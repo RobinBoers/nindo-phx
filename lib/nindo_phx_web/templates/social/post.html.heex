@@ -1,0 +1,13 @@
+<%= if Nindo.Posts.exists?(@id) do %>
+
+    <div class="page-wrapper">
+        <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+            <PostComponent.show post={Nindo.Posts.get(@id)} user_link={true} />
+        </div>
+    </div>
+
+<% else %>
+
+
+
+<% end %>

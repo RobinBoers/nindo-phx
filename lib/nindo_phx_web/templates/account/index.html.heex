@@ -1,0 +1,13 @@
+<div class="page-wrapper">
+    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+
+        <h2 class="title">My Account</h2>
+
+        <%= if logged_in?(@conn) do %>
+
+            <ProfileComponent.edit username={user(@conn).username} /> 
+
+        <% end %>
+
+    </div>
+</div>

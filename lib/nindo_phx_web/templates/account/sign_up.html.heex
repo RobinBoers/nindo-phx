@@ -1,0 +1,20 @@
+<div class="page-wrapper">
+    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-xl">
+
+        <%= if assigns[:error] do %>
+            <NindoPhxWeb.AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+        <% end %>
+
+        <h2 class="title">Sign up</h2>
+
+        <div class="w-full flex-grow-0 rounded-lg shadow-lg bg-white text-black lg:mt-4 p-12">
+            <%= form_for(@conn, account_path(@conn, :create_account), [as: :create_account, method: :put], fn f -> %>
+                <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1 w-full" %>
+                <%= text_input f, :email, placeholder: "Emailaddress", class: "input my-1 w-full" %>
+                <%= password_input f, :password, placeholder: "Password", class: "input my-1 w-full" %>
+                <%= submit "Sign up", class: "btn-primary block mt-4"  %>
+            <% end) %>
+        </div>
+
+    </div>
+</div>

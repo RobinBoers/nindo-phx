@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    @responsive {
+        .h-content {
+            height: max-content;
+        }
+
+        /* Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    }
+}
+
+/* General */
+
+a:not(.header-title, .btn-primary, .btn-secondary) {
+    @apply hover:underline;
+}
+
+/* Buttons */
+
+.btn-primary {
+    @apply cursor-pointer border border-blue-700 font-bold py-3 px-5 rounded bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
+}
+.btn-secondary {
+    @apply cursor-pointer border border-blue-700 font-bold py-3 px-5 rounded hover:bg-indigo-200 text-indigo-500 hover:shadow bg-white;
+}
+
+.input {
+    @apply border border-blue-700 py-3 px-5 rounded text-indigo-500 hover:shadow bg-white focus:shadow-lg;
+}
+
+/* Header */
+
+.header-item {
+    @apply font-bold p-4;
+}
+.header-button {
+    @apply p-2;
+}
+.header-button.btn-secondary {
+    @apply bg-blue-50;
+}
+
+.btn-menu {
+    @apply cursor-pointer font-bold py-3 px-5 rounded bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
+}
+
+/* Typography */
+
+.title {
+    @apply tracking-tighter text-3xl xs:text-4xl sm:text-6xl font-bold py-7;
+}
+.subtitle {
+    @apply text-xl sm:text-2xl font-medium text-gray-500 px-4;
+}
+
+.jumbo {
+    @apply md:text-7xl lg:text-8xl p-8;
+}
+
+.paragraph {
+    @apply py-2 text-xl text-gray-700;
+}
+
+.intro {
+    @apply text-xl text-gray-500 pb-12 font-medium;
+}
+
+/* Layout */
+
+.page-wrapper {
+    @apply mt-6 p-5 sm:p-12
+}

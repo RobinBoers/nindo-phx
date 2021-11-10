@@ -1,0 +1,65 @@
+<header class="text-center mt-12 sm:mt-24 md:mt-36">
+
+  <h2 class="title jumbo">Social media of the <i class="text-yellow-900 bg-yellow-200 px-3 rounded-lg">future </i></h2>
+  <p class="subtitle">A simple, easy to use and secure platform for communicating with your friends</p>
+
+  <div class="m-16">
+    <%= link "Sign up", to: account_path(@conn, :sign_up), class: "btn-primary" %>
+    <%= link "Sign in", to: account_path(@conn, :sign_in), class: "btn-secondary" %>
+  </div>
+
+</header>
+
+<section class="flex flex-row xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
+    <div class="flex-grow-0 w-2/6 rounded shadow bg-white text-black mr-12 hidden lg:block">
+      <div class="flex flex-row items-center justify-start pt-4 p-3">
+        <img class="w-12 rounded-full border-indigo-700 border-2" src="https://yt3.ggpht.com/ytc/AKedOLQvoGlDt6jGvKwDY30bF8pD7zrRmcPCZXEgGu-0=s256-c-k-c0x00ffffff-no-rj">
+        <p class="font-bold text-lg pl-2">
+          Robin Boers
+          <i class="block text-sm text-gray-400">@robin</i>
+        </p>
+      </div>
+      <hr class="clear-both">
+      <p class="p-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor id arcu venenatis egestas. Sed pharetra lectus eget justo semper, vitae tincidunt diam rutrum. Proin mattis libero lacus, vel pulvinar quam suscipit non. Donec commodo metus ut rutrum dapibus. Morbi commodo enim eget sem varius, nec vulputate nisi porttitor. In placerat elit eu turpis vulputate, ac iaculis quam mollis. Nunc et est consequat libero fringilla sollicitudin in non arcu. Nam pharetra placerat nibh. Pellentesque lobortis a enim eu vehicula. Morbi consequat enim vel orci auctor lobortis. Aenean accumsan nibh eget libero rutrum, sagittis volutpat eros ullamcorper. Quisque ipsum lacus, mollis ac dolor eu, interdum ultricies neque. </p>
+
+      <p class="px-4 pb-2 italic text-gray-500">Posted on <%= now() %></p>
+
+    </div>
+    <div class="flex-grow-0">
+      <h2 class="title">Simple by design</h2>
+      <p class="intro">Nindo is built on top of a stable foundation<br> and bleeding-edge tools which makes it extremely reliable. </p>
+    </div>
+</section>
+
+<section class="flex flex-row xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
+    <div class="flex-grow-0">
+      <h2 class="title">Powerful when needed</h2>
+      <p class="intro">Nindo allows you to create your own custom feeds using RSS.<br>This allows for a personalized feed without the need for AI and tracking. </p>
+    </div>
+    <div class="flex-grow-0 w-2/6 rounded shadow bg-white text-black ml-12 hidden lg:block">
+      <div class="flex flex-row items-center justify-start pt-4 p-3">
+        <input class="input w-full text-black" placeholder="Add RSS feed...">
+      </div>
+      <hr class="clear-both">
+
+      <ul class="p-4">
+        <li></li>
+      </ul>
+    </div>
+</section>
+
+<section class="flex flex-row items-center xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
+    <i class="fas fa-lock flex-grow-0 mr-36 text-9xl text-indigo-600 hidden lg:block"></i>
+    <div class="flex-grow-0">
+      <h2 class="title">Secure</h2>
+      <p class="intro">Your data is encrypted and can only be accessed by <i class="text-blue-900 bg-blue-200 px-3 rounded-lg">you</i>. </p>
+    </div>    
+</section>
+
+<section class="flex flex-row justify-center xl:mt-24 p-9 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded">
+  <div class="flex-grow-0">
+    <h2 class="title">And on top of all that...</h2>
+    <p class="intro">... Nindo is fully open-source and can even be selfhosted.<br>And thanks to the RSS features you can even follow users of another instance in your own.<br>Oh, I forgot to tell? Every users posts can be viewed as a RSS feed,<br>which allows you to follow users without even having an account.</p>
+  </div>
+  <i class="fab fa-github-alt flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
+</section>

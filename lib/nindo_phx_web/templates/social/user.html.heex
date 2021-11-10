@@ -1,0 +1,38 @@
+<%= if Nindo.Accounts.exists?(@username) do %>
+
+<div class="page-wrapper">
+    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+
+        <ProfileComponent.header username={@username} display_link={false} />
+
+        <h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
+
+        <FeedComponent.single username={@username} user_link={false} />
+
+    </div>    
+</div>
+
+<% else %>
+
+<div class="page-wrapper">
+    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+
+        <div class="w-full bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="md:flex">
+                <div class="md:flex-shrink-0">
+                    <img class="h-48 w-full object-cover md:h-full md:w-52" src={default_profile_picture()}>
+                </div>
+                <div class="p-8">
+                    <p class="font-bold text-2xl">
+                        Unknown user
+                        <i class="block text-base text-gray-400">@deleted</i>
+                    </p>
+                    <p class="mt-2 text-gray-500">No account information available.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+<% end %>
