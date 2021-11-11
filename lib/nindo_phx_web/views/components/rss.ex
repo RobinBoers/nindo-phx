@@ -23,7 +23,8 @@ defmodule NindoPhxWeb.RSSComponent do
       <div class="w-full flex-grow-0 min-h-md rounded shadow bg-white text-black">
           <div class="pt-4 p-3">
             <%= form_for(@conn, rss_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
-              <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input w-full text-black" %>
+              <span class="input input-l input-static">https://</span>
+              <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-r w-full text-black" %>
             <% end) %>
           </div>
           <hr class="clear-both">

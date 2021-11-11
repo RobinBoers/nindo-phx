@@ -39,6 +39,18 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply border border-indigo-700 py-3 px-5 rounded text-indigo-500 hover:shadow bg-white focus:shadow-lg;
 }
 
+.input-l {
+    @apply rounded-r-none border-r-0;
+}
+
+.input-r {
+    @apply rounded-l-none;
+}
+
+.input-static:hover {
+    @apply shadow-none;
+}
+
 /* Header */
 
 .header-item {
@@ -76,10 +88,14 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply text-xl text-gray-500 pb-12 font-medium;
 }
 
+.icon {
+    @apply mr-1;
+}
+
 /* Layout */
 
 .page-wrapper {
-    @apply mt-6 p-5 sm:p-12 lg:flex flex-row justify-start;
+    @apply mt-6 p-5 sm:p-12 xl:flex flex-row justify-start;
 }
 
 .page-inner {
