@@ -2,6 +2,10 @@
     <UIComponent.sidebar conn={@conn} />
     <div class="page-inner">
 
+        <%= if assigns[:error] do %>
+            <NindoPhxWeb.AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+        <% end %>
+
         <h2 class="title">Sources</h2>
 
         <%= if logged_in?(@conn) do %>

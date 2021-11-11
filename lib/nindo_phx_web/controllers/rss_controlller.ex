@@ -7,7 +7,10 @@ defmodule NindoPhxWeb.RSSController do
   import Nindo.Core
 
   def sources(conn, _params) do
-    render(conn, "sources.html")
+    conn
+    |> assign(:error, get_session(conn, :error))
+    |> put_session(:error, nil)
+    |> render("sources.html")
   end
 
   def feed(conn, %{"username" => username}) do
@@ -17,7 +20,7 @@ defmodule NindoPhxWeb.RSSController do
   end
 
   def external(conn, %{"source" => source}) do
-    source = RSS.detect_feed(source)
+    source = RSS.detect_feed(source) <> "&max-results=6"
     feed = RSS.parse_feed(source)
     posts = RSS.generate_posts(feed)
 
@@ -27,20 +30,27 @@ defmodule NindoPhxWeb.RSSController do
   # Manage feeds
 
   def add_feed(conn, params) do
-    source = RSS.detect_feed(params["add_feed"]["feed"])
-    feed = RSS.parse_feed(source <> "&max-results=0")
+    try do
+      source = RSS.detect_feed(params["add_feed"]["feed"])
+      feed = RSS.parse_feed(source <> "&max-results=0")
 
-    if logged_in?(conn) do
-      Feeds.add(
-        %{
-          "title" => feed.title,
-          "feed" => source <> "&max-results=3",
-          "icon" => feed.image
-        }, user(conn)
-      )
+      if logged_in?(conn) do
+        Feeds.add(
+          %{
+            "title" => feed.title,
+            "feed" => source <> "&max-results=3",
+            "icon" => RSS.detect_favicon(params["add_feed"]["feed"])
+          }, user(conn)
+        )
+      end
+
+      redirect(conn, to: rss_path(conn, :sources))
+    rescue
+      RuntimeError ->
+        conn
+        |> put_session(:error, %{title: "uri", message: "Invalid feed"})
+        |> redirect(to: rss_path(conn, :sources))
     end
-
-    redirect(conn, to: rss_path(conn, :sources))
   end
 
   def remove_feed(conn, params) do
