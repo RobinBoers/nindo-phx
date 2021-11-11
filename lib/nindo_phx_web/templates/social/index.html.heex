@@ -1,8 +1,18 @@
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<%= if logged_in?(@conn) do %>
 
-        <h2 class="title">Home</h2>
+    <div class="page-wrapper">
+        <UIComponent.sidebar conn={@conn} />
+        <div class="page-inner">
+            <h2 class="title">Home</h2>
 
-    </div>    
-</div>
+                <FeedComponent.rss 
+                    sources={@sources} 
+                />
+        </div>
+    </div>
+
+<% else %>
+
+    <%= #redirect(@conn, to: social_path(@conn, :discover)) %>
+
+<% end %>
