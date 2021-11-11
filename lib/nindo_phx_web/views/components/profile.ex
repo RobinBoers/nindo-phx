@@ -4,21 +4,21 @@ defmodule NindoPhxWeb.ProfileComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  alias NindoPhxWeb.SocialHelpers
+  alias Nindo.Format
 
   def header(assigns) do
     ~H"""
     <div class="w-full bg-white rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
-                <img class="h-48 w-full object-cover md:h-full md:w-52" src={SocialHelpers.profile_picture(@username)}>
+                <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>
             </div>
             <div class="p-8">
                 <p class="font-bold text-2xl">
-                    <%= SocialHelpers.display_name(@username) %>
+                    <%= Format.display_name(@username) %>
                     <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                 </p>
-                <p class="mt-2 text-gray-500"><%= SocialHelpers.description(@username) %></p>
+                <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
                 <p class="mt-10">
                     <a class="btn-primary">Follow</a>
@@ -35,18 +35,18 @@ defmodule NindoPhxWeb.ProfileComponent do
     <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
-                <img class="h-36 w-full object-cover md:h-full md:w-40" src={SocialHelpers.profile_picture(@username)}>
+                <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
             </div>
             <div class="p-8">
                 <p class="font-bold text-2xl">
                     <%= if @display_link do %>
-                      <a href={"/user/#{@username}"}><%= SocialHelpers.display_name(@username) %></a>
+                      <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
                     <% else %>
-                      <%= SocialHelpers.display_name(@username) %>
+                      <%= Format.display_name(@username) %>
                     <% end %>
                     <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                 </p>
-                <p class="mt-2 text-gray-500"><%= SocialHelpers.description(@username) %></p>
+                <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
             </div>
         </div>
     </div>
@@ -58,14 +58,14 @@ defmodule NindoPhxWeb.ProfileComponent do
     <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
-                <img class="h-36 w-full object-cover md:h-full md:w-40" src={SocialHelpers.profile_picture(@username)}>
+                <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
             </div>
             <div class="p-8">
                 <p class="font-bold text-2xl">
-                    <a href={"/user/#{@username}"}><%= SocialHelpers.display_name(@username) %></a>
+                    <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
                     <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                 </p>
-                <p class="mt-2 text-gray-500"><%= SocialHelpers.description(@username) %></p>
+                <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
             </div>
         </div>
     </div>

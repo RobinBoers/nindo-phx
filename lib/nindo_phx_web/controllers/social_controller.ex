@@ -3,6 +3,10 @@ defmodule NindoPhxWeb.SocialController do
 
   # Pages to display
 
+  def home(conn, _params) do
+    render(conn, "index.html")
+  end
+
   def discover(conn, _params) do
     render(conn, "discover.html")
   end
@@ -12,7 +16,7 @@ defmodule NindoPhxWeb.SocialController do
   end
 
   def post(conn, %{"id" => id}) do
-    render(conn, "post.html", id: id)
+    render(conn, "post.html", id: id, post: Nindo.Posts.get(id))
   end
 
 end

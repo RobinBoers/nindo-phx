@@ -1,7 +1,10 @@
 defmodule NindoPhxWeb.RSSController do
   use NindoPhxWeb, :controller
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers, RSSHelpers}
+  alias Nindo.{RSS, Feeds}
+  import NindoPhxWeb.{Router.Helpers}
+
+  import Nindo.Core
 
   def sources(conn, _params) do
     render(conn, "sources.html")
@@ -14,18 +17,9 @@ defmodule NindoPhxWeb.RSSController do
   end
 
   def external(conn, %{"source" => source}) do
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(detect_feed(source))
-    {:ok, feed, _} = FeederEx.parse(body)
-
-    posts = Enum.map(feed.entries, fn entry ->
-      %{
-        author: entry.author,
-        body: safe(entry.summary),
-        datetime: Nindo.Core.datetime(),
-        image: entry.image,
-        title: entry.title,
-      }
-    end)
+    source = RSS.detect_feed(source)
+    feed = RSS.parse_feed(source)
+    posts = RSS.generate_posts(feed)
 
     render(conn, "external.html", posts: posts, title: feed.title)
   end
@@ -33,30 +27,27 @@ defmodule NindoPhxWeb.RSSController do
   # Manage posts and feeds
 
   def add_feed(conn, params) do
-    source = params["add_feed"]["feed"]
-    source = detect_feed(source)
-
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(source <> "&?max-results=1")
-    {:ok, feed, _} = FeederEx.parse(body)
+    source = RSS.detect_feed(params["add_feed"]["feed"])
+    feed = RSS.parse_feed(source)
 
     if logged_in?(conn) do
-      Nindo.Feeds.add(%{"title" => feed.title, "feed" => source <> "&?max-results=3", "icon" => feed.image}, user(conn))
+      Feeds.add(
+        %{
+          "title" => feed.title,
+          "feed" => source <> "&max-results=3",
+          "icon" => feed.image
+        }, user(conn)
+      )
     end
 
     redirect(conn, to: rss_path(conn, :sources))
   end
 
   def remove_feed(conn, params) do
-    feed =
-      params["feed"]
-      |> Enum.map(fn
-          {key, val} when val === "" -> {key, nil}
-          {key, val} -> {key, val}
-        end)
-      |> Enum.into(%{})
+    feed = params["feed"]
 
     if logged_in?(conn) do
-      Nindo.Feeds.remove(feed, user(conn))
+      Feeds.remove(feed, user(conn))
     end
 
     redirect(conn, to: rss_path(conn, :sources))

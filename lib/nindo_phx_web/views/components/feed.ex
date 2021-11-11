@@ -4,17 +4,16 @@ defmodule NindoPhxWeb.FeedComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers}
-  alias NindoPhxWeb.SocialHelpers
+  alias NindoPhxWeb.SocialView
   alias NindoPhxWeb.PostComponent
 
   def single(assigns), do:
-    feed %{posts: SocialHelpers.get_posts(assigns.username), user_link: assigns.user_link, rss: false}
+    feed %{posts: SocialView.get_posts(assigns.username), user_link: assigns.user_link, rss: false}
 
   def mixed(assigns) do
     feed =
       assigns.users
-      |> Enum.map(fn user -> SocialHelpers.get_posts(user) end)
+      |> Enum.map(fn user -> SocialView.get_posts(user) end)
       |> List.flatten()
       |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
 
@@ -29,7 +28,7 @@ defmodule NindoPhxWeb.FeedComponent do
   def feed(assigns) do
     ~H"""
       <%= for post <- @posts do %>
-        <PostComponent.show post={post}, user_link={@user_link}, rss={@rss} />
+        <PostComponent.show post={post} user_link={@user_link} rss={@rss} />
       <% end %>
     """
   end

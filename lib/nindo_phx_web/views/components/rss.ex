@@ -4,21 +4,18 @@ defmodule NindoPhxWeb.RSSComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers}
-  alias NindoPhxWeb.{SocialHelpers}
+  import NindoPhxWeb.{Router.Helpers}
+  alias Nindo.{Accounts, RSS}
+
+  import Nindo.Core
 
   def generate_feed(username) do
-    account = Nindo.Accounts.get_by(:username, username)
-    channel = RSS.channel("#{SocialHelpers.display_name(username)}'s feed · Nindo", "https://nindo.net/user/#{username}", account.description, to_rfc822(Nindo.Core.datetime()), "en-us")
+    account = Accounts.get_by(:username, username)
 
-    items =
-      :user
-      |> Nindo.Posts.get(account.id)
-      |> Enum.map(fn post ->
-        RSS.item(post.title, post.body, to_rfc822(post.datetime), "https://nindo.net/post/#{post.id}", "https://nindo.net/post/#{post.id}")
-      end)
+    channel = RSS.generate_channel(account)
+    items = RSS.generate_entries(account)
 
-    RSS.feed(channel, items)
+    RSS.generate_feed(channel, items)
   end
 
   def customizer(assigns) do

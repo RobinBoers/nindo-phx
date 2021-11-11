@@ -3,9 +3,12 @@ defmodule NindoPhxWeb.LayoutView do
 
   use NindoPhxWeb, :view
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers}
-  alias NindoPhxWeb.{SocialHelpers, BarComponent}
+  import NindoPhxWeb.{Router.Helpers}
+  alias NindoPhxWeb.{BarComponent}
+  alias Nindo.{Accounts, Posts, Format}
   alias Phoenix.Controller
+
+  import Nindo.Core
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.
@@ -17,13 +20,13 @@ defmodule NindoPhxWeb.LayoutView do
   def title(:about, _),       do: "About"
   def title(:sign_up, _),     do: "Sign up"
   def title(:sign_in, _),     do: "Sign in"
-  def title(:user, assigns),  do: SocialHelpers.display_name(assigns.username) <> " (@" <> assigns.username <> ")"
+  def title(:user, assigns),  do: Format.display_name(assigns.username) <> " (@" <> assigns.username <> ")"
 
   def title(:post, assigns) do
-    post = Nindo.Posts.get(assigns.id)
-    account = Nindo.Accounts.get(post.author_id)
+    post = Posts.get(assigns.id)
+    account = Accounts.get(post.author_id)
 
-    post.title <> " · " <> SocialHelpers.display_name(account.username) <> " (@" <> account.username <> ")"
+    post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")"
   end
 
   def title(_, _),            do: "Social media of the Future"

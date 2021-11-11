@@ -78,12 +78,16 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 
 /* Layout */
 
-.page-inner {
-    @apply max-w-md mx-auto sm:max-w-2xl md:max-w-6xl flex-grow;
-}
-
 .page-wrapper {
     @apply mt-6 p-5 sm:p-12 lg:flex flex-row justify-start;
+}
+
+.page-inner {
+    @apply max-w-md mx-auto sm:max-w-2xl md:max-w-6xl;
+}
+
+.page-inner:not(.sign-in-up) {
+    @apply flex-grow;
 }
 
 .sidebar {

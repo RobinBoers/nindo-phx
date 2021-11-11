@@ -4,8 +4,9 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  import NindoPhxWeb.ViewHelpers
-  alias NindoPhxWeb.SocialHelpers
+  alias Nindo.Format
+
+  import Nindo.Core
 
   def show(assigns) do
     ~H"""
@@ -22,12 +23,12 @@ defmodule NindoPhxWeb.PostComponent do
 
             <% username = Nindo.Accounts.get(@post.author_id).username %>
 
-            <img class="w-12 rounded-full border border border-indigo-700 border-2" src={SocialHelpers.profile_picture(username)}>
+            <img class="w-12 rounded-full border border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg pl-2">
               <%= if @user_link do %>
-                <a href={"/user/#{username}"}><%= SocialHelpers.display_name(username) %></a>
+                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
               <% else %>
-                <%= SocialHelpers.display_name(username) %>
+                <%= Format.display_name(username) %>
               <% end %>
               <i class="block text-sm text-gray-400"><%= "@#{username}" %></i>
             </p>

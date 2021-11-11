@@ -1,9 +1,11 @@
-<%= if Nindo.Posts.exists?(@id) do %>
+<%= if Posts.exists?(@id) do %>
 
     <div class="page-wrapper">
         <UIComponent.sidebar conn={@conn} />
         <div class="page-inner">
-            <PostComponent.show post={Nindo.Posts.get(@id)} user_link={true} />
+            <h2 class="title"><%= @post.title %></h2>
+
+            <PostComponent.show post={@post} user_link={true} rss={false} />
         </div>
     </div>
 

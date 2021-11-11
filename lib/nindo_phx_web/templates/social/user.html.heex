@@ -1,4 +1,4 @@
-<%= if Nindo.Accounts.exists?(@username) do %>
+<%= if Accounts.exists?(@username) do %>
 
 <div class="page-wrapper">
     <UIComponent.sidebar conn={@conn} />
@@ -22,7 +22,7 @@
         <div class="w-full bg-white rounded-xl shadow-md overflow-hidden">
             <div class="md:flex">
                 <div class="md:flex-shrink-0">
-                    <img class="h-48 w-full object-cover md:h-full md:w-52" src={default_profile_picture()}>
+                    <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
                 </div>
                 <div class="p-8">
                     <p class="font-bold text-2xl">

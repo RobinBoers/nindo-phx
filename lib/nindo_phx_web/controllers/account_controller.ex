@@ -1,7 +1,10 @@
 defmodule NindoPhxWeb.AccountController do
   use NindoPhxWeb, :controller
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers}
+  import NindoPhxWeb.{Router.Helpers}
+  alias Nindo.{Accounts}
+
+  import Nindo.Core
 
   # Pages to display
 
@@ -27,7 +30,7 @@ defmodule NindoPhxWeb.AccountController do
     password = params["create_account"]["password"]
     email = params["create_account"]["email"]
 
-    case Nindo.Accounts.new(username, password, email) do
+    case Accounts.new(username, password, email) do
       {:ok, _account}   ->    redirect(conn, to: account_path(conn, :sign_in))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
@@ -36,9 +39,9 @@ defmodule NindoPhxWeb.AccountController do
   def login(conn, params) do
     username = params["login"]["username"]
     password = params["login"]["password"]
-    id       = Nindo.Accounts.get_by(:username, username).id
+    id       = Accounts.get_by(:username, username).id
 
-    case Nindo.Accounts.login(username, password) do
+    case Accounts.login(username, password) do
       :ok ->
         conn
         |> put_session(:logged_in, true)

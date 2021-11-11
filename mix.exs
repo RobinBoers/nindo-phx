@@ -35,10 +35,6 @@ defmodule NindoPhx.MixProject do
     {:jason, "~> 1.2"},
     {:plug_cowboy, "~> 2.5"},
     {:nindo, path: "../nindo"},
-    {:feeder_ex, "~> 1.1.0"},
-    {:rss, "~> 0.2.1"},
-    {:httpoison, "~> 1.8"},
-    {:calendar, "~> 1.0.0"},
   ]
 
   defp aliases, do: [
