@@ -19,6 +19,8 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 - Add way to follow people (and include in home feed)
 - Favicons feeds
 - Post posts via web client
+- Way faster RSS parsing (maybe something built in another lang and wrapped for use in erlang/elixir)
+- RSS optimizing
 
 ## Questions
 
