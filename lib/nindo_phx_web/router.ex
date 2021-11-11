@@ -21,8 +21,8 @@ defmodule NindoPhxWeb.Router do
     get "/about", PageController, :about
     get "/blog", PageController, :blog
 
+    get "/home", SocialController, :index
     get "/discover", SocialController, :discover
-    get "/home", SocialController, :home
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
 

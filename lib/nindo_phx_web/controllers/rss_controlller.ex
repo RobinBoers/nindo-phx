@@ -28,7 +28,7 @@ defmodule NindoPhxWeb.RSSController do
 
   def add_feed(conn, params) do
     source = RSS.detect_feed(params["add_feed"]["feed"])
-    feed = RSS.parse_feed(source)
+    feed = RSS.parse_feed(source <> "&max-results=0")
 
     if logged_in?(conn) do
       Feeds.add(

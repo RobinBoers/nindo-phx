@@ -5,11 +5,15 @@ defmodule NindoPhxWeb.SocialController do
 
   # Pages to display
 
-  def home(conn, _params) do
-    sources = for feed <- user(conn).feeds do
-      feed["feed"]
+  def index(conn, _params) do
+    if logged_in?(conn) do
+      sources = for feed <- user(conn).feeds do
+        feed["feed"]
+      end
+      render(conn, "index.html", sources: sources)
+    else
+      render(conn, "index.html", sources: [])
     end
-    render(conn, "index.html", sources: sources)
   end
 
   def discover(conn, _params) do
