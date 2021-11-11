@@ -3,5 +3,5 @@ defmodule NindoPhxWeb.AccountView do
 
   use NindoPhxWeb, :view
   import NindoPhxWeb.{Router.Helpers, ViewHelpers}
-  alias NindoPhxWeb.{ProfileComponent}
+  alias NindoPhxWeb.{ProfileComponent, UIComponent}
 end

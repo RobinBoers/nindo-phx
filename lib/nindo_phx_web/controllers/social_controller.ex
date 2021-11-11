@@ -1,8 +1,6 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  import NindoPhxWeb.{Router.Helpers, ViewHelpers}
-
   # Pages to display
 
   def discover(conn, _params) do

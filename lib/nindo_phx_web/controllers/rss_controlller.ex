@@ -3,6 +3,10 @@ defmodule NindoPhxWeb.RSSController do
 
   import NindoPhxWeb.{Router.Helpers, ViewHelpers, RSSHelpers}
 
+  def sources(conn, _params) do
+    render(conn, "sources.html")
+  end
+
   def feed(conn, %{"username" => username}) do
     conn
     |> put_req_header("accept", "application/xml")
@@ -32,14 +36,14 @@ defmodule NindoPhxWeb.RSSController do
     source = params["add_feed"]["feed"]
     source = detect_feed(source)
 
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(source)
+    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(source <> "&?max-results=1")
     {:ok, feed, _} = FeederEx.parse(body)
 
     if logged_in?(conn) do
-      Nindo.Feeds.add(%{"title" => feed.title, "feed" => source, "icon" => feed.image}, user(conn))
+      Nindo.Feeds.add(%{"title" => feed.title, "feed" => source <> "&?max-results=3", "icon" => feed.image}, user(conn))
     end
 
-    redirect(conn, to: social_path(conn, :discover))
+    redirect(conn, to: rss_path(conn, :sources))
   end
 
   def remove_feed(conn, params) do
@@ -55,7 +59,7 @@ defmodule NindoPhxWeb.RSSController do
       Nindo.Feeds.remove(feed, user(conn))
     end
 
-    redirect(conn, to: social_path(conn, :discover))
+    redirect(conn, to: rss_path(conn, :sources))
   end
 
 end

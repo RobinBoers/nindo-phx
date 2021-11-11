@@ -4,7 +4,7 @@ defmodule NindoPhxWeb.RSSView do
   use NindoPhxWeb, :view
   import NindoPhxWeb.ViewHelpers
   alias NindoPhxWeb.SocialHelpers
-  alias NindoPhxWeb.{FeedComponent}
+  alias NindoPhxWeb.{FeedComponent, RSSComponent, UIComponent}
 
   # RSS feeds
 

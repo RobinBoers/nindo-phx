@@ -26,10 +26,10 @@ defmodule NindoPhxWeb.Router do
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
 
-
+    get "/sources", RSSController, :sources
     get "/feed/:username", RSSController, :feed
-
     get "/rss/:source", RSSController, :external
+
     put "/feed/add", RSSController, :add_feed
     delete "/feed/remove", RSSController, :remove_feed
 

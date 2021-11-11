@@ -1,7 +1,8 @@
 <%= if Nindo.Accounts.exists?(@username) do %>
 
 <div class="page-wrapper">
-    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+    <UIComponent.sidebar conn={@conn} />
+    <div class="page-inner">
 
         <ProfileComponent.header username={@username} display_link={false} />
 
@@ -15,7 +16,8 @@
 <% else %>
 
 <div class="page-wrapper">
-    <div class="max-w-md mx-auto sm:max-wl-2xl md:max-w-6xl">
+    <UIComponent.sidebar conn={@conn} />
+    <div class="page-inner">
 
         <div class="w-full bg-white rounded-xl shadow-md overflow-hidden">
             <div class="md:flex">

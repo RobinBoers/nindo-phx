@@ -58,7 +58,7 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 /* Typography */
 
 .title {
-    @apply tracking-tighter text-3xl xs:text-4xl sm:text-6xl font-bold py-7;
+    @apply tracking-tighter text-3xl xs:text-4xl sm:text-6xl font-bold py-7 w-full;
 }
 .subtitle {
     @apply text-xl sm:text-2xl font-medium text-gray-500 px-4;
@@ -78,6 +78,14 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 
 /* Layout */
 
+.page-inner {
+    @apply max-w-md mx-auto sm:max-w-2xl md:max-w-6xl flex-grow;
+}
+
 .page-wrapper {
-    @apply mt-6 p-5 sm:p-12
+    @apply mt-6 p-5 sm:p-12 lg:flex flex-row justify-start;
+}
+
+.sidebar {
+    @apply pt-7 mr-24;
 }
