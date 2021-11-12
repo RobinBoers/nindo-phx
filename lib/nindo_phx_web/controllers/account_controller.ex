@@ -29,8 +29,9 @@ defmodule NindoPhxWeb.AccountController do
     username = params["create_account"]["username"]
     password = params["create_account"]["password"]
     email = params["create_account"]["email"]
+    profile_picture = "https://avatars.dicebear.com/api/identicon/#{username}.svg"
 
-    case Accounts.new(username, password, email) do
+    case Accounts.new(username, password, email, profile_picture) do
       {:ok, _account}   ->    redirect(conn, to: account_path(conn, :sign_in))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
