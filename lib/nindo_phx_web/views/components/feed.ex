@@ -14,8 +14,7 @@ defmodule NindoPhxWeb.FeedComponent do
   def mixed(assigns) do
     posts =
       assigns.users
-      |> Enum.map(fn user -> SocialView.get_posts(user) end)
-      |> List.flatten()
+      |> Enum.flat_map(fn user -> SocialView.get_posts(user) end)
       |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
 
     feed %{posts: posts, user_link: assigns.user_link, rss: false}
@@ -24,8 +23,12 @@ defmodule NindoPhxWeb.FeedComponent do
   def rss(assigns) do
     posts =
       assigns.sources
-      |> Enum.map(&RSS.parse_feed(&1))
-      |> Enum.map(&RSS.generate_posts(&1))
+      |> Enum.map(fn source -> Task.async(fn ->
+        source
+        |> RSS.parse_feed()
+        |> RSS.generate_posts()
+      end) end)
+      |> Task.await_many()
       |> List.flatten()
       |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
 
