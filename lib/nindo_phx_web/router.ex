@@ -38,6 +38,7 @@ defmodule NindoPhxWeb.Router do
     get "/signup", AccountController, :sign_up
 
     post "/account/update/prefs", AccountController, :update_prefs
+    post "/account/update/profile_picture", AccountController, :update_profile_picture
     post "/account/update/password", AccountController, :change_password
 
     put "/signup", AccountController, :create_account

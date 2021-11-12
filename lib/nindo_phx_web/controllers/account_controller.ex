@@ -85,6 +85,17 @@ defmodule NindoPhxWeb.AccountController do
     end
   end
 
+  def update_profile_picture(conn, params) do
+    url = params["prefs"]["url"]
+
+    if logged_in?(conn) do
+      Accounts.change(:profile_picture, url, user(conn))
+      redirect(conn, to: account_path(conn, :index))
+    else
+      render(conn, "index.html", error: %{title: "error", message: "Something went wrong"})
+    end
+  end
+
   def change_password(conn, params) do
     p1 = params["change_password"]["password"]
     p2 = params["change_password"]["check"]

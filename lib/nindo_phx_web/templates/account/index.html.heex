@@ -10,7 +10,7 @@
 
         <%= if logged_in?(@conn) do %>
 
-            <ProfileComponent.account username={user(@conn).username} /> 
+            <ProfileComponent.account username={user(@conn).username} conn={@conn} /> 
 
             <h2 class="my-3 mt-12 font-bold text-2xl">Preferences</h2>
     
