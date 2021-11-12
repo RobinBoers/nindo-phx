@@ -36,7 +36,7 @@ defmodule NindoPhxWeb.PostComponent do
           <% end %>
       </div>
       <hr class="clear-both">
-      <div class="p-4 text-sm"><%= @post.body %></div>
+      <div class="p-4 text-sm post-content"><%= @post.body %></div>
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>

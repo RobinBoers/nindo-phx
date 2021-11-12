@@ -24,7 +24,7 @@ defmodule NindoPhxWeb.RSSController do
     feed = RSS.parse_feed(source)
     posts = RSS.generate_posts(feed)
 
-    render(conn, "external.html", posts: posts, title: feed.title)
+    render(conn, "external.html", posts: posts, title: feed["title"])
   end
 
   # Manage feeds

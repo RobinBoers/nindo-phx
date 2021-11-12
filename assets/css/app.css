@@ -88,6 +88,14 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply text-xl text-gray-500 pb-12 font-medium;
 }
 
+.post-content p {
+    @apply py-1;
+}
+
+.post-content img {
+    @apply my-3;
+}
+
 .icon {
     @apply mr-1;
 }
