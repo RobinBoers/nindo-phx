@@ -53,7 +53,7 @@ defmodule NindoPhxWeb.ProfileComponent do
     """
   end
 
-  def edit(assigns) do
+  def account(assigns) do
     ~H"""
     <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">

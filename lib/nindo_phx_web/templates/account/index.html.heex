@@ -2,11 +2,32 @@
     <UIComponent.sidebar conn={@conn} />
     <div class="page-inner">
 
+        <%= if assigns[:error] do %>
+            <NindoPhxWeb.AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+        <% end %>
+
         <h2 class="title">My Account</h2>
 
         <%= if logged_in?(@conn) do %>
 
-            <ProfileComponent.edit username={user(@conn).username} /> 
+            <ProfileComponent.account username={user(@conn).username} /> 
+
+            <h2 class="my-3 mt-12 font-bold text-2xl">Preferences</h2>
+    
+            <%= form_for(@conn, account_path(@conn, :update_prefs), [as: :prefs, method: :update], fn f -> %>
+                <%= text_input f, :display_name, placeholder: "Display name", value: user(@conn).display_name, class: "input my-1 w-full" %>
+                <%= text_input f, :email, placeholder: "Emailaddress", value: user(@conn).email, class: "input my-1 w-full" %>
+                <%= textarea f, :description, placeholder: "Biography", value: user(@conn).description, class: "input my-1 w-full" %>
+                <%= submit "Save", class: "btn-primary block mt-4"  %>
+            <% end) %>
+
+            <h2 class="my-3 mt-12 font-bold text-2xl">Change password</h2>
+
+            <%= form_for(@conn, account_path(@conn, :change_password), [as: :change_password, method: :update], fn f -> %>
+                <%= password_input f, :password, placeholder: "Password", class: "input my-1 w-full" %>
+                <%= password_input f, :check, placeholder: "Confirm password", class: "input my-1 w-full" %>
+                <%= submit "Update", class: "btn-primary block mt-4"  %>
+            <% end) %>
 
         <% end %>
 
