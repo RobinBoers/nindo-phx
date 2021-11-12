@@ -27,6 +27,8 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 - Is it OK to get content from other sites and using it as safe? (And what else?)
 - Nindo.Format.display_name/1 defined in application :nindo is used by the current application but the current application does not depend on :nindo. If :nindo is a dependency, make sure it is listed under "def deps" in your mix.exs
 - Is the way I created the components correct?
+- Why are classes generated in EEx not picked up by tailwind?
+- How to encrypt email in DB that is easy to decrypt for me, but hard for attacker?
 
 ## Credits
 
