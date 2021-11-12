@@ -39,7 +39,7 @@ defmodule NindoPhxWeb.RSSController do
           %{
             "title" => feed.title,
             "feed" => source <> "&max-results=3",
-            "icon" => RSS.detect_favicon(params["add_feed"]["feed"])
+            "icon" => RSS.detect_favicon(URI.parse(source).authority)
           }, user(conn)
         )
       end
