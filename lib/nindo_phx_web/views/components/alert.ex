@@ -13,6 +13,8 @@ defmodule NindoPhxWeb.AlertComponent do
   def success(assigns), do:
     alert(%{color: "green", title: assigns.title, message: assigns.message})
 
+  # bg-red-800 bg-indigo-800 bg-green-800 text-red-100 text-green-100 text-indigo-100
+  # bg-green-500 bg-green-500 bg-red-500
   def alert(assigns) do
     ~H"""
       <div class="text-center py-4 lg:px-4">
