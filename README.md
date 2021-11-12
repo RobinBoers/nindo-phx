@@ -17,19 +17,9 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 
 - Add way to upload images
 - Add way to follow people (and include in home feed)
-- Favicons feeds
 - Post posts via web client
-- Way faster RSS parsing (maybe something built in another lang and wrapped for use in erlang/elixir)
-- RSS optimizing
-
-## Questions
-
-- Is it OK to get content from other sites and using it as safe? (And what else?)
-- Nindo.Format.display_name/1 defined in application :nindo is used by the current application but the current application does not depend on :nindo. If :nindo is a dependency, make sure it is listed under "def deps" in your mix.exs
-- Is the way I created the components correct?
-- Why are classes generated in EEx not picked up by tailwind?
-- How to encrypt email in DB that is easy to decrypt for me, but hard for attacker?
+- RSS optimizing + caching
 
 ## Credits
 
-Nindo is built using a lot of great tools. I want to especially thank [Elixir](https://elixir-lang.org), [Phoenix Framework](https://www.phoenixframework.org), [bcrypt_elixir](https://github.com/riverrun/bcrypt_elixir), [feeder_ex](https://github.com/manukall/feeder_ex), and [elixir-rss](https://github.com/BennyHallett/elixir-rss).
+Nindo is built using a lot of great tools. I want to especially thank [Elixir](https://elixir-lang.org), [Phoenix Framework](https://www.phoenixframework.org), [bcrypt_elixir](https://github.com/riverrun/bcrypt_elixir), [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) [fast_rss](https://github.com/avencera/fast_rss), and [elixir-rss](https://github.com/BennyHallett/elixir-rss).
