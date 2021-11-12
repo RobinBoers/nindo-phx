@@ -39,17 +39,23 @@ defmodule NindoPhxWeb.AccountController do
   def login(conn, params) do
     username = params["login"]["username"]
     password = params["login"]["password"]
-    id       = Accounts.get_by(:username, username).id
+    account  = Accounts.get_by(:username, username)
 
-    case Accounts.login(username, password) do
-      :ok ->
-        conn
-        |> put_session(:logged_in, true)
-        |> put_session(:user_id, id)
-        |> redirect(to: social_path(conn, :index))
+    if account != nil do
+      id       = account.id
 
-      :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
-      _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})
+      case Accounts.login(username, password) do
+        :ok ->
+          conn
+          |> put_session(:logged_in, true)
+          |> put_session(:user_id, id)
+          |> redirect(to: social_path(conn, :index))
+
+        :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
+        _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})
+      end
+    else
+      render(conn, "sign_in.html", error: %{title: "account", message: "Doesn't exist"})
     end
   end
 
