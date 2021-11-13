@@ -53,7 +53,7 @@ defmodule NindoPhxWeb.RSSController do
               "title" => feed["title"],
               "feed" => params["add_feed"]["feed"],
               "type" => params["add_feed"]["type"],
-              "icon" => RSS.detect_favicon(URI.parse(source).authority)
+              "icon" => RSS.detect_favicon(URI.parse("https://" <> params["add_feed"]["feed"]).authority)
             }, user(conn)
           )
 
