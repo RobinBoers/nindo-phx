@@ -3,6 +3,7 @@ defmodule NindoPhxWeb.RSSController do
 
   alias Nindo.{Accounts, RSS, Feeds, FeedAgent}
   import NindoPhxWeb.{Router.Helpers}
+  alias Nindo.RSS.YouTube
 
   import Nindo.Core
 
@@ -39,21 +40,29 @@ defmodule NindoPhxWeb.RSSController do
   # Manage feeds
 
   def add_feed(conn, params) do
-    source = RSS.detect_feed(params["add_feed"]["type"], params["add_feed"]["feed"])
+    type = params["add_feed"]["type"]
+    input_feed = convert_link(type, params["add_feed"]["feed"])
+
+    source = RSS.detect_feed(type, input_feed)
 
     case RSS.parse_feed(source) do
+
       {:error, _} ->
         conn
-        |> put_session(:error, %{title: "uri", message: "Invalid feed"})
+        |> put_session(:error, %{title: "uri", message: "Feed doesn't exist or is invalid"})
         |> redirect(to: rss_path(conn, :sources))
+
       feed ->
         if logged_in?(conn) do
+
           Feeds.add(
             %{
               "title" => feed["title"],
-              "feed" => params["add_feed"]["feed"],
-              "type" => params["add_feed"]["type"],
-              "icon" => RSS.detect_favicon(URI.parse("https://" <> params["add_feed"]["feed"]).authority)
+              "feed" => input_feed,
+              "type" => type,
+              "icon" => RSS.detect_favicon(
+                URI.parse("https://" <> input_feed).authority
+              )
             }, user(conn)
           )
 
@@ -79,6 +88,20 @@ defmodule NindoPhxWeb.RSSController do
     end
 
     redirect(conn, to: rss_path(conn, :sources))
+  end
+
+  # Private methods
+
+  # This method is used to convert the YouTube custom urls or legacy
+  # username to the yt.com/channel/id format, which is needed for the
+  # RSS feeds to work. Converting is a expensive task, which also uses quota
+  # on my YT API key. That's why I only convert it when adding the feed
+  # and not every time I need to access the feed.
+  defp convert_link(type, feed) do
+    case type do
+      "youtube" -> YouTube.to_channel_link(feed)
+      _         -> feed
+    end
   end
 
 end
