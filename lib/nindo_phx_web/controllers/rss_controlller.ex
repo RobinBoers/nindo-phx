@@ -28,7 +28,8 @@ defmodule NindoPhxWeb.RSSController do
 
   def external(conn, %{"source" => source}) do
     [source, type] = String.split(source, ":")
-    {source, _} = RSS.detect_feed(type, source)
+    source = RSS.detect_feed(type, URI.decode(source))
+
     feed = RSS.parse_feed(source)
     posts = RSS.generate_posts(feed)
 
@@ -38,9 +39,9 @@ defmodule NindoPhxWeb.RSSController do
   # Manage feeds
 
   def add_feed(conn, params) do
-    {source, pull} = RSS.detect_feed(params["add_feed"]["type"], params["add_feed"]["feed"])
+    source = RSS.detect_feed(params["add_feed"]["type"], params["add_feed"]["feed"])
 
-    case RSS.parse_feed(pull) do
+    case RSS.parse_feed(source) do
       {:error, _} ->
         conn
         |> put_session(:error, %{title: "uri", message: "Invalid feed"})
@@ -50,7 +51,7 @@ defmodule NindoPhxWeb.RSSController do
           Feeds.add(
             %{
               "title" => feed["title"],
-              "feed" => source,
+              "feed" => params["add_feed"]["feed"],
               "type" => params["add_feed"]["type"],
               "icon" => RSS.detect_favicon(URI.parse(source).authority)
             }, user(conn)

@@ -52,7 +52,7 @@ defmodule NindoPhxWeb.FeedComponent do
             <%= form_for(@conn, rss_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
               <span class="input input-l input-static">https://</span>
               <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-m flex-grow text-black" %>
-              <%= select f, :type, ["Blogger": :blogger, "Wordpress": :wordpress, "Custom": :custom], class: "input input-r"  %>
+              <%= select f, :type, ["Blogger": :blogger, "Wordpress": :wordpress, "Youtube": :youtube, "Atom": :atom, "Custom": :custom], class: "input input-r"  %>
             <% end) %>
           </div>
           <hr class="clear-both">
@@ -67,7 +67,7 @@ defmodule NindoPhxWeb.FeedComponent do
                     <span class="w-8 mr-3"></span>
                   <% end %>
                   <span class="mt-1">
-                    <a href={"/rss/#{URI.parse(feed["feed"]).authority}:#{feed["type"]}"}><%= feed["title"] %></a>
+                    <a href={"/rss/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"}><%= feed["title"] %></a>
                   </span>
 
                   <%= link safe("<i class='fas fa-times'></i>"), to: rss_path(@conn, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
