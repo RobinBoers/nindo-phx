@@ -22,7 +22,7 @@ defmodule NindoPhxWeb.FeedComponent do
     feed %{posts: posts, user_link: assigns.user_link, rss: false}
   end
 
-  def rss(assigns) do
+  def mixed_rss(assigns) do
     posts =
       :username
       |> Nindo.Accounts.get_by(assigns.username)
