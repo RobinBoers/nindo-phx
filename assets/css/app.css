@@ -111,7 +111,7 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 }
 
 .page-inner {
-    @apply max-w-md mx-auto sm:max-w-2xl md:max-w-6xl;
+    @apply relative max-w-md mx-auto sm:max-w-2xl md:max-w-6xl;
 }
 
 .page-inner:not(.sign-in-up) {
