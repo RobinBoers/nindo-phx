@@ -4,6 +4,8 @@ defmodule NindoPhxWeb.AccountController do
   import NindoPhxWeb.{Router.Helpers}
   alias Nindo.{Accounts, Auth}
 
+  plug :scrub_params, "prefs" when action in [:update_prefs, :update_profile_picture]
+
   import Nindo.Core
 
   # Pages to display
