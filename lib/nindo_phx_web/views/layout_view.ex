@@ -20,7 +20,13 @@ defmodule NindoPhxWeb.LayoutView do
   def title(:about, _),       do: "About"
   def title(:sign_up, _),     do: "Sign up"
   def title(:sign_in, _),     do: "Sign in"
-  def title(:user, assigns),  do: Format.display_name(assigns.username) <> " (@" <> assigns.username <> ")"
+  def title(:user, assigns) do
+    if Accounts.exists?(assigns.username) do
+      Format.display_name(assigns.username) <> " (@" <> assigns.username <> ")"
+    else
+      "Unknown user" <> " (@deleted)"
+    end
+  end
 
   def title(:post, assigns) do
     post = Posts.get(assigns.id)
