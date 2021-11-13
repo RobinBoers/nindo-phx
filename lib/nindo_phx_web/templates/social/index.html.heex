@@ -6,7 +6,7 @@
             <h2 class="title">My Feed</h2>
 
                 <FeedComponent.rss 
-                    sources={@sources} 
+                    username={user(@conn).username}
                 />
         </div>
     </div>

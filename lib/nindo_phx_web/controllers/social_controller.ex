@@ -1,19 +1,10 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  import Nindo.Core
-
   # Pages to display
 
   def index(conn, _params) do
-    if logged_in?(conn) do
-      sources = for feed <- user(conn).feeds do
-        feed["feed"]
-      end
-      render(conn, "index.html", sources: sources)
-    else
-      render(conn, "index.html", sources: [])
-    end
+    render(conn, "index.html")
   end
 
   def discover(conn, _params) do

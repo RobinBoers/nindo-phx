@@ -5,7 +5,6 @@ defmodule NindoPhxWeb.FeedComponent do
   use Phoenix.HTML
 
   import NindoPhxWeb.Router.Helpers
-  alias Nindo.{RSS}
   alias NindoPhxWeb.SocialView
   alias NindoPhxWeb.PostComponent
 
@@ -25,15 +24,10 @@ defmodule NindoPhxWeb.FeedComponent do
 
   def rss(assigns) do
     posts =
-      assigns.sources
-      |> Enum.map(fn source -> Task.async(fn ->
-        source
-        |> RSS.parse_feed()
-        |> RSS.generate_posts()
-      end) end)
-      |> Task.await_many()
-      |> List.flatten()
-      |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
+      :username
+      |> Nindo.Accounts.get_by(assigns.username)
+      |> Nindo.FeedAgent.get_pid()
+      |> Nindo.FeedAgent.get_posts()
 
     feed %{posts: posts, user_link: false, rss: true}
   end

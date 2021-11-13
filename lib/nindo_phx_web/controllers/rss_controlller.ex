@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.RSSController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, RSS, Feeds}
+  alias Nindo.{Accounts, RSS, Feeds, FeedAgent}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -37,26 +37,29 @@ defmodule NindoPhxWeb.RSSController do
   # Manage feeds
 
   def add_feed(conn, params) do
-    try do
-      source = RSS.detect_feed(params["add_feed"]["feed"])
-      feed = RSS.parse_feed(source <> "&max-results=0")
+    source = RSS.detect_feed(params["add_feed"]["feed"])
 
-      if logged_in?(conn) do
-        Feeds.add(
-          %{
-            "title" => feed.title,
-            "feed" => source <> "&max-results=3",
-            "icon" => RSS.detect_favicon(URI.parse(source).authority)
-          }, user(conn)
-        )
-      end
-
-      redirect(conn, to: rss_path(conn, :sources))
-    rescue
-      RuntimeError ->
+    case RSS.parse_feed(source <> "&max-results=0") do
+      {:error, _} ->
         conn
         |> put_session(:error, %{title: "uri", message: "Invalid feed"})
         |> redirect(to: rss_path(conn, :sources))
+      feed ->
+        if logged_in?(conn) do
+          Feeds.add(
+            %{
+              "title" => feed["title"],
+              "feed" => source <> "&max-results=3",
+              "icon" => RSS.detect_favicon(URI.parse(source).authority)
+            }, user(conn)
+          )
+        end
+
+        user(conn)
+        |> FeedAgent.get_pid()
+        |> FeedAgent.update()
+
+        redirect(conn, to: rss_path(conn, :sources))
     end
   end
 
