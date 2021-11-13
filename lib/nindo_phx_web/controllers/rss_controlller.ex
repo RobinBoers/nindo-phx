@@ -53,11 +53,12 @@ defmodule NindoPhxWeb.RSSController do
               "icon" => RSS.detect_favicon(URI.parse(source).authority)
             }, user(conn)
           )
-        end
 
-        user(conn)
-        |> FeedAgent.get_pid()
-        |> FeedAgent.update()
+          user(conn)
+          |> FeedAgent.get_pid()
+          |> FeedAgent.update()
+
+        end
 
         redirect(conn, to: rss_path(conn, :sources))
     end
@@ -68,6 +69,10 @@ defmodule NindoPhxWeb.RSSController do
 
     if logged_in?(conn) do
       Feeds.remove(feed, user(conn))
+
+      user(conn)
+      |> FeedAgent.get_pid()
+      |> FeedAgent.update()
     end
 
     redirect(conn, to: rss_path(conn, :sources))
