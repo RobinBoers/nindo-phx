@@ -47,6 +47,10 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply rounded-l-none;
 }
 
+.input-m {
+    @apply rounded-l-none rounded-r-none border-r-0;
+}
+
 .input-static:hover {
     @apply shadow-none;
 }
