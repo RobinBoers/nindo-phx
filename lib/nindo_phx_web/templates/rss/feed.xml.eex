@@ -1,1 +1,1 @@
-<%= RSSComponent.generate_feed(@username) %>
+<%= @feed %>

@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.RSSController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{RSS, Feeds}
+  alias Nindo.{Accounts, RSS, Feeds}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -14,9 +14,16 @@ defmodule NindoPhxWeb.RSSController do
   end
 
   def feed(conn, %{"username" => username}) do
+    account = Accounts.get_by(:username, username)
+
+    channel = RSS.generate_channel(account)
+    items = RSS.generate_entries(account)
+
+    feed = RSS.generate_feed(channel, items)
+
     conn
     |> put_req_header("accept", "application/xml")
-    |> render("feed.xml", username: username)
+    |> render("feed.xml", feed: feed)
   end
 
   def external(conn, %{"source" => source}) do

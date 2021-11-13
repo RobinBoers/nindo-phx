@@ -3,7 +3,7 @@ defmodule NindoPhxWeb.AccountView do
 
   use NindoPhxWeb, :view
   import NindoPhxWeb.{Router.Helpers}
-  alias NindoPhxWeb.{ProfileComponent, UIComponent}
+  alias NindoPhxWeb.{ProfileComponent, UIComponent, AlertComponent}
 
   import Nindo.Core
 end

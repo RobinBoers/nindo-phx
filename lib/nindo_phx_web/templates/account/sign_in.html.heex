@@ -2,7 +2,7 @@
     <div class="sign-in-up page-inner">
 
         <%= if assigns[:error] do %>
-            <NindoPhxWeb.AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+            <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
         <% end %>
 
         <h2 class="title">Sign in</h2>
