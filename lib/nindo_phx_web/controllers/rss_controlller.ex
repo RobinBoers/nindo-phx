@@ -32,7 +32,7 @@ defmodule NindoPhxWeb.RSSController do
     source = RSS.detect_feed(type, URI.decode(source))
 
     feed = RSS.parse_feed(source)
-    posts = RSS.generate_posts(feed)
+    posts = RSS.generate_posts(feed, type)
 
     render(conn, "external.html", posts: posts, title: feed["title"])
   end
