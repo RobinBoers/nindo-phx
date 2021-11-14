@@ -3,8 +3,8 @@ defmodule NindoPhxWeb.SocialView do
 
   use NindoPhxWeb, :view
 
-  alias NindoPhxWeb.{ProfileComponent, FeedComponent, PostComponent, UIComponent}
   alias Nindo.{Accounts, Posts, Format}
+  alias NindoPhxWeb.{ProfileComponent, FeedComponent, PostComponent, UIComponent}
 
   # Post feed
 

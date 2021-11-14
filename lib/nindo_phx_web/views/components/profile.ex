@@ -4,8 +4,9 @@ defmodule NindoPhxWeb.ProfileComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
+  alias Nindo.{Format}
   import NindoPhxWeb.Router.Helpers
-  alias Nindo.Format
+
   import Nindo.Core
 
   def header(assigns) do

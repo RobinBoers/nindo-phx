@@ -4,8 +4,8 @@ defmodule NindoPhxWeb.BarComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  import NindoPhxWeb.Router.Helpers
   alias Nindo.{Accounts, Format}
+  import NindoPhxWeb.Router.Helpers
 
   def account_header(assigns) do
     account = Accounts.get(assigns.id)

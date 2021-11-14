@@ -1,9 +1,8 @@
 defmodule NindoPhxWeb.RSSController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, RSS, Feeds, FeedAgent}
+  alias Nindo.{Accounts, RSS, Feeds, FeedAgent, RSS.YouTube}
   import NindoPhxWeb.{Router.Helpers}
-  alias Nindo.RSS.YouTube
 
   import Nindo.Core
 

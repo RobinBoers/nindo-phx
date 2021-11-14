@@ -2,11 +2,11 @@ defmodule NindoPhxWeb.LayoutView do
   @moduledoc false
 
   use NindoPhxWeb, :view
-
-  import NindoPhxWeb.{Router.Helpers}
-  alias NindoPhxWeb.{BarComponent}
-  alias Nindo.{Accounts, Posts, Format}
   alias Phoenix.Controller
+
+  alias Nindo.{Accounts, Posts, Format}
+  import NindoPhxWeb.Router.Helpers
+  alias NindoPhxWeb.{BarComponent}
 
   import Nindo.Core
 

@@ -4,7 +4,7 @@ defmodule NindoPhxWeb.UIComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  import NindoPhxWeb.{Router.Helpers}
+  import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
 

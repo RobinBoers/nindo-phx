@@ -5,8 +5,7 @@ defmodule NindoPhxWeb.FeedComponent do
   use Phoenix.HTML
 
   import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.SocialView
-  alias NindoPhxWeb.PostComponent
+  alias NindoPhxWeb.{SocialView, PostComponent}
 
   import Nindo.Core
 
