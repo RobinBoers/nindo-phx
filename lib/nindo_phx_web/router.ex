@@ -22,18 +22,18 @@ defmodule NindoPhxWeb.Router do
     get "/about", PageController, :about
     get "/blog", PageController, :blog
 
+    get "/home", SocialController, :index
     get "/discover", SocialController, :discover
+    get "/sources", SocialController, :sources
+
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
     get "/follow/:username", SocialController, :follow
+    get "/feed/:username", SocialController, :feed
+    get "/rss/:source", SocialController, :external
 
-    get "/home", RSSController, :index
-    get "/sources", RSSController, :sources
-    get "/feed/:username", RSSController, :feed
-    get "/rss/:source", RSSController, :external
-
-    put "/feed/add", RSSController, :add_feed
-    delete "/feed/remove", RSSController, :remove_feed
+    put "/feed/add", SocialController, :add_feed
+    delete "/feed/remove", SocialController, :remove_feed
 
     get "/account", AccountController, :index
     get "/signin", AccountController, :sign_in

@@ -43,15 +43,22 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def preview(assigns) do
     ~H"""
+
     <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
+                <%= if @display_link do %>
+                    <a href={"/user/#{@username}"}>
+                        <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
+                    </a>
+                <% else %>
                 <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
+                <% end %>
             </div>
             <div class="p-8">
                 <p class="font-bold text-2xl">
                     <%= if @display_link do %>
-                      <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
+                    <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
                     <% else %>
                       <%= Format.display_name(@username) %>
                     <% end %>

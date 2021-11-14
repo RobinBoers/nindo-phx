@@ -37,7 +37,7 @@ defmodule NindoPhxWeb.AccountController do
 
       redirect_to =
         NavigationHistory.last_path(conn, 1,
-        default: rss_path(conn, :index))
+        default: social_path(conn, :index))
 
       case Accounts.login(username, password) do
         :ok ->
@@ -73,7 +73,7 @@ defmodule NindoPhxWeb.AccountController do
     email = params["create_account"]["email"]
 
     case Accounts.new(username, password, email) do
-      {:ok, _account}   ->    redirect(conn, to: account_path(conn, :sign_in))
+      {:ok, _account}   ->    redirect(conn, to: account_path(conn, :index))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
   end
