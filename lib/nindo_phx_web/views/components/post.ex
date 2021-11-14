@@ -43,9 +43,13 @@ defmodule NindoPhxWeb.PostComponent do
         <% [_, video_id] = String.split(@post.link, "=") %>
 
         <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+
+        <div class="p-4 text-sm post-content"><%= safe @post.body %></div>
+      <% else %>
+        <div class="p-4 text-sm post-content"><%= @post.body %></div>
       <% end %>
 
-      <div class="p-4 text-sm post-content"><%= @post.body %></div>
+
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>
