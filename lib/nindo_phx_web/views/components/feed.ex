@@ -22,7 +22,6 @@ defmodule NindoPhxWeb.FeedComponent do
     feed %{posts: posts, user_link: assigns.user_link, rss: false}
   end
 
-
   def feed(assigns) when assigns.posts == [] do
     ~H"""
       <p class="my-6 text-gray-500">Wow, such empty...</p>

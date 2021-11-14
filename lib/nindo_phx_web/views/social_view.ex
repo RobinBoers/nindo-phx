@@ -3,12 +3,8 @@ defmodule NindoPhxWeb.SocialView do
 
   use NindoPhxWeb, :view
 
-  import NindoPhxWeb.{Router.Helpers}
   alias NindoPhxWeb.{ProfileComponent, FeedComponent, PostComponent, UIComponent}
   alias Nindo.{Accounts, Posts, Format}
-  import Phoenix.Controller
-
-  import Nindo.Core
 
   # Post feed
 
