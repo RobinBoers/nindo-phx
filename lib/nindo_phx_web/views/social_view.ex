@@ -11,6 +11,9 @@ defmodule NindoPhxWeb.SocialView do
   def get_posts(username) do
     account = Accounts.get_by(:username, username)
     Posts.get(:user, account.id)
+    |> Enum.map(fn post ->
+      Map.from_struct(post)
+    end)
     |> Enum.reverse() # reverse because otherwise the newest post will be at the bottom in EEx
   end
 

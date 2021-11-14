@@ -79,10 +79,6 @@ defmodule NindoPhxWeb.RSSController do
             }, user(conn)
           )
 
-          user(conn)
-          |> FeedAgent.get_pid()
-          |> FeedAgent.update()
-
         end
 
         redirect(conn, to: rss_path(conn, :sources))
@@ -94,10 +90,6 @@ defmodule NindoPhxWeb.RSSController do
 
     if logged_in?(conn) do
       Feeds.remove(feed, user(conn))
-
-      user(conn)
-      |> FeedAgent.get_pid()
-      |> FeedAgent.update()
     end
 
     redirect(conn, to: rss_path(conn, :sources))

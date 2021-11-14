@@ -29,7 +29,7 @@ defmodule NindoPhxWeb.FeedComponent do
   def feed(assigns) do
     ~H"""
       <%= for post <- @posts do %>
-        <PostComponent.show post={post} user_link={@user_link} rss={@rss} />
+        <PostComponent.show post={post} user_link={@user_link} rss={post[:type] != nil} />
       <% end %>
     """
   end
