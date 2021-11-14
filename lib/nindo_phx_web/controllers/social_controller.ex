@@ -3,10 +3,6 @@ defmodule NindoPhxWeb.SocialController do
 
   # Pages to display
 
-  def index(conn, _params) do
-    render(conn, "index.html")
-  end
-
   def discover(conn, _params) do
     render(conn, "discover.html")
   end

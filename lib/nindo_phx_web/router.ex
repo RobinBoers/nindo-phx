@@ -21,11 +21,11 @@ defmodule NindoPhxWeb.Router do
     get "/about", PageController, :about
     get "/blog", PageController, :blog
 
-    get "/home", SocialController, :index
     get "/discover", SocialController, :discover
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
 
+    get "/home", RSSController, :index
     get "/sources", RSSController, :sources
     get "/feed/:username", RSSController, :feed
     get "/rss/:source", RSSController, :external

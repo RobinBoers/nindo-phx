@@ -40,7 +40,7 @@ defmodule NindoPhxWeb.AccountController do
           conn
           |> put_session(:logged_in, true)
           |> put_session(:user_id, id)
-          |> redirect(to: social_path(conn, :index))
+          |> redirect(to: rss_path(conn, :index))
 
         :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
         _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})

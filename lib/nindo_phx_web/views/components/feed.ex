@@ -22,15 +22,6 @@ defmodule NindoPhxWeb.FeedComponent do
     feed %{posts: posts, user_link: assigns.user_link, rss: false}
   end
 
-  def mixed_rss(assigns) do
-    posts =
-      :username
-      |> Nindo.Accounts.get_by(assigns.username)
-      |> Nindo.FeedAgent.get_pid()
-      |> Nindo.FeedAgent.get_posts()
-
-    feed %{posts: posts, user_link: false, rss: true}
-  end
 
   def feed(assigns) when assigns.posts == [] do
     ~H"""

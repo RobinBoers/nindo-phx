@@ -1,0 +1,12 @@
+<div class="page-wrapper">
+    <UIComponent.sidebar conn={@conn} />
+    <div class="page-inner">
+        <h2 class="title">My Feed</h2>
+
+            <FeedComponent.feed 
+                posts={@posts}
+                user_link={false}
+                rss={true}
+            />
+    </div>
+</div>

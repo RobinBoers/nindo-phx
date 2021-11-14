@@ -7,6 +7,20 @@ defmodule NindoPhxWeb.RSSController do
 
   import Nindo.Core
 
+  def index(conn, _params) do
+    if logged_in?(conn) do
+      posts =
+        user(conn).id
+        |> Accounts.get()
+        |> FeedAgent.get_pid()
+        |> FeedAgent.get_posts()
+
+      render(conn, "index.html", posts: posts)
+    else
+        redirect(conn, to: social_path(conn, :discover))
+    end
+  end
+
   def sources(conn, _params) do
     conn
     |> assign(:error, get_session(conn, :error))
