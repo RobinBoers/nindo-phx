@@ -12,11 +12,18 @@
             <FeedComponent.customizer feeds={user(@conn).feeds} conn={@conn} />
 
             <h2 class="my-3 mt-16 font-bold text-2xl">Users</h2>
+
+            <%= for username <- user(@conn).following do %>
+                <ProfileComponent.preview username={username} display_link={true} show_buttons={true} conn={@conn} />
+            <% end %>
+
+            <%= if user(@conn).following == [] do %>
+                <p>You haven't followed any users yet. </p>
+            <% end %>
+
         <% else %>
-            <h2 class="my-3 font-bold text-2xl">Users</h2>
+            <h2 class="my-3 font-bold text-2xl">Not logged in</h2>
+            <p>You need to be logged in to create a custom feed. </p>
         <% end %>
-
-        <p>Follow users will be displayed here</p>
-
     </div>
 </div>

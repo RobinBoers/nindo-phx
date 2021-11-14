@@ -35,6 +35,7 @@ defmodule NindoPhx.MixProject do
     {:jason, "~> 1.2"},
     {:plug_cowboy, "~> 2.5"},
     {:nindo, path: "../nindo"},
+    {:navigation_history, "~> 0.4.0"},
   ]
 
   defp aliases, do: [

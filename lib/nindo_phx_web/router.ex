@@ -8,6 +8,7 @@ defmodule NindoPhxWeb.Router do
     plug :put_root_layout, {NindoPhxWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug NavigationHistory.Tracker
   end
 
   pipeline :api do
@@ -24,6 +25,7 @@ defmodule NindoPhxWeb.Router do
     get "/discover", SocialController, :discover
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
+    get "/follow/:username", SocialController, :follow
 
     get "/home", RSSController, :index
     get "/sources", RSSController, :sources

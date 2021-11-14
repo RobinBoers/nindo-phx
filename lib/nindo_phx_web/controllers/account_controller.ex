@@ -35,12 +35,16 @@ defmodule NindoPhxWeb.AccountController do
     if account != nil do
       id       = account.id
 
+      redirect_to =
+        NavigationHistory.last_path(conn, 1,
+        default: rss_path(conn, :index))
+
       case Accounts.login(username, password) do
         :ok ->
           conn
           |> put_session(:logged_in, true)
           |> put_session(:user_id, id)
-          |> redirect(to: rss_path(conn, :index))
+          |> redirect(to: redirect_to)
 
         :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
         _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})
@@ -51,10 +55,14 @@ defmodule NindoPhxWeb.AccountController do
   end
 
   def logout(conn, _params) do
+    redirect_to =
+      NavigationHistory.last_path(conn, 1,
+      default: account_path(conn, :sign_in))
+
     conn
     |> put_session(:logged_in, false)
     |> put_session(:user_id, nil)
-    |> redirect(to: account_path(conn, :sign_in))
+    |> redirect(to: redirect_to)
   end
 
   # Account managment

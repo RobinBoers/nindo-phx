@@ -24,7 +24,15 @@ defmodule NindoPhxWeb.ProfileComponent do
                 <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
                 <p class="mt-10">
-                    <a class="btn-primary">Follow</a>
+                    <%= if logged_in?(@conn) do %>
+                        <a class="btn-primary" href={"/follow/#{@username}"}>
+                            <%= case @username in user(@conn).following do
+                                true -> "Unfollow"
+                                false -> "Follow"
+                            end %>
+                        </a>
+                    <% end %>
+
                     <a class="btn-secondary" href={"/feed/#{@username}"}><i class="fas fa-rss-square text-yellow-600 icon"></i> RSS</a>
                 </p>
             </div>
@@ -49,7 +57,19 @@ defmodule NindoPhxWeb.ProfileComponent do
                     <% end %>
                     <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                 </p>
+
+                <%= if logged_in?(@conn) and @show_buttons do %>
+                    <p class="mt-6">
+                        <a class="btn-primary" href={"/follow/#{@username}"}>
+                            <%= case @username in user(@conn).following do
+                                true -> "Unfollow"
+                                false -> "Follow"
+                            end %>
+                        </a>
+                    </p>
+                <% else %>
                 <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
+                <% end %>
             </div>
         </div>
     </div>

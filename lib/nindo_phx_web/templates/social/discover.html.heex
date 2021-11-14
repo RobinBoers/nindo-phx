@@ -7,7 +7,7 @@
         <h2 class="my-3 font-bold text-2xl">Users</h2>     
 
         <%= for user <- get_users() do %>
-            <ProfileComponent.preview username={user.username} display_link={true} />
+            <ProfileComponent.preview username={user.username} display_link={true} show_buttons={false} conn={@conn} />
         <% end %>
 
     </div>

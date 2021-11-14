@@ -3,7 +3,7 @@ defmodule NindoPhxWeb.RSSView do
 
   use NindoPhxWeb, :view
 
-  alias NindoPhxWeb.{FeedComponent, AlertComponent, UIComponent}
+  alias NindoPhxWeb.{FeedComponent, AlertComponent, UIComponent, ProfileComponent}
 
   import Nindo.Core
 
