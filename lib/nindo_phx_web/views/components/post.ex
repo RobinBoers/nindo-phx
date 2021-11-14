@@ -38,13 +38,15 @@ defmodule NindoPhxWeb.PostComponent do
           <% end %>
       </div>
       <hr class="clear-both">
-      <%= if @rss and @post.type == "youtube" and not debug_mode() do %>
+      <%= if @rss do %>
 
-        <% [_, video_id] = String.split(@post.link, "=") %>
+        <%= if @post.type == "youtube" and not debug_mode() do %>
+          <% [_, video_id] = String.split(@post.link, "=") %>
 
-        <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+        <% end %>
 
-        <div class="p-4 text-sm post-content"><%= safe @post.body %></div>
+        <div class="p-4 text-sm post-content"><%=  safe @post.body %></div>
       <% else %>
         <div class="p-4 text-sm post-content"><%= @post.body %></div>
       <% end %>
