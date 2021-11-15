@@ -76,13 +76,16 @@ defmodule NindoPhxWeb.SocialController do
   def new_post(conn, params) do
     title = params["post"]["title"]
     body = params["post"]["body"]
+    user = user(conn)
 
     redirect_to =
       NavigationHistory.last_path(conn,
       default: social_path(conn, :index))
 
-    case Posts.new(title, body, nil, user(conn)) do
-      {:ok, _post}    -> redirect(conn, to: redirect_to)
+    case Posts.new(title, body, nil, user) do
+      {:ok, _post}    ->
+        FeedAgent.update(user)
+        redirect(conn, to: redirect_to)
       {:error, error} ->
         conn
         |> put_session(:error, AccountController.format_error(error))

@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.AccountController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, Auth}
+  alias Nindo.{Accounts, Auth, Feeds}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -73,7 +73,9 @@ defmodule NindoPhxWeb.AccountController do
     email = params["create_account"]["email"]
 
     case Accounts.new(username, password, email) do
-      {:ok, _account}   ->    redirect(conn, to: account_path(conn, :index))
+      {:ok, account}    ->
+        Feeds.cache(account)
+        redirect(conn, to: account_path(conn, :index))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
   end
