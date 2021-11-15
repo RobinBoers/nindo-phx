@@ -11,7 +11,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def header(assigns) do
     ~H"""
-    <div class="w-full bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="w-full bg-white mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
                 <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>

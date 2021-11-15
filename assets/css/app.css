@@ -93,7 +93,7 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 }
 
 .post-content p {
-    @apply py-1;
+    @apply py-2;
 }
 
 .post-content img {
@@ -110,6 +110,10 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 
 .post-content h2 {
     @apply text-lg my-4;
+}
+
+.post-content a {
+    @apply text-blue-500;
 }
 
 .icon {
