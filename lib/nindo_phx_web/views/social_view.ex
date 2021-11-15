@@ -16,7 +16,7 @@ defmodule NindoPhxWeb.SocialView do
     |> Enum.map(fn post ->
       Map.from_struct(post)
     end)
-    |> Enum.reverse() # reverse because otherwise the newest post will be at the bottom in EEx
+    |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
   end
 
   # Discover page
