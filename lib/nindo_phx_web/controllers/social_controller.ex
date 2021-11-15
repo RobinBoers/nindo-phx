@@ -56,12 +56,13 @@ defmodule NindoPhxWeb.SocialController do
     |> render("feed.xml", feed: feed)
   end
 
-  def external(conn, %{"source" => source}) do
-    [source, type] = String.split(source, ":")
-    source = RSS.detect_feed(type, URI.decode(source))
+  def external(conn, %{"source" => input}) do
+    [url, type] = String.split(input, ":")
 
-    feed = RSS.parse_feed(source)
-    posts = RSS.generate_posts(feed, type)
+    feed = RSS.parse_feed(url, type)
+    source = RSS.generate_source(feed, type, url)
+
+    posts = RSS.generate_posts(feed, source)
 
     render(conn, "external.html", posts: posts, title: feed["title"])
   end
@@ -70,11 +71,9 @@ defmodule NindoPhxWeb.SocialController do
 
   def add_feed(conn, params) do
     type = params["add_feed"]["type"]
-    input_feed = convert_link(type, params["add_feed"]["feed"])
+    url = convert_link(type, params["add_feed"]["feed"])
 
-    source = RSS.detect_feed(type, input_feed)
-
-    case RSS.parse_feed(source) do
+    case RSS.parse_feed(url, type) do
 
       {:error, _} ->
         conn
@@ -83,18 +82,7 @@ defmodule NindoPhxWeb.SocialController do
 
       feed ->
         if logged_in?(conn) do
-
-          Feeds.add(
-            %{
-              "title" => feed["title"],
-              "feed" => input_feed,
-              "type" => type,
-              "icon" => RSS.detect_favicon(
-                URI.parse("https://" <> input_feed).authority
-              )
-            }, user(conn)
-          )
-
+          Feeds.add(RSS.generate_source(feed, type, url), user(conn))
         end
 
         redirect(conn, to: social_path(conn, :sources))

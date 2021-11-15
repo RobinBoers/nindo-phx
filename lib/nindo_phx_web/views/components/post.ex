@@ -4,7 +4,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  alias Nindo.{Format, RSS}
+  alias Nindo.{Format}
 
   import Nindo.Core
 
@@ -14,7 +14,7 @@ defmodule NindoPhxWeb.PostComponent do
       <div class="flex flex-row items-center justify-start pt-4 p-3">
           <%= if @rss do %>
 
-            <img class="w-12" src={RSS.detect_favicon(URI.parse(@post.link).authority)}>
+            <img class="w-12" src={@post.icon}>
 
             <p class="font-bold text-lg pl-2">
               <%= @post.author %>
