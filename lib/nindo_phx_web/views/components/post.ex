@@ -26,7 +26,7 @@ defmodule NindoPhxWeb.PostComponent do
 
             <% username = Nindo.Accounts.get(@post.author_id).username %>
 
-            <img class="w-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+            <img class="w-12 object-cover h-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg pl-2">
               <%= if @user_link do %>
                 <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
