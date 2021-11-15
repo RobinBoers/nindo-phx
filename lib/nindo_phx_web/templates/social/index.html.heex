@@ -1,7 +1,14 @@
 <div class="page-wrapper">
     <UIComponent.sidebar conn={@conn} />
     <div class="page-inner">
+
+         <%= if assigns[:error] do %>
+            <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+        <% end %>
+
         <h2 class="title">My Feed</h2>
+
+            <PostComponent.new conn={@conn} />
 
             <FeedComponent.feed 
                 posts={@posts}

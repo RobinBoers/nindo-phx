@@ -5,6 +5,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
+  import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
 
@@ -55,6 +56,19 @@ defmodule NindoPhxWeb.PostComponent do
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>
+    """
+  end
+
+  def new(assigns) do
+    ~H"""
+      <div class="w-full flex-grow-0 rounded text-black">
+          <div class="pt-4">
+            <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "w-full"], fn f -> %>
+              <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow text-black" %>
+              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "w-full input block border-none resize-none shadow flex-grow text-black" %>
+            <% end) %>
+          </div>
+      </div>
     """
   end
 end

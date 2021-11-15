@@ -120,9 +120,9 @@ defmodule NindoPhxWeb.AccountController do
     end
   end
 
-  # Private methods
+  # Helper methods
 
-  defp format_error(changeset) do
+  def format_error(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
       Enum.reduce(opts, msg, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))

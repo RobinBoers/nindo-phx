@@ -1,7 +1,8 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, RSS, Feeds, FeedAgent, RSS.YouTube}
+  alias Nindo.{Accounts, Posts, RSS, Feeds, FeedAgent, RSS.YouTube}
+  alias NindoPhxWeb.{AccountController}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -16,7 +17,10 @@ defmodule NindoPhxWeb.SocialController do
         |> FeedAgent.get_pid()
         |> FeedAgent.get_posts()
 
-      render(conn, "index.html", posts: posts)
+      conn
+      |> assign(:error, get_session(conn, :error))
+      |> put_session(:error, nil)
+      |> render("index.html", posts: posts)
     else
         redirect(conn, to: social_path(conn, :discover))
     end
@@ -65,6 +69,26 @@ defmodule NindoPhxWeb.SocialController do
     posts = RSS.generate_posts(feed, source)
 
     render(conn, "external.html", posts: posts, title: feed["title"])
+  end
+
+  # Posts
+
+  def new_post(conn, params) do
+    title = params["post"]["title"]
+    body = params["post"]["body"]
+
+    redirect_to =
+      NavigationHistory.last_path(conn,
+      default: social_path(conn, :index))
+
+    case Posts.new(title, body, nil, user(conn)) do
+      {:ok, _post}    -> redirect(conn, to: redirect_to)
+      {:error, error} ->
+        conn
+        |> put_session(:error, AccountController.format_error(error))
+        |> redirect(to: redirect_to)
+    end
+
   end
 
   # Manage feeds and followers
