@@ -55,7 +55,7 @@ defmodule NindoPhxWeb.FeedComponent do
 
                 <li class="p-2 py-3 flex flex-row flex-wrap center-items">
                   <%= if feed["icon"] != nil do %>
-                    <img src={feed["icon"]} class="w-8 mr-3">
+                    <img class="w-8 mr-3" src={feed["icon"]} onerror="this.src='/images/rss.png'">
                   <% else %>
                     <span class="w-8 mr-3"></span>
                   <% end %>

@@ -17,7 +17,7 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
 
-              <img class="w-12" src={@post.source["icon"]}>
+              <img class="w-12" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
@@ -89,7 +89,7 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center gap-2">
           <%= if @rss do %>
 
-            <img class="w-6" src={@post.source["icon"]}>
+            <img class="w-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
