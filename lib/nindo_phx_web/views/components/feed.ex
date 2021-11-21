@@ -60,7 +60,7 @@ defmodule NindoPhxWeb.FeedComponent do
                     <span class="w-8 mr-3"></span>
                   <% end %>
                   <span class="mt-1">
-                    <a href={get_feed_link(feed)}><%= feed["title"] %></a>
+                    <a href={get_source_link(feed)}><%= feed["title"] %></a>
                   </span>
 
                   <%= link safe("<i class='fas fa-times'></i>"), to: social_path(@conn, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
@@ -74,8 +74,8 @@ defmodule NindoPhxWeb.FeedComponent do
 
   # Private methods
 
-  defp get_feed_link(feed) do
-    "/rss/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  defp get_source_link(feed) do
+    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
 end

@@ -30,7 +30,7 @@ defmodule NindoPhxWeb.Router do
     get "/user/:username", SocialController, :user
     get "/follow/:username", SocialController, :follow
     get "/feed/:username", SocialController, :feed
-    get "/rss/:source", SocialController, :external
+    get "/source/:source", SocialController, :external
 
     put "/post/new", SocialController, :new_post
 
