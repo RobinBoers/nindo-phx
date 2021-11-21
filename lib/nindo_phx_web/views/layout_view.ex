@@ -29,10 +29,15 @@ defmodule NindoPhxWeb.LayoutView do
   end
 
   def title(:post, assigns) do
-    post = Posts.get(assigns.id)
-    account = Accounts.get(post.author_id)
+    case Posts.exists?(assigns.id) do
+      true ->
+        post = Posts.get(assigns.id)
+        account = Accounts.get(post.author_id)
 
-    post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")"
+        post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")"
+      false ->
+        "Wow, such empty"
+    end
   end
 
   def title(_, _),            do: "Social media of the Future"
