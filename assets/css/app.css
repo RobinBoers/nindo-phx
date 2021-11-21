@@ -120,6 +120,10 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply mr-1;
 }
 
+.no-top {
+    @apply mt-0 pt-0;
+}
+
 /* Layout */
 
 .page-wrapper {

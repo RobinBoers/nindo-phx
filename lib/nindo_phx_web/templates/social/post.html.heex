@@ -3,9 +3,7 @@
     <div class="page-wrapper">
         <UIComponent.sidebar conn={@conn} />
         <div class="page-inner">
-            <h2 class="title"><%= @post.title %></h2>
-
-            <PostComponent.show post={@post} user_link={true} rss={false} />
+            <PostComponent.standalone post={@post} user_link={true} rss={false} />
         </div>
     </div>
 

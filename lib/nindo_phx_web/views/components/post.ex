@@ -9,36 +9,42 @@ defmodule NindoPhxWeb.PostComponent do
 
   import Nindo.Core
 
+  #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def show(assigns) do
     ~H"""
     <div class="w-full my-6 rounded shadow bg-white text-black">
-      <div class="flex flex-row items-center justify-start pt-4 p-3">
-          <%= if @rss do %>
+      <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
+        <div class="flex flex-row items-center justify-start">
+            <%= if @rss do %>
 
-            <img class="w-12" src={@post.icon}>
+              <img class="w-12" src={@post.icon}>
 
-            <p class="font-bold text-lg pl-2">
-              <%= @post.author %>
-              <i class="block text-sm text-gray-400">@external</i>
-            </p>
+              <p class="font-bold text-lg pl-2">
+                <%= @post.author %>
+                <i class="block text-sm text-gray-400">@external</i>
+              </p>
 
-          <% else %>
+            <% else %>
 
-            <% username = Nindo.Accounts.get(@post.author_id).username %>
+              <% username = Nindo.Accounts.get(@post.author_id).username %>
 
-            <img class="w-12 object-cover h-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
-            <p class="font-bold text-lg pl-2">
-              <%= if @user_link do %>
-                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
-              <% else %>
-                <%= Format.display_name(username) %>
-              <% end %>
-              <i class="block text-sm text-gray-400"><%= "@#{username}" %></i>
-            </p>
+              <img class="w-12 object-cover h-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+              <p class="font-bold text-lg pl-2">
+                <%= if @user_link do %>
+                  <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+                <% else %>
+                  <%= Format.display_name(username) %>
+                <% end %>
+                <i class="block text-sm text-gray-400"><%= "@#{username}" %></i>
+              </p>
 
-          <% end %>
+            <% end %>
+          </div>
+
       </div>
       <hr class="clear-both">
+
+
       <%= if @rss do %>
 
         <%= if @post.type == "youtube" and not debug_mode() do %>
@@ -52,10 +58,64 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="p-4 text-sm post-content"><%= @post.body %></div>
       <% end %>
 
-
-
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>
+    """
+  end
+
+  def standalone(assigns) do
+    username = Nindo.Accounts.get(assigns.post.author_id).username
+    ~H"""
+      <div class="flex flex-row items-center gap-2 pt-7">
+        <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+        <p class="font-bold text-lg">
+            <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+        </p>
+      </div>
+
+      <h2 class="title no-top"><%= @post.title %></h2>
+      <p><%= @post.body %></p>
+    """
+  end
+
+  def preview(assigns) do
+    ~H"""
+      <div class="my-6">
+        <div class="flex flex-row items-center gap-2">
+          <%= if @rss do %>
+
+            <img class="w-6" src={@post.icon}>
+
+            <p class="font-bold text-lg">
+              <%= @post.author %>
+            </p>
+
+          <% else %>
+
+            <% username = Nindo.Accounts.get(@post.author_id).username %>
+
+            <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+            <p class="font-bold text-lg">
+              <%= if @user_link do %>
+                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+              <% else %>
+                <%= Format.display_name(username) %>
+              <% end %>
+            </p>
+
+          <% end %>
+        </div>
+
+        <%= if @rss do %>
+
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= @post.title %></h3>
+
+        <% else %>
+
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><a href={"/post/#{@post.id}"}><%= @post.title %></a></h3>
+
+        <% end %>
+      </div>
     """
   end
 

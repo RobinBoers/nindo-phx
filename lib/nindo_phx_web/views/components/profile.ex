@@ -120,4 +120,5 @@ defmodule NindoPhxWeb.ProfileComponent do
     </script>
     """
   end
+
 end
