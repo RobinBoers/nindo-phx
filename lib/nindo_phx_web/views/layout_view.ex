@@ -3,6 +3,7 @@ defmodule NindoPhxWeb.LayoutView do
 
   use NindoPhxWeb, :view
   alias Phoenix.Controller
+  alias NindoPhxWeb.{PageController, AccountController, SocialController}
 
   alias Nindo.{Accounts, Posts, Format}
   import NindoPhxWeb.Router.Helpers
@@ -14,13 +15,16 @@ defmodule NindoPhxWeb.LayoutView do
   # so we instruct Elixir to not warn if the dashboard route is missing.
   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}
 
-  def title(:index, _),       do: "Social media of the Future"
-  def title(:blog, _),        do: "Blog"
-  def title(:discover, _),    do: "Discover"
-  def title(:about, _),       do: "About"
-  def title(:sign_up, _),     do: "Sign up"
-  def title(:sign_in, _),     do: "Sign in"
-  def title(:user, assigns) do
+  def title(:index, PageController, _),       do: "Social media of the Future"
+  def title(:index, AccountController, _),    do: "Settings"
+  def title(:index, SocialController, _),     do: "Social"
+  def title(:blog, _, _),                     do: "Blog"
+  def title(:discover, _, _),                 do: "Discover"
+  def title(:sources, _, _),                 do: "Sources"
+  def title(:about, _, _),                    do: "About"
+  def title(:sign_up, _, _),                  do: "Sign up"
+  def title(:sign_in, _, _),                  do: "Sign in"
+  def title(:user, _, assigns) do
     if Accounts.exists?(assigns.username) do
       Format.display_name(assigns.username) <> " (@" <> assigns.username <> ")"
     else
@@ -28,7 +32,7 @@ defmodule NindoPhxWeb.LayoutView do
     end
   end
 
-  def title(:post, assigns) do
+  def title(:post, _, assigns) do
     case Posts.exists?(assigns.id) do
       true ->
         post = Posts.get(assigns.id)
@@ -40,6 +44,7 @@ defmodule NindoPhxWeb.LayoutView do
     end
   end
 
-  def title(_, _),            do: "Social media of the Future"
+  def title(:external, _, assigns), do: assigns.title
+  def title(_, _, _),            do: "Nindo"
 
 end
