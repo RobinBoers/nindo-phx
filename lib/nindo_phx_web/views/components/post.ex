@@ -12,15 +12,20 @@ defmodule NindoPhxWeb.PostComponent do
   #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
-    <div class="w-full my-6 rounded shadow bg-white text-black">
+    <div id={@post.title} class="w-full my-6 rounded shadow bg-white text-black">
       <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
 
-              <img class="w-12" src={@post.icon}>
+              <img class="w-12" src={@post.source["icon"]}>
 
               <p class="font-bold text-lg pl-2">
-                <%= @post.author %>
+                <%= if @user_link do %>
+                  <a href={get_source_link(@post.source)}><%= @post.author %></a>
+                <% else %>
+                  <%= @post.author %>
+                <% end %>
+
                 <i class="block text-sm text-gray-400">@external</i>
               </p>
 
@@ -55,7 +60,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <div class="p-4 text-sm post-content"><%=  safe @post.body %></div>
       <% else %>
-        <div class="p-4 text-sm post-content"><%= @post.body %></div>
+        <div class="p-4 text-lg post-content" style="font-family: Roboto;"><%= @post.body %></div>
       <% end %>
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
@@ -74,7 +79,7 @@ defmodule NindoPhxWeb.PostComponent do
       </div>
 
       <h2 class="title no-top"><%= @post.title %></h2>
-      <p><%= @post.body %></p>
+      <p class="text-lg"><%= @post.body %></p>
     """
   end
 
@@ -84,10 +89,14 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center gap-2">
           <%= if @rss do %>
 
-            <img class="w-6" src={@post.icon}>
+            <img class="w-6" src={@post.source["icon"]}>
 
             <p class="font-bold text-lg">
-              <%= @post.author %>
+              <%= if @user_link do %>
+                <a href={get_source_link(@post.source)}><%= @post.author %></a>
+              <% else %>
+                <%= @post.author %>
+              <% end %>
             </p>
 
           <% else %>
@@ -108,7 +117,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= @post.title %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><a href={get_source_link(@post.source) <> "##{@post.title}"}><%= @post.title %></a></h3>
 
         <% else %>
 
@@ -139,4 +148,11 @@ defmodule NindoPhxWeb.PostComponent do
       </script>
     """
   end
+
+  # Private methods
+
+  defp get_source_link(feed) do
+    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  end
+
 end
