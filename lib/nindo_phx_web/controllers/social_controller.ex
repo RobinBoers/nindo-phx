@@ -63,7 +63,7 @@ defmodule NindoPhxWeb.SocialController do
   def external(conn, %{"source" => input}) do
     [url, type] = String.split(input, ":")
 
-    feed = RSS.parse_feed(url, type)
+    feed = Feeds.get_feed(url)
     source = RSS.generate_source(feed, type, url)
 
     posts = RSS.generate_posts(feed, source)
