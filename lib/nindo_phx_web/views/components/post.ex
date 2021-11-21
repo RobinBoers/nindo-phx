@@ -10,7 +10,7 @@ defmodule NindoPhxWeb.PostComponent do
   import Nindo.Core
 
   #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
-  def show(assigns) do
+  def default(assigns) do
     ~H"""
     <div class="w-full my-6 rounded shadow bg-white text-black">
       <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
