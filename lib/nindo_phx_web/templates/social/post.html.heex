@@ -3,7 +3,7 @@
     <div class="page-wrapper">
         <UIComponent.sidebar conn={@conn} />
         <div class="page-inner">
-            <PostComponent.standalone post={@post} user_link={true} rss={false} />
+            <PostComponent.standalone post={@post} user_link={true} rss={@rss} />
         </div>
     </div>
 

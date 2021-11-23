@@ -69,17 +69,43 @@ defmodule NindoPhxWeb.PostComponent do
   end
 
   def standalone(assigns) do
-    username = Nindo.Accounts.get(assigns.post.author_id).username
     ~H"""
-      <div class="flex flex-row items-center gap-2 pt-7">
-        <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
-        <p class="font-bold text-lg">
+      <%= if not @rss do %>
+        <% username = Nindo.Accounts.get(assigns.post.author_id).username %>
+
+        <div class="flex flex-row items-center gap-2 pt-7">
+          <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+          <p class="font-bold text-lg">
             <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
-        </p>
-      </div>
+          </p>
+        </div>
+
+      <% else %>
+
+        <div class="flex flex-row items-center gap-2 pt-7">
+          <img class="w-6 object-cover h-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
+          <p class="font-bold text-lg">
+            <a href={get_source_link(@post.source)}><%= @post.author %></a>
+          </p>
+        </div>
+
+      <% end %>
 
       <h2 class="title no-top"><%= @post.title %></h2>
-      <p class="text-lg"><%= @post.body %></p>
+
+
+      <%= if @rss do %>
+
+        <%= if @post.type == "youtube" and not debug_mode() do %>
+          <% [_, video_id] = String.split(@post.link, "=") %>
+
+          <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+        <% end %>
+
+        <div class="text-lg post-content"><%= safe @post.body %></div>
+      <% else %>
+        <p class="text-lg"><%= @post.body %></p>
+      <% end %>
     """
   end
 
@@ -117,7 +143,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><a href={get_source_link(@post.source) <> "##{@post.title}"}><%= @post.title %></a></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= link @post.title, to: social_path(@conn, :external_post, url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime) %></h3>
 
         <% else %>
 

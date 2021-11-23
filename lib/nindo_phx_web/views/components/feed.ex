@@ -10,7 +10,7 @@ defmodule NindoPhxWeb.FeedComponent do
   import Nindo.Core
 
   def single(assigns), do:
-    feed %{posts: SocialView.get_posts(assigns.username), user_link: assigns.user_link, rss: false, preview: false}
+    feed %{posts: SocialView.get_posts(assigns.username), user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}
 
   def mixed(assigns) do
     posts =
@@ -18,7 +18,7 @@ defmodule NindoPhxWeb.FeedComponent do
       |> Enum.flat_map(fn user -> SocialView.get_posts(user) end)
       |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
 
-    feed %{posts: posts, user_link: assigns.user_link, rss: false, preview: false}
+    feed %{posts: posts, user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}
   end
 
   def feed(assigns) when assigns.posts == [] do
@@ -30,7 +30,7 @@ defmodule NindoPhxWeb.FeedComponent do
     ~H"""
       <%= for post <- @posts do %>
         <%= if @preview do %>
-          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} />
+          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} conn={@conn} />
         <% else %>
           <PostComponent.default post={post} user_link={@user_link} rss={post[:type] != nil} />
         <% end %>

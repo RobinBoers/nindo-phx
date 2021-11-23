@@ -44,7 +44,7 @@ defmodule NindoPhxWeb.SocialController do
   end
 
   def post(conn, %{"id" => id}) do
-    render(conn, "post.html", post: Nindo.Posts.get(id))
+    render(conn, "post.html", post: Nindo.Posts.get(id), rss: false)
   end
 
   def feed(conn, %{"username" => username}) do
@@ -75,7 +75,7 @@ defmodule NindoPhxWeb.SocialController do
     datetime = from_string(datetime)
     post = Feeds.get_post(url, title, datetime)
 
-    render(conn, "post.html", post: post)
+    render(conn, "post.html", post: post, rss: true)
   end
 
   # Posts
