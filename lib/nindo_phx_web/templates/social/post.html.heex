@@ -1,4 +1,4 @@
-<%= if Posts.exists?(@id) do %>
+<%= if @post != nil do %>
 
     <div class="page-wrapper">
         <UIComponent.sidebar conn={@conn} />

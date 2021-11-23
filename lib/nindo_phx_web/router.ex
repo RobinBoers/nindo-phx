@@ -26,6 +26,7 @@ defmodule NindoPhxWeb.Router do
     get "/discover", SocialController, :discover
     get "/sources", SocialController, :sources
 
+    get "/post/external", SocialController, :external_post
     get "/post/:id", SocialController, :post
     get "/user/:username", SocialController, :user
     get "/follow/:username", SocialController, :follow

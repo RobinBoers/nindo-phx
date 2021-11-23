@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.LayoutView do
   alias Phoenix.Controller
   alias NindoPhxWeb.{PageController, AccountController, SocialController}
 
-  alias Nindo.{Accounts, Posts, Format}
+  alias Nindo.{Accounts, Format}
   import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.{BarComponent}
 
@@ -33,12 +33,11 @@ defmodule NindoPhxWeb.LayoutView do
   end
 
   def title(:post, _, assigns) do
-    case Posts.exists?(assigns.id) do
+    case assigns.post != nil do
       true ->
-        post = Posts.get(assigns.id)
-        account = Accounts.get(post.author_id)
+        account = Accounts.get(assigns.post.author_id)
 
-        post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")"
+        assigns.post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")"
       false ->
         "Wow, such empty"
     end
