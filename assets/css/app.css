@@ -29,14 +29,14 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 /* Buttons */
 
 .btn-primary {
-    @apply cursor-pointer border font-bold py-3 px-5 rounded bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
+    @apply cursor-pointer border font-bold py-3 px-5 rounded-md bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
 }
 .btn-secondary {
-    @apply cursor-pointer border font-bold py-3 px-5 rounded hover:bg-indigo-200 text-indigo-500 hover:shadow bg-white;
+    @apply cursor-pointer border font-bold py-3 px-5 rounded-md hover:bg-indigo-200 text-indigo-500 hover:shadow bg-white;
 }
 
 .input {
-    @apply border border-indigo-700 py-3 px-5 rounded text-indigo-500 hover:shadow bg-white focus:shadow-lg;
+    @apply border border-indigo-700 py-3 px-5 rounded-md text-indigo-500 hover:shadow bg-white focus:shadow-lg;
 }
 
 .input-l {
@@ -61,14 +61,14 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply font-bold p-4;
 }
 .header-button {
-    @apply p-2 border-0;
+    @apply p-2 border-0 rounded;
 }
 .header-button.btn-secondary {
     @apply bg-blue-50 hover:bg-indigo-200;
 }
 
 .btn-menu {
-    @apply cursor-pointer font-bold py-3 px-5 rounded bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
+    @apply cursor-pointer font-bold py-3 px-5 bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
 }
 
 /* Typography */

@@ -12,7 +12,7 @@ defmodule NindoPhxWeb.PostComponent do
   #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
-    <div id={@post.title} class="w-full my-6 rounded shadow bg-white text-black">
+    <div id={@post.title} class="w-full my-6 rounded-md shadow bg-white text-black">
       <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
