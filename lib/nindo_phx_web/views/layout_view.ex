@@ -7,7 +7,7 @@ defmodule NindoPhxWeb.LayoutView do
 
   alias Nindo.{Accounts, Format}
   import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{BarComponent}
+  alias NindoPhxWeb.{UIComponent}
 
   import Nindo.Core
 

@@ -52,7 +52,7 @@ defmodule NindoPhxWeb.PostComponent do
 
       <%= if @rss do %>
 
-        <%= if @post.type == "youtube" and not debug_mode() do %>
+        <%= if @post.source["type"] == "youtube" and not debug_mode() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
           <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
@@ -96,7 +96,7 @@ defmodule NindoPhxWeb.PostComponent do
 
       <%= if @rss do %>
 
-        <%= if @post.type == "youtube" and not debug_mode() do %>
+        <%= if @post.source["type"] == "youtube" and not debug_mode() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
           <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>

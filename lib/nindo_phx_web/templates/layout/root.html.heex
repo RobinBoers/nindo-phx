@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-scrollbar">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -25,11 +25,11 @@
   <body class="flex flex-col h-screen bg-gray-50 no-scrollbar">
     <header class="bg-indigo-500 text-blue-50 shadow-lg flex flex-row justify-between">
 
-      <div class="ml-3 flex items-center justify-start flex-wrap flex-1">
+      <section class="ml-3 flex items-center justify-start flex-wrap flex-1">
         <h1 class="p4 text-xl font-extrabold"><a class="header-title" href="/">Nindo</a></h1>
-      </div>
+      </section>
 
-      <div class="flex-2">
+      <section class="flex-2">
         <nav class="hidden sm:block">
           <ul class="flex items-center justify-center flex-wrap">
             <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
@@ -50,14 +50,14 @@
             <li class="header-item header-button btn-menu">☰</li>
           </ul>
         </nav>
-      </div>
+      </section>
 
-      <div class="hidden sm:block flex-1">
+      <section class="hidden sm:block flex-1">
         <div class="mr-3">
           <div class="flex items-center justify-end flex-wrap">
             <%= if logged_in?(@conn) do %>
 
-              <BarComponent.account_header id={user(@conn).id} conn={@conn} /> 
+              <UIComponent.account_header id={user(@conn).id} conn={@conn} /> 
 
             <% else %>
 
@@ -68,7 +68,7 @@
             <% end %>
           </div>
         </div>
-      </div>
+      </section>
 
     </header>
 

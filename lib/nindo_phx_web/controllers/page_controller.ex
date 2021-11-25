@@ -8,6 +8,6 @@ defmodule NindoPhxWeb.PageController do
     render(conn, "about.html")
   end
   def blog(conn, _params) do
-    render(conn, "blog.html", username: "robin")
+    render(conn, "blog.html")
   end
 end

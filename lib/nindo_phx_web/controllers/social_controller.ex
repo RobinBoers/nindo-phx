@@ -68,7 +68,7 @@ defmodule NindoPhxWeb.SocialController do
 
     posts = RSS.generate_posts(feed, source)
 
-    render(conn, "external.html", posts: posts, title: feed["title"])
+    render(conn, "feed.html", posts: posts, title: feed["title"])
   end
 
   def external_post(conn, %{"url" => url, "title" => title, "datetime" => datetime}) do
@@ -91,7 +91,7 @@ defmodule NindoPhxWeb.SocialController do
 
     case Posts.new(title, body, nil, user) do
       {:ok, _post}    ->
-        FeedAgent.update(user)
+        Feeds.update_cache(user)
         redirect(conn, to: redirect_to)
       {:error, error} ->
         conn
