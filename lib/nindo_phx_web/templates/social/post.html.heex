@@ -3,7 +3,11 @@
     <div class="page-wrapper">
         <UIComponent.sidebar conn={@conn} />
         <div class="page-inner">
-            <PostComponent.standalone post={@post} user_link={true} rss={@rss} />
+            <%= if assigns[:error] do %>
+                <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+            <% end %>
+
+            <PostComponent.standalone post={@post} user_link={true} rss={@rss} conn={@conn} />
         </div>
     </div>
 

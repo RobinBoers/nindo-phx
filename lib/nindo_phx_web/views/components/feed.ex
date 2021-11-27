@@ -9,9 +9,6 @@ defmodule NindoPhxWeb.FeedComponent do
 
   import Nindo.Core
 
-  def single(assigns), do:
-    feed %{posts: SocialView.get_posts(assigns.username), user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}
-
   def mixed(assigns) do
     posts =
       assigns.users

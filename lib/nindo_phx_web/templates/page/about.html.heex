@@ -17,7 +17,7 @@
                 Nindo is built using a lot of great tools. I want to especially thank <a href="https://elixir-lang.org">Elixir</a>, <a href="https://www.phoenixframework.org">Phoenix Framework</a>, <a href="https://github.com/riverrun/bcrypt_elixir">bcrypt_elixir</a>, <a href="https://github.com/rrrene/html_sanitize_ex">html_sanitize_ex</a>, <a href="https://github.com/avencera/fast_rss">fast_rss</a> and <a href="https://github.com/BennyHallett/elixir-rss">elixir-rss</a>.
             </p>
 
-            <PostComponent.default post={Posts.get(8)} user_link={true} rss={false} />
+            <PostComponent.default post={Posts.get(8)} user_link={true} rss={false} conn={@conn} />
 
             <!--This is the first post published from within the official Nindo text-based CLI client. This is a huge achievement, which I like to document here, on my new social media platform. Some of you may remember the old Nindo. It was my first big scale project. I built the original in PHP with a MySQL database. I have to say, the code was horrible, but it worked. Now, three years later, I'm rebuilding my biggest project in Elixir. The plan is to make a web-based version using Phoenix framework next. ~ 18/10/2021 --> 
             

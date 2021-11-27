@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, Posts, RSS, Feeds, FeedAgent, RSS.YouTube}
+  alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, FeedAgent, RSS.YouTube}
   alias NindoPhxWeb.{AccountController}
   import NindoPhxWeb.{Router.Helpers}
 
@@ -44,7 +44,10 @@ defmodule NindoPhxWeb.SocialController do
   end
 
   def post(conn, %{"id" => id}) do
-    render(conn, "post.html", post: Nindo.Posts.get(id), rss: false)
+    conn
+    |> assign(:error, get_session(conn, :error))
+    |> put_session(:error, nil)
+    |> render("post.html", post: Nindo.Posts.get(id), rss: false)
   end
 
   def feed(conn, %{"username" => username}) do
@@ -78,7 +81,7 @@ defmodule NindoPhxWeb.SocialController do
     render(conn, "post.html", post: post, rss: true)
   end
 
-  # Posts
+  # Posts and comments
 
   def new_post(conn, params) do
     title = params["post"]["title"]
@@ -99,6 +102,25 @@ defmodule NindoPhxWeb.SocialController do
         |> redirect(to: redirect_to)
     end
 
+  end
+
+  def new_comment(conn, params) do
+    title = params["comment"]["title"]
+    body = params["comment"]["body"]
+    post_id = params["comment"]["post_id"]
+
+    redirect_to =
+      NavigationHistory.last_path(conn,
+      default: social_path(conn, :index))
+
+    case Comments.new(post_id, title, body, user(conn)) do
+      {:ok, _comment}    ->
+        redirect(conn, to: redirect_to)
+      {:error, error} ->
+        conn
+        |> put_session(:error, AccountController.format_error(error))
+        |> redirect(to: redirect_to)
+    end
   end
 
   # Manage feeds and followers
@@ -151,14 +173,16 @@ defmodule NindoPhxWeb.SocialController do
     end
   end
 
-  # Private methods
+  # Helper methods
 
-  # This method is used to convert the YouTube custom urls or legacy
-  # username to the yt.com/channel/id format, which is needed for the
-  # RSS feeds to work. Converting is a expensive task, which also uses quota
-  # on my YT API key. That's why I only convert it when adding the feed
-  # and not every time I need to access the feed.
-  defp convert_link(type, feed) do
+  @doc """
+  This method is used to convert the YouTube custom urls or legacy
+  username to the yt.com/channel/id format, which is needed for the
+  RSS feeds to work. Converting is a expensive task, which also uses quota
+  on my YT API key. That's why I only convert it when adding the feed
+  and not every time I need to access the feed.
+  """
+  def convert_link(type, feed) do
     case type do
       "youtube" -> YouTube.to_channel_link(feed)
       _         -> feed

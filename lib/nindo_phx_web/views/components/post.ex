@@ -5,6 +5,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
+  alias NindoPhxWeb.{CommentComponent}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -105,6 +106,11 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="text-lg post-content"><%= safe @post.body %></div>
       <% else %>
         <p class="text-lg"><%= @post.body %></p>
+
+        <CommentComponent.section post_id={@post.id} />
+        <%= if logged_in?(@conn) do %>
+          <CommentComponent.form post_id={@post.id} conn={@conn} />
+        <% end %>
       <% end %>
     """
   end

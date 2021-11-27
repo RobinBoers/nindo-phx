@@ -34,6 +34,7 @@ defmodule NindoPhxWeb.Router do
     get "/source/:source", SocialController, :external
 
     put "/post/new", SocialController, :new_post
+    put "/comment/new", SocialController, :new_comment
 
     put "/feed/add", SocialController, :add_feed
     delete "/feed/remove", SocialController, :remove_feed
