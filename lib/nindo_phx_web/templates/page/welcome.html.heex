@@ -1,0 +1,84 @@
+<%= if logged_in?(@conn) do %>
+    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
+        <div class="flex-grow-0">
+            <h2 class="title">Hello, <%= Format.display_name(user(@conn).username) %>!</h2>
+            <p class="intro">Welcome to Nindo. Let's get you started, shall we?</p>
+
+            <details>
+                <summary class="text-xl cursor-pointer text-gray-900 pb-9 font-bold">Setting up your sources</summary>
+                
+                <p class="intro">
+                    Nindo is a central place where you can read all your favorite blogs and other sites. It also allows you to post content on Nindo itself. There is no tracking and AI to create a feed for you, you can do it yourself by following other users and adding external sites.
+                </p>
+
+                <h4 class="font-bold py-3 text-lg">Try it:</h4>
+
+                <div class="pb-9">
+                <FeedComponent.customizer feeds={user(@conn).feeds} conn={@conn} />
+                </div>
+            </details>
+
+            <details>
+                <summary class="text-xl cursor-pointer text-gray-900 pb-9 font-bold">Customizing your account</summary>
+                
+                <p class="intro">
+                    Give your account some <i class="highlight">swag</i><br>
+                    Customize it by setting a profile picture, biography and display name.
+                </p>
+
+                <div class="pb-9">
+                    <%= link "Customize", to: account_path(@conn, :index), class: "btn-primary", target: "_blank" %>
+                </div>        
+            </details>
+
+            <details>
+                <summary class="text-xl cursor-pointer text-gray-900 pb-9 font-bold">Discover other users</summary>
+                
+                <p class="intro">
+                    Follow other Nindo users and their posts will be display in your feed. You can also comment Nindo posts.
+                </p>
+
+                <%= for user <- SocialView.get_users(3) do %>
+                    <ProfileComponent.preview username={user.username} display_link={true} show_buttons={false} conn={@conn} />
+                <% end %>
+            </details>
+
+            <details>
+                <summary class="text-xl cursor-pointer text-gray-900 pb-9 font-bold">All done!</summary>
+                
+                <p class="intro">
+                    You're ready to start using Nindo. Enjoy!
+                </p>
+
+                <div class="pb-9">
+                    <%= link "Finish", to: social_path(@conn, :index), class: "btn-primary" %>
+                </div>   
+            </details>
+            
+            
+            
+        </div>
+        <i class="fas fa-mug-hot flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
+    </section>
+<% else %>
+    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
+        <div class="flex-grow-0">
+            <h2 class="title">Hello!</h2>
+            <p class="intro">Welcome to Nindo. Let's take a look.</p>
+
+            <h3 class="text-xl text-gray-900 pb-9 font-bold">Creating your account</h3>
+            
+            <p class="intro">
+                Create an account to get started. Your account will house your feeds, posts and comments.<br>
+                If you already have an account, you can sign in.
+            </p>
+
+            <div class="pb-9">
+                <%= link "Sign up", to: account_path(@conn, :sign_up), class: "btn-primary" %>
+                <%= link "Sign in", to: account_path(@conn, :sign_in), class: "btn-secondary" %>
+            </div> 
+            
+        </div>
+        <i class="fas fa-bolt flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
+    </section>
+<% end %>

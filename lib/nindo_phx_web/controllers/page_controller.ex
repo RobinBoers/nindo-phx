@@ -10,4 +10,7 @@ defmodule NindoPhxWeb.PageController do
   def blog(conn, _params) do
     render(conn, "blog.html")
   end
+  def welcome(conn, _params) do
+    render(conn, "welcome.html")
+  end
 end

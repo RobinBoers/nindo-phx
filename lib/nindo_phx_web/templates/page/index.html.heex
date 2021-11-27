@@ -1,6 +1,6 @@
 <header class="text-center mt-12 sm:mt-24 md:mt-36">
 
-  <h2 class="title jumbo">Social media of the <i class="text-yellow-900 bg-yellow-200 px-3 rounded-lg">future </i></h2>
+  <h2 class="title jumbo">Social media of the <i class="text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-xl">future </i> </h2>
   <p class="subtitle">A simple, easy to use and secure platform for communicating with your friends</p>
 
   <div class="m-16">
@@ -38,12 +38,26 @@
     </div>
     <div class="flex-grow-0 w-2/6 rounded shadow bg-white text-black ml-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
-        <input class="input w-full text-black" placeholder="Add RSS feed...">
+        <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
+            <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow text-black" %>
+            <%= hidden_input f, :type, value: "custom" %>
+          <% end) %>
       </div>
       <hr class="clear-both">
 
       <ul class="p-4">
-        <li></li>
+        <li class="p-2 py-3 flex flex-row flex-wrap center-items">
+            <img class="w-8 mr-3" src="https://geheimesite.nl/logo2.png">
+            <span class="mt-1">
+              <a href="https://webdevelopment-en-meer.blogspot.com">Webdevelopment-En-Meer</a>
+            </span>
+        </li>
+        <li class="p-2 py-3 flex flex-row flex-wrap center-items">
+            <img class="w-8 mr-3" src="https://drewdevault.com/avatar-148.jpg">
+            <span class="mt-1">
+              <a href="https://drewdevault.com/">Drew DeVault's blog</a>
+            </span>
+        </li>
       </ul>
     </div>
 </section>
@@ -52,14 +66,18 @@
     <i class="fas fa-lock flex-grow-0 mr-36 text-9xl text-indigo-600 hidden lg:block"></i>
     <div class="flex-grow-0">
       <h2 class="title">Secure</h2>
-      <p class="intro">Your data is encrypted and can only be accessed by <i class="text-blue-900 bg-blue-200 px-3 rounded-lg">you</i>. </p>
+      <p class="intro">Your data is encrypted and can only be accessed by <i class="highlight">you</i>. </p>
     </div>    
 </section>
 
-<section class="flex flex-row justify-center xl:mt-24 p-9 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded">
+<section class="flex flex-row justify-center xl:mt-24 p-9 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
   <div class="flex-grow-0">
     <h2 class="title">And on top of all that...</h2>
     <p class="intro">... Nindo is fully open-source and can even be selfhosted.<br>And thanks to the RSS features you can even follow users of another instance in your own.<br>Oh, I forgot to tell? Every users posts can be viewed as a RSS feed,<br>which allows you to follow users without even having an account.</p>
+    <div class="flex flex-row jusitfy-start items-center gap-2 mb-3">
+      <img src="https://img.shields.io/github/forks/RobinBoers/NindoPhx?style=flat" width="170px">
+      <img src="https://img.shields.io/github/stars/RobinBoers/NindoPhx?style=flat" width="170px">
+    </div>
   </div>
   <i class="fab fa-github-alt flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
 </section>

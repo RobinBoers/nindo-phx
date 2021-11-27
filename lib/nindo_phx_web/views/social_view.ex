@@ -21,8 +21,9 @@ defmodule NindoPhxWeb.SocialView do
 
   # Discover page
 
-  def get_users() do
-    Accounts.list(6)
+  def get_users(count) do
+    count
+    |> Accounts.list()
     |> Enum.shuffle() # shuffle to make a random order
   end
 end
