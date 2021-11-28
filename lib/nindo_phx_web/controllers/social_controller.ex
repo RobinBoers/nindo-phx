@@ -2,7 +2,7 @@ defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
   alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, FeedAgent, RSS.YouTube}
-  alias NindoPhxWeb.{AccountController}
+  alias NindoPhxWeb.{AccountController, SocialView}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -27,7 +27,7 @@ defmodule NindoPhxWeb.SocialController do
   end
 
   def discover(conn, _params) do
-    render(conn, "discover.html")
+    render(conn, "discover.html", users: SocialView.get_users(6), searching: false)
   end
 
   def sources(conn, _params) do
@@ -35,6 +35,28 @@ defmodule NindoPhxWeb.SocialController do
     |> assign(:error, get_session(conn, :error))
     |> put_session(:error, nil)
     |> render("sources.html")
+  end
+
+  def welcome(conn, _params) do
+    render(conn, "welcome.html")
+  end
+
+  # Searching
+
+  def search(conn, %{"query" => query}) do
+    results =
+      NinDB.Account
+      |> NinDB.Database.list()
+      |> Enum.filter(fn account ->
+        bool = String.contains?(account.username, query) or String.contains?(account.description, query)
+        if account.display_name != nil do
+          String.contains?(account.display_name, query) or bool
+        else
+          bool
+        end
+      end)
+
+    render(conn, "discover.html", users: results, searching: true, query: query)
   end
 
   # Feeds and users
@@ -63,7 +85,7 @@ defmodule NindoPhxWeb.SocialController do
     |> render("feed.xml", feed: feed)
   end
 
-  def external(conn, %{"source" => input}) do
+  def external_feed(conn, %{"source" => input}) do
     [url, type] = String.split(input, ":")
 
     feed = Feeds.get_feed(url)

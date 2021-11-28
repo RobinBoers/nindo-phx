@@ -38,7 +38,7 @@
                     Follow other Nindo users and their posts will be display in your feed. You can also comment on Nindo posts.
                 </p>
 
-                <%= for user <- SocialView.get_users(3) do %>
+                <%= for user <- get_users(3) do %>
                     <ProfileComponent.preview username={user.username} display_link={true} show_buttons={true} conn={@conn} />
                 <% end %>
             </details>

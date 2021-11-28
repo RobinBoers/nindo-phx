@@ -4,6 +4,7 @@ defmodule NindoPhxWeb.SocialView do
   use NindoPhxWeb, :view
 
   alias Nindo.{Accounts, Posts, Format}
+  import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.{ProfileComponent, FeedComponent, AlertComponent, PostComponent, UIComponent}
 
   import Nindo.Core
