@@ -74,6 +74,7 @@ defmodule NindoPhxWeb.AccountController do
 
     case Accounts.new(username, password, email) do
       {:ok, account}    ->
+        Feeds.follow(account.username, account)
         Feeds.cache(account)
         redirect(conn, to: page_path(conn, :welcome))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))

@@ -129,6 +129,10 @@ defmodule NindoPhxWeb.SocialController do
     type = params["add_feed"]["type"]
     url = convert_link(type, params["add_feed"]["feed"])
 
+    redirect_to =
+      NavigationHistory.last_path(conn,
+      default: social_path(conn, :sources))
+
     case RSS.parse_feed(url, type) do
 
       {:error, _} ->
@@ -141,7 +145,7 @@ defmodule NindoPhxWeb.SocialController do
           Feeds.add(RSS.generate_source(feed, type, url), user(conn))
         end
 
-        redirect(conn, to: social_path(conn, :sources))
+        redirect(conn, to: redirect_to)
     end
   end
 
@@ -152,7 +156,11 @@ defmodule NindoPhxWeb.SocialController do
       Feeds.remove(feed, user(conn))
     end
 
-    redirect(conn, to: social_path(conn, :sources))
+    redirect_to =
+      NavigationHistory.last_path(conn,
+      default: social_path(conn, :sources))
+
+    redirect(conn, to: redirect_to)
   end
 
   def follow(conn, %{"username" => person}) do
