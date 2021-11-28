@@ -7,11 +7,11 @@
 
         <h2 class="title">Sign up</h2>
 
-        <div class="w-full flex-grow-0 rounded-xl shadow bg-white text-black lg:mt-4 p-12">
+        <div class="w-full flex-grow-0 text-black lg:mt-4">
             <%= form_for(@conn, account_path(@conn, :create_account), [as: :create_account, method: :put], fn f -> %>
-                <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1 w-full" %>
-                <%= text_input f, :email, placeholder: "Emailaddress", class: "input my-1 w-full" %>
-                <%= password_input f, :password, placeholder: "Password", class: "input my-1 w-full" %>
+                <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1.5 w-full block" %>
+                <%= text_input f, :email, placeholder: "Emailaddress", class: "input my-1.5 w-full block" %>
+                <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
                 <%= submit "Sign up", class: "btn-primary block mt-4"  %>
             <% end) %>
         </div>

@@ -43,43 +43,64 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def preview(assigns) do
     ~H"""
+    <%= if not @source do %>
 
-    <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
-        <div class="md:flex">
-            <div class="md:flex-shrink-0">
-                <%= if @display_link do %>
-                    <a href={"/user/#{@username}"}>
-                        <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
-                    </a>
-                <% else %>
-                <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
-                <% end %>
-            </div>
-            <div class="p-8">
-                <p class="font-bold text-2xl">
+        <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="md:flex">
+                <div class="md:flex-shrink-0">
                     <%= if @display_link do %>
-                    <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
-                    <% else %>
-                      <%= Format.display_name(@username) %>
-                    <% end %>
-                    <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
-                </p>
-
-                <%= if logged_in?(@conn) and @show_buttons do %>
-                    <p class="mt-6">
-                        <a class="btn-primary" href={"/follow/#{@username}"}>
-                            <%= case @username in user(@conn).following do
-                                true -> "Unfollow"
-                                false -> "Follow"
-                            end %>
+                        <a href={"/user/#{@username}"}>
+                            <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
                         </a>
+                    <% else %>
+                    <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(@username)}>
+                    <% end %>
+                </div>
+                <div class="p-8">
+                    <p class="font-bold text-2xl">
+                        <%= if @display_link do %>
+                        <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
+                        <% else %>
+                        <%= Format.display_name(@username) %>
+                        <% end %>
+                        <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                     </p>
-                <% else %>
-                <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
-                <% end %>
+
+                    <%= if logged_in?(@conn) and @show_buttons do %>
+                        <p class="mt-6">
+                            <a class="btn-primary" href={"/follow/#{@username}"}>
+                                <%= case @username in user(@conn).following do
+                                    true -> "Unfollow"
+                                    false -> "Follow"
+                                end %>
+                            </a>
+                        </p>
+                    <% else %>
+                    <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
+                    <% end %>
+                </div>
             </div>
         </div>
-    </div>
+
+    <% else %>
+
+        <li class="p-2 py-3 flex flex-row flex-wrap center-items">
+            <img class="w-9 object-cover h-9 rounded-full mr-3 border border-indigo-700" src={Format.profile_picture(@username)}>
+
+            <span class="mt-1">
+            <%= if @display_link do %>
+                <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
+            <% else %>
+                <%= Format.display_name(@username) %>
+            <% end %>
+            </span>
+
+            <%= if logged_in?(@conn) and @show_buttons do %>
+                <%= link "Unfollow", to: social_path(@conn, :follow, @username), class: "mt-3 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
+            <% end %>
+        </li>
+
+    <% end %>
     """
   end
 

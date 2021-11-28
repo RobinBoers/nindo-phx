@@ -1,6 +1,6 @@
 <header class="text-center mt-12 sm:mt-24 md:mt-36">
 
-  <h2 class="title jumbo">Social media of the <i class="text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-xl">future </i> </h2>
+  <h2 class="title jumbo">Social media of the <i class="text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg">future </i> </h2>
   <p class="subtitle">A simple, easy to use and secure platform for communicating with your friends</p>
 
   <div class="m-16">
@@ -11,7 +11,7 @@
 </header>
 
 <section class="flex flex-row xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
-    <div class="flex-grow-0 w-2/6 rounded shadow bg-white text-black mr-12 hidden lg:block">
+    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white text-black mr-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
         <img class="w-12 rounded-full border-indigo-700 border-2" src="https://geheimesite.nl/images/profile.JPG">
         <p class="font-bold text-lg pl-2">
@@ -20,7 +20,7 @@
         </p>
       </div>
       <hr class="clear-both">
-      <p class="p-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor id arcu venenatis egestas. Sed pharetra lectus eget justo semper, vitae tincidunt diam rutrum. Proin mattis libero lacus, vel pulvinar quam suscipit non. Donec commodo metus ut rutrum dapibus. Morbi commodo enim eget sem varius, nec vulputate nisi porttitor. In placerat elit eu turpis vulputate, ac iaculis quam mollis. Nunc et est consequat libero fringilla sollicitudin in non arcu. Nam pharetra placerat nibh. Pellentesque lobortis a enim eu vehicula. Morbi consequat enim vel orci auctor lobortis. Aenean accumsan nibh eget libero rutrum, sagittis volutpat eros ullamcorper. Quisque ipsum lacus, mollis ac dolor eu, interdum ultricies neque. </p>
+      <p class="p-4">Nindo is a mixture of an RSS reader and social media platform that has been in development since 2019. It allows you to construct your own feeds using content from external sites. This also eliminates the need for AI and tracking. It has support for images in posts and commenting on posts. It is built on a rocksolid base using tools like Elixir and Phoenix. On top of all that all personal data is encrypted so that hackers can't obtain it. It is fully ad-free, open-source and self-hosted. That means: everyone can use it without need for asking and is allowed to modify and redistribute the code. </p>
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= now() %></p>
 
@@ -36,7 +36,7 @@
       <h2 class="title">Powerful when needed</h2>
       <p class="intro">Nindo allows you to create your own custom feeds using RSS.<br>This allows for a personalized feed without the need for AI and tracking. </p>
     </div>
-    <div class="flex-grow-0 w-2/6 rounded shadow bg-white text-black ml-12 hidden lg:block">
+    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white text-black ml-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
         <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
             <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow text-black" %>
@@ -86,15 +86,38 @@
     </div>
 </section>
 
+<section class="flex flex-row items-center xl:justify-center xl:mt-24 sm:mt-36 xl:mb-12">
+    <div class="flex-grow-0">
+      <h2 class="title">Distraction free</h2>
+      <p class="intro">Focus on what matters.<br>No annoying popups, no flashing colors, no beeps, boops and no fancy notifications.<br>Just you and your content. </p>
+    </div>    
+    <div class="ml-24 mb-6 rounded-md shadow text-black hidden lg:block">
+      <div class="blur hover:blur-none transition-all">
+        <div class="pt-4 p-3 flex flex-row justify-between items-bottom bg-white">
+          <div class="flex flex-row items-center justify-start">
+              <i class="pl-3 fas fa-bell text-xl text-indigo-600"></i>
+              <p class="font-bold text-lg pl-2">
+                New message from Bob
+              </p>
+            </div>
+        </div>
+        <hr class="clear-both">
+
+        <div class="bg-opacity-50 p-5 text-lg post-content" style="font-family: Roboto;">Come spend the next three hours of your life on our app and watch ads.<br>PLS. COME TO OUR F*CKIN APP YOU MORON!!!!</div>
+      </div>
+    </div>
+</section>
+
 <section class="flex flex-row items-center xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
     <i class="fas fa-lock flex-grow-0 mr-36 text-9xl text-indigo-600 hidden lg:block"></i>
     <div class="flex-grow-0">
-      <h2 class="title">Secure</h2>
-      <p class="intro">Your data is encrypted and can only be accessed by <i class="highlight">you</i>. </p>
+      <h2 class="title">Private</h2>
+      <p class="intro">Nindo doesn't store any data about you that is doesn't need.<br>The only data we store is what <i class="highlight">you</i> want others to see on your public profile. </p>
     </div>    
 </section>
 
-<section class="flex flex-row justify-center xl:mt-24 p-9 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-2xl">
+
+<section class="flex flex-row justify-center xl:mt-24 p-9 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
   <div class="flex-grow-0">
     <h2 class="title">And on top of all that...</h2>
     <p class="intro">... Nindo is fully open-source and can even be selfhosted.<br>And thanks to the RSS features you can even follow users of another instance in your own.<br>Oh, I forgot to tell? Every users posts can be viewed as a RSS feed,<br>which allows you to follow users without even having an account.</p>

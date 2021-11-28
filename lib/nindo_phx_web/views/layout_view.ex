@@ -18,9 +18,11 @@ defmodule NindoPhxWeb.LayoutView do
   def title(:index, PageController, _),       do: "Social media of the Future"
   def title(:index, AccountController, _),    do: "Settings"
   def title(:index, SocialController, _),     do: "Social"
+  def title(:welcome, _, _),                  do: "Welcome"
   def title(:blog, _, _),                     do: "Blog"
   def title(:discover, _, _),                 do: "Discover"
-  def title(:sources, _, _),                 do: "Sources"
+  def title(:search, _, assigns),             do: "Search results for \"#{assigns.query}\""
+  def title(:sources, _, _),                  do: "Sources"
   def title(:about, _, _),                    do: "About"
   def title(:sign_up, _, _),                  do: "Sign up"
   def title(:sign_in, _, _),                  do: "Sign in"
@@ -43,7 +45,8 @@ defmodule NindoPhxWeb.LayoutView do
     end
   end
 
-  def title(:external, _, assigns), do: assigns.title
+  def title(:external_feed, _, assigns), do: assigns.title
+  def title(:external_post, _, assigns), do: assigns.post.title <> " · " <> assigns.post.author
   def title(_, _, _),            do: "Nindo"
 
 end

@@ -25,6 +25,6 @@ defmodule NindoPhxWeb.SocialView do
   def get_users(count) do
     count
     |> Accounts.list()
-    |> Enum.shuffle() # shuffle to make a random order
+    #|> Enum.shuffle() # shuffle to make a random order
   end
 end

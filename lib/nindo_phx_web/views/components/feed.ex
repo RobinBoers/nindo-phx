@@ -20,7 +20,7 @@ defmodule NindoPhxWeb.FeedComponent do
 
   def feed(assigns) when assigns.posts == [] do
     ~H"""
-      <p class="my-6 text-gray-500">Wow, such empty...</p>
+      <p class="inactive">Wow, such empty...</p>
     """
   end
   def feed(assigns) do
@@ -37,8 +37,8 @@ defmodule NindoPhxWeb.FeedComponent do
 
   def customizer(assigns) do
     ~H"""
-      <div class="w-full flex-grow-0 min-h-md rounded shadow bg-white text-black">
-          <div class="pt-4 p-3">
+      <div class="w-full flex-grow-0 rounded-md text-black">
+          <div class="pt-4">
             <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
               <span class="input input-l input-static">https://</span>
               <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-m flex-grow text-black" %>
@@ -47,7 +47,12 @@ defmodule NindoPhxWeb.FeedComponent do
           </div>
           <hr class="clear-both">
 
-          <ul class="p-4">
+          <%= if @feeds != [] do %>
+                <h3 class="heading pt-4">Sources</h3>
+          <% end %>
+
+          <ul>
+
               <%= for feed <- @feeds do %>
 
                 <li class="p-2 py-3 flex flex-row flex-wrap center-items">

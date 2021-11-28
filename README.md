@@ -1,6 +1,6 @@
 # NindoPhx
 
-Nindo is a small-scale self-hosted opensource social media platform. Its key features are security, ease of use and reliabilty. It is designed by Robin Boers and built using Phoenix Framework and Elixir.
+Nindo is a small scale self-hosted open-source social media platform. Its key features are security, ease of use and reliabilty. It is designed by Robin Boers and built using Phoenix Framework and Elixir.
 
 Nindo was first built as a small chatting platform for a local community in Maassluis. It's codebase was pretty terrrible and very insecure. This newer version of Nindo is fully rewritten in Elixir and much more stable and secure than the original. The old Nindo archive can be found on my [personal website](https://www.geheimesite.nl/library/projects/package/nindo.php). It is full of cool old stuff.
 

@@ -22,11 +22,15 @@
 
 /* General */
 
-a:not(.header-title, .btn-primary, .btn-secondary) {
+a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
     @apply hover:underline;
 }
 
-/* Buttons */
+.gradient {
+    @apply bg-gradient-to-r from-green-400 to-blue-500;
+}
+
+/* Buttons and inputs */
 
 .btn-primary {
     @apply cursor-pointer border font-bold py-3 px-5 rounded-md bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
@@ -79,6 +83,9 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 .subtitle {
     @apply text-xl sm:text-2xl font-medium text-gray-500 px-4;
 }
+.heading {
+    @apply my-3 font-bold text-2xl;
+}
 
 .jumbo {
     @apply md:text-7xl lg:text-8xl p-8;
@@ -91,6 +98,16 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
 .intro {
     @apply text-xl text-gray-500 pb-12 font-medium;
 }
+
+.highlight {
+    @apply text-blue-900 px-3 rounded-lg bg-gradient-to-r from-blue-100 to-blue-200;
+}
+
+.inactive {
+    @apply my-6 text-gray-500;
+}
+
+/* Post content styles */
 
 .post-content p {
     @apply py-2;
@@ -116,32 +133,34 @@ a:not(.header-title, .btn-primary, .btn-secondary) {
     @apply text-blue-500;
 }
 
+/* Images */ 
+
 .icon {
     @apply mr-1;
-}
-
-.highlight {
-    @apply text-blue-900 bg-blue-200 px-3 rounded-lg;
-}
-
-.no-top {
-    @apply mt-0 pt-0;
 }
 
 /* Layout */
 
 .page-wrapper {
-    @apply mt-6 p-1 md:p-12 xl:flex flex-row justify-start;
+    @apply mt-6 p-1 md:p-12 xl:flex flex-row justify-center;
 }
 
 .page-inner {
     @apply relative max-w-md mx-auto sm:max-w-2xl md:max-w-6xl;
 }
 
-.page-inner:not(.sign-in-up) {
-    @apply flex-grow;
+.page-inner:not(.sign-in-up, .blog) {
+    @apply flex-grow m-0;
+}
+
+.page-inner.sign-in-up {
+    @apply lg:w-1/2 xl:w-2/6;
 }
 
 .sidebar {
-    @apply pt-7 xl:mr-24;
+    @apply pt-10 xl:mr-48;
+}
+
+.no-top {
+    @apply mt-0 pt-0;
 }

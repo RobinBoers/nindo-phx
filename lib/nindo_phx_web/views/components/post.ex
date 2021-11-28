@@ -59,7 +59,7 @@ defmodule NindoPhxWeb.PostComponent do
           <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
-        <div class="px-4 text-lg post-content"><%=  safe @post.body %></div>
+        <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
       <% else %>
         <div class="px-4 py-2 text-lg post-content" style="font-family: Roboto;"><%= @post.body %></div>
       <% end %>
@@ -162,11 +162,11 @@ defmodule NindoPhxWeb.PostComponent do
 
   def new(assigns) do
     ~H"""
-      <div class="w-full flex-grow-0 rounded text-black">
-          <div class="pt-4">
+      <div class="w-full flex-grow-0 rounded-md pt-4 text-black">
+          <div>
             <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "w-full", id: "post-form"], fn f -> %>
-              <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow text-black" %>
-              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", onkeydown: "pressed(event)", class: "w-full input block border-none resize-none shadow flex-grow text-black" %>
+              <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
+              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", onkeydown: "pressed(event)", class: "w-full input block resize-none flex-grow text-black" %>
             <% end) %>
           </div>
       </div>
