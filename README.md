@@ -9,6 +9,9 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 ## Features
 
 - Posts with images
+- Comments
+- Encrypted user data
+- Modern design
 - Construct your own feed
 - No AI nonsense
 - Every user's post are exported in an RSS feed
@@ -16,9 +19,6 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 ## TODOs
 
 - Add way to upload images
-- Add way to follow people (and include in home feed)
-- Post posts via web client
-- RSS optimizing + caching
 
 ## Credits
 
