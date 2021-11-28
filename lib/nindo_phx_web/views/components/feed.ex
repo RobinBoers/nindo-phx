@@ -69,9 +69,9 @@ defmodule NindoPhxWeb.FeedComponent do
     """
   end
 
-  # Private methods
+  # Helper methods
 
-  defp get_source_link(feed) do
+  def get_source_link(feed) do
     "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
