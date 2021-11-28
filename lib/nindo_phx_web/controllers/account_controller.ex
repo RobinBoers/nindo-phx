@@ -41,6 +41,8 @@ defmodule NindoPhxWeb.AccountController do
 
       case Accounts.login(username, password) do
         :ok ->
+          Feeds.cache(account)
+
           conn
           |> put_session(:logged_in, true)
           |> put_session(:user_id, id)
