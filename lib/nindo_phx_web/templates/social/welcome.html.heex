@@ -1,5 +1,5 @@
 <%= if logged_in?(@conn) do %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
+    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
             <h2 class="title">Hello, <%= Format.display_name(user(@conn).username) %>!</h2>
             <p class="intro">Welcome to Nindo. Let's get you started, shall we?</p>
@@ -68,7 +68,7 @@
         <i class="fas fa-mug-hot flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
     </section>
 <% else %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white shadow rounded-xl">
+    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
             <h2 class="title">Hello!</h2>
             <p class="intro">Welcome to Nindo. Let's take a look.</p>

@@ -10,7 +10,7 @@ defmodule NindoPhxWeb.CommentComponent do
 
   def show(assigns) do
     ~H"""
-      <div id={@comment.title} class="w-full mb-6 rounded-md shadow bg-white text-black">
+      <div id={@comment.title} class="w-full mb-6 rounded-md shadow bg-white dark:bg-gray-800 text-black">
         <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
           <div class="flex flex-row items-center justify-start">
               <% username = Nindo.Accounts.get(@comment.author_id).username %>

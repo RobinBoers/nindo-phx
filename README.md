@@ -14,6 +14,7 @@ Some people ask why I called it Nindo. Well, the anwser is is: I liked Ninjas wh
 - Modern design
 - Construct your own feed
 - No AI nonsense
+- Nice dark mode
 - Every user's post are exported in an RSS feed
 
 ## TODOs

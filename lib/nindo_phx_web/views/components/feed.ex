@@ -45,7 +45,6 @@ defmodule NindoPhxWeb.FeedComponent do
               <%= select f, :type, ["Blogger": :blogger, "Wordpress": :wordpress, "Youtube": :youtube, "Atom": :atom, "Custom": :custom], class: "input input-r"  %>
             <% end) %>
           </div>
-          <hr class="clear-both">
 
           <%= if @feeds != [] do %>
                 <h3 class="heading pt-4">Sources</h3>

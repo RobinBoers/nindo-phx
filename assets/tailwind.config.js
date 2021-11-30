@@ -4,7 +4,7 @@ module.exports = {
     './js/**/*.js',
     '../lib/*_web/**/*.*ex',
   ],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: 'media', // 'false' or 'media' or 'class'
   theme: {
     screens: {
       'xs': '440px',

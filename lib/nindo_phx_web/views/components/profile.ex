@@ -11,7 +11,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def header(assigns) do
     ~H"""
-    <div class="w-full bg-white mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
+    <div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
                 <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>
@@ -45,7 +45,7 @@ defmodule NindoPhxWeb.ProfileComponent do
     ~H"""
     <%= if not @source do %>
 
-        <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
             <div class="md:flex">
                 <div class="md:flex-shrink-0">
                     <%= if @display_link do %>
@@ -106,7 +106,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def account(assigns) do
     ~H"""
-    <div class="my-6 w-full bg-white rounded-xl shadow-md overflow-hidden transition-all">
+    <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
                 <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" onclick="toggleEdit()" src={Format.profile_picture(@username)}>
