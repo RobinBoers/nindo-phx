@@ -47,7 +47,13 @@ module.exports = {
       'full': '100%',
       'screen': '100vh'
     },
-    extend: {},
+    extend: {
+      colors: {
+        gray: {
+          850: '#1C2631'
+        }
+      }
+    },
   },
   variants: {
     extend: {},

@@ -30,14 +30,14 @@
       </section>
 
       <section class="flex-2">
-        <nav class="hidden sm:block">
+        <nav class="hidden md:block">
           <ul class="flex items-center justify-center flex-wrap">
             <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
             <li class="header-item"><%= link "Social", to: social_path(@conn, :index) %></li>
             <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
             <li class="header-item"><%= link "About", to: page_path(@conn, :about) %></li>
             
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <% if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li class="header-item">
                 <%= link "Developer", to: Routes.live_dashboard_path(@conn, :home) %>
               </li>
@@ -45,14 +45,14 @@
           </ul>
         </nav>
 
-        <nav class="block sm:hidden">
+        <nav class="block md:hidden">
           <ul class="flex items-center justify-end flex-wrap">
             <li class="header-item header-button btn-menu">☰</li>
           </ul>
         </nav>
       </section>
 
-      <section class="hidden sm:block flex-1">
+      <section class="hidden md:block flex-1">
         <div class="mr-3">
           <div class="flex items-center justify-end flex-wrap">
             <%= if logged_in?(@conn) do %>
@@ -72,7 +72,7 @@
 
     </header>
 
-    <main class="flex-grow sm:mx-12 md:mx-20">
+    <main class="flex-grow">
 
       <%= @inner_content %>
 
