@@ -25,7 +25,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
                 <p class="mt-10">
                     <%= if logged_in?(@conn) do %>
-                        <a class="btn-primary" href={"/follow/#{@username}"}>
+                        <a class="btn-primary mr-1" href={"/follow/#{@username}"}>
                             <%= case @username in user(@conn).following do
                                 true -> "Unfollow"
                                 false -> "Follow"

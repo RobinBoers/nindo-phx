@@ -36,15 +36,19 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
 
 /* Buttons and inputs */
 
+.input {
+    @apply border border-indigo-700 py-3 px-5 rounded-md text-indigo-500 hover:shadow bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 focus:shadow-lg;
+}
+
+.input-static:hover {
+    @apply shadow-none;
+}
+
 .btn-primary {
     @apply cursor-pointer border font-bold py-3 px-5 rounded-md bg-indigo-700 hover:bg-indigo-900 text-blue-50 hover:shadow;
 }
 .btn-secondary {
     @apply cursor-pointer border font-bold py-3 px-5 rounded-md hover:bg-indigo-200 text-indigo-500 hover:shadow bg-white dark:bg-gray-800 dark:hover:bg-opacity-50;
-}
-
-.input {
-    @apply border border-indigo-700 py-3 px-5 rounded-md text-indigo-500 hover:shadow bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 focus:shadow-lg;
 }
 
 .input-l {
@@ -57,10 +61,6 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
 
 .input-m {
     @apply rounded-l-none rounded-r-none border-r-0;
-}
-
-.input-static:hover {
-    @apply shadow-none;
 }
 
 /* Header */
@@ -96,11 +96,11 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
 }
 
 .paragraph {
-    @apply py-2 text-xl text-gray-700;
+    @apply py-2 text-xl text-gray-700 dark:text-gray-300;
 }
 
 .intro {
-    @apply text-xl text-gray-500 pb-12 font-medium;
+    @apply text-xl text-gray-500 pb-12 font-medium dark:text-gray-200;
 }
 
 .highlight {
