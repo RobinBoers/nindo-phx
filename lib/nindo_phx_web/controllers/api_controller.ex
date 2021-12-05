@@ -37,7 +37,7 @@ defmodule NindoPhxWeb.APIController do
   end
 
   def change_account(conn, %{"key" => key, "value" => value}) do
-    user = Accounts.get(conn.assigns.user_id)
+    user = Accounts.get(conn.assigns.current_user)
 
     case Accounts.change(key, value, user) do
       {:ok, _account} ->
@@ -59,7 +59,7 @@ defmodule NindoPhxWeb.APIController do
     do: json(conn, Posts.get(:latest, 50))
 
   def new_post(conn, %{"title" => title, "body" => body}) do
-    user = Accounts.get(conn.assigns.user_id)
+    user = Accounts.get(conn.assigns.current_user)
 
     case Posts.new(title, body, nil, user) do
       {:ok, _post} ->
