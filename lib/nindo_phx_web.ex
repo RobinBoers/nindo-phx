@@ -7,6 +7,7 @@ defmodule NindoPhxWeb do
 
       import Plug.Conn
       import NindoPhxWeb.Gettext
+      import NindoPhxWeb.API.Auth, only: [authenticate_api_user: 2]
       alias NindoPhxWeb.Router.Helpers, as: Routes
     end
   end

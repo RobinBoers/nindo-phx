@@ -43,6 +43,12 @@ Used to obtain an access token.
 
 ```json
 {
-    "message": "Error: something went wrong."
+    "message": "Account doesn't exist."
+}
+```
+
+```json
+{
+    "message": "Wrong password."
 }
 ```

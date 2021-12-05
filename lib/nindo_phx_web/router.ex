@@ -14,6 +14,7 @@ defmodule NindoPhxWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug NindoPhxWeb.API.Auth
   end
 
   scope "/", NindoPhxWeb do
