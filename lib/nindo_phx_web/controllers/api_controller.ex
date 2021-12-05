@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.APIController do
   @moduledoc false
   use NindoPhxWeb, :controller
-  plug :authenticate_api_user when action in [:change_account, :get_post]
+  plug :authenticate_api_user when action in [:change_account, :new_post]
 
   alias NindoPhxWeb.API.Auth
   alias Nindo.{Accounts, Posts}
