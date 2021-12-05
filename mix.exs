@@ -10,6 +10,15 @@ defmodule NindoPhx.MixProject do
     start_permanent: Mix.env() == :prod,
     aliases: aliases(),
     deps: deps(),
+    name: "NindoPhx",
+    source_url: "https://github.com/RobinBoers/NindoPhx",
+    docs: [
+      main: "overview",
+      extra_section: "GUIDES",
+      api_reference: false,
+      extras: extras(),
+      groups_for_extras: groups_for_extras(),
+    ],
   ]
 
   def application, do: [
@@ -36,10 +45,33 @@ defmodule NindoPhx.MixProject do
     {:plug_cowboy, "~> 2.5"},
     {:nindo, path: "../nindo"},
     {:navigation_history, "~> 0.4.0"},
+    {:ex_doc, "~> 0.24", only: :dev, runtime: false},
   ]
 
   defp aliases, do: [
     setup: ["deps.get"],
     "assets.deploy": ["esbuild default --minify", "phx.digest"],
   ]
+
+  defp extras, do: [
+    "docs/overview.md",
+    "docs/api.md",
+    "docs/api/auth/login.md",
+    "docs/api/accounts/create-account.md",
+    "docs/api/accounts/get-account.md",
+    "docs/api/accounts/list-accounts.md",
+    "docs/api/accounts/modify-account.md",
+    "docs/api/posts/create-post.md",
+    "docs/api/posts/get-post.md",
+    "docs/api/posts/list-posts.md",
+  ]
+
+  defp groups_for_extras do
+    [
+      Introduction: ~r/^(?:(?!\/).)*\/(?!.*\/).*$/,
+      API: ~r/docs\/api\/auth\/.?/,
+      Accounts: ~r/docs\/api\/accounts\/.?/,
+      Posts: ~r/docs\/api\/posts\/.?/,
+    ]
+  end
 end

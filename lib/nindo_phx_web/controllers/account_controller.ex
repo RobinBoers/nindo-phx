@@ -28,12 +28,12 @@ defmodule NindoPhxWeb.AccountController do
   # Session management
 
   def login(conn, params) do
-    username = params["login"]["username"]
-    password = params["login"]["password"]
+    username = params["username"]
+    password = params["password"]
     account  = Accounts.get_by(:username, username)
 
     if account != nil do
-      id       = account.id
+      id = account.id
 
       redirect_to =
         NavigationHistory.last_path(conn, 1,

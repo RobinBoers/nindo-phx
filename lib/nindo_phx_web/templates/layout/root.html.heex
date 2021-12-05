@@ -37,7 +37,7 @@
             <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
             <li class="header-item"><%= link "About", to: page_path(@conn, :about) %></li>
             
-            <% if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li class="header-item">
                 <%= link "Developer", to: Routes.live_dashboard_path(@conn, :home) %>
               </li>

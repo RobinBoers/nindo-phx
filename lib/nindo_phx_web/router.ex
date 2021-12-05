@@ -1,4 +1,5 @@
 defmodule NindoPhxWeb.Router do
+  @moduledoc false
   use NindoPhxWeb, :router
 
   pipeline :browser do
@@ -54,6 +55,21 @@ defmodule NindoPhxWeb.Router do
     put "/signup", AccountController, :create_account
     post "/signin", AccountController, :login
     get "/logout", AccountController, :logout
+  end
+
+  scope "/api", NindoPhxWeb do
+    pipe_through :api
+
+    get "/accounts", APIController, :list_accounts
+    put "/accounts", APIController, :create_account
+    get "/accounts/:username", APIController, :get_account
+    put "/accounts/:username", APIController, :change_account
+
+    get "/posts", APIController, :list_posts
+    put "/posts", APIController, :new_post
+    get "/posts/:id", APIController, :get_post
+
+    post "/login", AccountController, :login
   end
 
   if Mix.env() in [:dev, :test] do
