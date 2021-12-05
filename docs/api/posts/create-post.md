@@ -13,8 +13,7 @@ Used to publish a new post.
 ```json
 {
     "title": "[string]",
-    "body": "[string]",
-    "token": "[string]"
+    "body": "[string]"
 }
 ```
 
@@ -32,16 +31,6 @@ Used to publish a new post.
 
 ## Error Response
 
-**Condition** : If something went wrong publishing the post with one of these reasons:
+**Condition** : Not authorized
 
-- Invalid token
-
-**Code** : `400 BAD REQUEST`
-
-**Content** :
-
-```json
-{
-    "message": "Error: something went wrong."
-}
-```
+**Code** : `403 UNAUTHORIZED`

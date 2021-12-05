@@ -48,7 +48,7 @@ defmodule NindoPhxWeb.APIController do
       _ ->
         conn
         |> put_status(:bad_request)
-        |> json(%{"message" => "Success! You can close this tab now."})
+        |> json(%{"message" => "Error: something went wrong."})
     end
   end
 
@@ -70,7 +70,7 @@ defmodule NindoPhxWeb.APIController do
       _ ->
         conn
         |> put_status(:bad_request)
-        |> json(%{"message" => "Success! You can close this tab now."})
+        |> json(%{"message" => "Error: something went wrong."})
     end
   end
 

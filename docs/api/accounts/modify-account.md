@@ -13,8 +13,7 @@ Used to update user preferences.
 ```json
 {
     "key": "[string]",
-    "value": "[string]",
-    "token": "[string]"
+    "value": "[string]"
 }
 ```
 
@@ -32,11 +31,18 @@ Used to update user preferences.
 
 ## Error Response
 
+### Unauthorized
+
+**Condition** : Not authorized
+
+**Code** : `403 UNAUTHORIZED`
+
+### Other errors
+
 **Condition** : If something went wrong updating the account with one of these reasons:
 
 - Invalid key
 - Invalid value
-- Invalid token
 
 **Code** : `400 BAD REQUEST`
 

@@ -15,7 +15,7 @@ Open endpoints require no Authentication.
 
 ## Private Endpoints
 
-These endpoint require Authentication in the form of an token. A token can be obtained via the Login API described above.
+These endpoint require Authentication in the form of an token. A token can be obtained via the Login API described above and as a bearer token put in the request headers.
 
-* [Modify account](api/account/modify-account.md) : `PUT /accounts/:username`
+* [Modify account](api/accounts/modify-account.md) : `PUT /accounts/:username`
 * [Create post](api/posts/create-post.md) : `PUT /posts`
