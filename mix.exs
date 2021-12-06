@@ -11,7 +11,7 @@ defmodule NindoPhx.MixProject do
     aliases: aliases(),
     deps: deps(),
     name: "NindoPhx",
-    source_url: "https://github.com/RobinBoers/NindoPhx",
+    source_url: "https://github.com/RobinBoers/nindo-phx",
     docs: [
       main: "overview",
       extra_section: "GUIDES",
