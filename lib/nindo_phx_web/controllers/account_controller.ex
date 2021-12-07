@@ -78,7 +78,11 @@ defmodule NindoPhxWeb.AccountController do
       {:ok, account}    ->
         Feeds.follow(account.username, account)
         Feeds.cache(account)
-        redirect(conn, to: social_path(conn, :welcome))
+
+        conn
+        |> put_session(:logged_in, true)
+        |> put_session(:user_id, account.id)
+        |> redirect(to: social_path(conn, :welcome))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
   end
