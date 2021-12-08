@@ -1,13 +1,44 @@
-<header class="text-center mt-12 sm:mt-24 md:mt-36">
+<!DOCTYPE html>
+<html lang="en" class="no-scrollbar">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <h2 class="title">You've ventured into deep space!</h2>
-  <p class="subtitle">Look out, the <span class="highlight">404</span> Klingons are attacking our spacecraft!</p>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <div class="m-16">
-    <%= link "Escape to the homepage", to: page_path(@conn, :index), class: "btn-primary" %>
-    <%= link "Learn what's beyond*", to: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", class: "btn-secondary" %>
-  </div>
+    <%= csrf_meta_tag() %>
+    <title>Oops! · Nindo</title>
 
-  <p class="text-gray-500 text-xs">* Nindo isn't responsible for potential mental problems caused by going beyond. Click at own risk.</p>
+    <link 
+      phx-track-static 
+      rel="stylesheet" 
+      href={Routes.static_path(@conn, "/assets/app.css")}
+    />
 
-</header>
+    <script 
+      defer phx-track-static 
+      type="text/javascript" 
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    ></script>
+  </head>
+  <body class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 no-scrollbar">
+    <main class="flex-grow">
+
+        <header class="text-center mt-12 sm:mt-24 md:mt-36">
+
+            <h2 class="title">You've ventured into deep space!</h2>
+            <p class="subtitle">Look out, the <span class="highlight">404</span> Klingons are attacking our spacecraft!</p>
+
+            <div class="m-16">
+                <%= link "Escape to the homepage", to: page_path(@conn, :index), class: "btn-primary" %>
+                <%= link "Learn what's beyond*", to: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", class: "btn-secondary" %>
+            </div>
+
+            <p class="text-gray-500 text-xs">* Nindo isn't responsible for potential mental problems caused by going beyond. Click at own risk.</p>
+
+        </header>
+
+    </main>
+  </body>
+</html>

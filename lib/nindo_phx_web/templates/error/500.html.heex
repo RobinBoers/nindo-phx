@@ -1,12 +1,42 @@
-<header class="text-center mt-12 sm:mt-24 md:mt-36">
+<!DOCTYPE html>
+<html lang="en" class="no-scrollbar">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <h2 class="title">ARHGH, our spacecraft crashed!</h2>
-  <p class="subtitle">It wasn't your fault. We didn't see the <span class="highlight">500</span> Klingons coming!</p>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <p class="paragraph">Seriously tho, it wasn't your fault. Something went wrong on our servers.</p>
+    <%= csrf_meta_tag() %>
+    <title>Oops! · Nindo</title>
 
-  <div class="m-16">
-    <%= link "Back to the homepage", to: page_path(@conn, :index), class: "btn-primary" %>
-  </div>
+    <link 
+      phx-track-static 
+      rel="stylesheet" 
+      href={Routes.static_path(@conn, "/assets/app.css")}
+    />
 
-</header>
+    <script 
+      defer phx-track-static 
+      type="text/javascript" 
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    ></script>
+  </head>
+  <body class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 no-scrollbar">
+    <main class="flex-grow">
+        <header class="text-center mt-12 sm:mt-24 md:mt-36">
+
+            <h2 class="title">ARHGH, our spacecraft crashed!</h2>
+            <p class="subtitle">It wasn't your fault. We didn't see the <span class="highlight">500</span> Klingons coming!</p>
+
+            <p class="paragraph">Seriously tho, it wasn't your fault. Something went wrong on our servers.</p>
+
+            <div class="m-16">
+                <%= link "Back to the homepage", to: page_path(@conn, :index), class: "btn-primary" %>
+            </div>
+
+        </header>
+
+    </main>
+  </body>
+</html>
