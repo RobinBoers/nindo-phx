@@ -49,7 +49,9 @@ defmodule NindoPhx.MixProject do
   ]
 
   defp aliases, do: [
-    setup: ["deps.get"],
+    setup: ["deps.get", "ecto.setup"],
+    "ecto.setup": ["ecto.create", "ecto.migrate"],
+    "ecto.reset": ["ecto.drop", "ecto.setup"],
     "assets.deploy": ["esbuild default --minify", "phx.digest"],
   ]
 

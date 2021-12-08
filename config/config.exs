@@ -30,10 +30,12 @@ import_config "#{config_env()}.exs"
 config :nin_db,
    ecto_repos: [NinDB.Repo]
 
-config :nin_db, NinDB.Repo,
-  database: "nindb",
-  hostname: "localhost",
-  log: false
+if config_env() in [:test, :dev] do
+  config :nin_db, NinDB.Repo,
+    database: "nindb",
+    hostname: "localhost",
+    log: false
+end
 
 config :nin_db, NinDB.Vault,
   ciphers: [

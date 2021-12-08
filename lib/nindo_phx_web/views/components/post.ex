@@ -13,6 +13,7 @@ defmodule NindoPhxWeb.PostComponent do
   #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
+    <%= if @post != nil do %>
     <div id={@post.title} class="w-full my-6 rounded-md shadow bg-white dark:bg-gray-800 text-black">
       <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
         <div class="flex flex-row items-center justify-start">
@@ -66,6 +67,7 @@ defmodule NindoPhxWeb.PostComponent do
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>
+    <% end %>
     """
   end
 
