@@ -41,6 +41,17 @@ defmodule NindoPhxWeb.SocialController do
     render(conn, "welcome.html")
   end
 
+  def app(conn, _params) do
+    case logged_in?(conn) do
+      true -> redirect(conn, to: social_path(conn, :index))
+      false ->
+        conn
+        |> put_layout(false)
+        |> put_root_layout("base.html")
+        |> render("app.html")
+    end
+  end
+
   # Searching
 
   def search(conn, %{"query" => ""}), do: redirect(conn, to: social_path(conn, :discover))
