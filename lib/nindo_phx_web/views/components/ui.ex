@@ -18,7 +18,7 @@ defmodule NindoPhxWeb.UIComponent do
           <% end %>
           <li class="header-item"><%= link safe("<i class='fas fa-compass icon'></i> Discover"), to: social_path(@conn, :discover) %></li>
           <li class="header-item"><%= link safe("<i class='fas fa-stream icon'></i> Sources"), to: social_path(@conn, :sources) %></li>
-          <li class="header-item"><%= link safe("<i class='fas fa-user icon'></i> Settings"), to: account_path(@conn, :index) %></li>
+          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user icon'></i> Settings"), to: account_path(@conn, :index) %></li>
         </ul>
       </div>
     """
