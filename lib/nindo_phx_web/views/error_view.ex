@@ -2,6 +2,7 @@ defmodule NindoPhxWeb.ErrorView do
   @moduledoc false
 
   use NindoPhxWeb, :view
+  import NindoPhxWeb.Router.Helpers
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
