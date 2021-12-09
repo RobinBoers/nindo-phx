@@ -4,7 +4,7 @@
     "description": "A simple, easy to use and secure platform for communicating with your friends",
     "display": "standalone",
     "start_url": "/app",
-    "background_color": "#11182",
+    "background_color": "#111827",
     "theme_color": "#6366F1",
     "icons": [
         {
