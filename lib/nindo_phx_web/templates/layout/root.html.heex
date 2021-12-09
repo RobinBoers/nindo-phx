@@ -25,7 +25,7 @@
     ></script>
   </head>
   <body class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 no-scrollbar">
-    <header class="bg-indigo-500 text-blue-50 shadow-lg flex flex-row justify-between">
+    <header class={Plug.Conn.get_session(assigns.conn, :app) |> header_classes()}>
 
       <section class="ml-3 flex items-center justify-start flex-wrap flex-1">
         <h1 class="p4 text-xl font-extrabold"><a class="header-title" href="/">Nindo</a></h1>

@@ -43,9 +43,13 @@ defmodule NindoPhxWeb.SocialController do
 
   def app(conn, _params) do
     case logged_in?(conn) do
-      true -> redirect(conn, to: social_path(conn, :index))
+      true ->
+        conn
+        |> put_session(:app, true)
+        |> redirect(to: social_path(conn, :index))
       false ->
         conn
+        |> put_session(:app, true)
         |> put_layout(false)
         |> put_root_layout("base.html")
         |> render("app.html")

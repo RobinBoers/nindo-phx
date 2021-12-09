@@ -62,6 +62,7 @@ defmodule NindoPhxWeb.AccountController do
       default: account_path(conn, :sign_in))
 
     conn
+    |> put_session(:app, false)
     |> put_session(:logged_in, false)
     |> put_session(:user_id, nil)
     |> redirect(to: redirect_to)
