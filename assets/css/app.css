@@ -145,6 +145,10 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
     @apply text-blue-500;
 }
 
+pre code, code pre {
+    @apply overflow-x-auto;
+}
+
 /* Images */ 
 
 .icon {
