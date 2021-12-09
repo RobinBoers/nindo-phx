@@ -14,6 +14,7 @@ defmodule NindoPhx.MixProject do
     source_url: "https://github.com/RobinBoers/nindo-phx",
     docs: [
       main: "overview",
+      logo: "logo.png",
       extra_section: "GUIDES",
       api_reference: false,
       extras: extras(),
