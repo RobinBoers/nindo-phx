@@ -10,6 +10,8 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag title(Controller.action_name(@conn), Controller.controller_module(@conn), assigns), suffix: " · Nindo" %>
 
+    <link rel="manifest" href="/manifest.webmanifest">
+
     <link 
       phx-track-static 
       rel="stylesheet" 

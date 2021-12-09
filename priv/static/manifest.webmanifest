@@ -1,0 +1,37 @@
+{
+    "name": "Nindo",
+    "short_name": "Nindo",
+    "description": "A simple, easy to use and secure platform for communicating with your friends",
+    "display": "standalone",
+    "start_url": "/app",
+    "background_color": "#11182",
+    "theme_color": "#6366F1",
+    "icons": [
+        {
+            "src": "https://nindo.geheimesite.nl/images/logo.png",
+            "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Feed",
+            "short_name": "Feed",
+            "url": "/home"
+        },
+        {
+            "name": "Discover new people",
+            "short_name": "Discover",
+            "url": "/discover"
+        },
+        {
+            "name": "Add a new RSS source",
+            "short_name": "Add source",
+            "url": "/sources"
+        },
+        {
+            "name": "User preferences",
+            "short_name": "Settings",
+            "url": "/settings"
+        }
+    ]
+}

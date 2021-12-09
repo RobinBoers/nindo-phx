@@ -48,6 +48,7 @@ defmodule NindoPhxWeb.Router do
     delete "/feed/remove", SocialController, :remove_feed
 
     get "/account", AccountController, :index
+    get "/settings", AccountController, :index
     get "/signin", AccountController, :sign_in
     get "/signup", AccountController, :sign_up
 
