@@ -154,7 +154,7 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
 /* Layout */
 
 .page-wrapper {
-    @apply mt-6 p-1 md:p-12 xl:flex flex-row justify-center;
+    @apply mt-6 overflow-x-hidden p-1 md:p-12 xl:flex flex-row justify-center;
 }
 
 .page-inner {
