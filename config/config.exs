@@ -6,9 +6,8 @@ config :nindo_phx, NindoPhxWeb.Endpoint,
   pubsub_server: NindoPhx.PubSub,
   live_view: [signing_salt: "vjxpT+JX"]
 
-config :nindo_phx, NindoPhx.Mailer, adapter: Swoosh.Adapters.Local
-
-config :swoosh, :api_client, false
+#config :nindo_phx, NindoPhx.Mailer, adapter: Swoosh.Adapters.Local
+#config :swoosh, :api_client, false
 
 config :esbuild,
   version: "0.12.18",

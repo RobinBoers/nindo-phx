@@ -57,7 +57,7 @@ defmodule NindoPhxWeb.PostComponent do
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
-          <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="rounded-md aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
         <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
@@ -102,7 +102,7 @@ defmodule NindoPhxWeb.PostComponent do
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
-          <iframe class="w-full h-96" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="rounded-md aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
         <div class="text-lg post-content"><%= safe @post.body %></div>
