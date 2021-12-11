@@ -32,14 +32,56 @@
   </head>
   <body class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 no-scrollbar">
     <header class={Plug.Conn.get_session(assigns.conn, :app) |> header_classes()}>
+      <div class="flex flex-row justify-between">
+        <section class="ml-3 flex items-center justify-start flex-wrap flex-1">
+          <h1 class="p4 text-xl font-extrabold"><a class="header-title" href="/">Nindo</a></h1>
+        </section>
 
-      <section class="ml-3 flex items-center justify-start flex-wrap flex-1">
-        <h1 class="p4 text-xl font-extrabold"><a class="header-title" href="/">Nindo</a></h1>
-      </section>
+        <section class="flex-2">
+          <nav class="hidden md:block">
+            <ul class="flex items-center justify-center flex-wrap">
+              <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
+              <li class="header-item"><%= link "Social", to: social_path(@conn, :index) %></li>
+              <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
+              <li class="header-item"><%= link "About", to: page_path(@conn, :about) %></li>
+              
+              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                <li class="header-item">
+                  <%= link "Developer", to: Routes.live_dashboard_path(@conn, :home) %>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
 
-      <section class="flex-2">
-        <nav class="hidden md:block">
-          <ul class="flex items-center justify-center flex-wrap">
+          <nav class="block md:hidden">
+            <ul class="flex items-center justify-end flex-wrap mobile-menu-button">
+              <li class="header-item header-button btn-menu">☰</li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="hidden md:block flex-1">
+          <div class="mr-3">
+            <div class="flex items-center justify-end flex-wrap">
+              <%= if logged_in?(@conn) do %>
+
+                <UIComponent.account_header id={user(@conn).id} conn={@conn} /> 
+
+              <% else %>
+
+                <p class="header-item">New?</p>
+                <%= link "Sign up", to: account_path(@conn, :sign_up), class: "header-item header-button btn-primary mr-1" %>
+                <%= link "Sign in", to: account_path(@conn, :sign_in), class: "header-item header-button btn-secondary" %>
+              
+              <% end %>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="mobile-menu hidden bg-indigo-800">
+        <nav>
+          <ul>
             <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
             <li class="header-item"><%= link "Social", to: social_path(@conn, :index) %></li>
             <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
@@ -52,30 +94,6 @@
             <% end %>
           </ul>
         </nav>
-
-        <nav class="block md:hidden">
-          <ul class="flex items-center justify-end flex-wrap">
-            <li class="header-item header-button btn-menu">☰</li>
-          </ul>
-        </nav>
-      </section>
-
-      <section class="hidden md:block flex-1">
-        <div class="mr-3">
-          <div class="flex items-center justify-end flex-wrap">
-            <%= if logged_in?(@conn) do %>
-
-              <UIComponent.account_header id={user(@conn).id} conn={@conn} /> 
-
-            <% else %>
-
-              <p class="header-item">New?</p>
-              <%= link "Sign up", to: account_path(@conn, :sign_up), class: "header-item header-button btn-primary mr-1" %>
-              <%= link "Sign in", to: account_path(@conn, :sign_in), class: "header-item header-button btn-secondary" %>
-            
-            <% end %>
-          </div>
-        </div>
       </section>
 
     </header>

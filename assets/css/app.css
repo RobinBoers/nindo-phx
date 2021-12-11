@@ -23,7 +23,7 @@
 /* General */
 
 * {
-    @apply dark:text-white dark:border-gray-700;
+    @apply dark:text-white dark:border-gray-700 transition-all;
 }
 
 a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
@@ -73,7 +73,10 @@ a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
     @apply font-bold p-4;
 }
 .header-button {
-    @apply p-2 border-0 rounded;
+    @apply p-2 border-0;
+}
+.header-button.btn-primary, .header-button.btn-secondary {
+    @apply rounded;
 }
 .header-button.btn-secondary {
     @apply bg-blue-50 hover:bg-indigo-200;
@@ -162,11 +165,11 @@ pre code, code pre {
 }
 
 .page-inner {
-    @apply relative mx-auto sm:max-w-2xl md:max-w-6xl;
+    @apply p-3 relative mx-auto sm:max-w-2xl md:max-w-6xl;
 }
 
 .page-inner:not(.sign-in-up, .blog, .app) {
-    @apply flex-grow p-3 sm:p-6 md:p-0 md:m-0;
+    @apply flex-grow sm:p-6 md:p-0 md:m-0;
 }
 
 .page-inner.sign-in-up {

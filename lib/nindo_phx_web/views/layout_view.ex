@@ -50,6 +50,6 @@ defmodule NindoPhxWeb.LayoutView do
   def title(_, _, _),            do: "Nindo"
 
   def header_classes(true), do: "hidden"
-  def header_classes(_), do: "bg-indigo-500 text-blue-50 shadow-lg flex flex-row justify-between"
+  def header_classes(_), do: "bg-indigo-500 text-blue-50 shadow-lg"
 
 end
