@@ -36,8 +36,11 @@ defmodule NindoPhxWeb.AccountController do
       id = account.id
 
       redirect_to =
-        NavigationHistory.last_path(conn, 1,
-        default: social_path(conn, :index))
+        case NavigationHistory.last_path(conn, 1,
+        default: social_path(conn, :index)) do
+          "/" -> social_path(conn, :index)
+          path -> path
+        end
 
       case Accounts.login(username, password) do
         :ok ->
