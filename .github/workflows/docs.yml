@@ -11,16 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+      - run: mix deps.get
+      - run: mix docs
 
-      - name: Build docs
-        uses: MilesChou/elixir-action@v0.0.1
-        with:
-          args: |
-            mix local.hex --force
-            mix docs
-        
       - name: Publish docs to GitHub Pages
         uses: rayluo/github-pages-overwriter@v1.2
         with:
