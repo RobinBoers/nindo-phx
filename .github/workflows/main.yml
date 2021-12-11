@@ -17,7 +17,9 @@ jobs:
       - name: Build docs
         uses: MilesChou/elixir-action@v0.0.1
         with:
-          args: mix docs
+          args: |
+            mix local.hex
+            mix docs
         
       - name: Publish docs to GitHub Pages
         uses: rayluo/github-pages-overwriter@v1.2
