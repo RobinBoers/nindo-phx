@@ -63,6 +63,7 @@ defmodule NindoPhxWeb.SocialController do
     results = Accounts.search(query)
     render(conn, "discover.html", users: results, searching: true, query: query)
   end
+  def search(conn, _params), do: redirect(conn, to: social_path(conn, :discover))
 
   # Feeds and users
 
