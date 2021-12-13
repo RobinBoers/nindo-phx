@@ -19,6 +19,8 @@ defmodule NindoPhx.MixProject do
       api_reference: false,
       extras: extras(),
       groups_for_extras: groups_for_extras(),
+      source_ref: "master",
+      deps: [nindo: "https://robinboers.github.io/nindo-elixir"]
     ],
   ]
 
@@ -58,6 +60,7 @@ defmodule NindoPhx.MixProject do
 
   defp extras, do: [
     "docs/overview.md",
+    "docs/about.md",
     "docs/api.md",
     "docs/api/auth/login.md",
     "docs/api/accounts/create-account.md",

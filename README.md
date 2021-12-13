@@ -21,4 +21,4 @@ NindoPhx is a web client for Nindo2 written in Elixir using Phoenix Framework. I
 
 ## Credits
 
-NindoPhx is built using a lot of great tools. I want to especially thank [Elixir](https://elixir-lang.org), [Phoenix Framework](https://www.phoenixframework.org), [bcrypt_elixir](https://github.com/riverrun/bcrypt_elixir), [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) [fast_rss](https://github.com/avencera/fast_rss), and [elixir-rss](https://github.com/BennyHallett/elixir-rss).
+NindoPhx is built using a lot of great tools. I want to especially thank [Elixir](https://elixir-lang.org), [Phoenix Framework](https://www.phoenixframework.org), [bcrypt_elixir](https://github.com/riverrun/bcrypt_elixir), [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex), [fast_rss](https://github.com/avencera/fast_rss), and [elixir-rss](https://github.com/BennyHallett/elixir-rss).
