@@ -194,17 +194,6 @@ defmodule NindoPhxWeb.PostComponent do
 
   # Private methods
 
-  defp markdown(text) do
-    text
-    |> String.split("\n")
-    |> Earmark.as_html()
-    |> strip_ok()
-    |> HtmlSanitizeEx.basic_html()
-  end
-
-  def strip_ok({:ok, data}), do: data
-  def strip_ok({:ok, data, _}), do: data
-
   defp get_source_link(feed) do
     "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
