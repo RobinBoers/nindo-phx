@@ -119,7 +119,7 @@ defmodule NindoPhxWeb.PostComponent do
 
   def preview(assigns) do
     ~H"""
-      <div class="my-6">
+      <div class="mb-6">
         <div class="flex flex-row items-center gap-2">
           <%= if @rss do %>
 
@@ -164,20 +164,29 @@ defmodule NindoPhxWeb.PostComponent do
 
   def new(assigns) do
     ~H"""
-      <div class="w-full flex-grow-0 rounded-md pt-4 text-black">
-          <div>
-            <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "w-full", id: "post-form"], fn f -> %>
+      <button class="btn-primary mb-6 new-post-btn" onclick="newPost()">New post</button>
+      <div class="new-post-modal transition-height h-0 overflow-y-hidden w-full">
+          <div class="mb-6 p-1">
+            <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "new-post-form w-full", id: "post-form"], fn f -> %>
               <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
-              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", onkeydown: "pressed(event)", class: "w-full input block resize-none flex-grow text-black" %>
+              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "w-full input block resize-none flex-grow" %>
             <% end) %>
+            <button class="btn-primary mt-2" onclick="submit()">Publish</button>
+            <button class="btn-secondary mt-2" onclick="cancel()">Cancel</button>
           </div>
       </div>
 
       <script>
-        function pressed(e) {
-          if ( (window.event ? event.keyCode : e.which) == 13) {
-              document.getElementById("post-form").submit();
-          }
+        function newPost() {
+          document.querySelector(".new-post-modal").style.height = '250px';
+          document.querySelector(".new-post-btn").style.display = 'none';
+        }
+        function cancel() {
+          document.querySelector(".new-post-modal").style.height = '0px';
+          document.querySelector(".new-post-btn").style.display = 'block';
+        }
+        function submit() {
+          document.querySelector(".new-post-form").submit();
         }
       </script>
     """

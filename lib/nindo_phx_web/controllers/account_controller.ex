@@ -141,9 +141,9 @@ defmodule NindoPhxWeb.AccountController do
         String.replace(acc, "%{#{key}}", to_string(value))
       end)
     end)
-    |> Enum.reduce("", fn {k, v}, acc ->
+    |> Enum.reduce("", fn {k, v}, _acc ->
       joined_errors = Enum.join(v, "; ")
-      %{title: "#{acc}#{k}", message: String.capitalize joined_errors}
+      %{title: "#{k}", message: String.capitalize joined_errors}
     end)
   end
 

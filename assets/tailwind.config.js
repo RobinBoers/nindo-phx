@@ -52,7 +52,8 @@ module.exports = {
         gray: {
           850: '#1C2631'
         }
-      }
+      },
+      transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      }
     },
   },
   variants: {

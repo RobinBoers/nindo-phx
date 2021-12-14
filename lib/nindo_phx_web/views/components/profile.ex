@@ -33,7 +33,7 @@ defmodule NindoPhxWeb.ProfileComponent do
                         </a>
                     <% end %>
 
-                    <a class="btn-secondary" href={"/feed/#{@username}"}><i class="fas fa-rss-square text-yellow-600 icon"></i> RSS</a>
+                    <a class="btn-secondary" href={"/feed/#{@username}"}><i class="fas fa-rss-square text-yellow-600 mr-1"></i> RSS</a>
                 </p>
             </div>
         </div>

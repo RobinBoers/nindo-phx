@@ -14,11 +14,11 @@ defmodule NindoPhxWeb.UIComponent do
       <div class="sidebar">
         <ul class="flex items-center justify-center flex-wrap flex-row xl:flex-col xl:items-start xl:justify-start">
           <%= if logged_in?(@conn) do %>
-            <li class="header-item"><%= link safe("<i class='fas fa-home icon'></i> Home"), to: social_path(@conn, :index) %></li>
+            <li class="header-item"><%= link safe("<i class='fas fa-home mr-1'></i> Home"), to: social_path(@conn, :index) %></li>
           <% end %>
-          <li class="header-item"><%= link safe("<i class='fas fa-compass icon'></i> Discover"), to: social_path(@conn, :discover) %></li>
-          <li class="header-item"><%= link safe("<i class='fas fa-stream icon'></i> Sources"), to: social_path(@conn, :sources) %></li>
-          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user icon'></i> Settings"), to: account_path(@conn, :index) %></li>
+          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: social_path(@conn, :discover) %></li>
+          <li class="header-item"><%= link safe("<i class='fas fa-stream mr-1'></i> Sources"), to: social_path(@conn, :sources) %></li>
+          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user mr-1'></i> Settings"), to: account_path(@conn, :index) %></li>
         </ul>
       </div>
     """
@@ -39,6 +39,35 @@ defmodule NindoPhxWeb.UIComponent do
       </p>
 
       <%= link "Logout", to: account_path(@conn, :logout), class: "header-item header-button btn-secondary hidden lg:block" %>
+    """
+  end
+
+  def dev_header(assigns) do
+    ~H"""
+    <div class="bg-yellow-400">
+      <div class="py-1.5 pl-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between flex-wrap">
+          <div class="flex-1 flex items-center text-black">
+            <span class="flex p-2 rounded-lg bg-yellow-600">
+              <i class="fas fa-database text-lg"></i>
+            </span>
+            <p class="ml-3 font-medium truncate text-black">
+              <span class="md:hidden text-black">
+                Look out! In development!
+              </span>
+              <span class="hidden md:inline text-black">
+                Look out! Nindo is still in active development and can be very unstable.
+              </span>
+            </p>
+          </div>
+          <div class="order-3 hidden sm:block flex-shrink-0 w-full sm:w-auto">
+            <a href="https://robinboers.github.io/nindo-phx" class="btn-secondary p-2 bg-white hover:bg-gray-50 text-yellow-700 border border-yellow-600">
+              Documentation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     """
   end
 end
