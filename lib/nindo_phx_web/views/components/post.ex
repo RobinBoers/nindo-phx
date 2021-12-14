@@ -62,7 +62,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
       <% else %>
-        <div class="px-4 py-2 text-lg post-content" style="font-family: Roboto;"><%= @post.body %></div>
+        <div class="px-4 py-2 text-lg post-content" style="font-family: Roboto, Inter, sans-serif;"><%= safe markdown @post.body %></div>
       <% end %>
 
       <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
@@ -107,7 +107,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <div class="text-lg post-content"><%= safe @post.body %></div>
       <% else %>
-        <p class="text-lg"><%= @post.body %></p>
+        <div class="text-lg post-content"><%= safe markdown @post.body %></div>
 
         <CommentComponent.section post_id={@post.id} />
         <%= if logged_in?(@conn) do %>
@@ -193,6 +193,17 @@ defmodule NindoPhxWeb.PostComponent do
   end
 
   # Private methods
+
+  defp markdown(text) do
+    text
+    |> String.split("\n")
+    |> Earmark.as_html()
+    |> strip_ok()
+    |> HtmlSanitizeEx.basic_html()
+  end
+
+  def strip_ok({:ok, data}), do: data
+  def strip_ok({:ok, data, _}), do: data
 
   defp get_source_link(feed) do
     "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"

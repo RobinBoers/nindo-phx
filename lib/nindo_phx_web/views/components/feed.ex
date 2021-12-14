@@ -37,11 +37,11 @@ defmodule NindoPhxWeb.FeedComponent do
 
   def customizer(assigns) do
     ~H"""
-      <div class="w-full flex-grow-0 rounded-md text-black">
+      <div class="w-full flex-grow-0 rounded-md">
           <div class="pt-4">
             <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
               <span class="input input-l input-static">https://</span>
-              <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-m flex-grow w-full text-black" %>
+              <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-m flex-grow w-full" %>
               <%= select f, :type, ["Blogger": :blogger, "Wordpress": :wordpress, "YouTube": :youtube, "Atom": :atom, "Custom": :custom], class: "input input-r"  %>
             <% end) %>
           </div>

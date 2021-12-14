@@ -48,9 +48,9 @@ defmodule NindoPhxWeb.CommentComponent do
         <h3 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h3>
 
         <%= form_for(@conn, social_path(@conn, :new_comment), [as: :comment, method: :put, class: "w-full", id: "comment-form"], fn f -> %>
-          <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow text-black" %>
+          <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow" %>
           <%= hidden_input f, :post_id, value: @post_id %>
-          <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block border-none resize-none shadow flex-grow text-black" %>
+          <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block border-none resize-none shadow flex-grow" %>
         <% end) %>
       </section>
 

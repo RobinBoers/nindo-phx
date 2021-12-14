@@ -49,6 +49,8 @@ defmodule NindoPhx.MixProject do
     {:nindo, git: "git://github.com/RobinBoers/nindo-elixir.git"},
     {:navigation_history, "~> 0.4.0"},
     {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+    {:earmark, "~> 1.4"},
+    {:html_sanitize_ex, git: "git://github.com/RobinBoers/html-sanitize-ex.git"},
   ]
 
   defp aliases, do: [
