@@ -8,7 +8,7 @@
         <h2 class="title">Sign in</h2>
 
         <div class="w-full flex-grow-0 text-black lg:mt-4">
-            <%= form_for(@conn, account_path(@conn, :login), [method: :post], fn f -> %>
+            <%= form_for(@conn, account_path(Endpoint, :login), [method: :post], fn f -> %>
                 <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1.5 w-full block" %>
                 <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
                 <%= submit "Sign in", class: "btn-primary block mt-4"  %>

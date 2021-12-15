@@ -4,6 +4,8 @@ defmodule NindoPhxWeb.ErrorView do
   use NindoPhxWeb, :view
   import NindoPhxWeb.Router.Helpers
 
+  alias NindoPhxWeb.Endpoint
+
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   # def render("500.html", _assigns) do

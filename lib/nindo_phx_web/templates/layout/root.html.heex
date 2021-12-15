@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <%= csrf_meta_tag() %>
-    <%= live_title_tag title(Controller.action_name(@conn), Controller.controller_module(@conn), assigns), suffix: " · Nindo" %>
+    <%# live_title_tag title(Controller.action_name(@conn), Controller.controller_module(@conn), assigns), suffix: " · Nindo" %>
 
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="apple-touch-icon" href="/images/logo.png"/>
@@ -31,8 +31,8 @@
     ></script>
   </head>
   <body class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 no-scrollbar">
-    <UIComponent.dev_header />
-    <header class={Plug.Conn.get_session(assigns.conn, :app) |> header_classes()}>
+    <%#<UIComponent.dev_header />%>
+    <header class={Plug.Conn.get_session(@conn, :app) |> header_classes()}>
       <div class="flex flex-row justify-between">
         <section class="ml-3 flex items-center justify-start flex-wrap flex-1">
           <h1 class="p4 text-xl font-extrabold"><a class="header-title" href="/">Nindo</a></h1>
@@ -41,10 +41,10 @@
         <section class="flex-2">
           <nav class="hidden md:block">
             <ul class="flex items-center justify-center flex-wrap">
-              <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
-              <li class="header-item"><%= link "Social", to: social_path(@conn, :index) %></li>
-              <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
-              <li class="header-item"><%= link "About", to: page_path(@conn, :about) %></li>
+              <li class="header-item"><%= link "Home", to: page_path(NindoPhxWeb.Endpoint, :index) %></li>
+              <li class="header-item"><%= link "Social", to: live_path(NindoPhxWeb.Endpoint, NindoPhxWeb.Live.Social) %></li>
+              <li class="header-item"><%= link "Blog", to: page_path(NindoPhxWeb.Endpoint, :blog) %></li>
+              <li class="header-item"><%= link "About", to: page_path(NindoPhxWeb.Endpoint, :about) %></li>
               
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <li class="header-item">
@@ -71,8 +71,8 @@
               <% else %>
 
                 <p class="header-item">New?</p>
-                <%= link "Sign up", to: account_path(@conn, :sign_up), class: "header-item header-button btn-primary mr-1" %>
-                <%= link "Sign in", to: account_path(@conn, :sign_in), class: "header-item header-button btn-secondary" %>
+                <%= link "Sign up", to: account_path(NindoPhxWeb.Endpoint, :sign_up), class: "header-item header-button btn-primary mr-1" %>
+                <%= link "Sign in", to: account_path(NindoPhxWeb.Endpoint, :sign_in), class: "header-item header-button btn-secondary" %>
               
               <% end %>
             </div>
@@ -83,10 +83,10 @@
       <section class="mobile-menu hidden bg-indigo-800">
         <nav>
           <ul>
-            <li class="header-item"><%= link "Home", to: page_path(@conn, :index) %></li>
-            <li class="header-item"><%= link "Social", to: social_path(@conn, :index) %></li>
-            <li class="header-item"><%= link "Blog", to: page_path(@conn, :blog) %></li>
-            <li class="header-item"><%= link "About", to: page_path(@conn, :about) %></li>
+            <li class="header-item"><%= link "Home", to: page_path(NindoPhxWeb.Endpoint, :index) %></li>
+            <li class="header-item"><%= link "Social", to: live_path(NindoPhxWeb.Endpoint, NindoPhxWeb.Live.Social) %></li>
+            <li class="header-item"><%= link "Blog", to: page_path(NindoPhxWeb.Endpoint, :blog) %></li>
+            <li class="header-item"><%= link "About", to: page_path(NindoPhxWeb.Endpoint, :about) %></li>
             
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li class="header-item">

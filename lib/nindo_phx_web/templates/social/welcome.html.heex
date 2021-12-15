@@ -31,7 +31,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Customize", to: account_path(@conn, :index), class: "btn-primary", target: "_blank" %>
+                    <%= link "Customize", to: account_path(Endpoint, :index), class: "btn-primary", target: "_blank" %>
                 </div>        
             </details>
 
@@ -58,7 +58,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Finish", to: social_path(@conn, :index), class: "btn-primary" %>
+                    <%= link "Finish", to: live_path(Endpoint, Live.Social), class: "btn-primary" %>
                 </div>   
             </details>
             
@@ -81,8 +81,8 @@
             </p>
 
             <div class="py-8">
-                <%= link "Sign up", to: account_path(@conn, :sign_up), class: "btn-primary" %>
-                <%= link "Sign in", to: account_path(@conn, :sign_in), class: "btn-secondary" %>
+                <%= link "Sign up", to: account_path(Endpoint, :sign_up), class: "btn-primary" %>
+                <%= link "Sign in", to: account_path(Endpoint, :sign_in), class: "btn-secondary" %>
             </div> 
             
         </div>

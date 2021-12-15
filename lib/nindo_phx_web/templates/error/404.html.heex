@@ -39,7 +39,7 @@
             <p class="subtitle">Look out, the <span class="highlight">404</span> Klingons are attacking our spacecraft!</p>
 
             <div class="m-16">
-                <%= link "Escape to the homepage", to: page_path(@conn, :index), class: "btn-primary" %>
+                <%= link "Escape to the homepage", to: page_path(Endpoint, :index), class: "btn-primary" %>
                 <%= link "Learn what's beyond*", to: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", class: "btn-secondary" %>
             </div>
 

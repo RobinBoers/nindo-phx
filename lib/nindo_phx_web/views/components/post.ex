@@ -6,6 +6,7 @@ defmodule NindoPhxWeb.PostComponent do
 
   alias Nindo.{Format}
   alias NindoPhxWeb.{CommentComponent}
+  alias NindoPhxWeb.Endpoint
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -151,7 +152,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= link @post.title, to: social_path(@conn, :external_post, url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime) %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= link @post.title, to: social_path(Endpoint, :external_post, url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime) %></h3>
 
         <% else %>
 
@@ -167,7 +168,7 @@ defmodule NindoPhxWeb.PostComponent do
       <button class="btn-primary mb-6 new-post-btn" onclick="newPost()">New post</button>
       <div class="new-post-modal transition-height h-0 overflow-y-hidden w-full">
           <div class="mb-6 p-1">
-            <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "new-post-form w-full", id: "post-form"], fn f -> %>
+            <%= form_for(@conn, social_path(Endpoint, :new_post), [as: :post, method: :put, class: "new-post-form w-full", id: "post-form"], fn f -> %>
               <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
               <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "w-full input block resize-none flex-grow" %>
             <% end) %>

@@ -7,6 +7,8 @@ defmodule NindoPhxWeb.PageView do
   import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.{PostComponent, FeedComponent}
 
+  alias NindoPhxWeb.Endpoint
+
   import Nindo.Core
 
 end

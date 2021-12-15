@@ -1,7 +1,7 @@
 <%= if Accounts.exists?(@username) do %>
 
 <div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
+    <UIComponent.sidebar logged_in={logged_in?(@conn)} />
     <div class="page-inner">
 
         <ProfileComponent.header username={@username} display_link={false} conn={@conn} />
@@ -16,7 +16,7 @@
 <% else %>
 
 <div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
+    <UIComponent.sidebar logged_in={logged_in?(@conn)} />
     <div class="page-inner">
 
         <div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">

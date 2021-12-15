@@ -5,6 +5,7 @@ defmodule NindoPhxWeb.ProfileComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
+  alias NindoPhxWeb.Endpoint
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -96,7 +97,7 @@ defmodule NindoPhxWeb.ProfileComponent do
             </span>
 
             <%= if logged_in?(@conn) and @show_buttons do %>
-                <%= link "Unfollow", to: social_path(@conn, :follow, @username), class: "mt-3 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
+                <%= link "Unfollow", to: social_path(Endpoint, :follow, @username), class: "mt-3 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
             <% end %>
         </li>
 
@@ -120,7 +121,7 @@ defmodule NindoPhxWeb.ProfileComponent do
             </div>
             <div class="p-8 hidden flex-grow" id="edit">
                 <h3 class="font-bold text-2xl">Profile picture</h3>
-                <%= form_for(@conn, account_path(@conn, :update_profile_picture), [as: :prefs, method: :update, class: "flex flex-row flex-wrap"], fn f -> %>
+                <%= form_for(@conn, account_path(Endpoint, :update_profile_picture), [as: :prefs, method: :update, class: "flex flex-row flex-wrap"], fn f -> %>
                     <%= text_input f, :url, placeholder: "URL to profile picture", value: user(@conn).profile_picture, class: "input my-1 flex-grow" %>
                     <%= submit "Save", class: "btn-primary ml-4 pt-1 pb-1"  %>
                 <% end) %>

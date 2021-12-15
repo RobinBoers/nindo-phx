@@ -5,6 +5,7 @@ defmodule NindoPhxWeb.FeedComponent do
   use Phoenix.HTML
 
   import NindoPhxWeb.Router.Helpers
+  alias NindoPhxWeb.Endpoint
   alias NindoPhxWeb.{SocialView, PostComponent}
 
   import Nindo.Core
@@ -27,7 +28,7 @@ defmodule NindoPhxWeb.FeedComponent do
     ~H"""
       <%= for post <- @posts do %>
         <%= if @preview do %>
-          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} conn={@conn} />
+          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} />
         <% else %>
           <PostComponent.default post={post} user_link={@user_link} rss={post[:type] != nil} />
         <% end %>
@@ -39,7 +40,7 @@ defmodule NindoPhxWeb.FeedComponent do
     ~H"""
       <div class="w-full flex-grow-0 rounded-md">
           <div class="pt-4">
-            <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
+            <%= form_for(@conn, social_path(Endpoint, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
               <span class="input input-l input-static">https://</span>
               <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input input-m flex-grow w-full" %>
               <%= select f, :type, ["Blogger": :blogger, "Wordpress": :wordpress, "YouTube": :youtube, "Atom": :atom, "Custom": :custom], class: "input input-r"  %>
@@ -64,7 +65,7 @@ defmodule NindoPhxWeb.FeedComponent do
                     <a href={get_source_link(feed)}><%= feed["title"] %></a>
                   </span>
 
-                  <%= link safe("<i class='fas fa-times'></i>"), to: social_path(@conn, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
+                  <%= link safe("<i class='fas fa-times'></i>"), to: social_path(Endpoint, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
                 </li>
 
               <% end %>

@@ -6,4 +6,8 @@
   phx-click="lv:clear-flash"
   phx-value-key="error"><%= live_flash(@flash, :error) %></p>
 
-<%= @inner_content %>
+
+<div class="page-wrapper">
+    <UIComponent.sidebar logged_in={@logged_in} />
+    <%= @inner_content %>
+</div>

@@ -4,6 +4,8 @@ defmodule NindoPhxWeb.AccountController do
   alias Nindo.{Accounts, Auth, Feeds}
   import NindoPhxWeb.{Router.Helpers}
 
+  alias NindoPhxWeb.{Endpoint, Live}
+
   import Nindo.Core
 
   plug :scrub_params, "prefs" when action in [:update_prefs, :update_profile_picture]
@@ -20,7 +22,7 @@ defmodule NindoPhxWeb.AccountController do
   def index(conn, _params) do
     case logged_in?(conn) do
       true  -> render(conn, "index.html")
-      _     -> redirect(conn, to: account_path(conn, :sign_in))
+      _     -> redirect(conn, to: account_path(Endpoint, :sign_in))
     end
 
   end
@@ -37,8 +39,8 @@ defmodule NindoPhxWeb.AccountController do
 
       redirect_to =
         case NavigationHistory.last_path(conn, 1,
-        default: social_path(conn, :index)) do
-          "/" -> social_path(conn, :index)
+        default: live_path(Endpoint, Live.Social)) do
+          "/" -> live_path(Endpoint, Live.Social)
           path -> path
         end
 
@@ -62,7 +64,7 @@ defmodule NindoPhxWeb.AccountController do
   def logout(conn, _params) do
     redirect_to =
       NavigationHistory.last_path(conn, 1,
-      default: account_path(conn, :sign_in))
+      default: account_path(Endpoint, :sign_in))
 
     conn
     |> put_session(:app, false)
@@ -86,7 +88,7 @@ defmodule NindoPhxWeb.AccountController do
         conn
         |> put_session(:logged_in, true)
         |> put_session(:user_id, account.id)
-        |> redirect(to: social_path(conn, :welcome))
+        |> redirect(to: social_path(Endpoint, :welcome))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
   end
@@ -101,7 +103,7 @@ defmodule NindoPhxWeb.AccountController do
       Accounts.change(:email, email, user(conn))
       Accounts.change(:description, description, user(conn))
 
-      redirect(conn, to: account_path(conn, :index))
+      redirect(conn, to: account_path(Endpoint, :index))
     else
       render(conn, "index.html", error: %{title: "error", message: "Something went wrong"})
     end
@@ -112,7 +114,7 @@ defmodule NindoPhxWeb.AccountController do
 
     if logged_in?(conn) do
       Accounts.change(:profile_picture, url, user(conn))
-      redirect(conn, to: account_path(conn, :index))
+      redirect(conn, to: account_path(Endpoint, :index))
     else
       render(conn, "index.html", error: %{title: "error", message: "Something went wrong"})
     end
@@ -127,7 +129,7 @@ defmodule NindoPhxWeb.AccountController do
       password = Auth.hash_pass(p1, salt)
 
       Accounts.change(:password, password, user(conn))
-      redirect(conn, to: account_path(conn, :index))
+      redirect(conn, to: account_path(Endpoint, :index))
     else
       render(conn, "index.html", error: %{title: "passwords", message: "Don't match"})
     end

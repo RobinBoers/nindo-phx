@@ -2,7 +2,7 @@ defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
   alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, FeedAgent, RSS.YouTube}
-  alias NindoPhxWeb.{AccountController, SocialView}
+  alias NindoPhxWeb.{AccountController, Endpoint, SocialView}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -22,7 +22,7 @@ defmodule NindoPhxWeb.SocialController do
       |> put_session(:error, nil)
       |> render("index.html", posts: posts)
     else
-        redirect(conn, to: social_path(conn, :discover))
+        redirect(conn, to: social_path(Endpoint, :discover))
     end
   end
 
@@ -46,7 +46,7 @@ defmodule NindoPhxWeb.SocialController do
       true ->
         conn
         |> put_session(:app, true)
-        |> redirect(to: social_path(conn, :index))
+        |> redirect(to: live_path(Endpoint, Live.Social))
       false ->
         conn
         |> put_session(:app, true)
@@ -58,12 +58,12 @@ defmodule NindoPhxWeb.SocialController do
 
   # Searching
 
-  def search(conn, %{"query" => ""}), do: redirect(conn, to: social_path(conn, :discover))
+  def search(conn, %{"query" => ""}), do: redirect(conn, to: social_path(Endpoint, :discover))
   def search(conn, %{"query" => query}) do
     results = Accounts.search(query)
     render(conn, "discover.html", users: results, searching: true, query: query)
   end
-  def search(conn, _params), do: redirect(conn, to: social_path(conn, :discover))
+  def search(conn, _params), do: redirect(conn, to: social_path(Endpoint, :discover))
 
   # Feeds and users
 
@@ -118,7 +118,7 @@ defmodule NindoPhxWeb.SocialController do
 
     redirect_to =
       NavigationHistory.last_path(conn,
-      default: social_path(conn, :index))
+      default: live_path(Endpoint, Live.Social))
 
     case Posts.new(title, body, nil, user) do
       {:ok, _post}    ->
@@ -139,7 +139,7 @@ defmodule NindoPhxWeb.SocialController do
 
     redirect_to =
       NavigationHistory.last_path(conn,
-      default: social_path(conn, :index))
+      default: live_path(Endpoint, Live.Social))
 
     case Comments.new(post_id, title, body, user(conn)) do
       {:ok, _comment}    ->
@@ -159,14 +159,14 @@ defmodule NindoPhxWeb.SocialController do
 
     redirect_to =
       NavigationHistory.last_path(conn,
-      default: social_path(conn, :sources))
+      default: social_path(Endpoint, :sources))
 
     case RSS.parse_feed(url, type) do
 
       {:error, _} ->
         conn
         |> put_session(:error, %{title: "uri", message: "Feed doesn't exist or is invalid"})
-        |> redirect(to: social_path(conn, :sources))
+        |> redirect(to: social_path(Endpoint, :sources))
 
       feed ->
         if logged_in?(conn) do
@@ -186,7 +186,7 @@ defmodule NindoPhxWeb.SocialController do
 
     redirect_to =
       NavigationHistory.last_path(conn,
-      default: social_path(conn, :sources))
+      default: social_path(Endpoint, :sources))
 
     redirect(conn, to: redirect_to)
   end
@@ -201,11 +201,11 @@ defmodule NindoPhxWeb.SocialController do
 
       redirect_to =
         NavigationHistory.last_path(conn, 1,
-        default: social_path(conn, :user, person))
+        default: social_path(Endpoint, :user, person))
 
       redirect(conn, to: redirect_to)
     else
-      redirect(conn, to: account_path(conn, :sign_in))
+      redirect(conn, to: account_path(Endpoint, :sign_in))
     end
   end
 

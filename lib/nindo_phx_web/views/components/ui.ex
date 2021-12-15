@@ -5,6 +5,7 @@ defmodule NindoPhxWeb.UIComponent do
   use Phoenix.HTML
 
   alias Nindo.{Accounts, Format}
+  alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -13,12 +14,12 @@ defmodule NindoPhxWeb.UIComponent do
     ~H"""
       <div class="sidebar">
         <ul class="flex items-center justify-center flex-wrap flex-row xl:flex-col xl:items-start xl:justify-start">
-          <%= if logged_in?(@conn) do %>
-            <li class="header-item"><%= link safe("<i class='fas fa-home mr-1'></i> Home"), to: social_path(@conn, :index) %></li>
+          <%= if @logged_in do %>
+            <li class="header-item"><%= link safe("<i class='fas fa-home mr-1'></i> Home"), to: live_path(Endpoint, Live.Social) %></li>
           <% end %>
-          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: social_path(@conn, :discover) %></li>
-          <li class="header-item"><%= link safe("<i class='fas fa-stream mr-1'></i> Sources"), to: social_path(@conn, :sources) %></li>
-          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user mr-1'></i> Settings"), to: account_path(@conn, :index) %></li>
+          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: social_path(Endpoint, :discover) %></li>
+          <li class="header-item"><%= link safe("<i class='fas fa-stream mr-1'></i> Sources"), to: social_path(Endpoint, :sources) %></li>
+          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user mr-1'></i> Settings"), to: account_path(Endpoint, :index) %></li>
         </ul>
       </div>
     """
@@ -38,7 +39,7 @@ defmodule NindoPhxWeb.UIComponent do
         </a>
       </p>
 
-      <%= link "Logout", to: account_path(@conn, :logout), class: "header-item header-button btn-secondary hidden lg:block" %>
+      <%= link "Logout", to: account_path(Endpoint, :logout), class: "header-item header-button btn-secondary hidden lg:block" %>
     """
   end
 

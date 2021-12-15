@@ -7,6 +7,8 @@ defmodule NindoPhxWeb.SocialView do
   import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.{ProfileComponent, FeedComponent, AlertComponent, PostComponent, UIComponent}
 
+  alias NindoPhxWeb.Endpoint
+
   import Nindo.Core
 
   # Post feed

@@ -1,7 +1,7 @@
 <%= if @post != nil do %>
 
     <div class="page-wrapper">
-        <UIComponent.sidebar conn={@conn} />
+        <UIComponent.sidebar logged_in={logged_in?(@conn)} />
         <div class="page-inner">
             <%= if assigns[:error] do %>
                 <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
@@ -14,7 +14,7 @@
 <% else %>
 
     <div class="page-wrapper">
-        <UIComponent.sidebar conn={@conn} />
+        <UIComponent.sidebar logged_in={logged_in?(@conn)} />
         <div class="page-inner">
             <h2 class="title">Whoops!</h2>
             <p class="inactive">Wow, such 404. That post doesn't exist...</p>

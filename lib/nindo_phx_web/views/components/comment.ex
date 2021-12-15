@@ -7,6 +7,7 @@ defmodule NindoPhxWeb.CommentComponent do
   alias Nindo.{Format, Comments}
 
   import NindoPhxWeb.Router.Helpers
+  alias NindoPhxWeb.Endpoint
   import Nindo.Core
 
   def show(assigns) do
@@ -48,7 +49,7 @@ defmodule NindoPhxWeb.CommentComponent do
       <section class="mt-12">
         <h3 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h3>
 
-        <%= form_for(@conn, social_path(@conn, :new_comment), [as: :comment, method: :put, class: "w-full", id: "comment-form"], fn f -> %>
+        <%= form_for(@conn, social_path(Endpoint, :new_comment), [as: :comment, method: :put, class: "w-full", id: "comment-form"], fn f -> %>
           <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow" %>
           <%= hidden_input f, :post_id, value: @post_id %>
           <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block border-none resize-none shadow flex-grow" %>

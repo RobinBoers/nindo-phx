@@ -1,20 +1,16 @@
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<div class="page-inner">
 
-         <%= if assigns[:error] do %>
-            <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
-        <% end %>
+    <%= if assigns[:error] do %>
+        <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+    <% end %>
 
-        <h2 class="title">My Feed</h2>
+    <h2 class="title">My Feed</h2>
 
-            <PostComponent.new conn={@conn} />
+        <%#<PostComponent.new conn={@conn} />%>
 
-            <FeedComponent.feed 
-                posts={@posts}
-                user_link={true}
-                preview={true}
-                conn={@conn}
-            />
-    </div>
+        <FeedComponent.feed 
+            posts={@posts}
+            user_link={true}
+            preview={true}
+        />
 </div>

@@ -4,8 +4,8 @@
   <p class="subtitle">A simple, easy to use and secure platform for communicating with your friends</p>
 
   <div class="m-16">
-    <%= link "Sign up", to: account_path(@conn, :sign_up), class: "btn-primary" %>
-    <%= link "Sign in", to: account_path(@conn, :sign_in), class: "btn-secondary" %>
+    <%= link "Sign up", to: account_path(Endpoint, :sign_up), class: "btn-primary" %>
+    <%= link "Sign in", to: account_path(Endpoint, :sign_in), class: "btn-secondary" %>
   </div>
 
 </header>
@@ -38,7 +38,7 @@
     </div>
     <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 text-black ml-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
-        <%= form_for(@conn, social_path(@conn, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
+        <%= form_for(@conn, social_path(NindoPhxWeb.Endpoint, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
             <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow text-black" %>
             <%= hidden_input f, :type, value: "custom" %>
           <% end) %>
