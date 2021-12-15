@@ -7,6 +7,7 @@ defmodule NindoPhxWeb.CommentComponent do
   alias Nindo.{Format, Comments}
 
   import NindoPhxWeb.Router.Helpers
+  import Nindo.Core
 
   def show(assigns) do
     ~H"""
@@ -22,7 +23,7 @@ defmodule NindoPhxWeb.CommentComponent do
         </div>
         <hr class="clear-both">
 
-        <div class="p-5 text-lg post-content" style="font-family: Roboto;"><%= @comment.body %></div>
+        <div class="p-5 text-lg post-content font-roboto"><%= safe markdown @comment.body %></div>
     </div>
     """
   end
@@ -51,6 +52,7 @@ defmodule NindoPhxWeb.CommentComponent do
           <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block border-none resize-none shadow flex-grow" %>
           <%= hidden_input f, :post_id, value: @post_id %>
           <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block border-none resize-none shadow flex-grow" %>
+          <%= submit "Post reply", class: "btn-primary mt-2" %>
         <% end) %>
       </section>
 

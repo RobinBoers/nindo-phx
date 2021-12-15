@@ -14,10 +14,6 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    fontFamily: {
-      display: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
-      body: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
-    },
     fontSize: {
       'xs': '.75rem',
       'sm': '.875rem',
@@ -53,7 +49,13 @@ module.exports = {
           850: '#1C2631'
         }
       },
-      transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      }
+      transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      },
+      fontFamily: {
+        roboto: ['Roboto', 'Arial', 'ui-sans-serif', 'system-ui', 'Inter', 'sans-serif'],
+        serif: ['ui-serif', 'Georgia', 'serif'],      
+        mono: ['ui-monospace', 'DejaVu LGC Sans Code', 'DejaVu Sans Code', 'DejaVu Sans Mono', 'SFMono-Regular', 'monospace'],
+        display: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
+      },
     },
   },
   variants: {
