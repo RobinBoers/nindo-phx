@@ -9,13 +9,6 @@ defmodule NindoPhxWeb.SocialController do
 
   # Pages to display
 
-  def sources(conn, _params) do
-    conn
-    |> assign(:error, get_session(conn, :error))
-    |> put_session(:error, nil)
-    |> render("sources.html")
-  end
-
   def welcome(conn, _params) do
     render(conn, "welcome.html")
   end
@@ -34,15 +27,6 @@ defmodule NindoPhxWeb.SocialController do
         |> render("app.html")
     end
   end
-
-  # Searching
-
-  def search(conn, %{"query" => ""}), do: redirect(conn, to: live_path(Endpoint, Live.Discover))
-  def search(conn, %{"query" => query}) do
-    results = Accounts.search(query)
-    render(conn, "discover.html", users: results, searching: true, query: query)
-  end
-  def search(conn, _params), do: redirect(conn, to: live_path(Endpoint, Live.Discover))
 
   # Feeds and users
 

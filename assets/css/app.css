@@ -84,8 +84,12 @@
 /* General */
 
 @layer base {
+    body {
+        @apply dark:text-white;
+    }
+
     * {
-        @apply dark:text-white dark:border-gray-700 transition-all;
+        @apply dark:border-gray-700 transition-all;
     }
     
     a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {

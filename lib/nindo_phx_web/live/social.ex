@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.Live.Social do
   use NindoPhxWeb, :live_view
 
   alias Nindo.{Accounts, FeedAgent}
-  alias NindoPhxWeb.{SocialView}
+  alias NindoPhxWeb.{Endpoint, SocialView, Live}
 
   import NindoPhxWeb.Router.Helpers
   import Nindo.Core
