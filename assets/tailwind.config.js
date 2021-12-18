@@ -47,6 +47,11 @@ module.exports = {
       colors: {
         gray: {
           850: '#1C2631'
+        },
+        code: {
+          gray: '#adadad',
+          black: '#1b1c1d',
+          purple: '#0d121d'
         }
       },
       transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      },
