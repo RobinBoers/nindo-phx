@@ -4,16 +4,17 @@ defmodule NindoPhxWeb.Live.Discover do
   """
   use NindoPhxWeb, :live_view
 
-  alias Nindo.{Accounts, FeedAgent}
+  alias Nindo.{Accounts}
   alias NindoPhxWeb.{SocialView}
 
-  import NindoPhxWeb.Router.Helpers
   import Nindo.Core
 
   @impl true
   def mount(_params, session, socket) do
+    users = get_users(6)
+
     {:ok, socket
-    |> assign(:users, get_users(6))
+    |> assign(:users, users)
     |> assign(:searching, false)
     |> assign(:logged_in, logged_in?(session))
     |> assign(:user, user(session))}
@@ -23,20 +24,19 @@ defmodule NindoPhxWeb.Live.Discover do
   def render(assigns), do: render SocialView, "discover.html", assigns
 
   @impl true
-  def handle_info(:refresh, socket) do
-    user = socket.assigns.user
-
-    posts =
-      user.id
-      |> Accounts.get()
-      |> FeedAgent.get_pid()
-      |> FeedAgent.get_posts()
+  def handle_event("search", %{"search" => %{"query" => ""}}, socket) do
+    {:noreply, socket
+    |> assign(:searching, false)}
+  end
+  def handle_event("search", %{"search" => %{"query" => query}}, socket) do
+    results = Accounts.search(query)
 
     {:noreply, socket
-    |> assign(:posts, posts)}
+    |> assign(:users, results)
+    |> assign(:searching, true)
+    |> assign(:query, query)}
   end
-
-  def handle_info(_, socket), do: {:noreply, socket}
+  def handle_event("search", _params, socket), do: {:noreply, socket}
 
   defp get_users(count) do
     count
