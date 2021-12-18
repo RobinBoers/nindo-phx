@@ -10,9 +10,9 @@
 
         <%= form_for(@conn, social_path(@conn, :search), [method: :get, class: "w-full flex flex-row py-4"], fn f -> %>
             <%= if not @searching do %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black" %>
+                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
             <% else %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black", value: @query %>
+                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow", value: @query %>
             <% end %>
             
             <%= submit safe("<i class='fas fa-search'></i>"), class: "input btn-primary input-r" %>

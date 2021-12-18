@@ -20,7 +20,7 @@
     /* Buttons and inputs */
 
     .input {
-        @apply border border-indigo-700 py-3 px-5 rounded-md text-indigo-500 hover:shadow bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 focus:shadow-lg;
+        @apply border py-3 px-5 rounded-md text-indigo-500 hover:shadow bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 focus:shadow-lg;
     }
 
     .input-static:hover {
@@ -187,5 +187,5 @@
 }
 
 pre code, code pre {
-    @apply overflow-x-auto;
+    @apply overflow-x-auto w-full p-3 rounded-md block text-code-gray bg-code-black dark:bg-code-purple my-2;
 }
