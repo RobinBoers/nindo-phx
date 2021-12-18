@@ -28,7 +28,7 @@ defmodule NindoPhxWeb.Router do
     get "/welcome", SocialController, :welcome
     live "/home", Live.Social
     live "/social", Live.Social
-    get "/discover", SocialController, :discover
+    live "/discover", Live.Discover
     get "/sources", SocialController, :sources
 
     get "/search", SocialController, :search

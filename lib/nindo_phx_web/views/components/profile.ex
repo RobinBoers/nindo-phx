@@ -67,7 +67,7 @@ defmodule NindoPhxWeb.ProfileComponent do
                         <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
                     </p>
 
-                    <%= if logged_in?(@conn) and @show_buttons do %>
+                    <%= if @logged_in and @show_buttons do %>
                         <p class="mt-6">
                             <a class="btn-primary" href={"/follow/#{@username}"}>
                                 <%= case @username in user(@conn).following do

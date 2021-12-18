@@ -1,5 +1,4 @@
 <div class="page-wrapper">
-    <UIComponent.sidebar logged_in={logged_in?(@conn)} />
     <div class="page-inner">
 
         <%= if not @searching do %>
@@ -8,15 +7,25 @@
             <h2 class="title">Search results for "<%= @query %>"</h2>
         <% end %>
 
-        <%= form_for(@conn, social_path(Endpoint, :search), [method: :get, class: "w-full flex flex-row py-4"], fn f -> %>
+        <%# form_for(@conn, social_path(Endpoint, :search), [method: :get, class: "w-full flex flex-row py-4"], fn f -> %>
+            <%# if not @searching do %>
+                <%# text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black" %>
+            <%# else %>
+                <%# text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black", value: @query %>
+            <%# end %>
+            
+            <%# submit safe("<i class='fas fa-search'></i>"), class: "input btn-primary input-r" %>
+        <%# end) %>    
+
+        <.form let={f} for={:search} class="w-full flex flex-row py-4" phx-submit="search">
             <%= if not @searching do %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black" %>
+                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
             <% else %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow text-black", value: @query %>
+                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow", value: @query %>
             <% end %>
             
             <%= submit safe("<i class='fas fa-search'></i>"), class: "input btn-primary input-r" %>
-        <% end) %>    
+        </.form>
 
         <h2 class="heading">Users</h2> 
 
@@ -25,7 +34,7 @@
         <% end %>
 
         <%= for user <- @users do %>
-            <ProfileComponent.preview username={user.username} display_link={true} show_buttons={false} source={false} conn={@conn} />
+            <ProfileComponent.preview username={user.username} display_link={true} show_buttons={false} source={false} logged_in={@logged_in} />
         <% end %>
 
     </div>

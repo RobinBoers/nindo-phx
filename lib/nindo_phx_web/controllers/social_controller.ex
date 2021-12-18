@@ -1,34 +1,13 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, FeedAgent, RSS.YouTube}
-  alias NindoPhxWeb.{Endpoint, SocialView}
+  alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, RSS.YouTube}
+  alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
 
   # Pages to display
-
-  def index(conn, _params) do
-    if logged_in?(conn) do
-      posts =
-        user(conn).id
-        |> Accounts.get()
-        |> FeedAgent.get_pid()
-        |> FeedAgent.get_posts()
-
-      conn
-      |> assign(:error, get_session(conn, :error))
-      |> put_session(:error, nil)
-      |> render("index.html", posts: posts)
-    else
-        redirect(conn, to: social_path(Endpoint, :discover))
-    end
-  end
-
-  def discover(conn, _params) do
-    render(conn, "discover.html", users: SocialView.get_users(6), searching: false)
-  end
 
   def sources(conn, _params) do
     conn
@@ -58,12 +37,12 @@ defmodule NindoPhxWeb.SocialController do
 
   # Searching
 
-  def search(conn, %{"query" => ""}), do: redirect(conn, to: social_path(Endpoint, :discover))
+  def search(conn, %{"query" => ""}), do: redirect(conn, to: live_path(Endpoint, Live.Discover))
   def search(conn, %{"query" => query}) do
     results = Accounts.search(query)
     render(conn, "discover.html", users: results, searching: true, query: query)
   end
-  def search(conn, _params), do: redirect(conn, to: social_path(Endpoint, :discover))
+  def search(conn, _params), do: redirect(conn, to: live_path(Endpoint, Live.Discover))
 
   # Feeds and users
 

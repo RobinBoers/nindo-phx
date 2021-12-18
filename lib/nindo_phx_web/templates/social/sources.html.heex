@@ -15,7 +15,7 @@
 
             <ul>
                 <%= for username <- user(@conn).following do %>
-                    <ProfileComponent.preview username={username} display_link={true} show_buttons={true} source={true} conn={@conn} />
+                    <ProfileComponent.preview username={username} display_link={true} show_buttons={true} source={true} logged_in={true} />
                 <% end %>
             </ul>
 

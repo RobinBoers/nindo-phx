@@ -17,7 +17,7 @@ defmodule NindoPhxWeb.UIComponent do
           <%= if @logged_in do %>
             <li class="header-item"><%= link safe("<i class='fas fa-home mr-1'></i> Home"), to: live_path(Endpoint, Live.Social) %></li>
           <% end %>
-          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: social_path(Endpoint, :discover) %></li>
+          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: live_path(Endpoint, Live.Discover) %></li>
           <li class="header-item"><%= link safe("<i class='fas fa-stream mr-1'></i> Sources"), to: social_path(Endpoint, :sources) %></li>
           <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user mr-1'></i> Settings"), to: account_path(Endpoint, :index) %></li>
         </ul>

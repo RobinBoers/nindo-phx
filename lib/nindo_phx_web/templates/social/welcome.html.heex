@@ -46,7 +46,7 @@
                 <h4 class="font-bold py-3 text-lg">Try it:</h4>
 
                 <%= for user <- get_users(3) do %>
-                    <ProfileComponent.preview username={user.username} display_link={true} show_buttons={true} source={false} conn={@conn} />
+                    <ProfileComponent.preview username={user.username} display_link={true} show_buttons={true} source={false} @logged_in={true} />
                 <% end %>
             </details>
 

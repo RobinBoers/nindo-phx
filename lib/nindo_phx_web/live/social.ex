@@ -25,7 +25,7 @@ defmodule NindoPhxWeb.Live.Social do
         |> assign(:user, user(session))}
     else
       {:ok, socket
-      |> redirect(to: social_path(NindoPhxWeb.Endpoint, :discover))}
+      |> redirect(to: live_path(Endpoint, Live.Discover))}
     end
   end
 
