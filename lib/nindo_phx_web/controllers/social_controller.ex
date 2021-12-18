@@ -2,7 +2,7 @@ defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
   alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, FeedAgent, RSS.YouTube}
-  alias NindoPhxWeb.{AccountController, Endpoint, SocialView}
+  alias NindoPhxWeb.{Endpoint, SocialView}
   import NindoPhxWeb.{Router.Helpers}
 
   import Nindo.Core
@@ -126,7 +126,7 @@ defmodule NindoPhxWeb.SocialController do
         redirect(conn, to: redirect_to)
       {:error, error} ->
         conn
-        |> put_session(:error, AccountController.format_error(error))
+        |> put_session(:error, format_error(error))
         |> redirect(to: redirect_to)
     end
 
@@ -146,7 +146,7 @@ defmodule NindoPhxWeb.SocialController do
         redirect(conn, to: redirect_to)
       {:error, error} ->
         conn
-        |> put_session(:error, AccountController.format_error(error))
+        |> put_session(:error, format_error(error))
         |> redirect(to: redirect_to)
     end
   end

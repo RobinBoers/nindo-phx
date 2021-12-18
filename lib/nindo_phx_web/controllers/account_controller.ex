@@ -134,19 +134,4 @@ defmodule NindoPhxWeb.AccountController do
       render(conn, "index.html", error: %{title: "passwords", message: "Don't match"})
     end
   end
-
-  # Helper methods
-
-  def format_error(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
-      Enum.reduce(opts, msg, fn {key, value}, acc ->
-        String.replace(acc, "%{#{key}}", to_string(value))
-      end)
-    end)
-    |> Enum.reduce("", fn {k, v}, _acc ->
-      joined_errors = Enum.join(v, "; ")
-      %{title: "#{k}", message: String.capitalize joined_errors}
-    end)
-  end
-
 end

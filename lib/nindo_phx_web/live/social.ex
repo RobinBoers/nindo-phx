@@ -28,5 +28,5 @@ defmodule NindoPhxWeb.Live.Social do
     end
   end
 
-  def render(assigns), do: render SocialView, "index.html", posts: assigns.posts
+  def render(assigns), do: render SocialView, "index.html", assigns
 end

@@ -6,7 +6,7 @@
 
     <h2 class="title">My Feed</h2>
 
-        <%#<PostComponent.new conn={@conn} />%>
+        <.live_component module={NewPost} user={@user} id="new-post"/>
 
         <FeedComponent.feed 
             posts={@posts}
