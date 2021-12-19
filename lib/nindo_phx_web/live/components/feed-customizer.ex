@@ -2,7 +2,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   @moduledoc false
   use NindoPhxWeb, :live_component
 
-  alias Nindo.{Accounts, Feeds}
+  alias Nindo.{Accounts, Feeds, RSS, RSS.YouTube}
 
   @impl true
   def render(assigns) do
@@ -53,12 +53,34 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   end
 
   @impl true
-  def handle_event("add", params, socket) do
-    IO.inspect(params)
-    {:noreply, socket}
+  def handle_event("add", %{"source" => %{"feed" => source, "type" => type}}, socket) do
+    url = convert_link(type, source)
+
+    case RSS.parse_feed(url, type) do
+      {:error, _} -> {:noreply, socket}
+
+      feed ->
+        Feeds.add(RSS.generate_source(feed, type, url), socket.assigns.user)
+        feeds = Accounts.get(socket.assigns.user.id).feeds
+
+        {:noreply, socket
+        |> assign(:feeds, feeds)}
+    end
   end
 
   defp get_source_link(feed) do
     "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  end
+
+  # This method is used to convert the YouTube custom urls or legacy
+  # username to the yt.com/channel/id format, which is needed for the
+  # RSS feeds to work. Converting is a expensive task, which also uses quota
+  # on my YT API key. That's why I only convert it when adding the feed
+  # and not every time I need to access the feed.
+  defp convert_link(type, feed) do
+    case type do
+      "youtube" -> YouTube.to_channel_link(feed)
+      _         -> feed
+    end
   end
 end

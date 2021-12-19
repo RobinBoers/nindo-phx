@@ -44,9 +44,6 @@ defmodule NindoPhxWeb.Router do
     put "/post/new", SocialController, :new_post
     put "/comment/new", SocialController, :new_comment
 
-    put "/feed/add", SocialController, :add_feed
-    delete "/feed/remove", SocialController, :remove_feed
-
     get "/account", AccountController, :index
     get "/settings", AccountController, :index
     get "/signin", AccountController, :sign_in

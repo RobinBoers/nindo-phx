@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.SocialController do
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, Posts, RSS, Feeds, Comments, RSS.YouTube}
+  alias Nindo.{Accounts, RSS, Feeds, Comments}
   alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.{Router.Helpers}
 
@@ -74,27 +74,6 @@ defmodule NindoPhxWeb.SocialController do
 
   # Posts and comments
 
-  def new_post(conn, params) do
-    title = params["post"]["title"]
-    body = params["post"]["body"]
-    user = user(conn)
-
-    redirect_to =
-      NavigationHistory.last_path(conn,
-      default: live_path(Endpoint, Live.Social))
-
-    case Posts.new(title, body, nil, user) do
-      {:ok, _post}    ->
-        Feeds.update_cache(user)
-        redirect(conn, to: redirect_to)
-      {:error, error} ->
-        conn
-        |> put_session(:error, format_error(error))
-        |> redirect(to: redirect_to)
-    end
-
-  end
-
   def new_comment(conn, params) do
     title = params["comment"]["title"]
     body = params["comment"]["body"]
@@ -114,46 +93,6 @@ defmodule NindoPhxWeb.SocialController do
     end
   end
 
-  # Manage feeds and followers
-
-  def add_feed(conn, params) do
-    type = params["add_feed"]["type"]
-    url = convert_link(type, params["add_feed"]["feed"])
-
-    redirect_to =
-      NavigationHistory.last_path(conn,
-      default: social_path(Endpoint, :sources))
-
-    case RSS.parse_feed(url, type) do
-
-      {:error, _} ->
-        conn
-        |> put_session(:error, %{title: "uri", message: "Feed doesn't exist or is invalid"})
-        |> redirect(to: social_path(Endpoint, :sources))
-
-      feed ->
-        if logged_in?(conn) do
-          Feeds.add(RSS.generate_source(feed, type, url), user(conn))
-        end
-
-        redirect(conn, to: redirect_to)
-    end
-  end
-
-  def remove_feed(conn, params) do
-    feed = params["feed"]
-
-    if logged_in?(conn) do
-      Feeds.remove(feed, user(conn))
-    end
-
-    redirect_to =
-      NavigationHistory.last_path(conn,
-      default: social_path(Endpoint, :sources))
-
-    redirect(conn, to: redirect_to)
-  end
-
   def follow(conn, %{"username" => person}) do
     if logged_in?(conn) do
 
@@ -169,22 +108,6 @@ defmodule NindoPhxWeb.SocialController do
       redirect(conn, to: redirect_to)
     else
       redirect(conn, to: account_path(Endpoint, :sign_in))
-    end
-  end
-
-  # Helper methods
-
-  @doc """
-  This method is used to convert the YouTube custom urls or legacy
-  username to the yt.com/channel/id format, which is needed for the
-  RSS feeds to work. Converting is a expensive task, which also uses quota
-  on my YT API key. That's why I only convert it when adding the feed
-  and not every time I need to access the feed.
-  """
-  def convert_link(type, feed) do
-    case type do
-      "youtube" -> YouTube.to_channel_link(feed)
-      _         -> feed
     end
   end
 
