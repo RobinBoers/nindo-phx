@@ -1,20 +1,12 @@
-<div class="page-wrapper">
-    <div class="sign-in-up page-inner">
+<div class="lg:w-4/5 xl:w-1/2 mx-auto">
+    <h2 class="title">Sign up</h2>
 
-        <%= if assigns[:error] do %>
-            <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
-        <% end %>
-
-        <h2 class="title">Sign up</h2>
-
-        <div class="w-full flex-grow-0 text-black lg:mt-4">
-            <%= form_for(@conn, account_path(Endpoint, :create_account), [as: :create_account, method: :put], fn f -> %>
-                <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1.5 w-full block" %>
-                <%= text_input f, :email, placeholder: "Emailaddress", class: "input my-1.5 w-full block" %>
-                <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
-                <%= submit "Sign up", class: "btn-primary block mt-4"  %>
-            <% end) %>
-        </div>
-
+    <div class="w-full flex-grow-0 text-black lg:mt-4">
+        <%= form_for(@conn, account_path(Endpoint, :create_account), [as: :create_account, method: :put], fn f -> %>
+            <%= text_input f, :username, autofocus: "autofocus", placeholder: "Username", class: "input my-1.5 w-full block" %>
+            <%= text_input f, :email, placeholder: "Emailaddress", class: "input my-1.5 w-full block" %>
+            <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
+            <%= submit "Sign up", class: "btn-primary block mt-4"  %>
+        <% end) %>
     </div>
 </div>

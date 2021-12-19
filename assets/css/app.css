@@ -131,15 +131,11 @@
     }
     
     .page-inner {
-        @apply p-3 relative mx-auto sm:max-w-2xl md:max-w-6xl;
+        @apply flex-grow p-3 relative mx-auto sm:max-w-2xl md:max-w-6xl;
     }
     
-    .page-inner:not(.sign-in-up, .blog, .app) {
-        @apply flex-grow sm:p-6 md:p-0 md:m-0;
-    }
-    
-    .page-inner.sign-in-up {
-        @apply lg:w-1/2 xl:w-2/6;
+    .page-inner.social {
+        @apply sm:p-6 md:p-0 md:m-0;
     }
     
     .page-inner.app {

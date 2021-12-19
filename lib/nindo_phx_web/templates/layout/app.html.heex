@@ -1,3 +1,18 @@
-<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-<p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-<%= @inner_content %>
+<div class="page-wrapper">
+    <div class="page-inner">
+
+        <div class="alert alert-info" role="alert"
+        phx-click="lv:clear-flash"
+        phx-value-key="info"><AlertComponent.message message={get_flash(@conn, :info)} title={"message"} /></div>
+
+        <div class="alert alert-success" role="alert"
+        phx-click="lv:clear-flash"
+        phx-value-key="info"><AlertComponent.success message={get_flash(@conn, :success)} title={"ok"} /></div>
+
+        <div class="alert alert-danger" role="alert"
+        phx-click="lv:clear-flash"
+        phx-value-key="error"><AlertComponent.error message={get_flash(@conn, :error)} title={"error"} /></div>
+
+        <%= @inner_content %>
+    </div>
+</div>

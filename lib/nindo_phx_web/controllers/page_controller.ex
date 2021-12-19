@@ -6,16 +6,19 @@ defmodule NindoPhxWeb.PageController do
   def index(conn, _params) do
     conn
     |> assign(:page_title, "Social media of the future")
+    |> put_layout("page.html")
     |> render("index.html")
   end
   def about(conn, _params) do
     conn
     |> assign(:page_title, "About")
+    |> put_layout("page.html")
     |> render("about.html")
   end
   def blog(conn, _params) do
     conn
     |> assign(:page_title, "Blog")
+    |> put_layout("page.html")
     |> render("blog.html")
   end
 
