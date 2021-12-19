@@ -1,6 +1,6 @@
 defmodule NindoPhxWeb.Live.User do
   @moduledoc """
-  LiveView to display the posts of an user
+  LiveView to display the posts of an user.
   """
   use NindoPhxWeb, :live_view
   alias NindoPhxWeb.{SocialView}

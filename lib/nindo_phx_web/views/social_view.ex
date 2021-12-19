@@ -6,7 +6,7 @@ defmodule NindoPhxWeb.SocialView do
   alias Nindo.{Accounts, Posts, Format}
   import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.Live.Components.{NewPost, FeedCustomizer}
-  alias NindoPhxWeb.{FeedComponent, AlertComponent, CommentComponent, UIComponent, Live}
+  alias NindoPhxWeb.{FeedComponent, CommentComponent, Live}
 
   alias NindoPhxWeb.Endpoint
 
@@ -23,8 +23,8 @@ defmodule NindoPhxWeb.SocialView do
     |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
   end
 
-  def get_source_link(feed) do
-    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  def get_source_data(feed) do
+    "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
 end

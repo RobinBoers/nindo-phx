@@ -3,6 +3,8 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   use NindoPhxWeb, :live_component
 
   alias Nindo.{Accounts, Feeds, RSS, RSS.YouTube}
+  alias NindoPhxWeb.{Endpoint, Live}
+  import NindoPhxWeb.Router.Helpers
 
   @impl true
   def render(assigns) do
@@ -31,7 +33,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <a href={get_source_link(feed)}><%= feed["title"] %></a>
+                <%= live_patch feed["title"], to: live_path(Endpoint, Live.Source, get_source_data(feed)) %>
               </span>
 
               <a class="mt-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}><i class="fas fa-times"></i></a>
@@ -68,8 +70,8 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
     end
   end
 
-  defp get_source_link(feed) do
-    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  defp get_source_data(feed) do
+    "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
   # This method is used to convert the YouTube custom urls or legacy

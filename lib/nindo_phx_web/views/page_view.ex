@@ -11,6 +11,6 @@ defmodule NindoPhxWeb.PageView do
 
   import Nindo.Core
 
-  defdelegate get_source_link(x), to: SocialView
+  defdelegate get_source_data(feed), to: SocialView
 
 end

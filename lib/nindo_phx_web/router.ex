@@ -39,10 +39,11 @@ defmodule NindoPhxWeb.Router do
     live "/post/external", Live.Post
     live "/post/:id", Live.Post
     live "/user/:username", Live.User
-    get "/feed/:username", SocialController, :feed
-    get "/source/:source", SocialController, :external_feed
+
+    live "/source/:source", Live.Source
 
     put "/comment/new", SocialController, :new_comment
+    get "/feed/:username", PageController, :feed
 
     get "/signin", AccountController, :sign_in
     get "/signup", AccountController, :sign_up

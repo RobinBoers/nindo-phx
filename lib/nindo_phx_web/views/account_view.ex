@@ -5,9 +5,7 @@ defmodule NindoPhxWeb.AccountView do
 
   import NindoPhxWeb.Router.Helpers
   alias Nindo.Format
-  alias NindoPhxWeb.{ProfileComponent, UIComponent, AlertComponent}
+  alias NindoPhxWeb.{AlertComponent}
 
   alias NindoPhxWeb.Endpoint
-
-  import Nindo.Core
 end

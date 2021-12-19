@@ -39,8 +39,6 @@ defmodule NindoPhxWeb.Live.Account do
 
     user = Accounts.get(socket.assigns.user.id)
 
-    IO.inspect(user)
-
     {:noreply, socket
     |> assign(:user, user)}
   end

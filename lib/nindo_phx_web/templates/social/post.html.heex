@@ -6,7 +6,7 @@
         <div class="flex flex-row items-center gap-2 pt-7">
         <img class="w-6 object-cover h-6 rounded-full border-indigo-700 border-2" src={Format.profile_picture(username)}>
         <p class="font-bold text-lg">
-            <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+            <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
         </p>
         </div>
 
@@ -15,7 +15,7 @@
         <div class="flex flex-row items-center gap-2 pt-7">
         <img class="w-6 object-cover h-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
         <p class="font-bold text-lg">
-            <a href={get_source_link(@post.source)}><%= @post.author %></a>
+            <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
         </p>
         </div>
 

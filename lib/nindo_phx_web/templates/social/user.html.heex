@@ -12,7 +12,7 @@
             </p>
             <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
-            <p class="mt-10">
+            <p class="mt-6">
                 <%= if @logged_in do %>
                     <button class="btn-primary" phx-click="follow" phx-value-username={@username}>
                         <%= case @username in @user.following do

@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
-  alias NindoPhxWeb.{Endpoint, Live}
+  alias NindoPhxWeb.{Endpoint, SocialView, Live}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -23,7 +23,7 @@ defmodule NindoPhxWeb.PostComponent do
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
-                  <a href={get_source_link(@post.source)}><%= @post.author %></a>
+                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
                 <% else %>
                   <%= @post.author %>
                 <% end %>
@@ -81,7 +81,7 @@ defmodule NindoPhxWeb.PostComponent do
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <a href={get_source_link(@post.source)}><%= @post.author %></a>
+                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
               <% else %>
                 <%= @post.author %>
               <% end %>
@@ -94,7 +94,7 @@ defmodule NindoPhxWeb.PostComponent do
             <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+                ,<%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
               <% else %>
                 <%= Format.display_name(username) %>
               <% end %>
@@ -118,8 +118,6 @@ defmodule NindoPhxWeb.PostComponent do
 
   # Private methods
 
-  defp get_source_link(feed) do
-    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
-  end
+  defdelegate get_source_data(feed), to: SocialView
 
 end
