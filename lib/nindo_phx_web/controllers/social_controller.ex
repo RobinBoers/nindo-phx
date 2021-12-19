@@ -30,10 +30,6 @@ defmodule NindoPhxWeb.SocialController do
 
   # Feeds and users
 
-  def user(conn, %{"username" => username}) do
-    render(conn, "user.html", username: username)
-  end
-
   def post(conn, %{"id" => id}) do
     conn
     |> assign(:error, get_session(conn, :error))
@@ -90,24 +86,6 @@ defmodule NindoPhxWeb.SocialController do
         conn
         |> put_session(:error, format_error(error))
         |> redirect(to: redirect_to)
-    end
-  end
-
-  def follow(conn, %{"username" => person}) do
-    if logged_in?(conn) do
-
-      case person in user(conn).following do
-        true  -> Feeds.unfollow(person, user(conn))
-        _     -> Feeds.follow(person, user(conn))
-      end
-
-      redirect_to =
-        NavigationHistory.last_path(conn, 1,
-        default: social_path(Endpoint, :user, person))
-
-      redirect(conn, to: redirect_to)
-    else
-      redirect(conn, to: account_path(Endpoint, :sign_in))
     end
   end
 

@@ -38,7 +38,7 @@ defmodule NindoPhxWeb.Router do
 
     get "/post/external", SocialController, :external_post
     get "/post/:id", SocialController, :post
-    get "/user/:username", SocialController, :user
+    live "/user/:username", Live.User
     get "/follow/:username", SocialController, :follow
     get "/feed/:username", SocialController, :feed
     get "/source/:source", SocialController, :external_feed

@@ -16,7 +16,7 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
               <%= text_input f, :title, placeholder: "Title", class: "new-post-form-title w-full mb-2 input block resize-none flex-grow" %>
               <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "new-post-form-body w-full input block resize-none flex-grow" %>
               <button class="new-post-submit btn-primary mt-2" type="submit">Publish</button>
-              <button class="new-post-cancel btn-secondary mt-2" type="button"  onclick="cancelPost()">Cancel</button>
+              <button class="new-post-cancel btn-secondary mt-2" type="button" onclick="cancelPost()">Cancel</button>
             </.form>
           </div>
       </div>

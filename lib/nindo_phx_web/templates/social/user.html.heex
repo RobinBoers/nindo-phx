@@ -1,40 +1,52 @@
 <%= if Accounts.exists?(@username) do %>
 
-<div class="page-wrapper">
-    <UIComponent.sidebar logged_in={logged_in?(@conn)} />
-    <div class="page-inner">
+<div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
+    <div class="md:flex">
+        <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>
+        </div>
+        <div class="p-8">
+            <p class="font-bold text-2xl">
+                <%= Format.display_name(@username) %>
+                <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
+            </p>
+            <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
-        <ProfileComponent.header username={@username} display_link={false} conn={@conn} />
+            <p class="mt-10">
+                <%= if @logged_in do %>
+                    <button class="btn-primary" phx-click="follow" phx-value-username={@username}>
+                        <%= case @username in @user.following do
+                            true -> "Unfollow"
+                            false -> "Follow"
+                        end %>
+                    </button>
+                <% end %>
 
-        <h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
-
-        <FeedComponent.feed posts={get_posts(@username)} user_link={false} preview={false} conn={@conn} />
-
-    </div>    
+                <a class="btn-secondary" href={"/feed/#{@username}"}><i class="fas fa-rss-square text-yellow-600 mr-1"></i> RSS</a>
+            </p>
+        </div>
+    </div>
 </div>
+
+<h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
+
+<FeedComponent.feed posts={get_posts(@username)} user_link={false} preview={false} />
 
 <% else %>
 
-<div class="page-wrapper">
-    <UIComponent.sidebar logged_in={logged_in?(@conn)} />
-    <div class="page-inner">
-
-        <div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
-            <div class="md:flex">
-                <div class="md:flex-shrink-0">
-                    <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
-                </div>
-                <div class="p-8">
-                    <p class="font-bold text-2xl">
-                        Unknown user
-                        <i class="block text-base text-gray-400">@deleted</i>
-                    </p>
-                    <p class="mt-2 text-gray-500">No account information available.</p>
-                </div>
-            </div>
+<div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
+    <div class="md:flex">
+        <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
         </div>
-
-    </div>    
+        <div class="p-8">
+            <p class="font-bold text-2xl">
+                Unknown user
+                <i class="block text-base text-gray-400">@deleted</i>
+            </p>
+            <p class="mt-2 text-gray-500">No account information available.</p>
+        </div>
+    </div>
 </div>
 
 <% end %>

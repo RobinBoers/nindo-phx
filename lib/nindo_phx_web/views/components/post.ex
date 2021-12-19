@@ -10,7 +10,7 @@ defmodule NindoPhxWeb.PostComponent do
 
   import Nindo.Core
 
-  #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
+  #<h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
     <%= if @post != nil do %>
@@ -57,7 +57,7 @@ defmodule NindoPhxWeb.PostComponent do
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
-          <iframe class="rounded-md aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
         <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
@@ -113,36 +113,6 @@ defmodule NindoPhxWeb.PostComponent do
 
         <% end %>
       </div>
-    """
-  end
-
-  def new(assigns) do
-    ~H"""
-      <button class="btn-primary mb-6 new-post-btn" onclick="newPost()">New post</button>
-      <div class="new-post-modal transition-height h-0 overflow-y-hidden w-full">
-          <div class="mb-6 p-1">
-            <%= form_for(@conn, social_path(Endpoint, :new_post), [as: :post, method: :put, class: "new-post-form w-full", id: "post-form"], fn f -> %>
-              <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
-              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "w-full input block resize-none flex-grow" %>
-            <% end) %>
-            <button class="btn-primary mt-2" onclick="submit()">Publish</button>
-            <button class="btn-secondary mt-2" onclick="cancel()">Cancel</button>
-          </div>
-      </div>
-
-      <script>
-        function newPost() {
-          document.querySelector(".new-post-modal").style.height = '250px';
-          document.querySelector(".new-post-btn").style.display = 'none';
-        }
-        function cancel() {
-          document.querySelector(".new-post-modal").style.height = '0px';
-          document.querySelector(".new-post-btn").style.display = 'block';
-        }
-        function submit() {
-          document.querySelector(".new-post-form").submit();
-        }
-      </script>
     """
   end
 

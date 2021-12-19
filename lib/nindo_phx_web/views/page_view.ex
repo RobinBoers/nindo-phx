@@ -5,10 +5,12 @@ defmodule NindoPhxWeb.PageView do
 
   alias Nindo.{Posts}
   import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{PostComponent, FeedComponent}
+  alias NindoPhxWeb.{PostComponent, FeedComponent, SocialView}
 
   alias NindoPhxWeb.Endpoint
 
   import Nindo.Core
+
+  defdelegate get_source_link(x), to: SocialView
 
 end
