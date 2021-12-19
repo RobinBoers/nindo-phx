@@ -22,6 +22,7 @@ defmodule NindoPhxWeb.Live.Discover do
     results = Accounts.search(query)
 
     {:noreply, socket
+    |> assign(:page_title, "Search results for \"#{query}\"")
     |> assign(:users, results)
     |> assign(:searching, true)
     |> assign(:query, query)}
@@ -31,6 +32,7 @@ defmodule NindoPhxWeb.Live.Discover do
     users = get_users(6)
 
     {:noreply, socket
+    |> assign(:page_title, "Discover")
     |> assign(:users, users)
     |> assign(:searching, false)
     |> assign(:query, nil)}

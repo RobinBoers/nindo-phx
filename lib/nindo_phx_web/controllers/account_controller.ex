@@ -13,10 +13,14 @@ defmodule NindoPhxWeb.AccountController do
   # Pages to display
 
   def sign_up(conn, _params) do
-    render(conn, "sign_up.html")
+    conn
+    |> assign(:page_title, "Sign up")
+    |> render("sign_up.html")
   end
   def sign_in(conn, _params) do
-    render(conn, "sign_in.html")
+    conn
+    |> assign(:page_title, "Sign in")
+    |> render("sign_in.html")
   end
 
   def app(conn, _params) do
@@ -30,6 +34,7 @@ defmodule NindoPhxWeb.AccountController do
         |> put_session(:app, true)
         |> put_layout(false)
         |> put_root_layout("base.html")
+        |> assign(:page_title, "Nindo")
         |> render("app.html")
     end
   end
@@ -95,7 +100,7 @@ defmodule NindoPhxWeb.AccountController do
         conn
         |> put_session(:logged_in, true)
         |> put_session(:user_id, account.id)
-        |> redirect(to: social_path(Endpoint, :welcome))
+        |> redirect(to: live_path(Endpoint, Live.Welcome))
       {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
     end
   end

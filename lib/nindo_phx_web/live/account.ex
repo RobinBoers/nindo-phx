@@ -14,8 +14,10 @@ defmodule NindoPhxWeb.Live.Account do
   def mount(_params, session, socket) do
     case logged_in?(session) do
       true  -> {:ok, socket
+      |> assign(:page_title, "Settings")
       |> assign(:user, user(session))
       |> assign(:logged_in, true)}
+
       _     -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
     end
   end

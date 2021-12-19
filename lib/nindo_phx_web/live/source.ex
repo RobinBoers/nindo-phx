@@ -23,6 +23,7 @@ defmodule NindoPhxWeb.Live.Source do
     {:ok, socket
     |> assign(:logged_in, logged_in?(session))
     |> assign(:user, user(session))
+    |> assign(:page_title, feed["title"])
     |> assign(:posts, posts)
     |> assign(:title, feed["title"])}
   end

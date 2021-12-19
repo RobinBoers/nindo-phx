@@ -40,7 +40,6 @@ defmodule NindoPhxWeb.Router do
     live "/user/:username", Live.User
     live "/source/:source", Live.Source
 
-    put "/comment/new", SocialController, :new_comment
     get "/feed/:username", PageController, :feed
 
     get "/app", AccountController, :app

@@ -21,6 +21,7 @@ defmodule NindoPhxWeb.Live.Social do
 
         {:ok, socket
         |> assign(:posts, posts)
+        |> assign(:page_title, "Social")
         |> assign(:logged_in, logged_in?(session))
         |> assign(:user, user(session))}
     else

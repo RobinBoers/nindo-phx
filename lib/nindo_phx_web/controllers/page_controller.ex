@@ -4,13 +4,19 @@ defmodule NindoPhxWeb.PageController do
   alias Nindo.{Accounts, RSS}
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    conn
+    |> assign(:page_title, "Social media of the future")
+    |> render("index.html")
   end
   def about(conn, _params) do
-    render(conn, "about.html")
+    conn
+    |> assign(:page_title, "About")
+    |> render("about.html")
   end
   def blog(conn, _params) do
-    render(conn, "blog.html")
+    conn
+    |> assign(:page_title, "Blog")
+    |> render("blog.html")
   end
 
   # Feeds and users

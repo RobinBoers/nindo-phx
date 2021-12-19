@@ -12,6 +12,7 @@ defmodule NindoPhxWeb.Live.Sources do
   @impl true
   def mount(_params, session, socket) do
     {:ok, socket
+    |> assign(:page_title, "Sources")
     |> assign(:logged_in, logged_in?(session))
     |> assign(:user, user(session))}
   end

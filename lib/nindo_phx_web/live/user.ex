@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.Live.User do
   use NindoPhxWeb, :live_view
   alias NindoPhxWeb.{SocialView}
 
-  alias Nindo.{Accounts, Feeds}
+  alias Nindo.{Accounts, Feeds, Format}
   import Nindo.Core
 
   @impl true
@@ -14,6 +14,16 @@ defmodule NindoPhxWeb.Live.User do
     |> assign(:logged_in, logged_in?(session))
     |> assign(:user, user(session))
     |> assign(:username, username)}
+  end
+
+  @impl true
+  def handle_params(%{"username" => username}, _uri, socket) do
+    if Accounts.exists?(username) do
+      {:noreply, socket
+      |> assign(:page_title, Format.display_name(username) <> " (@" <> username <> ")")}
+    else
+      {:noreply, assign(socket, page_title: "Unknown user" <> " (@deleted)")}
+    end
   end
 
   @impl true
