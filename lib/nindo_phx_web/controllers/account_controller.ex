@@ -19,6 +19,21 @@ defmodule NindoPhxWeb.AccountController do
     render(conn, "sign_in.html")
   end
 
+  def app(conn, _params) do
+    case logged_in?(conn) do
+      true ->
+        conn
+        |> put_session(:app, true)
+        |> redirect(to: live_path(Endpoint, Live.Social))
+      false ->
+        conn
+        |> put_session(:app, true)
+        |> put_layout(false)
+        |> put_root_layout("base.html")
+        |> render("app.html")
+    end
+  end
+
   # Session management
 
   def login(conn, params) do

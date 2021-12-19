@@ -24,8 +24,7 @@ defmodule NindoPhxWeb.Router do
     get "/about", PageController, :about
     get "/blog", PageController, :blog
 
-    get "/app", SocialController, :app
-    get "/welcome", SocialController, :welcome
+    live "/welcome", Live.Welcome
     live "/home", Live.Social
     live "/social", Live.Social
     live "/discover", Live.Discover
@@ -39,12 +38,12 @@ defmodule NindoPhxWeb.Router do
     live "/post/external", Live.Post
     live "/post/:id", Live.Post
     live "/user/:username", Live.User
-
     live "/source/:source", Live.Source
 
     put "/comment/new", SocialController, :new_comment
     get "/feed/:username", PageController, :feed
 
+    get "/app", AccountController, :app
     get "/signin", AccountController, :sign_in
     get "/signup", AccountController, :sign_up
 

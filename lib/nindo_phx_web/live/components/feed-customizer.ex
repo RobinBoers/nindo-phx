@@ -36,7 +36,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
                 <%= live_patch feed["title"], to: live_path(Endpoint, Live.Source, get_source_data(feed)) %>
               </span>
 
-              <a class="mt-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}><i class="fas fa-times"></i></a>
+              <a class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}><i class="fas fa-times"></i></a>
             </li>
 
           <% end %>

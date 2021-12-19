@@ -1,7 +1,7 @@
-<%= if logged_in?(@conn) do %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
+<%= if @logged_in do %>
+    <section class="flex flex-row justify-between p-12 mt-10 xl:mt-0 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
-            <h2 class="title">Hello, <%= Format.display_name(user(@conn).username) %>!</h2>
+            <h2 class="title">Hello, <%= Format.display_name(@user.username) %>!</h2>
             <p class="intro">Welcome to Nindo. Let's get you started, shall we?</p>
 
             <details>
@@ -14,6 +14,10 @@
                     Nindo is a central place where you can read all your favorite blogs and other sites. It also allows you to post content on Nindo itself. There is no tracking and AI to create a feed for you, you can do it yourself by following other users and adding external sites.<br><br>
                     An external website you add is called a <b>source</b>. Sources can be added via the "Sources" tab.
                 </p>
+
+                <div class="pb-9">
+                    <.live_component module={FeedCustomizer} user={@user} feeds={@user.feeds} id="feed-customizer" />
+                </div>
             </details>
 
             <details>
@@ -25,7 +29,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Customize", to: account_path(Endpoint, :index), class: "btn-primary", target: "_blank" %>
+                    <%= link "Customize", to: live_path(Endpoint, Live.Account), class: "btn-primary", target: "_blank" %>
                 </div>        
             </details>
 
@@ -36,6 +40,11 @@
                     You can follow users you like on Nindo.<br>
                     Their posts will be displayed in your feed alongside sources.
                 </p>
+
+                <div class="py-8">
+                    <%= link "Discover", to: live_path(Endpoint, Live.Discover), class: "btn-primary", target: "_blank" %>
+                </div>    
+
             </details>
 
             <details>
@@ -46,7 +55,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Finish", to: live_path(Endpoint, Live.Social), class: "btn-primary" %>
+                    <%= live_patch "Finish", to: live_path(Endpoint, Live.Social), class: "btn-primary" %>
                 </div>   
             </details>
             
@@ -56,7 +65,7 @@
         <i class="fas fa-mug-hot flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
     </section>
 <% else %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
+    <section class="flex flex-row justify-between p-12 mt-10 xl:mt-0 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
             <h2 class="title">Hello!</h2>
             <p class="intro">Welcome to Nindo. Let's take a look.</p>
