@@ -15,11 +15,11 @@ defmodule NindoPhxWeb.UIComponent do
       <div class="sidebar">
         <ul class="flex items-center justify-center flex-wrap flex-row xl:flex-col xl:items-start xl:justify-start">
           <%= if @logged_in do %>
-            <li class="header-item"><%= link safe("<i class='fas fa-home mr-1'></i> Home"), to: live_path(Endpoint, Live.Social) %></li>
+            <li class="header-item"><%= live_patch safe("<i class='fas fa-home mr-1'></i> Home"), to: live_path(Endpoint, Live.Social) %></li>
           <% end %>
-          <li class="header-item"><%= link safe("<i class='fas fa-compass mr-1'></i> Discover"), to: live_path(Endpoint, Live.Discover) %></li>
-          <li class="header-item"><%= link safe("<i class='fas fa-stream mr-1'></i> Sources"), to: live_path(Endpoint, Live.Sources) %></li>
-          <li class="header-item hidden sm:block"><%= link safe("<i class='fas fa-user mr-1'></i> Settings"), to: live_path(Endpoint, Live.Account) %></li>
+          <li class="header-item"><%= live_patch safe("<i class='fas fa-compass mr-1'></i> Discover"), to: live_path(Endpoint, Live.Discover) %></li>
+          <li class="header-item"><%= live_patch safe("<i class='fas fa-stream mr-1'></i> Sources"), to: live_path(Endpoint, Live.Sources) %></li>
+          <li class="header-item hidden sm:block"><%= live_patch safe("<i class='fas fa-user mr-1'></i> Settings"), to: live_path(Endpoint, Live.Account) %></li>
         </ul>
       </div>
     """
