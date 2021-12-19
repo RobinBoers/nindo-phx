@@ -8,8 +8,6 @@ defmodule NindoPhxWeb.AccountController do
 
   import Nindo.Core
 
-  plug :scrub_params, "prefs" when action in [:update_prefs, :update_profile_picture]
-
   # Pages to display
 
   def sign_up(conn, _params) do
@@ -59,14 +57,22 @@ defmodule NindoPhxWeb.AccountController do
       case Accounts.login(username, password) do
         :ok ->
           Feeds.cache(account)
-
           conn
           |> put_session(:logged_in, true)
           |> put_session(:user_id, id)
           |> redirect(to: redirect_to)
 
-        :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
-        _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})
+        :wrong_password   ->
+          conn
+          |> put_flash(:error, "Password doesn't match")
+          |> assign(:page_title, "Sign in")
+          |> render("sign_in.html")
+
+        _ ->
+          conn
+          |> put_flash(:error, "Something went wrong")
+          |> assign(:page_title, "Sign in")
+          |> render("sign_in.html")
       end
     else
       render(conn, "sign_in.html", error: %{title: "account", message: "Doesn't exist"})
@@ -101,7 +107,11 @@ defmodule NindoPhxWeb.AccountController do
         |> put_session(:logged_in, true)
         |> put_session(:user_id, account.id)
         |> redirect(to: live_path(Endpoint, Live.Welcome))
-      {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
+      {:error, error}   ->
+        conn
+        |> put_flash(:error, format_error(error))
+        |> assign(:page_title, "Sign up")
+        |> render("sign_up.html")
     end
   end
 end
