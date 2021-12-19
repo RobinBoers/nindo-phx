@@ -11,7 +11,7 @@
 </header>
 
 <section class="flex flex-row px-6 xl:justify-center xl:mt-24 sm:mt-36 md:mt-48 xl:mb-24">
-    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 text-black mr-12 hidden lg:block">
+    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 mr-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
         <img class="w-12 rounded-full border-indigo-700 border-2" src="https://geheimesite.nl/images/profile.JPG">
         <p class="font-bold text-lg pl-2">
@@ -36,10 +36,10 @@
       <h2 class="title">Powerful when needed</h2>
       <p class="intro">Nindo allows you to create your own custom feeds using RSS.<br>This allows for a personalized feed without the need for AI and tracking. </p>
     </div>
-    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 text-black ml-12 hidden lg:block">
+    <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 ml-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
         <%= form_for(@conn, social_path(NindoPhxWeb.Endpoint, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
-            <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow text-black" %>
+            <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow" %>
             <%= hidden_input f, :type, value: "custom" %>
           <% end) %>
       </div>
@@ -91,7 +91,7 @@
       <h2 class="title">Distraction free</h2>
       <p class="intro">Focus on what matters.<br>No annoying popups, no flashing colors, no beeps, boops and no fancy notifications.<br>Just you and your content. </p>
     </div>    
-    <div class="ml-24 mb-6 rounded-md shadow text-black hidden lg:block">
+    <div class="ml-24 mb-6 rounded-md shadow hidden lg:block">
       <div class="blur hover:blur-none transition-all">
         <div class="pt-4 p-3 rounded-t-md flex flex-row justify-between items-bottom bg-white dark:bg-gray-800">
           <div class="flex flex-row items-center justify-start">
