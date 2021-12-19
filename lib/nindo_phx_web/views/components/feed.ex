@@ -64,7 +64,7 @@ defmodule NindoPhxWeb.FeedComponent do
                     <a href={get_source_link(feed)}><%= feed["title"] %></a>
                   </span>
 
-                  <%= link safe("<i class='fas fa-times'></i>"), to: social_path(@conn, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
+                  <%= link safe("<i class='fas fa-times'></i>"), to: social_path(@conn, :remove_feed, feed: feed), method: :delete, class: "mt-2 no-underline ml-auto hover:bg-gray-200 dark:hover:text-gray-900 w-auto px-2 rounded-full" %>
                 </li>
 
               <% end %>

@@ -96,7 +96,7 @@ defmodule NindoPhxWeb.ProfileComponent do
             </span>
 
             <%= if logged_in?(@conn) and @show_buttons do %>
-                <%= link "Unfollow", to: social_path(@conn, :follow, @username), class: "mt-3 no-underline ml-auto hover:bg-gray-200 w-auto px-2 rounded-full" %>
+                <%= link "Unfollow", to: social_path(@conn, :follow, @username), class: "mt-3 no-underline ml-auto hover:bg-gray-200  dark:hover:text-gray-900 w-auto px-2 rounded-full" %>
             <% end %>
         </li>
 
