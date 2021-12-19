@@ -30,6 +30,8 @@ defmodule NindoPhxWeb.Router do
     live "/social", Live.Social
     live "/discover", Live.Discover
     live "/sources", Live.Sources
+    live "/account", Live.Account
+    live "/settings", Live.Account
 
     get "/search", SocialController, :search
     get "/search/:query", SocialController, :search
@@ -44,14 +46,8 @@ defmodule NindoPhxWeb.Router do
     put "/post/new", SocialController, :new_post
     put "/comment/new", SocialController, :new_comment
 
-    get "/account", AccountController, :index
-    get "/settings", AccountController, :index
     get "/signin", AccountController, :sign_in
     get "/signup", AccountController, :sign_up
-
-    post "/account/update/prefs", AccountController, :update_prefs
-    post "/account/update/profile_picture", AccountController, :update_profile_picture
-    post "/account/update/password", AccountController, :change_password
 
     put "/signup", AccountController, :create_account
     post "/signin", AccountController, :login

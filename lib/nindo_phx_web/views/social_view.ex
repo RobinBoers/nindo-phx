@@ -6,7 +6,7 @@ defmodule NindoPhxWeb.SocialView do
   alias Nindo.{Accounts, Posts, Format}
   import NindoPhxWeb.Router.Helpers
   alias NindoPhxWeb.Live.Components.{NewPost, FeedCustomizer}
-  alias NindoPhxWeb.{ProfileComponent, FeedComponent, AlertComponent, PostComponent, UIComponent}
+  alias NindoPhxWeb.{ProfileComponent, FeedComponent, AlertComponent, PostComponent, CommentComponent, UIComponent}
 
   alias NindoPhxWeb.Endpoint
 
@@ -23,11 +23,8 @@ defmodule NindoPhxWeb.SocialView do
     |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
   end
 
-  # Discover page
-
-  def get_users(count) do
-    count
-    |> Accounts.list()
-    #|> Enum.shuffle() # shuffle to make a random order
+  def get_source_link(feed) do
+    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
+
 end

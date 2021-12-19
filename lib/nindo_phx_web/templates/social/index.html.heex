@@ -1,16 +1,9 @@
-<div class="page-inner">
+<h2 class="title">My Feed</h2>
 
-    <%= if assigns[:error] do %>
-        <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
-    <% end %>
+<.live_component module={NewPost} user={@user} id="new-post"/>
 
-    <h2 class="title">My Feed</h2>
-
-        <.live_component module={NewPost} user={@user} id="new-post"/>
-
-        <FeedComponent.feed 
-            posts={@posts}
-            user_link={true}
-            preview={true}
-        />
-</div>
+<FeedComponent.feed 
+    posts={@posts}
+    user_link={true}
+    preview={true}
+/>

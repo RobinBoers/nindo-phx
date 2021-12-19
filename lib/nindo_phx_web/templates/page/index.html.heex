@@ -38,10 +38,7 @@
     </div>
     <div class="flex-grow-0 w-2/6 rounded-md shadow bg-white dark:bg-gray-800 ml-12 hidden lg:block">
       <div class="flex flex-row items-center justify-start pt-4 p-3">
-        <%= form_for(@conn, social_path(NindoPhxWeb.Endpoint, :add_feed), [as: :add_feed, method: :put, class: "w-full flex flex-row"], fn f -> %>
-            <%= text_input f, :feed, autofocus: "autofocus", placeholder: "Add RSS feed...", class: "input flex-grow" %>
-            <%= hidden_input f, :type, value: "custom" %>
-          <% end) %>
+        <input type="text" placeholder="Add RSS feed..." class="input flex-grow">
       </div>
       <hr class="clear-both">
 

@@ -85,39 +85,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def account(assigns) do
     ~H"""
-    <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
-        <div class="md:flex">
-            <div class="md:flex-shrink-0">
-                <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" onclick="toggleEdit()" src={Format.profile_picture(@username)}>
-            </div>
-            <div class="p-8" id="default">
-                <p class="font-bold text-2xl">
-                    <a href={"/user/#{@username}"}><%= Format.display_name(@username) %></a>
-                    <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
-                </p>
-                <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
-            </div>
-            <div class="p-8 hidden flex-grow" id="edit">
-                <h3 class="font-bold text-2xl">Profile picture</h3>
-                <%= form_for(@conn, account_path(Endpoint, :update_profile_picture), [as: :prefs, method: :update, class: "flex flex-row flex-wrap"], fn f -> %>
-                    <%= text_input f, :url, placeholder: "URL to profile picture", value: user(@conn).profile_picture, class: "input my-1 flex-grow" %>
-                    <%= submit "Save", class: "btn-primary ml-4 pt-1 pb-1"  %>
-                <% end) %>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleEdit() {
-            if(document.getElementById("edit").style.display == "block") {
-                document.getElementById("edit").style.display = "none"
-                document.getElementById("default").style.display = "block"
-            } else {
-                document.getElementById("edit").style.display = "block"
-                document.getElementById("default").style.display = "none"
-            }
-        }
-    </script>
+    
     """
   end
 

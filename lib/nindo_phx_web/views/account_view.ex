@@ -4,6 +4,7 @@ defmodule NindoPhxWeb.AccountView do
   use NindoPhxWeb, :view
 
   import NindoPhxWeb.Router.Helpers
+  alias Nindo.Format
   alias NindoPhxWeb.{ProfileComponent, UIComponent, AlertComponent}
 
   alias NindoPhxWeb.Endpoint

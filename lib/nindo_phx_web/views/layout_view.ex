@@ -3,11 +3,11 @@ defmodule NindoPhxWeb.LayoutView do
 
   use NindoPhxWeb, :view
   alias Phoenix.Controller
-  alias NindoPhxWeb.{PageController, AccountController, SocialController}
+  alias NindoPhxWeb.{PageController, AccountController, SocialController, AlertComponent}
 
   alias Nindo.{Accounts, Format}
   import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{UIComponent}
+  alias NindoPhxWeb.{UIComponent, Endpoint, Live}
 
   import Nindo.Core
 

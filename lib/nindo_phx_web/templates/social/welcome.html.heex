@@ -36,12 +36,6 @@
                     You can follow users you like on Nindo.<br>
                     Their posts will be displayed in your feed alongside sources.
                 </p>
-
-                <h4 class="font-bold py-3 text-lg">Try it:</h4>
-
-                <%= for user <- get_users(3) do %>
-                    <ProfileComponent.preview username={user.username} display_link={true} show_buttons={true} source={false} @logged_in={true} />
-                <% end %>
             </details>
 
             <details>

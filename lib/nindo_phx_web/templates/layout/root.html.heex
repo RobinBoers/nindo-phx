@@ -41,10 +41,10 @@
         <section class="flex-2">
           <nav class="hidden md:block">
             <ul class="flex items-center justify-center flex-wrap">
-              <li class="header-item"><%= link "Home", to: page_path(NindoPhxWeb.Endpoint, :index) %></li>
-              <li class="header-item"><%= link "Social", to: live_path(NindoPhxWeb.Endpoint, NindoPhxWeb.Live.Social) %></li>
-              <li class="header-item"><%= link "Blog", to: page_path(NindoPhxWeb.Endpoint, :blog) %></li>
-              <li class="header-item"><%= link "About", to: page_path(NindoPhxWeb.Endpoint, :about) %></li>
+              <li class="header-item"><%= link "Home", to: page_path(Endpoint, :index) %></li>
+              <li class="header-item"><%= link "Social", to: live_path(Endpoint, Live.Social) %></li>
+              <li class="header-item"><%= link "Blog", to: page_path(Endpoint, :blog) %></li>
+              <li class="header-item"><%= link "About", to: page_path(Endpoint, :about) %></li>
               
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <li class="header-item">
@@ -71,8 +71,8 @@
               <% else %>
 
                 <p class="header-item">New?</p>
-                <%= link "Sign up", to: account_path(NindoPhxWeb.Endpoint, :sign_up), class: "header-item header-button btn-primary mr-1" %>
-                <%= link "Sign in", to: account_path(NindoPhxWeb.Endpoint, :sign_in), class: "header-item header-button btn-secondary" %>
+                <%= link "Sign up", to: account_path(Endpoint, :sign_up), class: "header-item header-button btn-primary mr-1" %>
+                <%= link "Sign in", to: account_path(Endpoint, :sign_in), class: "header-item header-button btn-secondary" %>
               
               <% end %>
             </div>
@@ -83,17 +83,17 @@
       <section class="mobile-menu hidden bg-indigo-800">
         <nav>
           <ul>
-            <li class="header-item"><%= link "Home", to: page_path(NindoPhxWeb.Endpoint, :index) %></li>
-            <li class="header-item"><%= link "Social", to: live_path(NindoPhxWeb.Endpoint, NindoPhxWeb.Live.Social) %></li>
-            <li class="header-item"><%= link "Blog", to: page_path(NindoPhxWeb.Endpoint, :blog) %></li>
-            <li class="header-item"><%= link "About", to: page_path(NindoPhxWeb.Endpoint, :about) %></li>
+            <li class="header-item"><%= link "Home", to: page_path(Endpoint, :index) %></li>
+            <li class="header-item"><%= link "Social", to: live_path(Endpoint, Live.Social) %></li>
+            <li class="header-item"><%= link "Blog", to: page_path(Endpoint, :blog) %></li>
+            <li class="header-item"><%= link "About", to: page_path(Endpoint, :about) %></li>
             
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li class="header-item">
                 <%= link "Developer", to: Routes.live_dashboard_path(@conn, :home) %>
               </li>
             <% end %>
-            <li class="header-item"><%= link "Settings", to: account_path(NindoPhxWeb.Endpoint, :index) %></li>
+            <li class="header-item"><%= link "Settings", to: live_path(Endpoint, Live.Account) %></li>
           </ul>
         </nav>
       </section>
