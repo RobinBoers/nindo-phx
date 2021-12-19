@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
-  alias NindoPhxWeb.Endpoint
+  alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -105,11 +105,11 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= link @post.title, to: social_path(Endpoint, :external_post, url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime) %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, %{url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime}) %></h3>
 
         <% else %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><a href={"/post/#{@post.id}"}><%= @post.title %></a></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.id) %></h3>
 
         <% end %>
       </div>
