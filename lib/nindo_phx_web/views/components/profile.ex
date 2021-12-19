@@ -5,8 +5,6 @@ defmodule NindoPhxWeb.ProfileComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
-  alias NindoPhxWeb.Endpoint
-  import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
 
@@ -85,7 +83,7 @@ defmodule NindoPhxWeb.ProfileComponent do
 
   def account(assigns) do
     ~H"""
-    
+
     """
   end
 
