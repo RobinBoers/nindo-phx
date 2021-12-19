@@ -94,7 +94,7 @@ defmodule NindoPhxWeb.PostComponent do
             <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                ,<%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
+                <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
               <% else %>
                 <%= Format.display_name(username) %>
               <% end %>
