@@ -36,7 +36,7 @@
 
         <CommentComponent.section post_id={@post.id} />
         <%= if @logged_in do %>
-        <%#CommentComponent.form post_id={@post.id} conn={@conn} %>
+        <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
         <% end %>
     <% end %>
 

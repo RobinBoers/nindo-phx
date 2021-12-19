@@ -42,13 +42,10 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   end
 
   @impl true
-  def handle_event("publish", %{"post" => post}, socket)
-  when socket.assigns.user != nil do
-    user = socket.assigns.user
-
-    case Posts.new(post["title"] , post["body"], nil, user) do
+  def handle_event("publish", %{"post" => %{"body" => body, "title" => title}}, socket) do
+    case Posts.new(title, body, nil, socket.assigns.user) do
       {:ok, _post}    ->
-        Task.async(fn -> Feeds.update_cache(user) end)
+        Task.async(fn -> Feeds.update_cache(socket.assigns.user) end)
         send(self(), :refresh)
 
         changeset = Posts.validate(nil, nil, nil, %{id: 0})

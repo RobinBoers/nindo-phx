@@ -6,13 +6,11 @@ defmodule NindoPhxWeb.CommentComponent do
 
   alias Nindo.{Format, Comments}
 
-  import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.Endpoint
   import Nindo.Core
 
   def show(assigns) do
     ~H"""
-      <div id={@comment.title} class="w-full mb-6 rounded-md shadow bg-white dark:bg-gray-800 text-black">
+      <div id={@comment.title} class="w-full mb-6 rounded-md shadow bg-white dark:bg-gray-800">
         <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
           <div class="flex flex-row items-center justify-start">
               <% username = Nindo.Accounts.get(@comment.author_id).username %>
@@ -41,29 +39,6 @@ defmodule NindoPhxWeb.CommentComponent do
           <% end %>
         </section>
       <% end %>
-    """
-  end
-
-  def form(assigns) do
-    ~H"""
-      <section class="mt-12">
-        <h3 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h3>
-
-        <%= form_for(@conn, social_path(Endpoint, :new_comment), [as: :comment, method: :put, class: "w-full", id: "comment-form"], fn f -> %>
-          <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
-          <%= hidden_input f, :post_id, value: @post_id %>
-          <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block resize-none flex-grow" %>
-          <%= submit "Post reply", class: "btn-primary mt-2" %>
-        <% end) %>
-      </section>
-
-      <script>
-        function pressed(e) {
-          if ( (window.event ? event.keyCode : e.which) == 13) {
-              document.getElementById("comment-form").submit();
-          }
-        }
-      </script>
     """
   end
 end
