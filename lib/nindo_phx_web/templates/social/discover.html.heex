@@ -5,7 +5,11 @@
 <% end %>  
 
 <.form let={f} for={:search} class="w-full flex flex-row py-4" phx-change="search" phx-submit="search">
-    <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
+    <%= if not @searching do %>
+        <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
+    <% else %>
+        <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", value: @query, class: "input input-l flex-grow" %>
+    <% end %>
     <%= submit safe("<i class='fas fa-search'></i>"), class: "input btn-primary input-r" %>
 </.form>
 

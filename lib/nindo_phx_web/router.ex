@@ -33,8 +33,8 @@ defmodule NindoPhxWeb.Router do
     live "/account", Live.Account
     live "/settings", Live.Account
 
-    get "/search", SocialController, :search
-    get "/search/:query", SocialController, :search
+    live "/search", Live.Discover
+    live "/search/:query", Live.Discover
 
     get "/post/external", SocialController, :external_post
     get "/post/:id", SocialController, :post
