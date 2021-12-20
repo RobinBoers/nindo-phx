@@ -10,7 +10,6 @@ defmodule NindoPhxWeb.PostComponent do
 
   import Nindo.Core
 
-  #<h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
     <%= if @post != nil do %>
@@ -51,6 +50,9 @@ defmodule NindoPhxWeb.PostComponent do
       </div>
       <hr class="clear-both">
 
+      <%= if String.length(@post.body) > 450 do %>
+        <h1 class="text-3xl mt-3 px-3"><%= @post.title %></h1>
+      <% end %>
 
       <%= if @rss do %>
 
@@ -60,9 +62,9 @@ defmodule NindoPhxWeb.PostComponent do
           <iframe class="aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
-        <div class="px-3 py-3 text-lg prose dark:prose-invert max-w-none"><%=  safe @post.body %></div>
+        <div class="px-3 py-3 text-lg prose prose-headings:font-normal prose-headings:mt-0 prose-headings:mb-2 prose-li:m-0 prose-p:leading-snug dark:prose-invert max-w-none font-roboto"><%=  safe @post.body %></div>
       <% else %>
-        <div class="px-3 py-3 text-lg prose prose-p:leading-snug dark:prose-invert max-w-none font-roboto"><%= safe markdown @post.body %></div>
+        <div class="px-3 py-3 text-lg prose prose-headings:font-normal prose-headings:mt-0 prose-headings:mb-2 prose-li:m-0 prose-p:leading-snug dark:prose-invert max-w-none font-roboto"><%= safe markdown @post.body %></div>
       <% end %>
 
       <p class="px-3 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
