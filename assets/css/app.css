@@ -76,7 +76,7 @@
     }
 
     .big-highlight {
-        @apply text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg dark:bg-yellow-600 dark:text-yellow-50;
+        @apply text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg dark:bg-amber-600 dark:text-yellow-50;
     }
 
 }
@@ -86,10 +86,6 @@
 @layer base {
     body {
         @apply dark:text-white;
-    }
-
-    * {
-        @apply dark:border-gray-700 transition-all;
     }
     
     a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
@@ -188,4 +184,8 @@
 
 pre code, code pre {
     @apply overflow-x-auto w-full p-3 rounded-md block text-code-gray bg-code-black dark:bg-code-purple my-2;
+}
+
+* {
+    @apply dark:border-gray-700 transition-all;
 }
