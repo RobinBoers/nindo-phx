@@ -36,7 +36,11 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
                 <%= live_patch feed["title"], to: live_path(Endpoint, Live.Source, get_source_data(feed)) %>
               </span>
 
-              <a class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}><i class="fas fa-times"></i></a>
+              <a class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
             </li>
 
           <% end %>
