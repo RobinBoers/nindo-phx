@@ -1,7 +1,7 @@
 defmodule NindoPhxWeb.PageView do
   @moduledoc false
   use NindoPhxWeb, :view
-  alias NindoPhxWeb.{Endpoint, SocialView}
+  alias NindoPhxWeb.{Endpoint, SocialView, Live}
 
   alias Nindo.{Posts}
 
