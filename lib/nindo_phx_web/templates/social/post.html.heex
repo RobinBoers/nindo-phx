@@ -34,7 +34,16 @@
     <% else %>
         <div class="text-lg post-content"><%= safe markdown @post.body %></div>
 
-        <CommentComponent.section post_id={@post.id} />
+        <%= if @comments != [] do %>
+            <!--<hr class="mt-24"> -->
+            <section class="mt-12">
+                <h3 class="tracking-tighter text-5xl font-bold py-9 w-full">Comments</h3>
+                <%= for comment <- @comments do %>
+                    <CommentComponent.show comment={comment} />
+                <% end %>
+            </section>
+        <% end %>
+
         <%= if @logged_in do %>
         <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
         <% end %>

@@ -4,7 +4,10 @@ defmodule NindoPhxWeb.CommentComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  alias Nindo.{Format, Comments}
+  import NindoPhxWeb.Router.Helpers
+  alias NindoPhxWeb.{Endpoint, Live}
+
+  alias Nindo.{Format}
 
   import Nindo.Core
 
@@ -16,7 +19,7 @@ defmodule NindoPhxWeb.CommentComponent do
               <% username = Nindo.Accounts.get(@comment.author_id).username %>
               <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
               <p class="font-bold text-lg pl-2">
-                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+                <%= live_patch Format.display_name(username), to: live_path(Endpoint, Live.User, username) %>
               </p>
             </div>
         </div>
@@ -24,21 +27,6 @@ defmodule NindoPhxWeb.CommentComponent do
 
         <div class="p-5 text-lg post-content font-roboto"><%= safe markdown @comment.body %></div>
     </div>
-    """
-  end
-
-  def section(assigns) do
-    comments = Comments.get(:post, assigns.post_id)
-    ~H"""
-      <%= if comments != [] do %>
-        <!--<hr class="mt-24"> -->
-        <section class="mt-12">
-          <h3 class="tracking-tighter text-5xl font-bold py-9 w-full">Comments</h3>
-          <%= for comment <- comments do %>
-            <.show comment={comment} />
-          <% end %>
-        </section>
-      <% end %>
     """
   end
 end

@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.Live.Post do
   use NindoPhxWeb, :live_view
   alias NindoPhxWeb.{SocialView}
 
-  alias Nindo.{Accounts, Feeds, Format}
+  alias Nindo.{Accounts, Feeds, Comments, Format, Posts}
 
   import Nindo.Core
 
@@ -21,14 +21,20 @@ defmodule NindoPhxWeb.Live.Post do
     post = Nindo.Posts.get(id)
     if post != nil do
       account = Accounts.get(post.author_id)
+      comments =
+        :post
+        |> Comments.get(id)
+        |> Enum.reverse # newest at top
 
       {:noreply, socket
       |> assign(:page_title, post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")")
+      |> assign(:comments, comments)
       |> assign(:post, post)
       |> assign(:rss, false)}
     else
       {:noreply, socket
       |> assign(:page_title, "Wow, such empty")
+      |> assign(:comments, [])
       |> assign(:post, post)
       |> assign(:rss, false)}
     end
@@ -42,6 +48,16 @@ defmodule NindoPhxWeb.Live.Post do
     |> assign(:page_title, post.title <> " · " <> post.author)
     |> assign(:post, post)
     |> assign(:rss, true)}
+  end
+
+  @impl true
+  def handle_info(:refresh, socket) do
+    post = Posts.get(socket.assigns.post.id)
+    comments =
+      :post
+      |> Comments.get(socket.assigns.post.id)
+      |> Enum.reverse # newest at top
+    {:noreply, assign(socket, post: post, comments: comments)}
   end
 
   @impl true
