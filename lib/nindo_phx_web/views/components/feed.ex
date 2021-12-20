@@ -32,9 +32,13 @@ defmodule NindoPhxWeb.FeedComponent do
     ~H"""
       <%= for post <- @posts do %>
         <%= if @preview do %>
-          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} />
+          <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} text={false} />
         <% else %>
-          <PostComponent.default post={post} user_link={@user_link} rss={post[:type] != nil} />
+          <%= if String.length(post.body) > 450 do %>
+            <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} text={true} />
+          <% else %>
+            <PostComponent.default post={post} user_link={@user_link} rss={post[:type] != nil} />
+          <% end %>
         <% end %>
       <% end %>
     """

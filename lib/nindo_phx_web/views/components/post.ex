@@ -57,10 +57,6 @@ defmodule NindoPhxWeb.PostComponent do
       </div>
       <hr class="clear-both">
 
-      <%= if String.length(@post.body) > 450 do %>
-        <h1 class="text-3xl mt-3 px-3"><%= @post.title %></h1>
-      <% end %>
-
       <%= if @rss do %>
 
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
@@ -123,6 +119,15 @@ defmodule NindoPhxWeb.PostComponent do
 
           <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.id) %></h3>
 
+        <% end %>
+
+        <%= if @text do %>
+
+          <% <<exerpt::binary-size(250), _rest::binary>> = HtmlSanitizeEx.strip_tags(@post.body) %>
+
+          <p class="text-lg sm:text-xl font-light leading-snug pt-2 px-5">
+            <%= exerpt <> "..." %>
+          </p>
         <% end %>
       </div>
     """
