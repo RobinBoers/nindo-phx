@@ -62,6 +62,7 @@ defmodule NindoPhx.MixProject do
   defp extras, do: [
     "docs/overview.md",
     "docs/about.md",
+    "LICENSE",
     "docs/api.md",
     "docs/api/auth/login.md",
     "docs/api/accounts/create-account.md",
