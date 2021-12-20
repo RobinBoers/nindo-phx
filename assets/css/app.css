@@ -150,39 +150,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Post content styles */
-
-.post-content {
-    @apply font-roboto;
-}
-
-.post-content p {
-    @apply pb-2;
-}
-
-.post-content img {
-    @apply my-3;
-}
-
-.post-content h1, h2, h3 {
-    @apply font-bold;
-}
-
-.post-content h1 {
-    @apply text-xl my-5;
-}
-
-.post-content h2 {
-    @apply text-lg my-4;
-}
-
-.post-content a {
-    @apply text-blue-500;
-}
-
 pre code, code pre {
     @apply overflow-x-auto w-full p-3 rounded-md block text-code-gray bg-code-black dark:bg-code-purple my-2;
-}
+} 
 
 * {
     @apply dark:border-gray-700 transition-all;

@@ -60,12 +60,12 @@ defmodule NindoPhxWeb.PostComponent do
           <iframe class="aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
-        <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
+        <div class="px-3 py-3 text-lg prose dark:prose-invert max-w-none"><%=  safe @post.body %></div>
       <% else %>
-        <div class="px-4 pt-2 text-lg post-content"><%= safe markdown @post.body %></div>
+        <div class="px-3 py-3 text-lg prose prose-p:leading-snug dark:prose-invert max-w-none font-roboto"><%= safe markdown @post.body %></div>
       <% end %>
 
-      <p class="px-4 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
+      <p class="px-3 pb-2 italic text-gray-500">Posted on <%= human_datetime(@post.datetime) %></p>
     </div>
     <% end %>
     """
