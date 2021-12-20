@@ -1,5 +1,7 @@
 defmodule NindoPhxWeb.UIComponent do
-  @moduledoc false
+  @moduledoc """
+  Module to render various UI components.
+  """
 
   use Phoenix.Component
   use Phoenix.HTML
@@ -8,6 +10,11 @@ defmodule NindoPhxWeb.UIComponent do
   alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.Router.Helpers
 
+  @doc """
+  The sidebar for LiveView.
+
+  Uses `Phoenix.LiveView.Helpers.live_patch/2` for snappy navigation. The icons are from [Heroicons](https://heroicons.com).
+  """
   def sidebar(assigns) do
     ~H"""
       <div class="sidebar">
@@ -51,6 +58,9 @@ defmodule NindoPhxWeb.UIComponent do
     """
   end
 
+  @doc """
+  Component to show the little user avatar and name in the top-right of the screen. Also includes the logout button.
+  """
   def account_header(assigns) do
     account = Accounts.get(assigns.id)
 
@@ -69,6 +79,9 @@ defmodule NindoPhxWeb.UIComponent do
     """
   end
 
+  @doc """
+  Big yellow banner to show you're running a development version with a link to the docs.
+  """
   def dev_header(assigns) do
     ~H"""
     <div class="bg-yellow-400">

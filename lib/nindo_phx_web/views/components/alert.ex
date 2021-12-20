@@ -1,23 +1,39 @@
 defmodule NindoPhxWeb.AlertComponent do
-  @moduledoc false
+  @moduledoc """
+  Component to render pretty Phoenix Flashes.
+
+  All these functions need at least a map with a `:title` key and a `:message` key.
+  """
 
   use Phoenix.Component
   use Phoenix.HTML
 
+  @doc """
+  Render an info message.
+  """
   def message(%{message: nil} = assigns), do: ~H""
   def message(assigns), do:
     alert(%{color: "indigo", title: assigns.title, message: assigns.message})
 
+  @doc """
+  Render an error message.
+  """
   def error(%{message: nil} = assigns), do: ~H""
   def error(assigns), do:
     alert(%{color: "red", title: assigns.title, message: assigns.message})
 
+  @doc """
+  Render an success message.
+  """
   def success(%{message: nil} = assigns), do: ~H""
   def success(assigns), do:
     alert(%{color: "green", title: assigns.title, message: assigns.message})
 
-  # bg-red-800 bg-indigo-800 bg-green-800 text-red-100 text-green-100 text-indigo-100
-  # bg-green-500 bg-green-500 bg-red-500
+  @doc """
+  Render a custom message.
+
+  This method also needs a tailwind base color in the map.
+  """
   def alert(assigns) do
     ~H"""
       <div class="absolute text-center w-full lg:px-4">
@@ -28,4 +44,6 @@ defmodule NindoPhxWeb.AlertComponent do
       </div>
     """
   end
+  # bg-red-800 bg-indigo-800 bg-green-800 text-red-100 text-green-100 text-indigo-100
+  # bg-green-500 bg-green-500 bg-red-500
 end

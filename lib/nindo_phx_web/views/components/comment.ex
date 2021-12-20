@@ -1,5 +1,7 @@
 defmodule NindoPhxWeb.CommentComponent do
-  @moduledoc false
+  @moduledoc """
+  Component to render comments.
+  """
 
   use Phoenix.Component
   use Phoenix.HTML
@@ -11,6 +13,9 @@ defmodule NindoPhxWeb.CommentComponent do
 
   import Nindo.Core
 
+  @doc """
+  Component to render a single comment.
+  """
   def show(assigns) do
     ~H"""
       <div id={@comment.title} class="w-full mb-6 rounded-md shadow bg-white dark:bg-gray-800">

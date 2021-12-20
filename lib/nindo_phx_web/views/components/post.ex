@@ -1,5 +1,7 @@
 defmodule NindoPhxWeb.PostComponent do
-  @moduledoc false
+  @moduledoc """
+  Component for displaying posts.
+  """
 
   use Phoenix.Component
   use Phoenix.HTML
@@ -10,6 +12,11 @@ defmodule NindoPhxWeb.PostComponent do
 
   import Nindo.Core
 
+  @doc """
+  The default post. Will be renderd in feeds for both users and external RSS posts.
+
+  Only posts with more than 450 characters are counted as 'blogposts', everything else is a 'statusupdate'. Blogposts do have a title, statusupdates don't.
+  """
   def default(assigns) do
     ~H"""
     <%= if @post != nil do %>
@@ -73,6 +80,9 @@ defmodule NindoPhxWeb.PostComponent do
     """
   end
 
+  @doc """
+  Post preview. Includes only the title and author, and links to the full post.
+  """
   def preview(assigns) do
     ~H"""
       <div class="mb-6">

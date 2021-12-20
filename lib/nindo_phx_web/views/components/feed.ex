@@ -1,11 +1,16 @@
 defmodule NindoPhxWeb.FeedComponent do
-  @moduledoc false
+  @moduledoc """
+  Components to render user feeds and external RSS feeds.
+  """
 
   use Phoenix.Component
   use Phoenix.HTML
 
   alias NindoPhxWeb.{SocialView, PostComponent}
 
+  @doc """
+  Component to render a feed with posts from multiple users.
+  """
   def mixed(assigns) do
     posts =
       assigns.users
@@ -15,6 +20,9 @@ defmodule NindoPhxWeb.FeedComponent do
     feed %{posts: posts, user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}
   end
 
+  @doc """
+  Component to render a feed of posts.
+  """
   def feed(assigns) when assigns.posts == [] do
     ~H"""
       <p class="inactive">Wow, such empty...</p>
