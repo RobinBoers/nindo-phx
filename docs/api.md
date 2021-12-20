@@ -2,6 +2,8 @@
 
 NindoPhx has an REST API to access accounts and posts. The API scope is `/api`.
 
+_Note: the API is currently disabled in production because I didn't have the time to fully test it to make sure it is secure enough_
+
 ## Open Endpoints
 
 Open endpoints require no Authentication.

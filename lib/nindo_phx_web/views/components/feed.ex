@@ -31,5 +31,4 @@ defmodule NindoPhxWeb.FeedComponent do
       <% end %>
     """
   end
-
 end
