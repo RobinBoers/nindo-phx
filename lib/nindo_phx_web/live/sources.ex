@@ -3,9 +3,9 @@ defmodule NindoPhxWeb.Live.Sources do
   LiveView for managing sources and followed users.
   """
   use NindoPhxWeb, :live_view
+  alias NindoPhxWeb.{SocialView}
 
   alias Nindo.{Accounts, Feeds}
-  alias NindoPhxWeb.{SocialView}
 
   import Nindo.Core
 

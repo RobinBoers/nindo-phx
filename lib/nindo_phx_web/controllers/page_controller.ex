@@ -1,4 +1,7 @@
 defmodule NindoPhxWeb.PageController do
+  @moduledoc """
+  Controller for rendering static pages and XML feeds.
+  """
   use NindoPhxWeb, :controller
 
   alias Nindo.{Accounts, RSS}

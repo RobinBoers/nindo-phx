@@ -1,5 +1,7 @@
 defmodule NindoPhxWeb.Live.Components.CommentForm do
-  @moduledoc false
+  @moduledoc """
+  LiveView for the comment form.
+  """
   use NindoPhxWeb, :live_component
 
   alias Nindo.{Comments}

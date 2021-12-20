@@ -3,11 +3,11 @@ defmodule NindoPhxWeb.Live.Social do
   LiveView for displaying the user feed and publishing new posts.
   """
   use NindoPhxWeb, :live_view
-
-  alias Nindo.{Accounts, FeedAgent}
   alias NindoPhxWeb.{Endpoint, SocialView, Live}
 
-  import NindoPhxWeb.Router.Helpers
+  alias Nindo.{Accounts, FeedAgent}
+
+  import Routes
   import Nindo.Core
 
   @impl true

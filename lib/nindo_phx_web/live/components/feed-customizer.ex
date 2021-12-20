@@ -1,10 +1,13 @@
 defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
-  @moduledoc false
+  @moduledoc """
+  LiveView for (un)following external RSS sources.
+  """
   use NindoPhxWeb, :live_component
+  alias NindoPhxWeb.{Endpoint, Live}
 
   alias Nindo.{Accounts, Feeds, RSS, RSS.YouTube}
-  alias NindoPhxWeb.{Endpoint, Live}
-  import NindoPhxWeb.Router.Helpers
+
+  import Routes
 
   @impl true
   def render(assigns) do

@@ -2,11 +2,11 @@ defmodule NindoPhxWeb.LayoutView do
   @moduledoc false
 
   use NindoPhxWeb, :view
-  alias NindoPhxWeb.{AlertComponent}
+  alias NindoPhxWeb.{Endpoint, Live}
 
-  import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{UIComponent, Endpoint, Live}
+  alias NindoPhxWeb.{AlertComponent, UIComponent}
 
+  import Routes
   import Nindo.Core
 
   # Phoenix LiveDashboard is available only in development by default,

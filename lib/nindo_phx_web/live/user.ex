@@ -6,6 +6,7 @@ defmodule NindoPhxWeb.Live.User do
   alias NindoPhxWeb.{SocialView}
 
   alias Nindo.{Accounts, Feeds, Format}
+
   import Nindo.Core
 
   @impl true

@@ -3,11 +3,11 @@ defmodule NindoPhxWeb.Live.Discover do
   LiveView for displaying the a list of user profiles and searching them.
   """
   use NindoPhxWeb, :live_view
+  alias NindoPhxWeb.{Endpoint, SocialView, Live}
 
   alias Nindo.{Accounts}
-  alias NindoPhxWeb.{SocialView, Endpoint, Live}
-  import NindoPhxWeb.Router.Helpers
 
+  import Routes
   import Nindo.Core
 
   @impl true

@@ -3,10 +3,10 @@ defmodule NindoPhxWeb.Live.Post do
   LiveView to display Nindo posts and external posts.
   """
   use NindoPhxWeb, :live_view
-
   alias NindoPhxWeb.{SocialView}
 
   alias Nindo.{Accounts, Feeds, Format}
+
   import Nindo.Core
 
   @impl true

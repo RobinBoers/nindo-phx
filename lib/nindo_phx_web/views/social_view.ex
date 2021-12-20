@@ -2,14 +2,14 @@ defmodule NindoPhxWeb.SocialView do
   @moduledoc false
 
   use NindoPhxWeb, :view
+  alias NindoPhxWeb.{Endpoint, Live}
 
   alias Nindo.{Accounts, Posts, Format}
-  import NindoPhxWeb.Router.Helpers
+
   alias NindoPhxWeb.Live.Components.{NewPost, FeedCustomizer, CommentForm}
-  alias NindoPhxWeb.{FeedComponent, CommentComponent, Live}
+  alias NindoPhxWeb.{FeedComponent, CommentComponent}
 
-  alias NindoPhxWeb.Endpoint
-
+  import Routes
   import Nindo.Core
 
   # Post feed

@@ -1,8 +1,11 @@
 defmodule NindoPhxWeb.Live.Components.NewPost do
-  @moduledoc false
+  @moduledoc """
+  Live for the new post form.
+  """
   use NindoPhxWeb, :live_component
 
   alias Nindo.{Posts, Feeds}
+
   import Nindo.Core
 
   @impl true

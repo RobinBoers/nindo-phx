@@ -1,4 +1,7 @@
 defmodule NindoPhxWeb.AccountController do
+  @moduledoc """
+  Controller for managing the session.
+  """
   use NindoPhxWeb, :controller
 
   alias Nindo.{Accounts, Feeds}

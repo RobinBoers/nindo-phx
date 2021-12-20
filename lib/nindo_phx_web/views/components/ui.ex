@@ -8,8 +8,6 @@ defmodule NindoPhxWeb.UIComponent do
   alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.Router.Helpers
 
-  import Nindo.Core
-
   def sidebar(assigns) do
     ~H"""
       <div class="sidebar">

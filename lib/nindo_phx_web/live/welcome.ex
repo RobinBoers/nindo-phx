@@ -3,8 +3,8 @@ defmodule NindoPhxWeb.Live.Welcome do
   LiveView to display the welcome screen when a user first joins Nindo.
   """
   use NindoPhxWeb, :live_view
-
   alias NindoPhxWeb.{SocialView}
+
   import Nindo.Core
 
   @impl true

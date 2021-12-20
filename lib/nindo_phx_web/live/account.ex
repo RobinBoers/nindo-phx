@@ -5,9 +5,9 @@ defmodule NindoPhxWeb.Live.Account do
   use NindoPhxWeb, :live_view
   alias NindoPhxWeb.{Endpoint, AccountView}
 
-  import NindoPhxWeb.Router.Helpers
   alias Nindo.{Accounts, Auth}
 
+  import Routes
   import Nindo.Core
 
   @impl true

@@ -1,14 +1,13 @@
 defmodule NindoPhxWeb.PageView do
   @moduledoc false
-
   use NindoPhxWeb, :view
+  alias NindoPhxWeb.{Endpoint, SocialView}
 
   alias Nindo.{Posts}
-  import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{PostComponent, FeedComponent, SocialView}
 
-  alias NindoPhxWeb.Endpoint
+  alias NindoPhxWeb.{PostComponent, FeedComponent}
 
+  import Routes
   import Nindo.Core
 
   defdelegate get_source_data(feed), to: SocialView
