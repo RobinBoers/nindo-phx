@@ -21,7 +21,9 @@
 
     <% end %>
 
-    <h2 class="title pt-2 leading-none"><%= @post.title %></h2>
+    <h2 class="title pt-2 leading-tight max-w-xl"><%= @post.title %></h2>
+
+    <hr class="mb-10 w-36">
 
     <%= if @rss do %>
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
