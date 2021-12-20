@@ -16,6 +16,7 @@ defmodule NindoPhxWeb.Live.Account do
       true  -> {:ok, socket
       |> assign(:page_title, "Settings")
       |> assign(:user, user(session))
+      |> assign(:edit_avatar, false)
       |> assign(:logged_in, true)}
 
       _     -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
@@ -26,6 +27,10 @@ defmodule NindoPhxWeb.Live.Account do
   def render(assigns), do: render AccountView, "index.html", assigns
 
   @impl true
+  def handle_event("edit-avatar", _, socket) do
+    {:noreply, assign(socket, :edit_avatar, !socket.assigns.edit_avatar)}
+  end
+
   def handle_event("update-avatar", %{"avatar" => %{"url" => url}}, socket) do
     Accounts.change(:profile_picture, url, socket.assigns.user)
     user = Accounts.get(socket.assigns.user.id)

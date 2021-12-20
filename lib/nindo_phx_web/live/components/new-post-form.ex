@@ -12,27 +12,27 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   def render(assigns) do
     ~H"""
     <section class="new-post-section">
-      <button class="new-post-btn btn-primary mb-6" onclick="newPost()">New post</button>
-      <div class="new-post-modal transition-height h-0 overflow-y-hidden w-full">
+      <button class={"new-post-btn btn-primary mb-6 " <> if @visible == true, do: "hidden", else: "block"} phx-click="open" phx-target={@myself}>New post</button>
+      <div class={"new-post-modal transition-height overflow-y-hidden w-full " <> if @visible == true, do: "h-64", else: "h-0"}>
           <div class="mb-6 p-1">
             <.form let={f} for={@changeset} class="new-post-form w-full" phx-submit="publish" phx-target={@myself}>
               <%= text_input f, :title, placeholder: "Title", class: "new-post-form-title w-full mb-2 input block resize-none flex-grow" %>
               <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "new-post-form-body w-full input block resize-none flex-grow" %>
               <button class="new-post-submit btn-primary mt-2" type="submit">Publish</button>
-              <button class="new-post-cancel btn-secondary mt-2" type="button" onclick="cancelPost()">Cancel</button>
+              <button class="new-post-cancel btn-secondary mt-2" type="button" phx-click="close" phx-target={@myself}>Cancel</button>
             </.form>
           </div>
       </div>
 
       <script>
-        function newPost() {
-          document.querySelector(".new-post-modal").style.height = '250px';
-			    document.querySelector(".new-post-btn").style.display = 'none';
-        }
-        function cancelPost() {
-          document.querySelector(".new-post-modal").style.height = '0px';
-		    	document.querySelector(".new-post-btn").style.display = 'block';
-        }
+        //function newPost() {
+        //  document.querySelector(".new-post-modal").style.height = '250px';
+			  //  document.querySelector(".new-post-btn").style.display = 'none';
+        //}
+        //function cancelPost() {
+        //  document.querySelector(".new-post-modal").style.height = '0px';
+		    //	document.querySelector(".new-post-btn").style.display = 'block';
+        //}
       </script>
     </section>
     """
@@ -41,10 +41,18 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   @impl true
   def mount(socket) do
     changeset = Posts.validate(nil, nil, nil, %{id: 0})
-    {:ok, assign(socket, changeset: changeset)}
+    {:ok, assign(socket, changeset: changeset, visible: false)}
   end
 
   @impl true
+  def handle_event("open", _, socket) do
+    {:noreply, assign(socket, visible: true)}
+  end
+
+  def handle_event("close", _, socket) do
+    {:noreply, assign(socket, visible: false)}
+  end
+
   def handle_event("publish", %{"post" => %{"body" => body, "title" => title}}, socket) do
     case Posts.new(title, body, nil, socket.assigns.user) do
       {:ok, _post}    ->

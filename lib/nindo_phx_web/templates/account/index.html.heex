@@ -1,55 +1,40 @@
-<div class="page-inner">
+<h2 class="title">My Account</h2>
 
-    <h2 class="title">My Account</h2>
-
-    <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
-        <div class="md:flex">
-            <div class="md:flex-shrink-0">
-                <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" onclick="toggleEdit()" src={Format.profile_picture(@user.username)}>
-            </div>
-            <div class="p-8" id="default">
-                <p class="font-bold text-2xl">
-                    <a href={"/user/#{@user.username}"}><%= Format.display_name(@user.username) %></a>
-                    <i class="block text-base text-gray-400"><%= "@#{@user.username}" %></i>
-                </p>
-                <p class="mt-2 text-gray-500"><%= Format.description(@user.username) %></p>
-            </div>
-            <div class="p-8 hidden flex-grow" id="edit">
-                <h3 class="font-bold text-2xl">Profile picture</h3>
-                <.form let={f} for={:avatar} class="flex flex-row flex-wrap" phx-submit="update-avatar">
-                    <%= text_input f, :url, placeholder: "URL to profile picture", value: @user.profile_picture, class: "input my-1 flex-grow" %>
-                    <%= submit "Save", class: "btn-primary ml-4 pt-1 pb-1"  %>
-                </.form>
-            </div>
+<div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
+    <div class="md:flex">
+        <div class="md:flex-shrink-0">
+            <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" phx-click="edit-avatar" src={Format.profile_picture(@user.username)}>
+        </div>
+        <div class={"p-8 " <> if @edit_avatar == true, do: "hidden", else: "block"}>
+            <p class="font-bold text-2xl">
+                <a href={"/user/#{@user.username}"}><%= Format.display_name(@user.username) %></a>
+                <i class="block text-base text-gray-400"><%= "@#{@user.username}" %></i>
+            </p>
+            <p class="mt-2 text-gray-500"><%= Format.description(@user.username) %></p>
+        </div>
+        <div class={"p-8 flex-grow " <> if @edit_avatar == true, do: "block", else: "hidden"}>
+            <h3 class="font-bold text-2xl">Profile picture</h3>
+            <.form let={f} for={:avatar} class="flex flex-row flex-wrap" phx-submit="update-avatar">
+                <%= text_input f, :url, placeholder: "URL to profile picture", value: @user.profile_picture, class: "input my-1 flex-grow" %>
+                <%= submit "Save", class: "btn-primary ml-4 pt-1 pb-1"  %>
+            </.form>
         </div>
     </div>
-
-    <h2 class="my-3 mt-12 font-bold text-2xl">Preferences</h2>
-
-    <.form let={f} for={:prefs} phx-submit="update-prefs">
-        <%= text_input f, :display_name, placeholder: "Display name", value: @user.display_name, class: "input my-1 w-full" %>
-        <%= text_input f, :email, placeholder: "Emailaddress", value: @user.email, class: "input my-1 w-full" %>
-        <%= textarea f, :description, placeholder: "Biography", value: @user.description, class: "input my-1 w-full" %>
-        <%= submit "Save", class: "btn-primary block mt-4"  %>
-    </.form>
-
-    <h2 class="my-3 mt-12 font-bold text-2xl">Change password</h2>
-
-    <.form let={f} for={:password} phx-submit="update-password">
-        <%= password_input f, :password, placeholder: "Password", class: "input my-1 w-full" %>
-        <%= password_input f, :check, placeholder: "Confirm password", class: "input my-1 w-full" %>
-        <%= submit "Update", class: "btn-primary block mt-4"  %>
-    </.form>
-
 </div>
-<script>
-    function toggleEdit() {
-        if(document.getElementById("edit").style.display == "block") {
-            document.getElementById("edit").style.display = "none"
-            document.getElementById("default").style.display = "block"
-        } else {
-            document.getElementById("edit").style.display = "block"
-            document.getElementById("default").style.display = "none"
-        }
-    }
-</script>
+
+<h2 class="my-3 mt-12 font-bold text-2xl">Preferences</h2>
+
+<.form let={f} for={:prefs} phx-submit="update-prefs">
+    <%= text_input f, :display_name, placeholder: "Display name", value: @user.display_name, class: "input my-1 w-full" %>
+    <%= text_input f, :email, placeholder: "Emailaddress", value: @user.email, class: "input my-1 w-full" %>
+    <%= textarea f, :description, placeholder: "Biography", value: @user.description, class: "input my-1 w-full" %>
+    <%= submit "Save", class: "btn-primary block mt-4"  %>
+</.form>
+
+<h2 class="my-3 mt-12 font-bold text-2xl">Change password</h2>
+
+<.form let={f} for={:password} phx-submit="update-password">
+    <%= password_input f, :password, placeholder: "Password", class: "input my-1 w-full" %>
+    <%= password_input f, :check, placeholder: "Confirm password", class: "input my-1 w-full" %>
+    <%= submit "Update", class: "btn-primary block mt-4"  %>
+</.form>
