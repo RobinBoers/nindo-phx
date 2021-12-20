@@ -2,11 +2,14 @@ defmodule NindoPhxWeb.SocialView do
   @moduledoc false
 
   use NindoPhxWeb, :view
+  alias NindoPhxWeb.{Endpoint, Live}
 
   alias Nindo.{Accounts, Posts, Format}
-  import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{ProfileComponent, FeedComponent, AlertComponent, PostComponent, UIComponent}
 
+  alias NindoPhxWeb.Live.Components.{NewPost, FeedCustomizer, CommentForm}
+  alias NindoPhxWeb.{FeedComponent, CommentComponent}
+
+  import Routes
   import Nindo.Core
 
   # Post feed
@@ -20,11 +23,8 @@ defmodule NindoPhxWeb.SocialView do
     |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
   end
 
-  # Discover page
-
-  def get_users(count) do
-    count
-    |> Accounts.list()
-    #|> Enum.shuffle() # shuffle to make a random order
+  def get_source_data(feed) do
+    "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
+
 end

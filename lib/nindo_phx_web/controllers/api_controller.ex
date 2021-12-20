@@ -1,5 +1,7 @@
 defmodule NindoPhxWeb.APIController do
-  @moduledoc false
+  @moduledoc """
+  Controller for the REST API.
+  """
   use NindoPhxWeb, :controller
   plug :authenticate_api_user when action in [:change_account, :new_post]
 

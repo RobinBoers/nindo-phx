@@ -2,9 +2,9 @@ defmodule NindoPhxWeb.AccountView do
   @moduledoc false
 
   use NindoPhxWeb, :view
+  alias NindoPhxWeb.Endpoint
 
-  import NindoPhxWeb.Router.Helpers
-  alias NindoPhxWeb.{ProfileComponent, UIComponent, AlertComponent}
+  alias Nindo.{Format}
 
-  import Nindo.Core
+  import Routes
 end

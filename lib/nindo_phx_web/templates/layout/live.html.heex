@@ -1,9 +1,20 @@
-<p class="alert alert-info" role="alert"
-  phx-click="lv:clear-flash"
-  phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+<div class="page-wrapper">
+    <UIComponent.sidebar logged_in={@logged_in} />
 
-<p class="alert alert-danger" role="alert"
-  phx-click="lv:clear-flash"
-  phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+    <div class="page-inner social">
 
-<%= @inner_content %>
+      <div class="alert alert-info" role="alert"
+      phx-click="lv:clear-flash"
+      phx-value-key="info"><AlertComponent.message message={live_flash(@flash, :info)} title={"message"} /></div>
+
+      <div class="alert alert-success" role="alert"
+      phx-click="lv:clear-flash"
+      phx-value-key="info"><AlertComponent.success message={live_flash(@flash, :success)} title={"ok"} /></div>
+
+      <div class="alert alert-danger" role="alert"
+      phx-click="lv:clear-flash"
+      phx-value-key="error"><AlertComponent.error message={live_flash(@flash, :error)} title={"error"} /></div>
+
+      <%= @inner_content %>
+    </div>
+</div>

@@ -5,16 +5,16 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format}
-  alias NindoPhxWeb.{CommentComponent}
+  alias NindoPhxWeb.{Endpoint, SocialView, Live}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
 
-  #       <h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
+  #<h3 class="text-2xl mt-3 px-4"><%= @post.title %></h3>
   def default(assigns) do
     ~H"""
     <%= if @post != nil do %>
-    <div id={@post.title} class="w-full my-6 rounded-md shadow bg-white dark:bg-gray-800 text-black overflow-x-hidden">
+    <div id={@post.title} class="w-full my-6 rounded-md shadow bg-white dark:bg-gray-800 overflow-x-hidden">
       <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
@@ -23,7 +23,7 @@ defmodule NindoPhxWeb.PostComponent do
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
-                  <a href={get_source_link(@post.source)}><%= @post.author %></a>
+                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
                 <% else %>
                   <%= @post.author %>
                 <% end %>
@@ -57,7 +57,7 @@ defmodule NindoPhxWeb.PostComponent do
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
-          <iframe class="rounded-md aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
         <% end %>
 
         <div class="px-4 py-2 text-lg post-content"><%=  safe @post.body %></div>
@@ -71,52 +71,6 @@ defmodule NindoPhxWeb.PostComponent do
     """
   end
 
-  def standalone(assigns) do
-    ~H"""
-      <%= if not @rss do %>
-        <% username = Nindo.Accounts.get(assigns.post.author_id).username %>
-
-        <div class="flex flex-row items-center gap-2 pt-7">
-          <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
-          <p class="font-bold text-lg">
-            <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
-          </p>
-        </div>
-
-      <% else %>
-
-        <div class="flex flex-row items-center gap-2 pt-7">
-          <img class="w-6 object-cover h-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
-          <p class="font-bold text-lg">
-            <a href={get_source_link(@post.source)}><%= @post.author %></a>
-          </p>
-        </div>
-
-      <% end %>
-
-      <h2 class="title no-top"><%= @post.title %></h2>
-
-
-      <%= if @rss do %>
-
-        <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
-          <% [_, video_id] = String.split(@post.link, "=") %>
-
-          <iframe class="rounded-md aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
-        <% end %>
-
-        <div class="text-lg post-content"><%= safe @post.body %></div>
-      <% else %>
-        <div class="text-lg post-content"><%= safe markdown @post.body %></div>
-
-        <CommentComponent.section post_id={@post.id} />
-        <%= if logged_in?(@conn) do %>
-          <CommentComponent.form post_id={@post.id} conn={@conn} />
-        <% end %>
-      <% end %>
-    """
-  end
-
   def preview(assigns) do
     ~H"""
       <div class="mb-6">
@@ -127,7 +81,7 @@ defmodule NindoPhxWeb.PostComponent do
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <a href={get_source_link(@post.source)}><%= @post.author %></a>
+                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
               <% else %>
                 <%= @post.author %>
               <% end %>
@@ -140,7 +94,7 @@ defmodule NindoPhxWeb.PostComponent do
             <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+                <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
               <% else %>
                 <%= Format.display_name(username) %>
               <% end %>
@@ -151,51 +105,19 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= link @post.title, to: social_path(@conn, :external_post, url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime) %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, %{url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime}) %></h3>
 
         <% else %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><a href={"/post/#{@post.id}"}><%= @post.title %></a></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.id) %></h3>
 
         <% end %>
       </div>
     """
   end
 
-  def new(assigns) do
-    ~H"""
-      <button class="btn-primary mb-6 new-post-btn" onclick="newPost()">New post</button>
-      <div class="new-post-modal transition-height h-0 overflow-y-hidden w-full">
-          <div class="mb-6 p-1">
-            <%= form_for(@conn, social_path(@conn, :new_post), [as: :post, method: :put, class: "new-post-form w-full", id: "post-form"], fn f -> %>
-              <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
-              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "w-full input block resize-none flex-grow" %>
-            <% end) %>
-            <button class="btn-primary mt-2" onclick="submit()">Publish</button>
-            <button class="btn-secondary mt-2" onclick="cancel()">Cancel</button>
-          </div>
-      </div>
-
-      <script>
-        function newPost() {
-          document.querySelector(".new-post-modal").style.height = '250px';
-          document.querySelector(".new-post-btn").style.display = 'none';
-        }
-        function cancel() {
-          document.querySelector(".new-post-modal").style.height = '0px';
-          document.querySelector(".new-post-btn").style.display = 'block';
-        }
-        function submit() {
-          document.querySelector(".new-post-form").submit();
-        }
-      </script>
-    """
-  end
-
   # Private methods
 
-  defp get_source_link(feed) do
-    "/source/#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
-  end
+  defdelegate get_source_data(feed), to: SocialView
 
 end

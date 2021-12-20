@@ -24,37 +24,27 @@ defmodule NindoPhxWeb.Router do
     get "/about", PageController, :about
     get "/blog", PageController, :blog
 
-    get "/app", SocialController, :app
-    get "/welcome", SocialController, :welcome
-    get "/home", SocialController, :index
-    get "/social", SocialController, :index
-    get "/discover", SocialController, :discover
-    get "/sources", SocialController, :sources
+    live "/welcome", Live.Welcome
+    live "/home", Live.Social
+    live "/social", Live.Social
+    live "/discover", Live.Discover
+    live "/sources", Live.Sources
+    live "/account", Live.Account
+    live "/settings", Live.Account
 
-    get "/search", SocialController, :search
-    get "/search/:query", SocialController, :search
+    live "/search", Live.Discover
+    live "/search/:query", Live.Discover
 
-    get "/post/external", SocialController, :external_post
-    get "/post/:id", SocialController, :post
-    get "/user/:username", SocialController, :user
-    get "/follow/:username", SocialController, :follow
-    get "/feed/:username", SocialController, :feed
-    get "/source/:source", SocialController, :external_feed
+    live "/post/external", Live.Post
+    live "/post/:id", Live.Post
+    live "/user/:username", Live.User
+    live "/source/:source", Live.Source
 
-    put "/post/new", SocialController, :new_post
-    put "/comment/new", SocialController, :new_comment
+    get "/feed/:username", PageController, :feed
 
-    put "/feed/add", SocialController, :add_feed
-    delete "/feed/remove", SocialController, :remove_feed
-
-    get "/account", AccountController, :index
-    get "/settings", AccountController, :index
+    get "/app", AccountController, :app
     get "/signin", AccountController, :sign_in
     get "/signup", AccountController, :sign_up
-
-    post "/account/update/prefs", AccountController, :update_prefs
-    post "/account/update/profile_picture", AccountController, :update_profile_picture
-    post "/account/update/password", AccountController, :change_password
 
     put "/signup", AccountController, :create_account
     post "/signin", AccountController, :login

@@ -1,40 +1,67 @@
 <%= if Accounts.exists?(@username) do %>
 
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
+    <div class="md:flex">
+        <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>
+        </div>
+        <div class="p-8">
+            <p class="font-bold text-2xl">
+                <%= Format.display_name(@username) %>
+                <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
+            </p>
+            <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
-        <ProfileComponent.header username={@username} display_link={false} conn={@conn} />
+            <p class="mt-6">
+                <%= if @logged_in do %>
+                    <button class="btn-primary" phx-click="follow" phx-value-username={@username}>
+                        <%= case @username in @user.following do
+                            true -> "Unfollow"
+                            false -> "Follow"
+                        end %>
+                    </button>
+                <% end %>
 
-        <h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
-
-        <FeedComponent.feed posts={get_posts(@username)} user_link={false} preview={false} conn={@conn} />
-
-    </div>    
+                <a class="btn-secondary" href={"/feed/#{@username}"}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455.731 455.731" class="text mr-1 h-4 w-4 inline mb-0.5 rounded">
+                        <g>
+                            <rect x="0" y="0" class="fill-amber-600 w-full h-full"/>
+                            <g>
+                                <path class="fill-white" d="M296.208,159.16C234.445,97.397,152.266,63.382,64.81,63.382v64.348
+                                    c70.268,0,136.288,27.321,185.898,76.931c49.609,49.61,76.931,115.63,76.931,185.898h64.348
+                                    C391.986,303.103,357.971,220.923,296.208,159.16z"/>
+                                <path class="fill-white" d="M64.143,172.273v64.348c84.881,0,153.938,69.056,153.938,153.939h64.348
+                                    C282.429,270.196,184.507,172.273,64.143,172.273z"/>
+                                <circle class="fill-white" cx="109.833" cy="346.26" r="46.088"/>
+                            </g>
+                        </g>
+                    </svg>
+                    RSS
+                </a>
+            </p>
+        </div>
+    </div>
 </div>
+
+<h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
+
+<FeedComponent.feed posts={get_posts(@username)} user_link={false} preview={false} />
 
 <% else %>
 
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
-
-        <div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
-            <div class="md:flex">
-                <div class="md:flex-shrink-0">
-                    <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
-                </div>
-                <div class="p-8">
-                    <p class="font-bold text-2xl">
-                        Unknown user
-                        <i class="block text-base text-gray-400">@deleted</i>
-                    </p>
-                    <p class="mt-2 text-gray-500">No account information available.</p>
-                </div>
-            </div>
+<div class="w-full bg-white dark:bg-gray-800 mt-12 xl:mt-0 rounded-xl shadow-md overflow-hidden">
+    <div class="md:flex">
+        <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
         </div>
-
-    </div>    
+        <div class="p-8">
+            <p class="font-bold text-2xl">
+                Unknown user
+                <i class="block text-base text-gray-400">@deleted</i>
+            </p>
+            <p class="mt-2 text-gray-500">No account information available.</p>
+        </div>
+    </div>
 </div>
 
 <% end %>

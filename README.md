@@ -2,6 +2,8 @@
 
 NindoPhx is a web client for Nindo2 written in Elixir using Phoenix Framework. It has a cool dark mode, and supports 80% of Nindo's features.
 
+This is an attempt to port the main social view (home feed, discover, search and sources) to LiveView. If successfull, I will also try to port some other parts of Nindo (mainly posts, external posts, comments and feeds).
+
 ## Features
 
 - Posts with images
@@ -18,7 +20,3 @@ NindoPhx is a web client for Nindo2 written in Elixir using Phoenix Framework. I
 
 - Add way to upload images
 - Comment threads
-
-## Credits
-
-NindoPhx is built using a lot of great tools. I want to especially thank [Elixir](https://elixir-lang.org), [Phoenix Framework](https://www.phoenixframework.org), [bcrypt_elixir](https://github.com/riverrun/bcrypt_elixir), [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex), [fast_rss](https://github.com/avencera/fast_rss), and [elixir-rss](https://github.com/BennyHallett/elixir-rss).

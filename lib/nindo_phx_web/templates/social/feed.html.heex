@@ -1,10 +1,3 @@
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<h2 class="title"><%= @title %></h2>
 
-        <h2 class="title"><%= @title %></h2>
-
-        <FeedComponent.feed posts={@posts} user_link={false} preview={false} />
-
-    </div>
-</div>
+<FeedComponent.feed posts={@posts} user_link={false} preview={false} />

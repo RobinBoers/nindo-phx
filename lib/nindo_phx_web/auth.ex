@@ -4,7 +4,7 @@ defmodule NindoPhxWeb.API.Auth do
   assigns `:current_user`. The authorization header value may look like
   `Bearer xxxxxxx`.
 
-  Totally not copied from <https://dev.to/mnishiguchi/simple-token-authentication-for-phoenix-json-api-1m05> or something :P
+  Credits to: <https://dev.to/mnishiguchi/simple-token-authentication-for-phoenix-json-api-1m05>
   """
 
   import Plug.Conn

@@ -1,18 +1,16 @@
 @layer utilities {
-    @responsive {
-        .h-content {
-            height: max-content;
-        }
+    .h-content {
+        height: max-content;
+    }
 
-        /* Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-    
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 }
 
@@ -76,7 +74,7 @@
     }
 
     .big-highlight {
-        @apply text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg dark:bg-yellow-600 dark:text-yellow-50;
+        @apply text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg dark:bg-amber-600 dark:text-yellow-50;
     }
 
 }
@@ -86,10 +84,6 @@
 @layer base {
     body {
         @apply dark:text-white;
-    }
-
-    * {
-        @apply dark:border-gray-700 transition-all;
     }
     
     a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
@@ -131,15 +125,11 @@
     }
     
     .page-inner {
-        @apply p-3 relative mx-auto sm:max-w-2xl md:max-w-6xl;
+        @apply flex-grow p-3 relative mx-auto sm:max-w-2xl md:max-w-6xl;
     }
     
-    .page-inner:not(.sign-in-up, .blog, .app) {
-        @apply flex-grow sm:p-6 md:p-0 md:m-0;
-    }
-    
-    .page-inner.sign-in-up {
-        @apply lg:w-1/2 xl:w-2/6;
+    .page-inner.social {
+        @apply sm:p-6 md:p-0 md:m-0;
     }
     
     .page-inner.app {
@@ -192,4 +182,8 @@
 
 pre code, code pre {
     @apply overflow-x-auto w-full p-3 rounded-md block text-code-gray bg-code-black dark:bg-code-purple my-2;
+}
+
+* {
+    @apply dark:border-gray-700 transition-all;
 }

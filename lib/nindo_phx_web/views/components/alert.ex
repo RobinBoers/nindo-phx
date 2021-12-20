@@ -4,12 +4,15 @@ defmodule NindoPhxWeb.AlertComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
+  def message(%{message: nil} = assigns), do: ~H""
   def message(assigns), do:
     alert(%{color: "indigo", title: assigns.title, message: assigns.message})
 
+  def error(%{message: nil} = assigns), do: ~H""
   def error(assigns), do:
     alert(%{color: "red", title: assigns.title, message: assigns.message})
 
+  def success(%{message: nil} = assigns), do: ~H""
   def success(assigns), do:
     alert(%{color: "green", title: assigns.title, message: assigns.message})
 

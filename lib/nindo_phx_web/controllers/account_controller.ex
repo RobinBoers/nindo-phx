@@ -1,28 +1,43 @@
 defmodule NindoPhxWeb.AccountController do
+  @moduledoc """
+  Controller for managing the session.
+  """
   use NindoPhxWeb, :controller
 
-  alias Nindo.{Accounts, Auth, Feeds}
+  alias Nindo.{Accounts, Feeds}
   import NindoPhxWeb.{Router.Helpers}
 
-  import Nindo.Core
+  alias NindoPhxWeb.{Endpoint, Live}
 
-  plug :scrub_params, "prefs" when action in [:update_prefs, :update_profile_picture]
+  import Nindo.Core
 
   # Pages to display
 
   def sign_up(conn, _params) do
-    render(conn, "sign_up.html")
+    conn
+    |> assign(:page_title, "Sign up")
+    |> render("sign_up.html")
   end
   def sign_in(conn, _params) do
-    render(conn, "sign_in.html")
+    conn
+    |> assign(:page_title, "Sign in")
+    |> render("sign_in.html")
   end
 
-  def index(conn, _params) do
+  def app(conn, _params) do
     case logged_in?(conn) do
-      true  -> render(conn, "index.html")
-      _     -> redirect(conn, to: account_path(conn, :sign_in))
+      true ->
+        conn
+        |> put_session(:app, true)
+        |> redirect(to: live_path(Endpoint, Live.Social))
+      false ->
+        conn
+        |> put_session(:app, true)
+        |> put_layout(false)
+        |> put_root_layout("base.html")
+        |> assign(:page_title, "Nindo")
+        |> render("app.html")
     end
-
   end
 
   # Session management
@@ -37,22 +52,30 @@ defmodule NindoPhxWeb.AccountController do
 
       redirect_to =
         case NavigationHistory.last_path(conn, 1,
-        default: social_path(conn, :index)) do
-          "/" -> social_path(conn, :index)
+        default: live_path(Endpoint, Live.Social)) do
+          "/" -> live_path(Endpoint, Live.Social)
           path -> path
         end
 
       case Accounts.login(username, password) do
         :ok ->
           Feeds.cache(account)
-
           conn
           |> put_session(:logged_in, true)
           |> put_session(:user_id, id)
           |> redirect(to: redirect_to)
 
-        :wrong_password   ->    render(conn, "sign_in.html", error: %{title: "password", message: "Doesn't match"})
-        _                 ->    render(conn, "sign_in.html", error: %{title: "error", message: "Something went wrong"})
+        :wrong_password   ->
+          conn
+          |> put_flash(:error, "Password doesn't match")
+          |> assign(:page_title, "Sign in")
+          |> render("sign_in.html")
+
+        _ ->
+          conn
+          |> put_flash(:error, "Something went wrong")
+          |> assign(:page_title, "Sign in")
+          |> render("sign_in.html")
       end
     else
       render(conn, "sign_in.html", error: %{title: "account", message: "Doesn't exist"})
@@ -62,7 +85,7 @@ defmodule NindoPhxWeb.AccountController do
   def logout(conn, _params) do
     redirect_to =
       NavigationHistory.last_path(conn, 1,
-      default: account_path(conn, :sign_in))
+      default: account_path(Endpoint, :sign_in))
 
     conn
     |> put_session(:app, false)
@@ -86,65 +109,12 @@ defmodule NindoPhxWeb.AccountController do
         conn
         |> put_session(:logged_in, true)
         |> put_session(:user_id, account.id)
-        |> redirect(to: social_path(conn, :welcome))
-      {:error, error}   ->    render(conn, "sign_up.html", error: format_error(error))
+        |> redirect(to: live_path(Endpoint, Live.Welcome))
+      {:error, error}   ->
+        conn
+        |> put_flash(:error, format_error(error))
+        |> assign(:page_title, "Sign up")
+        |> render("sign_up.html")
     end
   end
-
-  def update_prefs(conn, params) do
-    display_name = params["prefs"]["display_name"]
-    email = params["prefs"]["email"]
-    description = params["prefs"]["description"]
-
-    if logged_in?(conn) do
-      Accounts.change(:display_name, display_name, user(conn))
-      Accounts.change(:email, email, user(conn))
-      Accounts.change(:description, description, user(conn))
-
-      redirect(conn, to: account_path(conn, :index))
-    else
-      render(conn, "index.html", error: %{title: "error", message: "Something went wrong"})
-    end
-  end
-
-  def update_profile_picture(conn, params) do
-    url = params["prefs"]["url"]
-
-    if logged_in?(conn) do
-      Accounts.change(:profile_picture, url, user(conn))
-      redirect(conn, to: account_path(conn, :index))
-    else
-      render(conn, "index.html", error: %{title: "error", message: "Something went wrong"})
-    end
-  end
-
-  def change_password(conn, params) do
-    p1 = params["change_password"]["password"]
-    p2 = params["change_password"]["check"]
-
-    if p1 == p2 and logged_in?(conn) do
-      salt = user(conn).salt
-      password = Auth.hash_pass(p1, salt)
-
-      Accounts.change(:password, password, user(conn))
-      redirect(conn, to: account_path(conn, :index))
-    else
-      render(conn, "index.html", error: %{title: "passwords", message: "Don't match"})
-    end
-  end
-
-  # Helper methods
-
-  def format_error(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
-      Enum.reduce(opts, msg, fn {key, value}, acc ->
-        String.replace(acc, "%{#{key}}", to_string(value))
-      end)
-    end)
-    |> Enum.reduce("", fn {k, v}, _acc ->
-      joined_errors = Enum.join(v, "; ")
-      %{title: "#{k}", message: String.capitalize joined_errors}
-    end)
-  end
-
 end

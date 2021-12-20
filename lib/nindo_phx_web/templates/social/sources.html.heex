@@ -1,27 +1,26 @@
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<h2 class="title">Sources</h2>
 
-        <%= if assigns[:error] do %>
-            <AlertComponent.error message={assigns[:error].message} title={assigns[:error].title} />
+<%= if @logged_in do %>
+
+    <.live_component module={FeedCustomizer} user={@user} feeds={@user.feeds} id="feed-customizer" />
+
+    <h3 class="heading pt-4">Users</h3>
+
+    <ul>
+        <%= for username <- @user.following do %>
+            <li class="p-2 py-3 flex flex-row flex-wrap center-items">
+                <img class="w-9 object-cover h-9 rounded-full mr-3 border border-indigo-700" src={Format.profile_picture(username)}>
+
+                <span class="mt-1">
+                    <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
+                </span>
+
+                <a phx-click="unfollow" phx-value-user={username} class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full">Unfollow</a>
+            </li>
         <% end %>
+    </ul>
 
-        <h2 class="title">Sources</h2>
-
-        <%= if logged_in?(@conn) do %>
-            <FeedComponent.customizer feeds={user(@conn).feeds} conn={@conn} />
-
-            <h3 class="heading pt-4">Users</h3>
-
-            <ul>
-                <%= for username <- user(@conn).following do %>
-                    <ProfileComponent.preview username={username} display_link={true} show_buttons={true} source={true} conn={@conn} />
-                <% end %>
-            </ul>
-
-        <% else %>
-            <h2 class="heading">Not logged in</h2>
-            <p>You need to be logged in to create a custom feed. </p>
-        <% end %>
-    </div>
-</div>
+<% else %>
+    <h2 class="heading">Not logged in</h2>
+    <p>You need to be logged in to create a custom feed. </p>
+<% end %>

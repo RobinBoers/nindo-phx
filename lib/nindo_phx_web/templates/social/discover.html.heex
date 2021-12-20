@@ -1,32 +1,44 @@
-<div class="page-wrapper">
-    <UIComponent.sidebar conn={@conn} />
-    <div class="page-inner">
+<%= if not @searching do %>
+    <h2 class="title">Discover</h2>
+<% else %>
+    <h2 class="title">Search results for "<%= @query %>"</h2>
+<% end %>  
 
-        <%= if not @searching do %>
-            <h2 class="title">Discover</h2>
-        <% else %>
-            <h2 class="title">Search results for "<%= @query %>"</h2>
-        <% end %>
+<.form let={f} for={:search} class="w-full flex flex-row py-4" phx-change="search" phx-submit="search">
+    <%= if not @searching do %>
+        <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
+    <% else %>
+        <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", value: @query, class: "input input-l flex-grow" %>
+    <% end %>
+    <button class="input btn-primary input-r">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+    </button>
+</.form>
 
-        <%= form_for(@conn, social_path(@conn, :search), [method: :get, class: "w-full flex flex-row py-4"], fn f -> %>
-            <%= if not @searching do %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow" %>
-            <% else %>
-                <%= text_input f, :query, autofocus: "autofocus", placeholder: "Search Nindo...", class: "input input-l flex-grow", value: @query %>
-            <% end %>
-            
-            <%= submit safe("<i class='fas fa-search'></i>"), class: "input btn-primary input-r" %>
-        <% end) %>    
+<h2 class="heading">Users</h2> 
 
-        <h2 class="heading">Users</h2> 
+<%= if @users == [] and @searching do %>
+    <p class="inactive">No users found matching "<%= @query %>"</p>
+<% end %>
 
-        <%= if @users == [] and @searching do %>
-            <p class="inactive">No users found matching "<%= @query %>"</p>
-        <% end %>
+<%= for user <- @users do %>
+    <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+            <div class="md:flex-shrink-0">
+                <%= live_patch to: live_path(Endpoint, Live.User, user.username) do %>
+                    <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(user.username)}>
+                <% end %>
+            </div>
+            <div class="p-8">
+                <p class="font-bold text-2xl">
+                    <%= live_patch(Format.display_name(user.username), to: live_path(Endpoint, Live.User, user.username)) %>
+                    <i class="block text-base text-gray-400"><%= "@#{user.username}" %></i>
+                </p>
 
-        <%= for user <- @users do %>
-            <ProfileComponent.preview username={user.username} display_link={true} show_buttons={false} source={false} conn={@conn} />
-        <% end %>
-
+                <p class="mt-2 text-gray-500"><%= Format.description(user.username) %></p>
+            </div>
+        </div>
     </div>
-</div>
+<% end %>

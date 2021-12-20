@@ -1,7 +1,7 @@
-<%= if logged_in?(@conn) do %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
+<%= if @logged_in do %>
+    <section class="flex flex-row justify-between p-12 mt-10 xl:mt-0 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
-            <h2 class="title">Hello, <%= Format.display_name(user(@conn).username) %>!</h2>
+            <h2 class="title">Hello, <%= Format.display_name(@user.username) %>!</h2>
             <p class="intro">Welcome to Nindo. Let's get you started, shall we?</p>
 
             <details>
@@ -13,12 +13,10 @@
                 <p class="paragraph">
                     Nindo is a central place where you can read all your favorite blogs and other sites. It also allows you to post content on Nindo itself. There is no tracking and AI to create a feed for you, you can do it yourself by following other users and adding external sites.<br><br>
                     An external website you add is called a <b>source</b>. Sources can be added via the "Sources" tab.
-                </p>              
-
-                <h4 class="font-bold py-3 text-lg">Try it:</h4>
+                </p>
 
                 <div class="pb-9">
-                    <FeedComponent.customizer feeds={user(@conn).feeds} conn={@conn} />
+                    <.live_component module={FeedCustomizer} user={@user} feeds={@user.feeds} id="feed-customizer" />
                 </div>
             </details>
 
@@ -31,7 +29,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Customize", to: account_path(@conn, :index), class: "btn-primary", target: "_blank" %>
+                    <%= link "Customize", to: live_path(Endpoint, Live.Account), class: "btn-primary", target: "_blank" %>
                 </div>        
             </details>
 
@@ -43,11 +41,10 @@
                     Their posts will be displayed in your feed alongside sources.
                 </p>
 
-                <h4 class="font-bold py-3 text-lg">Try it:</h4>
+                <div class="py-8">
+                    <%= link "Discover", to: live_path(Endpoint, Live.Discover), class: "btn-primary", target: "_blank" %>
+                </div>    
 
-                <%= for user <- get_users(3) do %>
-                    <ProfileComponent.preview username={user.username} display_link={true} show_buttons={true} source={false} conn={@conn} />
-                <% end %>
             </details>
 
             <details>
@@ -58,17 +55,19 @@
                 </p>
 
                 <div class="py-8">
-                    <%= link "Finish", to: social_path(@conn, :index), class: "btn-primary" %>
+                    <%= live_patch "Finish", to: live_path(Endpoint, Live.Social), class: "btn-primary" %>
                 </div>   
             </details>
-            
-            
-            
         </div>
-        <i class="fas fa-mug-hot flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
+        <div class="flex-grow-0 ml-auto hidden lg:block">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-36 w-36 fill-indigo-600" viewBox="0 0 20 20">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+            </svg>
+        </div>
+        <i class=""></i>
     </section>
 <% else %>
-    <section class="flex flex-row justify-between xl:mt-24 p-12 sm:mt-36 md:mt-48 mb-24 2xl:mx-48 bg-white dark:bg-gray-800 shadow rounded-xl">
+    <section class="flex flex-row justify-between p-12 mt-10 xl:mt-0 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
             <h2 class="title">Hello!</h2>
             <p class="intro">Welcome to Nindo. Let's take a look.</p>
@@ -81,11 +80,15 @@
             </p>
 
             <div class="py-8">
-                <%= link "Sign up", to: account_path(@conn, :sign_up), class: "btn-primary" %>
-                <%= link "Sign in", to: account_path(@conn, :sign_in), class: "btn-secondary" %>
+                <%= link "Sign up", to: account_path(Endpoint, :sign_up), class: "btn-primary" %>
+                <%= link "Sign in", to: account_path(Endpoint, :sign_in), class: "btn-secondary" %>
             </div> 
             
         </div>
-        <i class="fas fa-bolt flex-grow-0 ml-36 text-9xl text-indigo-600 hidden lg:block"></i>
+        <div class="flex-grow-0 ml-auto hidden lg:block">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-36 w-36 fill-indigo-600" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+            </svg>
+        </div>
     </section>
 <% end %>
