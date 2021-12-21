@@ -2,7 +2,7 @@ defmodule NindoPhxWeb.ErrorView do
   @moduledoc false
 
   use NindoPhxWeb, :view
-  alias NindoPhxWeb.Endpoint
+  alias NindoPhxWeb.{Endpoint, Live}
 
   import Routes
 
