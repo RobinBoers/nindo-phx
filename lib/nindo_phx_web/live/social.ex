@@ -12,19 +12,21 @@ defmodule NindoPhxWeb.Live.Social do
 
   @impl true
   def mount(_params, session, socket) do
-    if logged_in?(session) do
-      posts =
-        user(session).id
-        |> Accounts.get()
-        |> FeedAgent.get_pid()
-        |> FeedAgent.get_posts()
+    case logged_in?(session) do
+      true ->
+        posts =
+          user(session).id
+          |> Accounts.get()
+          |> FeedAgent.get_pid()
+          |> FeedAgent.get_posts()
 
-        {:ok, socket
-        |> assign(:posts, posts)
-        |> assign(:page_title, "Social")
-        |> assign(:logged_in, logged_in?(session))
-        |> assign(:user, user(session))}
-    else
+          {:ok, socket
+          |> assign(:posts, posts)
+          |> assign(:page_title, "Social")
+          |> assign(:logged_in, logged_in?(session))
+          |> assign(:user, user(session))}
+
+      _ ->
       {:ok, socket
       |> redirect(to: live_path(Endpoint, Live.Discover))}
     end

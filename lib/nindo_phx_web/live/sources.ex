@@ -3,18 +3,24 @@ defmodule NindoPhxWeb.Live.Sources do
   LiveView for managing sources and followed users.
   """
   use NindoPhxWeb, :live_view
-  alias NindoPhxWeb.{SocialView}
+  alias NindoPhxWeb.{Endpoint, SocialView}
 
   alias Nindo.{Accounts, Feeds}
 
+  import Routes
   import Nindo.Core
 
   @impl true
   def mount(_params, session, socket) do
-    {:ok, socket
-    |> assign(:page_title, "Sources")
-    |> assign(:logged_in, logged_in?(session))
-    |> assign(:user, user(session))}
+    case logged_in?(session) do
+      true -> {:ok, socket
+      |> assign(:page_title, "Sources")
+      |> assign(:logged_in, logged_in?(session))
+      |> assign(:user, user(session))}
+
+      _    -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
+    end
+
   end
 
   @impl true
