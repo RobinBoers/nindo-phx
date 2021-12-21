@@ -14,7 +14,7 @@ defmodule NindoPhxWeb.Endpoint do
     at: "/",
     from: :nindo_phx,
     gzip: false,
-    only: ~w(assets fonts images manifest.webmanifest favicon.ico robots.txt)
+    only: ~w(assets fonts docs images manifest.webmanifest favicon.ico robots.txt)
 
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket

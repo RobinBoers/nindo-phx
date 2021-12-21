@@ -4,7 +4,7 @@
         <article class="flex-grow-0 text-box p-6 max-w-content">
 
             <div class="prose dark:prose-invert md:prose-lg lg:prose-xl prose-h1:title prose-h1:!mb-0">
-                <%= safe markdown File.read!(File.cwd!() <> "/docs/about.md") %>
+                <%= safe markdown File.read!(Path.join(:code.priv_dir(:nindo_phx), "static/docs/about.md")) %>
             </div>
 
             <figure class="mt-16 max-w-prose">
