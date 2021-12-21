@@ -1,6 +1,5 @@
 module.exports = {
   mode: 'jit',
-  important: true,
   content: [
     './js/**/*.js',
     '../lib/*_web/**/*.*ex',
