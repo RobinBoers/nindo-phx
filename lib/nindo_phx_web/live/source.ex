@@ -22,7 +22,7 @@ defmodule NindoPhxWeb.Live.Source do
     posts = RSS.generate_posts(feed, source)
 
     {:ok, socket
-    |> assign(:logged_in, logged_in?(session))
+    |> assign(:logged_in?, logged_in?(session))
     |> assign(:user, user(session))
     |> assign(:page_title, feed["title"])
     |> assign(:posts, posts)

@@ -46,7 +46,7 @@
             </section>
         <% end %>
 
-        <%= if @logged_in do %>
+        <%= if @logged_in? do %>
         <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
         <% end %>
     <% end %>

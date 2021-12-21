@@ -17,7 +17,7 @@ defmodule NindoPhxWeb.Live.Account do
       |> assign(:page_title, "Settings")
       |> assign(:user, user(session))
       |> assign(:edit_avatar, false)
-      |> assign(:logged_in, true)}
+      |> assign(:logged_in?, true)}
 
       _     -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
     end

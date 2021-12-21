@@ -19,7 +19,7 @@ defmodule NindoPhxWeb.UIComponent do
     ~H"""
       <div class="sidebar">
         <ul class="flex items-center justify-center flex-wrap flex-row xl:flex-col xl:items-start xl:justify-start">
-          <%= if @logged_in do %>
+          <%= if @logged_in? do %>
             <li class="header-item">
               <%= live_patch to: live_path(Endpoint, Live.Social) do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 align-text-top inline" viewBox="0 0 20 20" fill="currentColor">

@@ -13,7 +13,7 @@ defmodule NindoPhxWeb.Live.Discover do
   @impl true
   def mount(_params, session, socket) do
     {:ok, socket
-    |> assign(:logged_in, logged_in?(session))
+    |> assign(:logged_in?, logged_in?(session))
     |> assign(:user, user(session))}
   end
 

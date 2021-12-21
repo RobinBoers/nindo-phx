@@ -15,7 +15,7 @@ defmodule NindoPhxWeb.Live.Sources do
     case logged_in?(session) do
       true -> {:ok, socket
       |> assign(:page_title, "Sources")
-      |> assign(:logged_in, logged_in?(session))
+      |> assign(:logged_in?, logged_in?(session))
       |> assign(:user, user(session))}
 
       _    -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}

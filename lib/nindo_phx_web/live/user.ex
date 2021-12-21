@@ -12,7 +12,7 @@ defmodule NindoPhxWeb.Live.User do
   @impl true
   def mount(%{"username" => username}, session, socket) do
     {:ok, socket
-    |> assign(:logged_in, logged_in?(session))
+    |> assign(:logged_in?, logged_in?(session))
     |> assign(:user, user(session))
     |> assign(:username, username)}
   end

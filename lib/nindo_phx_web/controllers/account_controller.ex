@@ -61,7 +61,7 @@ defmodule NindoPhxWeb.AccountController do
         :ok ->
           Feeds.cache(account)
           conn
-          |> put_session(:logged_in, true)
+          |> put_session(:logged_in?, true)
           |> put_session(:user_id, id)
           |> redirect(to: redirect_to)
 
@@ -89,7 +89,7 @@ defmodule NindoPhxWeb.AccountController do
 
     conn
     |> put_session(:app, false)
-    |> put_session(:logged_in, false)
+    |> put_session(:logged_in?, false)
     |> put_session(:user_id, nil)
     |> redirect(to: redirect_to)
   end
@@ -107,7 +107,7 @@ defmodule NindoPhxWeb.AccountController do
         Feeds.cache(account)
 
         conn
-        |> put_session(:logged_in, true)
+        |> put_session(:logged_in?, true)
         |> put_session(:user_id, account.id)
         |> redirect(to: live_path(Endpoint, Live.Welcome))
       {:error, error}   ->
