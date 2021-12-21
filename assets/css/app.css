@@ -74,7 +74,7 @@
     }
 
     .big-highlight {
-        @apply text-yellow-900 bg-yellow-200 px-3 pr-6 rounded-lg dark:bg-amber-600 dark:text-yellow-50;
+        @apply text-orange-900 bg-amber-200 px-3 pr-6 rounded-lg dark:bg-amber-600 dark:text-yellow-50;
     }
 
 }
@@ -87,7 +87,11 @@
     }
     
     a:not(.header-title, .btn-primary, .btn-secondary, .no-underline) {
-        @apply hover:underline;
+        @apply hover:underline decoration-2 underline-offset-4;
+    }
+
+    .prose a {
+        @apply underline decoration-indigo-600 hover:decoration-pink-500;
     }
 
     /* Typography */
