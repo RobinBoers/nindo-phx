@@ -6,10 +6,10 @@
             <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.profile_picture(@username)}>
         </div>
         <div class="p-8">
-            <p class="font-bold text-2xl">
+            <h2 class="font-bold text-2xl">
                 <%= Format.display_name(@username) %>
                 <i class="block text-base text-gray-400"><%= "@#{@username}" %></i>
-            </p>
+            </h2>
             <p class="mt-2 text-gray-500"><%= Format.description(@username) %></p>
 
             <p class="mt-6 print:hidden">
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<h2 class="my-3 mt-16 font-bold text-2xl">Posts</h2>
+<p class="my-3 mt-16 font-bold text-2xl">Posts</p>
 
 <FeedComponent.feed posts={get_posts(@username)} user_link={false} preview={false} />
 
@@ -55,10 +55,10 @@
             <img class="h-48 w-full object-cover md:h-full md:w-52" src={Format.default_profile_picture()}>
         </div>
         <div class="p-8">
-            <p class="font-bold text-2xl">
+            <h2 class="font-bold text-2xl">
                 Unknown user
                 <i class="block text-base text-gray-400">@deleted</i>
-            </p>
+            </h2>
             <p class="mt-2 text-gray-500">No account information available.</p>
         </div>
     </div>

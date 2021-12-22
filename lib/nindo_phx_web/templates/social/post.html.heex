@@ -21,7 +21,7 @@
 
     <% end %>
 
-    <h2 class="title text-3xl pt-2 leading-tight max-w-xl"><%= @post.title %></h2>
+    <h1 class="title text-3xl xl:text-4xl pt-2 leading-tight max-w-xl"><%= @post.title %></h1>
 
     <hr class="mb-5 w-36">
 
@@ -32,23 +32,37 @@
         <iframe class="rounded-md aspect-video w-full" src={YouTube.instance() <> "/embed/#{video_id}"} frameborder="0" allowfullscreen/>
         <% end %>
 
-        <div class="text-lg prose lg:prose-xl dark:prose-invert"><%= safe @post.body %></div>
+        <div class="text-lg prose dark:prose-invert"><%= safe @post.body %></div>
     <% else %>
-        <div class="text-lg prose lg:prose-xl dark:prose-invert"><%= safe markdown @post.body %></div>
+        <div class="text-lg prose dark:prose-invert"><%= safe markdown @post.body %></div>
 
         <%= if @comments != [] do %>
             <!--<hr class="mt-24"> -->
             <section class="mt-12">
-                <h3 class="tracking-tighter text-5xl font-bold py-9 w-full">Comments</h3>
+                <h2 class="tracking-tighter text-4xl font-bold py-9 w-full">Comments</h2>
                 <%= for comment <- @comments do %>
                     <CommentComponent.show comment={comment} />
                 <% end %>
+
+                <%= if @logged_in? do %>
+                <section class="mt-12 comment-form-modal print:hidden">
+                    <h3 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h3>
+
+                    <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
+                </section>
+                <% end %>                
             </section>
+        <% else %>
+            <%= if @logged_in? do %>
+                <section class="mt-12 comment-form-modal print:hidden">
+                    <h2 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h2>
+
+                    <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
+                </section>
+            <% end %>
         <% end %>
 
-        <%= if @logged_in? do %>
-        <.live_component module={CommentForm} post_id={@post.id} user={@user} id="comment-form"/>
-        <% end %>
+       
     <% end %>
 
 <% else %>

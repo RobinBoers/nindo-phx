@@ -17,7 +17,7 @@
     </button>
 </.form>
 
-<h2 class="heading">Users</h2> 
+<h3 class="heading">Users</h3> 
 
 <%= if @users == [] and @searching do %>
     <p class="inactive">No users found matching "<%= @query %>"</p>
@@ -32,10 +32,10 @@
                 <% end %>
             </div>
             <div class="p-8">
-                <p class="font-bold text-2xl">
+                <h4 class="font-bold text-2xl">
                     <%= live_patch(Format.display_name(user.username), to: live_path(Endpoint, Live.User, user.username), phx_hook: "ScrollToTop") %>
                     <i class="block text-base text-gray-400"><%= "@#{user.username}" %></i>
-                </p>
+                </h4>
 
                 <p class="mt-2 text-gray-500"><%= Format.description(user.username) %></p>
             </div>
