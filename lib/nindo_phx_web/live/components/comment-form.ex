@@ -9,7 +9,7 @@ defmodule NindoPhxWeb.Live.Components.CommentForm do
   @impl true
   def render(assigns) do
     ~H"""
-    <section class="mt-12 comment-form-modal">
+    <section class="mt-12 comment-form-modal print:hidden">
       <h3 class="tracking-tighter text-3xl font-bold py-7 w-full">Leave a comment</h3>
 
       <.form let={f} for={:comment} class="comment-form w-full" phx-submit="publish" phx-target={@myself}>

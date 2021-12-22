@@ -17,7 +17,7 @@ defmodule NindoPhxWeb.UIComponent do
   """
   def sidebar(assigns) do
     ~H"""
-      <div class="sidebar">
+      <div class="sidebar print:hidden">
         <ul class="flex items-center justify-center flex-wrap flex-row xl:flex-col xl:items-start xl:justify-start">
           <%= if @logged_in? do %>
             <li class="header-item">

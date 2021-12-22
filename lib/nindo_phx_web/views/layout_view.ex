@@ -14,6 +14,6 @@ defmodule NindoPhxWeb.LayoutView do
   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}
 
   def header_classes(true), do: "hidden"
-  def header_classes(_), do: "bg-indigo-500 text-blue-50 shadow-lg"
+  def header_classes(_), do: "bg-indigo-500 text-blue-50 shadow-lg print:hidden"
 
 end

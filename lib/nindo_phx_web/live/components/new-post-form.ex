@@ -11,7 +11,7 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   @impl true
   def render(assigns) do
     ~H"""
-    <section class="new-post-section">
+    <section class="new-post-section print:hidden">
       <button class={"new-post-btn btn-primary mb-6 " <> if @visible == true, do: "hidden", else: "block"} phx-click="open" phx-target={@myself}>New post</button>
       <div class={"new-post-modal transition-height overflow-y-hidden w-full " <> if @visible == true, do: "h-64", else: "h-0"}>
           <div class="mb-6 p-1">
