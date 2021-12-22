@@ -4,7 +4,7 @@ defmodule NindoPhxWeb.SocialView do
   use NindoPhxWeb, :view
   alias NindoPhxWeb.{Endpoint, Live}
 
-  alias Nindo.{Accounts, Posts, Format}
+  alias Nindo.{Accounts, Posts, Format, RSS.YouTube}
 
   alias NindoPhxWeb.Live.Components.{NewPost, FeedCustomizer, CommentForm}
   alias NindoPhxWeb.{FeedComponent, CommentComponent}

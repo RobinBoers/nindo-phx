@@ -6,7 +6,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.Component
   use Phoenix.HTML
 
-  alias Nindo.{Format}
+  alias Nindo.{Format, RSS.YouTube}
   alias NindoPhxWeb.{Endpoint, SocialView, Live}
   import NindoPhxWeb.Router.Helpers
 
@@ -62,7 +62,7 @@ defmodule NindoPhxWeb.PostComponent do
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
-          <iframe class="aspect-video w-full" src={"https://www.youtube.com/embed/#{video_id}"} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          <iframe class="aspect-video w-full" src={YouTube.instance() <> "/embed/#{video_id}"} frameborder="0" allowfullscreen/>
         <% end %>
 
         <div class="px-3 py-3 text-lg prose prose-headings:font-normal prose-headings:mt-0 prose-headings:mb-2 prose-li:m-0 prose-p:leading-snug dark:prose-invert max-w-none font-roboto"><%=  safe @post.body %></div>
