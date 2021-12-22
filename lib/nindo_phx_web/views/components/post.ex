@@ -29,7 +29,7 @@ defmodule NindoPhxWeb.PostComponent do
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
-                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
+                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
                 <% else %>
                   <%= @post.author %>
                 <% end %>
@@ -89,7 +89,7 @@ defmodule NindoPhxWeb.PostComponent do
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
+                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
               <% else %>
                 <%= @post.author %>
               <% end %>
@@ -102,7 +102,7 @@ defmodule NindoPhxWeb.PostComponent do
             <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
+                <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop") %>
               <% else %>
                 <%= Format.display_name(username) %>
               <% end %>
@@ -113,11 +113,11 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, %{url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime}) %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, %{url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime}), phx_hook: "ScrollToTop" %></h3>
 
         <% else %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.id) %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.id), phx_hook: "ScrollToTop" %></h3>
 
         <% end %>
 

@@ -27,13 +27,13 @@
     <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
         <div class="md:flex">
             <div class="md:flex-shrink-0">
-                <%= live_patch to: live_path(Endpoint, Live.User, user.username) do %>
+                <%= live_patch to: live_path(Endpoint, Live.User, user.username), phx_hook: "ScrollToTop" do %>
                     <img class="h-36 w-full object-cover md:h-full md:w-40" src={Format.profile_picture(user.username)}>
                 <% end %>
             </div>
             <div class="p-8">
                 <p class="font-bold text-2xl">
-                    <%= live_patch(Format.display_name(user.username), to: live_path(Endpoint, Live.User, user.username)) %>
+                    <%= live_patch(Format.display_name(user.username), to: live_path(Endpoint, Live.User, user.username), phx_hook: "ScrollToTop") %>
                     <i class="block text-base text-gray-400"><%= "@#{user.username}" %></i>
                 </p>
 

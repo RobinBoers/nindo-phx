@@ -24,7 +24,7 @@ defmodule NindoPhxWeb.CommentComponent do
               <% username = Nindo.Accounts.get(@comment.author_id).username %>
               <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
               <p class="font-bold text-lg pl-2">
-                <%= live_patch Format.display_name(username), to: live_path(Endpoint, Live.User, username) %>
+                <%= live_patch Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop" %>
               </p>
             </div>
         </div>

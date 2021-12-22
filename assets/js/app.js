@@ -14,8 +14,18 @@ document.querySelector(".mobile-menu-button").addEventListener("click", () => {
 	document.querySelector(".mobile-menu").classList.toggle("hidden");
 });
 
+let Hooks = [];
+
+Hooks.ScrollToTop = {
+	mounted() {
+	  this.el.addEventListener("click", e => {
+		window.scrollTo(0, 0);
+	  })
+	}
+  }  
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
 liveSocket.connect()
 window.liveSocket = liveSocket

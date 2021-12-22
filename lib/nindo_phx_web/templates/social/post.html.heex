@@ -6,7 +6,7 @@
         <div class="flex flex-row items-center gap-2 pt-7">
         <img class="w-6 object-cover h-6 rounded-full border-indigo-700 border-2" src={Format.profile_picture(username)}>
         <p class="font-bold text-lg">
-            <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
+            <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop") %>
         </p>
         </div>
 
@@ -15,15 +15,15 @@
         <div class="flex flex-row items-center gap-2 pt-7">
         <img class="w-6 object-cover h-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
         <p class="font-bold text-lg">
-            <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source)) %>
+            <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
         </p>
         </div>
 
     <% end %>
 
-    <h2 class="title pt-2 leading-tight max-w-xl"><%= @post.title %></h2>
+    <h2 class="title text-3xl pt-2 leading-tight max-w-xl"><%= @post.title %></h2>
 
-    <hr class="mb-10 w-36">
+    <hr class="mb-5 w-36">
 
     <%= if @rss do %>
         <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
