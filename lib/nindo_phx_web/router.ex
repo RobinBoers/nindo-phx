@@ -41,6 +41,7 @@ defmodule NindoPhxWeb.Router do
     live "/source/:source", Live.Source
 
     get "/feed/:username", PageController, :feed
+    get "/markdown/:id", PageController, :markdown
 
     get "/app", AccountController, :app
     get "/signin", AccountController, :sign_in
