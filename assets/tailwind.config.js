@@ -57,9 +57,9 @@ module.exports = {
       transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      },
       fontFamily: {
         roboto: ['Roboto', 'Arial', 'ui-sans-serif', 'system-ui', 'Inter', 'sans-serif'],
-        serif: ['ui-serif', 'Georgia', 'serif'],      
+        serif: ['Merriweather', 'Lora', 'ui-serif', 'serif'],      
         mono: ['ui-monospace', 'DejaVu LGC Sans Code', 'DejaVu Sans Code', 'DejaVu Sans Mono', 'SFMono-Regular', 'monospace'],
-        display: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
+        display: ['Arial', 'system-ui', 'Inter', 'sans-serif'],
       },
     },
   },

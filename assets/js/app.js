@@ -24,15 +24,11 @@ Hooks.ScrollToTop = {
 	}
   }  
 
-Hooks.StoreSettings = {
+Hooks.RestoreFont = {
 	mounted() {
-	  this.pushEvent("restore", {
+	  this.pushEvent("restore-font", {
 		font: localStorage.getItem("font"),
 	  })
-  
-	//   this.el.username.addEventListener("input", e => {
-	// 	localStorage.setItem("username", e.target.value)
-	//   })
 	},
   }
 

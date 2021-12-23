@@ -66,7 +66,10 @@ defmodule NindoPhxWeb.Live.Post do
     {:noreply, put_flash(socket, :success, message)}
   end
 
-  def handle_event("restore", %{"font" => font}, socket) do
+  def handle_event("restore-font", %{"font" => font}, socket) do
+    {:noreply, assign(socket, font: get_font(font))}
+  end
+  def handle_event("switch-font", %{"font" => font}, socket) do
     {:noreply, assign(socket, font: get_font(font))}
   end
 
@@ -75,6 +78,7 @@ defmodule NindoPhxWeb.Live.Post do
 
   defp get_font(nil), do: "font-sans"
   defp get_font("sans"), do: "font-sans"
+  defp get_font("display"), do: "font-display"
   defp get_font("serif"), do: "font-serif"
   defp get_font(font), do: "font-[#{font}]"
 end

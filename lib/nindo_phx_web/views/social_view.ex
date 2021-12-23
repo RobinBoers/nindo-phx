@@ -27,4 +27,7 @@ defmodule NindoPhxWeb.SocialView do
     "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
+  defp next_font("font-sans"), do: "serif"
+  defp next_font("font-serif"), do: "display"
+  defp next_font("font-display"), do: "sans"
 end
