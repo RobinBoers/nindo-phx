@@ -26,7 +26,7 @@ Hooks.ScrollToTop = {
 
 Hooks.RestoreFont = {
 	mounted() {
-	  this.pushEvent("restore-font", {
+	  this.pushEvent("set-font", {
 		font: localStorage.getItem("font"),
 	  })
 	},
