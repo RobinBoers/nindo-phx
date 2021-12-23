@@ -61,5 +61,10 @@ defmodule NindoPhxWeb.Live.Post do
   end
 
   @impl true
+  def handle_event("put-flash", %{"message" => message}, socket) do
+    {:noreply, put_flash(socket, :success, message)}
+  end
+
+  @impl true
   def render(assigns), do: render SocialView, "post.html", assigns
 end

@@ -36,8 +36,8 @@ defmodule NindoPhxWeb.AlertComponent do
   """
   def alert(assigns) do
     ~H"""
-      <div class="absolute text-center w-full lg:px-4">
-        <div class={"p-2 bg-#{@color}-800 items-center text-#{@color}-100 leading-none lg:rounded-full flex lg:inline-flex"} role="alert">
+      <div class="fixed flex flex-col top-[4em] flex-nowrap justify-center items-center left-0 w-full lg:px-4">
+        <div class={"p-2 bg-#{@color}-800 items-center text-#{@color}-100 leading-none rounded-full inline-flex"} role="alert">
           <span class={"flex rounded-full bg-#{@color}-500 uppercase px-2 py-1 text-xs font-bold mr-3"}><%= @title %></span>
           <span class="font-semibold mr-2 text-left flex-auto"><%= @message %></span>
         </div>
