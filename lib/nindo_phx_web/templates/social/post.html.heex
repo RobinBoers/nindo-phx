@@ -21,7 +21,7 @@
 
     <% end %>
 
-    <h1 class="title text-3xl xl:text-4xl pt-2 leading-tight max-w-xl"><%= @post.title %></h1>
+    <h1 class={"title text-3xl xl:text-4xl pt-2 leading-tight max-w-xl #{@font}"}><%= @post.title %></h1>
 
     <hr class="mb-5 w-36">
 
@@ -32,7 +32,7 @@
         <iframe class="rounded-md aspect-video w-full" src={YouTube.instance() <> "/embed/#{video_id}"} frameborder="0" allowfullscreen/>
         <% end %>
 
-        <div class="text-lg prose dark:prose-invert"><%= safe @post.body %></div>
+        <div class={"text-lg prose dark:prose-invert #{@font}"}><%= safe @post.body %></div>
 
         <section class="mt-6">
             <button class="mr-1 no-underline" phx-click="put-flash" phx-value-message="Link copied to clipboard." onclick="navigator.clipboard.writeText(window.location.href)">
@@ -47,7 +47,7 @@
             </a>
         </section>
     <% else %>
-        <div class="text-lg prose dark:prose-invert"><%= safe markdown @post.body %></div>
+        <div class={"text-lg prose dark:prose-invert #{@font}"}><%= safe markdown @post.body %></div>
 
         <section class="mt-6">
             <button class="mr-1 no-underline" phx-click="put-flash" phx-value-message="Link copied to clipboard." onclick="navigator.clipboard.writeText(window.location.href)">
