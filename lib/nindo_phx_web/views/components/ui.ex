@@ -18,7 +18,7 @@ defmodule NindoPhxWeb.UIComponent do
   def sidebar(assigns) do
     ~H"""
       <div class="sidebar print:hidden">
-        <ul class="flex items-center justify-center flex-row xl:flex-col xl:items-start xl:justify-start">
+        <ul class="flex items-center justify-center flex-row lg:flex-col lg:items-start lg:justify-start">
           <%= if @logged_in? do %>
             <li class="header-item">
               <%= live_patch to: live_path(Endpoint, Live.Social), phx_hook: "ScrollToTop" do %>

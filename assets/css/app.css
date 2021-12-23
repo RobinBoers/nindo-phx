@@ -125,7 +125,7 @@
     /* Layout */
 
     .page-wrapper {
-        @apply mt-6 overflow-x-hidden p-1 md:p-12 xl:flex flex-row justify-center;
+        @apply mt-6 overflow-x-hidden p-1 md:p-12 lg:flex flex-row justify-center;
     }
     
     .page-inner {
@@ -141,7 +141,7 @@
     }
     
     .sidebar {
-        @apply pt-10 xl:mr-24 2xl:mr-48;
+        @apply pt-10 lg:mr-24 2xl:mr-48;
     }
     
     .no-top {
@@ -160,4 +160,8 @@ pre code, code pre {
 
 * {
     @apply dark:border-gray-700 transition-all;
+}
+
+.prose hr {
+    @apply mt-[5px] mb-[20px];
 }
