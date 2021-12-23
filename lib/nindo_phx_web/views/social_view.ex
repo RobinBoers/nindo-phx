@@ -29,5 +29,6 @@ defmodule NindoPhxWeb.SocialView do
 
   defp next_font("font-sans"), do: "serif"
   defp next_font("font-serif"), do: "display"
-  defp next_font("font-display"), do: "sans"
+  defp next_font("font-display"), do: "Ubuntu_Mono"
+  defp next_font("font-['Ubuntu_Mono']"), do: "sans"
 end

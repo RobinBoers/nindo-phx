@@ -59,7 +59,7 @@ module.exports = {
         roboto: ['Roboto', 'Arial', 'ui-sans-serif', 'system-ui', 'Inter', 'sans-serif'],
         serif: ['Merriweather', 'Lora', 'ui-serif', 'serif'],      
         mono: ['ui-monospace', 'DejaVu LGC Sans Code', 'DejaVu Sans Code', 'DejaVu Sans Mono', 'SFMono-Regular', 'monospace'],
-        display: ['Arial', 'system-ui', 'Inter', 'sans-serif'],
+        display: ['Helvetica', 'Calibri', 'Arial', 'system-ui', 'Inter', 'sans-serif'],
       },
     },
   },

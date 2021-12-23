@@ -77,5 +77,5 @@ defmodule NindoPhxWeb.Live.Post do
   defp get_font("sans"), do: "font-sans"
   defp get_font("display"), do: "font-display"
   defp get_font("serif"), do: "font-serif"
-  defp get_font(font), do: "font-[#{font}]"
+  defp get_font(font), do: "font-['#{font}']"
 end
