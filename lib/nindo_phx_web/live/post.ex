@@ -12,6 +12,7 @@ defmodule NindoPhxWeb.Live.Post do
   @impl true
   def mount(_params, session, socket) do
     {:ok, socket
+    |> assign(:font, "font-sans")
     |> assign(:logged_in?, logged_in?(session))
     |> assign(:user, user(session))}
   end
@@ -65,6 +66,15 @@ defmodule NindoPhxWeb.Live.Post do
     {:noreply, put_flash(socket, :success, message)}
   end
 
+  def handle_event("restore", %{"font" => font}, socket) do
+    {:noreply, assign(socket, font: get_font(font))}
+  end
+
   @impl true
   def render(assigns), do: render SocialView, "post.html", assigns
+
+  defp get_font(nil), do: "font-sans"
+  defp get_font("sans"), do: "font-sans"
+  defp get_font("serif"), do: "font-serif"
+  defp get_font(font), do: "font-[#{font}]"
 end

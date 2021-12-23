@@ -24,6 +24,18 @@ Hooks.ScrollToTop = {
 	}
   }  
 
+Hooks.StoreSettings = {
+	mounted() {
+	  this.pushEvent("restore", {
+		font: localStorage.getItem("font"),
+	  })
+  
+	//   this.el.username.addEventListener("input", e => {
+	// 	localStorage.setItem("username", e.target.value)
+	//   })
+	},
+  }
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
