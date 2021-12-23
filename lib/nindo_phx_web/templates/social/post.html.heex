@@ -49,14 +49,14 @@
     <% else %>
         <div class={"text-lg prose dark:prose-invert #{@font}"}><%= safe markdown @post.body %></div>
 
-        <section class="mt-6">
-            <button class="mr-1 no-underline" phx-click="put-flash" phx-value-message="Link copied to clipboard." onclick="navigator.clipboard.writeText(window.location.href)">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline align-text-top mr-1 fill-current" viewBox="0 0 20 20">
+        <section class="absolute top-0 hidden lg:ml-[-75px] xl:ml-[-110px] mt-6 p-2.5 xl:p-4 rounded-md max-w-fit shadow-xl lg:flex flex-col gap-2 bg-gray-800/20">
+            <button class="no-underline" phx-click="put-flash" phx-value-message="Link copied to clipboard." onclick="navigator.clipboard.writeText(window.location.href)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 xl:h-5 xl:w-5 inline align-text-top mr-1 fill-current" viewBox="0 0 20 20">
                     <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                 </svg>
             </button> 
-            <a class="mr-1 no-underline" href={"/markdown/#{@post.id}"}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 inline align-text-top mr-1 fill-current" viewBox="0 0 208 128">
+            <a class="no-underline" href={"/markdown/#{@post.id}"}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 xl:h-5 inline align-text-top mr-1 fill-current" viewBox="0 0 208 128">
                     <path d="M193 128H15a15 15 0 0 1-15-15V15A15 15 0 0 1 15 0h178a15 15 0 0 1 15 15v98a15 15 0 0 1-15 15zM50 98V59l20 25 20-25v39h20V30H90L70 55 50 30H30v68zm134-34h-20V30h-20v34h-20l30 35z"/>
                 </svg>
             </a>
