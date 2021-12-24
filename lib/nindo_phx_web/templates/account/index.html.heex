@@ -3,14 +3,14 @@
 <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
     <div class="md:flex">
         <div class="md:flex-shrink-0">
-            <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" phx-click="edit-avatar" src={Format.profile_picture(@user.username)}>
+            <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" phx-click="edit-avatar" src={Format.profile_picture(@user)}>
         </div>
         <div class={"p-8 " <> if @edit_avatar == true, do: "hidden", else: "block"}>
             <p class="font-bold text-2xl">
-                <a href={"/user/#{@user.username}"}><%= Format.display_name(@user.username) %></a>
+                <a href={"/user/#{@user.username}"}><%= Format.display_name(@user) %></a>
                 <i class="block text-base text-gray-400"><%= "@#{@user.username}" %></i>
             </p>
-            <p class="mt-2 text-gray-500"><%= Format.description(@user.username) %></p>
+            <p class="mt-2 text-gray-500"><%= Format.description(@user) %></p>
         </div>
         <div class={"p-8 flex-grow " <> if @edit_avatar == true, do: "block", else: "hidden"}>
             <h3 class="font-bold text-2xl">Profile picture</h3>

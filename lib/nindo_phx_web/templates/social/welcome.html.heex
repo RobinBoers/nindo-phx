@@ -1,7 +1,7 @@
 <%= if @logged_in? do %>
     <section class="flex flex-row justify-between p-12 mt-10 xl:mt-0 bg-white dark:bg-gray-800 shadow rounded-xl">
         <div class="flex-grow-0">
-            <h2 class="title">Hello, <%= Format.display_name(@user.username) %>!</h2>
+            <h2 class="title">Hello, <%= Format.display_name(@user) %>!</h2>
             <p class="intro">Welcome to Nindo. Let's get you started, shall we?</p>
 
             <details>

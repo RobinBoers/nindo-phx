@@ -28,7 +28,7 @@ defmodule NindoPhxWeb.Live.Post do
         |> Enum.reverse # newest at top
 
       {:noreply, socket
-      |> assign(:page_title, post.title <> " · " <> Format.display_name(account.username) <> " (@" <> account.username <> ")")
+      |> assign(:page_title, post.title <> " · " <> Format.display_name(account) <> " (@" <> account.username <> ")")
       |> assign(:comments, comments)
       |> assign(:post, post)
       |> assign(:rss, false)}

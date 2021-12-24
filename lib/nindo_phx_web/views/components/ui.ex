@@ -87,9 +87,9 @@ defmodule NindoPhxWeb.UIComponent do
         <a href="/account">
           <img
             class="w-5 object-cover h-5 inline mr-1 rounded-full border border-indigo-700 border-2"
-            src={Format.profile_picture(account.username)}
+            src={Format.profile_picture(account)}
           >
-          <span><%= Format.display_name(account.username) %></span>
+          <span><%= Format.display_name(account) %></span>
         </a>
       </p>
 
