@@ -12,14 +12,14 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   def render(assigns) do
     ~H"""
     <section class="new-post-section print:hidden">
-      <button class={"new-post-btn btn-primary mb-6 " <> if @visible == true, do: "hidden", else: "block"} phx-click="open" phx-target={@myself}>New post</button>
-      <div class={"new-post-modal transition-height overflow-y-hidden w-full " <> if @visible == true, do: "h-64", else: "h-0"}>
+      <button class={"new-post-btn btn-primary mb-6 " <> if @visible, do: "hidden", else: "block"} phx-click="toggle-visible" phx-target={@myself}>New post</button>
+      <div class={"new-post-modal transition-height overflow-y-hidden w-full " <> if @visible, do: "h-64", else: "h-0"}>
           <div class="mb-6 p-1">
             <.form let={f} for={@changeset} class="new-post-form w-full" phx-submit="publish" phx-target={@myself}>
               <%= text_input f, :title, placeholder: "Title", class: "new-post-form-title w-full mb-2 input block resize-none flex-grow" %>
               <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "new-post-form-body w-full input block resize-none flex-grow" %>
               <button class="new-post-submit btn-primary mt-2" type="submit">Publish</button>
-              <button class="new-post-cancel btn-secondary mt-2" type="button" phx-click="close" phx-target={@myself}>Cancel</button>
+              <button class="new-post-cancel btn-secondary mt-2" type="button" phx-click="toggle-visible" phx-target={@myself}>Cancel</button>
             </.form>
           </div>
       </div>
@@ -45,12 +45,8 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
   end
 
   @impl true
-  def handle_event("open", _, socket) do
-    {:noreply, assign(socket, visible: true)}
-  end
-
-  def handle_event("close", _, socket) do
-    {:noreply, assign(socket, visible: false)}
+  def handle_event("toggle-visible", _, socket) do
+    {:noreply, assign(socket, visible: !socket.assigns.visible)}
   end
 
   def handle_event("publish", %{"post" => %{"body" => body, "title" => title}}, socket) do

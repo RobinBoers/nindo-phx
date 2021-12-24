@@ -20,7 +20,6 @@ defmodule NindoPhxWeb.Live.Sources do
 
       _    -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
     end
-
   end
 
   @impl true

@@ -7,7 +7,7 @@
 <ul>
     <%= for username <- @user.following do %>
         <li class="p-2 py-3 flex flex-row flex-wrap center-items">
-            <img class="w-9 object-cover h-9 rounded-full mr-3 border border-indigo-700" src={Format.profile_picture(username)}>
+            <img class="w-9 object-cover h-9 rounded-full mr-3 border border-indigo-700" src={Format.profile_picture(username)}/>
 
             <span class="mt-1">
                 <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>

@@ -2,7 +2,6 @@ defmodule NindoPhxWeb.PostComponent do
   @moduledoc """
   Component for displaying posts.
   """
-
   use Phoenix.Component
   use Phoenix.HTML
 
@@ -25,7 +24,7 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
 
-              <img class="w-12" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
+              <img class="w-12" src={@post.source["icon"]} onerror="this.src='/images/rss.png'"/>
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
@@ -41,7 +40,7 @@ defmodule NindoPhxWeb.PostComponent do
 
               <% username = Nindo.Accounts.get(@post.author_id).username %>
 
-              <img class="w-12 object-cover h-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+              <img class="w-12 object-cover h-12 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}/>
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
                   <a href={"/user/#{username}"}><%= Format.display_name(username) %></a>
@@ -85,7 +84,7 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center gap-2">
           <%= if @rss do %>
 
-            <img class="w-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'">
+            <img class="w-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'"/>
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
@@ -99,7 +98,7 @@ defmodule NindoPhxWeb.PostComponent do
 
             <% username = Nindo.Accounts.get(@post.author_id).username %>
 
-            <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+            <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}/>
             <p class="font-bold text-lg">
               <%= if @user_link do %>
                 <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop") %>
@@ -136,5 +135,4 @@ defmodule NindoPhxWeb.PostComponent do
   # Private methods
 
   defdelegate get_source_data(feed), to: SocialView
-
 end

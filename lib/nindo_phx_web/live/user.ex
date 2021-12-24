@@ -20,8 +20,7 @@ defmodule NindoPhxWeb.Live.User do
   @impl true
   def handle_params(%{"username" => username}, _uri, socket) do
     if Accounts.exists?(username) do
-      {:noreply, socket
-      |> assign(:page_title, Format.display_name(username) <> " (@" <> username <> ")")}
+      {:noreply, assign(socket, page_title: Format.display_name(username) <> " (@" <> username <> ")")}
     else
       {:noreply, assign(socket, page_title: "Unknown user" <> " (@deleted)")}
     end
@@ -39,7 +38,6 @@ defmodule NindoPhxWeb.Live.User do
 
     user = Accounts.get(socket.assigns.user.id)
 
-    {:noreply, socket
-    |> assign(:user, user)}
+    {:noreply, assign(socket, user: user)}
   end
 end

@@ -1,3 +1,5 @@
+<!-- This layout is used to display pages without the header and footer (basically the root layout with app mode enabled). Used to render error messages and the PWA landing page. -->
+
 <!DOCTYPE html>
 <html lang="en" class="no-scrollbar">
   <head>
@@ -8,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <%= csrf_meta_tag() %>
-    <title>Nindo</title>
+    <%= live_title_tag @page_title, suffix: " · Nindo" %>
 
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="apple-touch-icon" href="/images/logo.png"/>

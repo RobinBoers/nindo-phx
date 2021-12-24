@@ -23,12 +23,11 @@ defmodule NindoPhxWeb.Live.Components.CommentForm do
   @impl true
   def handle_event("publish", %{"comment" => %{"body" => body, "post_id" => id, "title" => title}}, socket) do
     case Comments.new(id, title, body, socket.assigns.user) do
-      {:ok, _comment}    ->
+      {:ok, _comment} ->
         send(self(), :refresh)
         {:noreply, socket}
       {:error, error} ->
-        {:noreply, socket
-        |> put_flash(:error, error)}
+        {:noreply, put_flash(socket, :error, error)}
     end
   end
 end

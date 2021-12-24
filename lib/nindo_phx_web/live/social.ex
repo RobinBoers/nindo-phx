@@ -45,8 +45,7 @@ defmodule NindoPhxWeb.Live.Social do
       |> FeedAgent.get_pid()
       |> FeedAgent.get_posts()
 
-    {:noreply, socket
-    |> assign(:posts, posts)}
+    {:noreply, assign(socket, posts: posts)}
   end
 
   def handle_info(_, socket), do: {:noreply, socket}

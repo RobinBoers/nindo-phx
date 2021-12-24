@@ -19,7 +19,7 @@ defmodule NindoPhxWeb.Live.Account do
       |> assign(:edit_avatar, false)
       |> assign(:logged_in?, true)}
 
-      _     -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
+      _ -> {:ok, redirect(socket, to: account_path(Endpoint, :sign_in))}
     end
   end
 
@@ -28,15 +28,14 @@ defmodule NindoPhxWeb.Live.Account do
 
   @impl true
   def handle_event("edit-avatar", _, socket) do
-    {:noreply, assign(socket, :edit_avatar, !socket.assigns.edit_avatar)}
+    {:noreply, assign(socket, edit_avatar: !socket.assigns.edit_avatar)}
   end
 
   def handle_event("update-avatar", %{"avatar" => %{"url" => url}}, socket) do
     Accounts.change(:profile_picture, url, socket.assigns.user)
     user = Accounts.get(socket.assigns.user.id)
 
-    {:noreply, socket
-    |> assign(:user, user)}
+    {:noreply, assign(socket, user: user)}
   end
 
   def handle_event("update-prefs", %{"prefs" => %{"description" => description, "display_name" => display_name, "email" => email}}, socket) do
@@ -46,8 +45,7 @@ defmodule NindoPhxWeb.Live.Account do
 
     user = Accounts.get(socket.assigns.user.id)
 
-    {:noreply, socket
-    |> assign(:user, user)}
+    {:noreply, assign(socket, user: user)}
   end
 
   def handle_event("update-password", %{"password" => %{"check" => check, "password" => password}}, socket) do
@@ -56,11 +54,9 @@ defmodule NindoPhxWeb.Live.Account do
       password = Auth.hash_pass(password, salt)
 
       Accounts.change(:password, password, socket.assigns.user)
-      {:noreply, socket
-      |> put_flash(:success, "Password updated")}
+      {:noreply, put_flash(socket, :success, "Password updated")}
     else
-      {:noreply, socket
-      |> put_flash(:error, "Passwords don't match")}
+      {:noreply, put_flash(socket, :error, "Passwords don't match")}
     end
   end
 end

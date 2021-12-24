@@ -3,21 +3,31 @@
 <div class="my-6 w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all">
     <div class="md:flex">
         <div class="md:flex-shrink-0">
-            <img class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" phx-click="edit-avatar" src={Format.profile_picture(@user)}>
+            <img 
+                class="h-36 w-full object-cover md:h-full md:w-40 hover:opacity-50 hover:cursor-pointer" 
+                phx-click="edit-avatar" 
+                src={Format.profile_picture(@user)}
+            />
         </div>
-        <div class={"p-8 " <> if @edit_avatar == true, do: "hidden", else: "block"}>
+        <div class={"p-8 " <> if @edit_avatar, do: "hidden", else: "block"}>
+
             <p class="font-bold text-2xl">
-                <a href={"/user/#{@user.username}"}><%= Format.display_name(@user) %></a>
+                <%= live_patch Format.display_name(@user), to: live_path(Endpoint, Live.User, @user.username) %>
                 <i class="block text-base text-gray-400"><%= "@#{@user.username}" %></i>
             </p>
-            <p class="mt-2 text-gray-500"><%= Format.description(@user) %></p>
+            <p class="mt-2 text-gray-500">
+                <%= Format.description(@user) %>
+            </p>
+
         </div>
-        <div class={"p-8 flex-grow " <> if @edit_avatar == true, do: "block", else: "hidden"}>
+        <div class={"p-8 flex-grow " <> if @edit_avatar, do: "block", else: "hidden"}>
+
             <h3 class="font-bold text-2xl">Profile picture</h3>
             <.form let={f} for={:avatar} class="flex flex-row flex-wrap" phx-submit="update-avatar">
                 <%= text_input f, :url, placeholder: "URL to profile picture", value: @user.profile_picture, class: "input my-1 flex-grow" %>
                 <%= submit "Save", class: "btn-primary ml-4 pt-1 pb-1"  %>
             </.form>
+
         </div>
     </div>
 </div>

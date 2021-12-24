@@ -3,9 +3,7 @@ defmodule NindoPhxWeb.PageView do
   use NindoPhxWeb, :view
   alias NindoPhxWeb.{Endpoint, SocialView, Live}
 
-  alias Nindo.{Posts}
-
-  alias NindoPhxWeb.{PostComponent, FeedComponent}
+  alias NindoPhxWeb.{FeedComponent}
 
   import Routes
   import Nindo.Core

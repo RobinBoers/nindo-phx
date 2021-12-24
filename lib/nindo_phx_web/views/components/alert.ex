@@ -4,7 +4,6 @@ defmodule NindoPhxWeb.AlertComponent do
 
   All these functions need at least a map with a `:title` key and a `:message` key.
   """
-
   use Phoenix.Component
   use Phoenix.HTML
 

@@ -13,17 +13,29 @@ defmodule NindoPhxWeb.AccountController do
 
   # Pages to display
 
+  @doc """
+  Sign up page.
+  """
   def sign_up(conn, _params) do
     conn
     |> assign(:page_title, "Sign up")
     |> render("sign_up.html")
   end
+
+  @doc """
+  Sign in page.
+  """
   def sign_in(conn, _params) do
     conn
     |> assign(:page_title, "Sign in")
     |> render("sign_in.html")
   end
 
+  @doc """
+  The landingpage for the PWA.
+
+  When opening this page the `:app` session will be set to true. In app mode the main UI of the website (header and footer) are hidden, to make the PWA look less like a website that I plonyked onto a phone (cause that is exactly what I did).
+  """
   def app(conn, _params) do
     case logged_in?(conn) do
       true ->
@@ -42,9 +54,7 @@ defmodule NindoPhxWeb.AccountController do
 
   # Session management
 
-  def login(conn, params) do
-    username = params["username"]
-    password = params["password"]
+  def login(conn, %{"password" => password, "username" => username}) do
     account  = Accounts.get_by(:username, username)
 
     if account != nil do
@@ -78,7 +88,10 @@ defmodule NindoPhxWeb.AccountController do
           |> render("sign_in.html")
       end
     else
-      render(conn, "sign_in.html", error: %{title: "account", message: "Doesn't exist"})
+      conn
+      |> put_flash(:error, "Account doesn't exist")
+      |> assign(:page_title, "Sign in")
+      |> render("sign_in.html")
     end
   end
 
@@ -96,11 +109,7 @@ defmodule NindoPhxWeb.AccountController do
 
   # Account managment
 
-  def create_account(conn, params) do
-    username = params["create_account"]["username"]
-    password = params["create_account"]["password"]
-    email = params["create_account"]["email"]
-
+  def create_account(conn, %{"email" => email, "password" => password, "username" => username}) do
     case Accounts.new(username, password, email) do
       {:ok, account}    ->
         Feeds.follow(account.username, account)
@@ -110,6 +119,7 @@ defmodule NindoPhxWeb.AccountController do
         |> put_session(:logged_in?, true)
         |> put_session(:user_id, account.id)
         |> redirect(to: live_path(Endpoint, Live.Welcome))
+
       {:error, error}   ->
         conn
         |> put_flash(:error, format_error(error))

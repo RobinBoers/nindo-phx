@@ -1,8 +1,9 @@
 defmodule NindoPhxWeb.CommentComponent do
   @moduledoc """
   Component to render comments.
-  """
 
+  This component used to also hold the comment section and comment form, but those are moved to `NindoPhxWeb.Live.Post` and `NindoPhxWeb.Live.Components.CommentForm`.
+  """
   use Phoenix.Component
   use Phoenix.HTML
 
@@ -22,7 +23,7 @@ defmodule NindoPhxWeb.CommentComponent do
         <div class="pt-4 p-3 flex flex-row justify-between items-bottom">
           <div class="flex flex-row items-center justify-start">
               <% username = Nindo.Accounts.get(@comment.author_id).username %>
-              <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}>
+              <img class="w-6 object-cover h-6 rounded-full border border-indigo-700 border-2" src={Format.profile_picture(username)}/>
               <p class="font-bold text-lg pl-2">
                 <%= live_patch Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop" %>
               </p>

@@ -2,7 +2,6 @@ defmodule NindoPhxWeb.FeedComponent do
   @moduledoc """
   Components to render user feeds and external RSS feeds.
   """
-
   use Phoenix.Component
   use Phoenix.HTML
 

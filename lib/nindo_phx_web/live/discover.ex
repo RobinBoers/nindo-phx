@@ -48,8 +48,9 @@ defmodule NindoPhxWeb.Live.Discover do
   def handle_event("search", %{"search" => %{"query" => query}}, socket) do
     {:noreply, push_patch(socket, to: live_path(Endpoint, Live.Discover, query))}
   end
-
-  def handle_event("search", _params, socket), do: {:noreply, push_patch(socket, to: live_path(Endpoint, Live.Discover))}
+  def handle_event("search", _params, socket) do
+    {:noreply, push_patch(socket, to: live_path(Endpoint, Live.Discover))}
+  end
 
   defp get_users(count) do
     count

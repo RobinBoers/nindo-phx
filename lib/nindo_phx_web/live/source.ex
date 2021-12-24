@@ -17,8 +17,8 @@ defmodule NindoPhxWeb.Live.Source do
       url
       |> URI.decode()
       |> Feeds.get_feed()
-    source = RSS.generate_source(feed, type, url)
 
+    source = RSS.generate_source(feed, type, url)
     posts = RSS.generate_posts(feed, source)
 
     {:ok, socket

@@ -31,7 +31,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
 
             <li class="p-2 py-3 flex flex-row flex-wrap center-items">
               <%= if feed["icon"] != nil do %>
-                <img class="w-8 mr-3" src={feed["icon"]} onerror="this.src='/images/rss.png'">
+                <img class="w-8 mr-3" src={feed["icon"]} onerror="this.src='/images/rss.png'"/>
               <% else %>
                 <span class="w-8 mr-3"></span>
               <% end %>
@@ -60,8 +60,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
     Feeds.remove(params, socket.assigns.user)
     feeds = Accounts.get(socket.assigns.user.id).feeds
 
-    {:noreply, socket
-    |> assign(:feeds, feeds)}
+    {:noreply, assign(socket, feeds: feeds)}
   end
 
   @impl true
@@ -77,8 +76,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
         Feeds.add(RSS.generate_source(feed, type, url), socket.assigns.user)
         feeds = Accounts.get(socket.assigns.user.id).feeds
 
-        {:noreply, socket
-        |> assign(:feeds, feeds)}
+        {:noreply, assign(socket, feeds: feeds)}
     end
   end
 

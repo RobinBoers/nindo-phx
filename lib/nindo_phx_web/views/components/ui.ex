@@ -2,7 +2,6 @@ defmodule NindoPhxWeb.UIComponent do
   @moduledoc """
   Module to render various UI components.
   """
-
   use Phoenix.Component
   use Phoenix.HTML
 
@@ -88,7 +87,7 @@ defmodule NindoPhxWeb.UIComponent do
           <img
             class="w-5 object-cover h-5 inline mr-1 rounded-full border border-indigo-700 border-2"
             src={Format.profile_picture(account)}
-          >
+          />
           <span><%= Format.display_name(account) %></span>
         </a>
       </p>
