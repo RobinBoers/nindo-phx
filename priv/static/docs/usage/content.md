@@ -6,7 +6,7 @@ Nindo posts are written in markdown.
 
 > Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber and Aaron Swartz created Markdown in 2004 as a markup language that is appealing to human readers in its source code form.[9] Markdown is widely used in blogging, instant messaging, online forums, collaborative software, documentation pages, and readme files.
 
-&mdash; [Wikipedia](https://en.wikipedia.org/wiki/Markdown)
+— [Wikipedia](https://en.wikipedia.org/wiki/Markdown)
 
 Markdown is also used in Whatsapp, Discord, Slack, GitHub, Reddit and many other existing sites, so most people will already be familiar with it (but many don't know it's called markdown). It's converted to HTML using `HtmlSanitizeEx` when displayed on Nindo or exported in an RSS feed, but it is also accessible via the simple [Markdown API](markdown-api.md)
 
@@ -16,11 +16,11 @@ Nindo exports all its content as RSS feeds. An RSS feed is a way to share conten
 
 ### Endpoints
 
-Nindo has RSS feeds for users and comments. They can be found at:
+Nindo has RSS feeds for users and comments and the official blog. They can be found at:
 
 - `/feed/:username`
-- `/feed/blog`
 - `/feed/post/:id/comments`
+- `/feed/blog`
 
 ## Preferences
 
