@@ -63,6 +63,10 @@ defmodule NindoPhx.MixProject do
     "docs/overview.md",
     "docs/about.md",
     "LICENSE",
+    "docs/usage/content.md",
+    "docs/usage/settings.md",
+    "docs/usage/sources.md",
+    "docs/usage/markdown-api.md",
     "docs/api.md",
     "docs/api/auth/login.md",
     "docs/api/accounts/create-account.md",
@@ -77,6 +81,7 @@ defmodule NindoPhx.MixProject do
   defp groups_for_extras do
     [
       Introduction: ~r/^(?:(?!\/).)*\/(?!.*\/).*$/,
+      Usage: ~r/docs\/usage\/.?/,
       API: ~r/docs\/api\/auth\/.?/,
       Accounts: ~r/docs\/api\/accounts\/.?/,
       Posts: ~r/docs\/api\/posts\/.?/,
