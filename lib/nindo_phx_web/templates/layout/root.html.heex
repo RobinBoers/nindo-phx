@@ -47,6 +47,7 @@
               <li class="header-item"><%= link "Social", to: live_path(Endpoint, Live.Social) %></li>
               <li class="header-item"><%= link "Blog", to: page_path(Endpoint, :blog) %></li>
               <li class="header-item"><%= link "About", to: page_path(Endpoint, :about) %></li>
+              <li class="header-item"><%= link "Docs", to: "https://docs.geheimesite.nl/nindo-phx" %></li>
               
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <li class="header-item">
@@ -89,6 +90,7 @@
             <li class="header-item"><%= link "Social", to: live_path(Endpoint, Live.Social) %></li>
             <li class="header-item"><%= link "Blog", to: page_path(Endpoint, :blog) %></li>
             <li class="header-item"><%= link "About", to: page_path(Endpoint, :about) %></li>
+            <li class="header-item"><%= link "Docs", to: "https://docs.geheimesite.nl/nindo-phx" %></li>
             
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li class="header-item">
