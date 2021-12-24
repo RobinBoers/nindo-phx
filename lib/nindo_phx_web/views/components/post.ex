@@ -15,7 +15,7 @@ defmodule NindoPhxWeb.PostComponent do
   @doc """
   The default post. Will be renderd in feeds for both users and external RSS posts.
 
-  Only posts with more than 450 characters are counted as 'blogposts', everything else is a 'statusupdate'. Blogposts do have a title, statusupdates don't.
+  Only posts with more than 450 characters are counted as 'blogposts', everything else is a 'statusupdate'. Blogposts do have a title, statusupdates do not.
   """
   def default(assigns) do
     ~H"""
