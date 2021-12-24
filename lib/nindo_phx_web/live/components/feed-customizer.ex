@@ -69,7 +69,9 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
     url = convert_link(type, source)
 
     case RSS.parse_feed(url, type) do
-      {:error, _} -> {:noreply, socket}
+      {:error, _} ->
+        send(self(), :invalid_feed)
+        {:noreply, socket}
 
       feed ->
         Feeds.add(RSS.generate_source(feed, type, url), socket.assigns.user)
