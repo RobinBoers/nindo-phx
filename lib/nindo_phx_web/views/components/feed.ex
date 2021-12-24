@@ -14,7 +14,7 @@ defmodule NindoPhxWeb.FeedComponent do
   def mixed(assigns) do
     posts =
       assigns.users
-      |> Enum.flat_map(fn user -> SocialView.get_posts(user) end)
+      |> Enum.flat_map(&SocialView.get_posts(&1))
       |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
 
     feed %{posts: posts, user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}

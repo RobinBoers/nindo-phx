@@ -4,13 +4,13 @@
         <div class="w-full bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
             <div class="md:flex">
                 <div class="p-8 pt-2">
-                    <h2 class="title">
+                    <h2 class="title pb-2">
                         Blog
                     </h2>
                     <p class="mt-2 text-gray-500">The official micro blog for Nindo.</p>
 
                     <p class="mt-10">
-                        <!-- <a class="btn-primary">Follow</a> -->
+                        <a class="btn-primary" href="/feed/blog">Follow</a>
                     </p>
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
         <p class="my-3 mt-16 font-bold text-2xl">Posts</p>
 
-        <FeedComponent.mixed users={["robin"]} user_link={true} conn={@conn} />
+        <FeedComponent.mixed users={@authorized_users} user_link={true} conn={@conn} />
 
     </div>    
 </div>
