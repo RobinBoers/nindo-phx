@@ -132,7 +132,7 @@ defmodule NindoPhxWeb.PostComponent do
     """
   end
 
-  # Private methods
+  # Helper methods
 
   defdelegate get_source_data(feed), to: SocialView
 end

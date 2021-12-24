@@ -8,5 +8,6 @@
             <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
             <%= submit "Sign up", class: "btn-primary block mt-4"  %>
         <% end) %>
+        <p class="pt-4 text-gray-500">Already a Nindo user? <%= link "Sign in", to: account_path(Endpoint, :sign_in), class: "text-indigo-600" %></p>
     </div>
 </div>

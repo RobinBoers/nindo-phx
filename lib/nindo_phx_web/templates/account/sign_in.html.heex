@@ -7,5 +7,6 @@
             <%= password_input f, :password, placeholder: "Password", class: "input my-1.5 w-full block" %>
             <%= submit "Sign in", class: "btn-primary block mt-4"  %>
         <% end) %>
+        <p class="pt-4 text-gray-500">Don't have an account yet? <%= link "Sign up", to: account_path(Endpoint, :sign_up), class: "text-indigo-600" %></p>
     </div>
 </div>

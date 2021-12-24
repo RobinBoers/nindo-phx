@@ -3,12 +3,11 @@ defmodule NindoPhxWeb.AccountController do
   Controller for managing the session.
   """
   use NindoPhxWeb, :controller
-
-  alias Nindo.{Accounts, Feeds}
-  import NindoPhxWeb.{Router.Helpers}
-
   alias NindoPhxWeb.{Endpoint, Live}
 
+  alias Nindo.{Accounts, Feeds}
+
+  import Routes
   import Nindo.Core
 
   # Pages to display
@@ -26,9 +25,15 @@ defmodule NindoPhxWeb.AccountController do
   Sign in page.
   """
   def sign_in(conn, _params) do
-    conn
-    |> assign(:page_title, "Sign in")
-    |> render("sign_in.html")
+    case logged_in?(conn) do
+      false ->
+        conn
+        |> assign(:page_title, "Sign in")
+        |> render("sign_in.html")
+
+      true ->
+        redirect(conn, to: live_path(Endpoint, Live.Account))
+    end
   end
 
   @doc """
