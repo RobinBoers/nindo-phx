@@ -27,8 +27,8 @@ defmodule NindoPhxWeb.SocialView do
     "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
-  defp next_font("font-sans"), do: "serif"
-  defp next_font("font-serif"), do: "display"
-  defp next_font("font-display"), do: "Ubuntu_Mono"
-  defp next_font("font-['Ubuntu_Mono']"), do: "sans"
+  defp next_font("font-sans"),            do: "font-serif"
+  defp next_font("font-serif"),           do: "font-display"
+  defp next_font("font-display"),         do: "font-['Ubuntu_Mono']"
+  defp next_font("font-['Ubuntu_Mono']"), do: "font-sans"
 end
