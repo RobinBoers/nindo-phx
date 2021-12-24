@@ -7,9 +7,9 @@
                 <%= safe markdown File.read!(Path.join(:code.priv_dir(:nindo_phx), "static/docs/about.md")) %>
             </div>
 
-            <figure class="mt-16 max-w-prose">
+            <%# <figure class="mt-16 max-w-prose">
                 <PostComponent.default post={Posts.get(8)} user_link={true} rss={false} conn={@conn} />
-            </figure>
+            </figure> %>
 
             <!--This is the first post published from within the official Nindo text-based CLI client. This is a huge achievement, which I like to document here, on my new social media platform. Some of you may remember the old Nindo. It was my first big scale project. I built the original in PHP with a MySQL database. I have to say, the code was horrible, but it worked. Now, three years later, I'm rebuilding my biggest project in Elixir. The plan is to make a web-based version using Phoenix framework next. ~ 18/10/2021 --> 
             
