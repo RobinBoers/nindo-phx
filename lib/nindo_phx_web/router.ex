@@ -42,7 +42,8 @@ defmodule NindoPhxWeb.Router do
 
     get "/feed/blog", PageController, :blog_feed
     get "/feed/:username", PageController, :post_feed
-    get "/feed/post/:id/comments", PageController, :comment_feed
+    get "/feed/posts/:username", PageController, :post_feed
+    get "/feed/comments/:id", PageController, :comment_feed
     get "/markdown/:id", PageController, :markdown
 
     get "/app", AccountController, :app

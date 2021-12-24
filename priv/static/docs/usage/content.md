@@ -16,10 +16,10 @@ Nindo exports all its content as RSS feeds. An RSS feed is a way to share conten
 
 ### Endpoints
 
-Nindo has RSS feeds for users and comments and the official blog. They can be found at:
+Nindo has RSS feeds for posts and comments and the official blog. They can be found at:
 
-- `/feed/:username`
-- `/feed/post/:id/comments`
+- `/feed/posts/:username`
+- `/feed/comments/:post_id`
 - `/feed/blog`
 
 ## Preferences

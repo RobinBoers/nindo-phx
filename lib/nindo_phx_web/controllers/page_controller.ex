@@ -56,7 +56,7 @@ defmodule NindoPhxWeb.PageController do
 
     if post != nil do
       channel = RSS.channel(
-        "Nindo",
+        "Comments for \"#{post.title}\" · Nindo",
         "https://#{RSS.base_url()}/post/#{id}",
         "The official micro blog for Nindo."
       )
@@ -88,7 +88,7 @@ defmodule NindoPhxWeb.PageController do
       |> Enum.map(&RSS.generate_entry(&1.title, &1.body, &1.datetime, &1.id))
 
     channel = RSS.channel(
-      "Nindo",
+      "Nindo Blog",
       "https://#{RSS.base_url()}/blog",
       "The official micro blog for Nindo."
     )
