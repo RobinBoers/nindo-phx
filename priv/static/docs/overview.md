@@ -1,6 +1,9 @@
 ![banner](https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/banner.png)
 
-[![license](https://img.shields.io/github/license/RobinBoers/nindo-phx)](LICENSE) ![activity](https://img.shields.io/github/commit-activity/w/RobinBoers/nindo-phx) [![stars](https://img.shields.io/github/stars/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/stargazers) [![forks](https://img.shields.io/github/forks/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/fork)
+
+<center>
+    [![license](https://img.shields.io/github/license/RobinBoers/nindo-phx)](LICENSE) ![activity](https://img.shields.io/github/commit-activity/w/RobinBoers/nindo-phx) [![stars](https://img.shields.io/github/stars/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/stargazers) [![forks](https://img.shields.io/github/forks/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/fork)
+</center>
 
 # Overview
 
