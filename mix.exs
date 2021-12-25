@@ -49,7 +49,7 @@ defmodule NindoPhx.MixProject do
     {:gettext, "~> 0.18"},
     {:jason, "~> 1.2"},
     {:plug_cowboy, "~> 2.5"},
-    {:nindo, git: "git://github.com/RobinBoers/nindo-elixir.git"},
+    {:nindo, github: "RobinBoers/nindo-elixir"},
     {:navigation_history, "~> 0.4.0"},
     {:ex_doc, "~> 0.24", only: :dev, runtime: false},
   ]

@@ -6,4 +6,4 @@ Following external sites works via RSS. RSS is a way to follow external sites th
 
 An external website you add is called a **source**. Sources can be added via the "Sources" tab.
 
-![Sources tab](../../images/guides/sources.png)
+![Sources tab](https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/guides/sources.png)
