@@ -4,22 +4,23 @@
 
 # Overview
 
-NindoPhx is a web client for `Nindo` written in Elixir using Phoenix Framework. It has a cool dark mode, and supports 80% of Nindo's features.
+Nindo is a RSS reader and blogging platform designed to be easy and minimal.
+
+![https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/post.png]
 
 ## Features
 
-- Posts with images
+- Markdown support
 - Comments
-- Encrypted user data
-- Modern design
-- Construct your own feed
-- No AI nonsense
-- Nice dark mode
-- Every user's post are exported in an RSS feed
+- Dark mode
+- Readable
+- RSS feeds
 - REST API
-- Very quick thanks to LiveView
+- Responsive and quick
 
-## TODOs
+## Resources
 
-- Add way to upload images
-- Comment threads
+- [About](https://docs.geheimesite.nl/nindo-phx/about.html)
+- [Usage](https://docs.geheimesite.nl/nindo-phx/content.html)
+- [Self-hosting](https://docs.geheimesite.nl/nindo-phx/getting-started.html)
+- [API Documentation](https://docs.geheimesite.nl/nindo-phx/rest-api.html)
