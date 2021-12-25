@@ -6,7 +6,7 @@
 
 Nindo is a RSS reader and blogging platform designed to be easy and minimal.
 
-![https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/post.png]
+![intro](https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/post.png)
 
 ## Features
 
