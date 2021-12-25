@@ -1,3 +1,7 @@
+![banner](../priv/static/images/banner.png)
+
+[![license](https://img.shields.io/github/license/RobinBoers/nindo-phx)](LICENSE) ![activity](https://img.shields.io/github/commit-activity/w/RobinBoers/nindo-phx) [![stars](https://img.shields.io/github/stars/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/stargazers) [![forks](https://img.shields.io/github/forks/RobinBoers/nindo-phx)](https://github.com/RobinBoers/nindo-phx/fork)
+
 # Overview
 
 NindoPhx is a web client for `Nindo` written in Elixir using Phoenix Framework. It has a cool dark mode, and supports 80% of Nindo's features.
