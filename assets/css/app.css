@@ -15,6 +15,7 @@
 }
 
 @layer components {
+
     /* Buttons and inputs */
 
     .input {
@@ -46,6 +47,10 @@
 
     .input-m {
         @apply rounded-l-none rounded-r-none border-r-0;
+    }
+
+    .md-mark {
+        @apply bg-md-mark bg-no-repeat bg-[length:30px] bg-[right_7px_bottom_7px];
     }
 
     /* Header */

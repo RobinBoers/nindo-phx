@@ -17,7 +17,7 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
           <div class="mb-6 p-1">
             <.form let={f} for={@changeset} class="new-post-form w-full" phx-submit="publish" phx-target={@myself}>
               <%= text_input f, :title, placeholder: "Title", class: "new-post-form-title w-full mb-2 input block resize-none flex-grow" %>
-              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "new-post-form-body w-full input block resize-none flex-grow" %>
+              <%= textarea f, :body, autofocus: "autofocus", placeholder: "Write something inspirational... ", class: "new-post-form-body w-full input block flex-grow md-mark" %>
               <button class="new-post-submit btn-primary mt-2" type="submit">Publish</button>
               <button class="new-post-cancel btn-secondary mt-2" type="button" phx-click="toggle-visible" phx-target={@myself}>Cancel</button>
             </.form>

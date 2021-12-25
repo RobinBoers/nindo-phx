@@ -13,7 +13,7 @@ defmodule NindoPhxWeb.Live.Components.CommentForm do
         <.form let={f} for={:comment} class="comment-form w-full" phx-submit="publish" phx-target={@myself}>
           <%= text_input f, :title, placeholder: "Title", class: "w-full mb-2 input block resize-none flex-grow" %>
           <%= hidden_input f, :post_id, value: @post_id %>
-          <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block resize-none flex-grow" %>
+          <%= textarea f, :body, placeholder: "What do you think? ", onkeydown: "pressed(event)", class: "w-full input block flex-grow md-mark" %>
           <%= submit "Post reply", class: "btn-primary mt-2" %>
         </.form>
       </div>

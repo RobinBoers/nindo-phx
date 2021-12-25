@@ -54,12 +54,18 @@ module.exports = {
           purple: '#0d121d'
         }
       },
-      transitionProperty: {        'height': 'height',        'spacing': 'margin, padding',      },
+      transitionProperty: {        
+        'height': 'height',        
+        'spacing': 'margin, padding',      
+      },
       fontFamily: {
         roboto: ['Roboto', 'Arial', 'ui-sans-serif', 'system-ui', 'Inter', 'sans-serif'],
         serif: ['Merriweather', 'Lora', 'ui-serif', 'serif'],      
         mono: ['ui-monospace', 'DejaVu LGC Sans Code', 'DejaVu Sans Code', 'DejaVu Sans Mono', 'SFMono-Regular', 'monospace'],
         display: ['Helvetica', 'Calibri', 'Arial', 'system-ui', 'Inter', 'sans-serif'],
+      },
+      backgroundImage: {        
+        'md-mark': "url('/images/md-mark.svg')",        
       },
     },
   },
