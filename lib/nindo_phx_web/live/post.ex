@@ -41,10 +41,7 @@ defmodule NindoPhxWeb.Live.Post do
     end
   end
 
-  def handle_params(%{"datetime" => datetime, "title" => title, "url" => url}, _uri, socket) do
-    datetime = from_string(datetime)
-    post = Feeds.get_post(url, title, datetime)
-
+  def handle_params(post, _uri, socket) do
     {:noreply, socket
     |> assign(:page_title, post.title <> " · " <> post.author)
     |> assign(:post, post)
