@@ -20,7 +20,9 @@ defmodule NindoPhx.MixProject do
       extras: extras(),
       groups_for_extras: groups_for_extras(),
       source_ref: "master",
-      deps: [nindo: "https://robinboers.github.io/nindo-elixir"]
+      deps: [
+        nindo: "https://docs.geheimesite.nl/nindo-elixir",
+      ],
     ],
   ]
 
@@ -66,9 +68,12 @@ defmodule NindoPhx.MixProject do
     "docs/usage/content.md",
     "docs/usage/settings.md",
     "docs/usage/sources.md",
-    "docs/usage/markdown-api.md",
-    "docs/api.md",
-    "docs/api/auth/login.md",
+    "docs/hosting/getting-started.md",
+    "docs/hosting/configuration.md",
+    "docs/hosting/deploy.md",
+    "docs/api/main/rest-api.md",
+    "docs/api/main/login.md",
+    "docs/api/main/markdown-api.md",
     "docs/api/accounts/create-account.md",
     "docs/api/accounts/get-account.md",
     "docs/api/accounts/list-accounts.md",
@@ -82,9 +87,10 @@ defmodule NindoPhx.MixProject do
     [
       Introduction: ~r/^(?:(?!\/).)*\/(?!.*\/).*$/,
       Usage: ~r/docs\/usage\/.?/,
-      API: ~r/docs\/api\/auth\/.?/,
-      Accounts: ~r/docs\/api\/accounts\/.?/,
-      Posts: ~r/docs\/api\/posts\/.?/,
+      "Self-hosting": ~r/docs\/hosting\/.?/,
+      API: ~r/docs\/api\/main\/.?/,
+      "API/Accounts": ~r/docs\/api\/accounts\/.?/,
+      "API/Posts": ~r/docs\/api\/posts\/.?/,
     ]
   end
 end

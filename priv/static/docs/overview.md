@@ -1,6 +1,6 @@
 # Overview
 
-NindoPhx is a web client for Nindo2 written in Elixir using Phoenix Framework. It has a cool dark mode, and supports 80% of Nindo's features.
+NindoPhx is a web client for `Nindo` written in Elixir using Phoenix Framework. It has a cool dark mode, and supports 80% of Nindo's features.
 
 ## Features
 
