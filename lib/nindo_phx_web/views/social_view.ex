@@ -23,6 +23,12 @@ defmodule NindoPhxWeb.SocialView do
     |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
   end
 
+  # Sources tab (duplicate of FeedCustomizer.get_source_data/1)
+
+  def get_source_data(feed) do
+    "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
+  end
+
   # Font preference
 
   defp next_font("font-sans"),    do: "font-serif"
