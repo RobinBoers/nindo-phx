@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   use NindoPhxWeb, :live_component
   alias NindoPhxWeb.{Endpoint, Live}
 
-  alias Nindo.{Accounts, Feeds, Source, RSS, RSS.YouTube}
+  alias Nindo.{Accounts, Feeds, RSS, RSS.YouTube}
 
   import Routes
 
@@ -21,28 +21,28 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
           </.form>
         </div>
 
-        <%= if @feeds != [] do %>
+        <%= if @sources != [] do %>
               <h3 class="heading pt-4">Sources</h3>
         <% end %>
 
         <ul>
 
-          <%= for feed <- @feeds do %>
+          <%= for source <- @sources do %>
 
             <li class="p-2 py-3 flex flex-row flex-wrap center-items">
-              <%= if feed["icon"] != nil do %>
-                <img class="w-8 mr-3" src={feed["icon"]} onerror="this.src='/images/rss.png'"/>
+              <%= if source.icon != nil do %>
+                <img class="w-8 mr-3" src={source.icon} onerror="this.src='/images/rss.png'"/>
               <% else %>
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <%= live_patch feed.title,
-                    to: live_path(Endpoint, Live.Source, feed),
+                <%= live_patch source.title,
+                    to: live_path(Endpoint, Live.Source, source),
                     phx_hook: "ScrollToTop"
                 %>
               </span>
 
-              <a class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto px-2 rounded-full" phx-click="remove" phx-value-feed={feed["feed"]} phx-value-icon={feed["icon"]} phx-value-title={feed["title"]} phx-value-type={feed["type"]} phx-target={@myself}>
+              <a class="mb-3 no-underline ml-auto hover:bg-gray-200 hover:text-gray-900 cursor-pointer w-auto rounded-full p-0.5" phx-click="remove" phx-value-title={source.title} phx-value-type={source.type} phx-value-url={source.feed} phx-target={@myself}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -56,11 +56,12 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   end
 
   @impl true
-  def handle_event("remove", params, socket) do
-    Feeds.remove(params, socket.assigns.user)
-    feeds = Accounts.get(socket.assigns.user.id).feeds
+  def handle_event("remove", %{"title" => title, "url" => url, "type" => type}, socket) do
+    RSS.generate_source(title, type, url)
+    |> Feeds.remove(socket.assigns.user)
+    sources = Accounts.get(socket.assigns.user.id).sources
 
-    {:noreply, assign(socket, feeds: feeds)}
+    {:noreply, assign(socket, sources: sources)}
   end
 
   @impl true
@@ -73,10 +74,10 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
         {:noreply, socket}
 
       feed ->
-        Feeds.add(RSS.generate_source(feed, type, url), socket.assigns.user)
-        feeds = Accounts.get(socket.assigns.user.id).feeds
+        Feeds.add(RSS.generate_source(feed["title"], type, url), socket.assigns.user)
+        sources = Accounts.get(socket.assigns.user.id).sources
 
-        {:noreply, assign(socket, feeds: feeds)}
+        {:noreply, assign(socket, sources: sources)}
     end
   end
 

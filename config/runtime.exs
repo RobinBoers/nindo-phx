@@ -29,7 +29,7 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  config :nin_db, NinDB.Repo,
+  config :nindb, NinDB.Repo,
     socket_options: [:inet6],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")

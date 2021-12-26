@@ -3,9 +3,9 @@ defmodule NindoPhxWeb.Live.Post do
   LiveView to display Nindo posts and external posts.
   """
   use NindoPhxWeb, :live_view
-  alias NindoPhxWeb.{SocialView}
+  alias NindoPhxWeb.{SocialView, Error}
 
-  alias Nindo.{Accounts, Feeds, Comments, Format, Posts}
+  alias Nindo.{Accounts, Comments, Format, Posts}
 
   import Nindo.Core
 
@@ -33,19 +33,19 @@ defmodule NindoPhxWeb.Live.Post do
       |> assign(:post, post)
       |> assign(:rss, false)}
     else
-      {:noreply, socket
-      |> assign(:page_title, "Wow, such empty")
-      |> assign(:comments, [])
-      |> assign(:post, post)
-      |> assign(:rss, false)}
+      raise Error.NotFound
     end
   end
 
-  def handle_params(post, _uri, socket) do
-    {:noreply, socket
-    |> assign(:page_title, post.title <> " · " <> post.author)
-    |> assign(:post, post)
-    |> assign(:rss, true)}
+  def handle_params(%{"post" => post_id, "source" => source_id}, _uri, socket) do
+    case Cachex.get(:rss, "#{source_id}:#{post_id}") do
+      {:ok, nil} -> raise Error.NotFound
+      {:ok, post} ->
+        {:noreply, socket
+        |> assign(:page_title, post.title <> " · " <> post.author)
+        |> assign(:post, post)
+        |> assign(:rss, true)}
+    end
   end
 
   @impl true

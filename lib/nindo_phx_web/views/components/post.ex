@@ -6,7 +6,7 @@ defmodule NindoPhxWeb.PostComponent do
   use Phoenix.HTML
 
   alias Nindo.{Format, RSS.YouTube}
-  alias NindoPhxWeb.{Endpoint, SocialView, Live}
+  alias NindoPhxWeb.{Endpoint, Live}
   import NindoPhxWeb.Router.Helpers
 
   import Nindo.Core
@@ -112,7 +112,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post), phx_hook: "ScrollToTop" %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post.source, @post, @post.title), phx_hook: "ScrollToTop" %></h3>
 
         <% else %>
 

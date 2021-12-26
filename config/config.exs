@@ -26,17 +26,17 @@ config :phoenix, :json_library, Jason
 
 import_config "#{config_env()}.exs"
 
-config :nin_db,
+config :nindb,
    ecto_repos: [NinDB.Repo]
 
 if config_env() in [:test, :dev] do
-  config :nin_db, NinDB.Repo,
+  config :nindb, NinDB.Repo,
     database: "nindb",
     hostname: "localhost",
     log: false
 end
 
-config :nin_db, NinDB.Vault,
+config :nindb, NinDB.Vault,
   ciphers: [
    default: {
       Cloak.Ciphers.AES.GCM,

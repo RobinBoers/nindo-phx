@@ -38,4 +38,7 @@ defmodule NindoPhxWeb.Live.Sources do
   def handle_info(:invalid_feed, socket) do
     {:noreply, put_flash(socket, :error, "Invalid feed")}
   end
+
+  @impl true
+  def handle_info(_, socket), do: {:noreply, socket}
 end

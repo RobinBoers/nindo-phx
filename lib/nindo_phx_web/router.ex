@@ -36,7 +36,7 @@ defmodule NindoPhxWeb.Router do
     live "/search/:query", Live.Discover
 
     live "/post/:id", Live.Post
-    live "/post/:title", Live.Post
+    live "/post/:source/:post/:title", Live.Post
     live "/user/:username", Live.User
     live "/source/:source", Live.Source
 

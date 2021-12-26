@@ -33,7 +33,7 @@ defmodule NindoPhxWeb.FeedComponent do
         <%= if @preview do %>
           <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} text={false} />
         <% else %>
-          <%= if String.length(post.body) > 450 do %>
+          <%= if post.body |> HtmlSanitizeEx.strip_tags() |> String.length() > 450 do %>
             <PostComponent.preview post={post} user_link={@user_link} rss={post[:type] != nil} text={true} />
           <% else %>
             <PostComponent.default post={post} user_link={@user_link} rss={post[:type] != nil} />
