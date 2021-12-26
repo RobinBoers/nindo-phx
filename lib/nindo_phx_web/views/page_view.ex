@@ -8,6 +8,4 @@ defmodule NindoPhxWeb.PageView do
   import Routes
   import Nindo.Core
 
-  defdelegate get_source_data(feed), to: SocialView
-
 end

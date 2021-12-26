@@ -1,6 +1,6 @@
 ![banner](https://raw.githubusercontent.com/RobinBoers/nindo-phx/master/priv/static/images/banner.png)
 
-<p align="center"><a href="LICENSE"><img src="https://img.shields.io/github/license/RobinBoers/nindo-phx"></a> <img src="https://img.shields.io/github/commit-activity/w/RobinBoers/nindo-phx"> <a href="https://github.com/RobinBoers/nindo-phx/stargazers"> <img src="https://img.shields.io/github/stars/RobinBoers/nindo-phx"></a> <a href="https://github.com/RobinBoers/nindo-phx/fork"><img src="https://img.shields.io/github/forks/RobinBoers/nindo-phx"></a></p>
+<p align="center"><a href="LICENSE"><img src="https://img.shields.io/github/license/RobinBoers/nindo-phx"></a> <img src="https://img.shields.io/github/commit-activity/w/RobinBoers/nindo-phx?color=success"> <a href="https://github.com/RobinBoers/nindo-phx/stargazers"> <img src="https://img.shields.io/github/stars/RobinBoers/nindo-phx?color=yellow"></a> <a href="https://github.com/RobinBoers/nindo-phx/fork"><img src="https://img.shields.io/github/forks/RobinBoers/nindo-phx?color=blueviolet"></a></p>
 
 # Overview
 

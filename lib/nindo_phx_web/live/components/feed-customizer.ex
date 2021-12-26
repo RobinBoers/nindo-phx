@@ -5,7 +5,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   use NindoPhxWeb, :live_component
   alias NindoPhxWeb.{Endpoint, Live}
 
-  alias Nindo.{Accounts, Feeds, RSS, RSS.YouTube}
+  alias Nindo.{Accounts, Feeds, Source, RSS, RSS.YouTube}
 
   import Routes
 
@@ -36,8 +36,8 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <%= live_patch feed["title"],
-                    to: live_path(Endpoint, Live.Source, get_source_data(feed)),
+                <%= live_patch feed.title,
+                    to: live_path(Endpoint, Live.Source, feed),
                     phx_hook: "ScrollToTop"
                 %>
               </span>
@@ -78,10 +78,6 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
 
         {:noreply, assign(socket, feeds: feeds)}
     end
-  end
-
-  defp get_source_data(feed) do
-    "#{URI.encode(feed["feed"], &(&1 != ?/ and &1 != ?: and &1 != ??))}:#{feed["type"]}"
   end
 
   # This method is used to convert the YouTube custom urls or legacy
