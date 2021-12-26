@@ -24,11 +24,11 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center justify-start">
             <%= if @rss do %>
 
-              <img class="w-12" src={@post.source.icon} onerror="this.src='/images/rss.png'"/>
+              <img class="w-12" src={@post.source["icon"]} onerror="this.src='/images/rss.png'"/>
 
               <p class="font-bold text-lg pl-2">
                 <%= if @user_link do %>
-                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, @post.source, phx_hook: "ScrollToTop") %>
+                  <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
                 <% else %>
                   <%= @post.author %>
                 <% end %>
@@ -58,7 +58,7 @@ defmodule NindoPhxWeb.PostComponent do
 
       <%= if @rss do %>
 
-        <%= if @post.source.type == "youtube" and not debug_mode?() do %>
+        <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
           <% [_, video_id] = String.split(@post.link, "=") %>
 
           <iframe class="aspect-video w-full" src={YouTube.instance() <> "/embed/#{video_id}"} frameborder="0" allowfullscreen/>
@@ -84,11 +84,11 @@ defmodule NindoPhxWeb.PostComponent do
         <div class="flex flex-row items-center gap-2">
           <%= if @rss do %>
 
-            <img class="w-6" src={@post.source.icon} onerror="this.src='/images/rss.png'"/>
+            <img class="w-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'"/>
 
             <p class="font-bold text-lg">
               <%= if @user_link do %>
-                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, @post.source, phx_hook: "ScrollToTop") %>
+                <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
               <% else %>
                 <%= @post.author %>
               <% end %>
@@ -112,7 +112,7 @@ defmodule NindoPhxWeb.PostComponent do
 
         <%= if @rss do %>
 
-          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, @post), phx_hook: "ScrollToTop" %></h3>
+          <h3 class="text-xl sm:text-2xl font-medium px-4"><%= live_patch @post.title, to: live_path(Endpoint, Live.Post, %{url: @post.source["feed"], title: @post.title, datetime: NaiveDateTime.to_string @post.datetime}), phx_hook: "ScrollToTop" %></h3>
 
         <% else %>
 
@@ -131,4 +131,8 @@ defmodule NindoPhxWeb.PostComponent do
       </div>
     """
   end
+
+  # Helper methods
+
+  defdelegate get_source_data(feed), to: SocialView
 end

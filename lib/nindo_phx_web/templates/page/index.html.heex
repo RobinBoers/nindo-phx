@@ -74,9 +74,10 @@
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <%= live_patch(feed.title, to: live_path(Endpoint, Live.Source, feed)) %>
+                <a href={"/source/" <> get_source_data(feed)}><%= feed["title"] %></a>
               </span>
             </li>
+
           <% end %>
         <% end %>
       </ul>

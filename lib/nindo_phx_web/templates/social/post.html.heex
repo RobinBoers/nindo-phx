@@ -13,9 +13,9 @@
     <% else %>
 
         <div class="flex flex-row items-center gap-2 pt-7">
-        <img class="w-6 object-cover h-6" src={@post.source.icon} onerror="this.src='/images/rss.png'"/>
+        <img class="w-6 object-cover h-6" src={@post.source["icon"]} onerror="this.src='/images/rss.png'"/>
         <p class="font-bold text-lg">
-            <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, @post.source, phx_hook: "ScrollToTop") %>
+            <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, get_source_data(@post.source), phx_hook: "ScrollToTop") %>
         </p>
         </div>
 
@@ -26,7 +26,7 @@
     <hr class="mb-5 w-36">
 
     <%= if @rss do %>
-        <%= if @post.source.icon == "youtube" and not debug_mode?() do %>
+        <%= if @post.source["type"] == "youtube" and not debug_mode?() do %>
         <% [_, video_id] = String.split(@post.link, "=") %>
 
         <iframe class="rounded-md aspect-video w-full" src={YouTube.instance() <> "/embed/#{video_id}"} frameborder="0" allowfullscreen/>
