@@ -5,8 +5,7 @@ config :nindo_phx, NindoPhxWeb.Endpoint,
   secret_key_base: "t3au4WpsQPyFkLzVEWYkxHAKo+0TUysaSdlW9wVmLwQX2rIjQBOmTxImU43GLhzS",
   server: false
 
-config :nindo_phx, NindoPhx.Mailer,
-  adapter: Swoosh.Adapters.Test
+config :nindo_phx, NindoPhx.Mailer, adapter: Swoosh.Adapters.Test
 
 config :logger, level: :warn
 

@@ -9,14 +9,15 @@ defmodule NindoPhxWeb.Live.Welcome do
 
   @impl true
   def mount(_params, session, socket) do
-    {:ok, socket
-    |> assign(:page_title, "Welcome")
-    |> assign(:logged_in?, logged_in?(session))
-    |> assign(:user, user(session))}
+    {:ok,
+     socket
+     |> assign(:page_title, "Welcome")
+     |> assign(:logged_in?, logged_in?(session))
+     |> assign(:user, user(session))}
   end
 
   @impl true
-  def render(assigns), do: render SocialView, "welcome.html", assigns
+  def render(assigns), do: render(SocialView, "welcome.html", assigns)
 
   @impl true
   def handle_info(:invalid_feed, socket) do

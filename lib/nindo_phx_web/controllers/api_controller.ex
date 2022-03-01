@@ -43,7 +43,9 @@ defmodule NindoPhxWeb.APIController do
         conn
         |> put_status(:not_found)
         |> json(nil)
-      account -> json(conn, account)
+
+      account ->
+        json(conn, account)
     end
   end
 
@@ -108,8 +110,10 @@ defmodule NindoPhxWeb.APIController do
       :ok ->
         account = Nindo.Accounts.get_by(:username, username)
         json(conn, %{"token" => Auth.generate_token(account.id)})
+
       :wrong_password ->
         json(conn, %{"message" => "Wrong password."})
+
       :no_user_found ->
         json(conn, %{"message" => "Account doesn't exist."})
     end
@@ -120,6 +124,7 @@ defmodule NindoPhxWeb.APIController do
   """
   def markdown(conn, %{"id" => id}) do
     post = Posts.get(id)
+
     case Posts.exists?(id) do
       true -> text(conn, "# #{post.title}\n\n#{post.body} ")
       false -> text(conn, "Post not found. ")

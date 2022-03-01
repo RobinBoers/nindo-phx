@@ -27,11 +27,11 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
       <script>
         //function newPost() {
         //  document.querySelector(".new-post-modal").style.height = '250px';
-			  //  document.querySelector(".new-post-btn").style.display = 'none';
+     //  document.querySelector(".new-post-btn").style.display = 'none';
         //}
         //function cancelPost() {
         //  document.querySelector(".new-post-modal").style.height = '0px';
-		    //	document.querySelector(".new-post-btn").style.display = 'block';
+      //	document.querySelector(".new-post-btn").style.display = 'block';
         //}
       </script>
     </section>
@@ -51,16 +51,20 @@ defmodule NindoPhxWeb.Live.Components.NewPost do
 
   def handle_event("publish", %{"post" => %{"body" => body, "title" => title}}, socket) do
     case Posts.new(title, body, nil, socket.assigns.user) do
-      {:ok, _post}    ->
+      {:ok, _post} ->
         Task.async(fn -> Feeds.update_cache(socket.assigns.user) end)
         send(self(), :refresh)
 
         changeset = Posts.validate(nil, nil, nil, %{id: 0})
-        {:noreply, socket
-        |> assign(:changeset, changeset)}
+
+        {:noreply,
+         socket
+         |> assign(:changeset, changeset)}
+
       {:error, error} ->
-        {:noreply, socket
-        |> assign(:error, format_error(error))}
+        {:noreply,
+         socket
+         |> assign(:error, format_error(error))}
     end
   end
 end

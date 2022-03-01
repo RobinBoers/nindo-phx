@@ -36,9 +36,8 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <%= live_patch source.title,
-                    to: live_path(Endpoint, Live.Source, source),
-                    phx_hook: "ScrollToTop"
+                <%= live_redirect source.title,
+                    to: live_path(Endpoint, Live.Source, source)
                 %>
               </span>
 
@@ -59,6 +58,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   def handle_event("remove", %{"title" => title, "url" => url, "type" => type}, socket) do
     RSS.generate_source(title, type, url)
     |> Feeds.remove(socket.assigns.user)
+
     sources = Accounts.get(socket.assigns.user.id).sources
 
     {:noreply, assign(socket, sources: sources)}
@@ -89,7 +89,7 @@ defmodule NindoPhxWeb.Live.Components.FeedCustomizer do
   defp convert_link(type, feed) do
     case type do
       "youtube" -> YouTube.to_channel_link(feed)
-      _         -> feed
+      _ -> feed
     end
   end
 end

@@ -7,5 +7,4 @@ defmodule NindoPhxWeb.PageView do
 
   import Routes
   import Nindo.Core
-
 end

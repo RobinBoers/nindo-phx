@@ -14,9 +14,15 @@ defmodule NindoPhxWeb.FeedComponent do
     posts =
       assigns.users
       |> Enum.flat_map(&SocialView.get_posts(&1))
-      |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
+      |> Enum.sort_by(& &1.datetime, {:desc, NaiveDateTime})
 
-    feed %{posts: posts, user_link: assigns.user_link, rss: false, preview: false, conn: assigns.conn}
+    feed(%{
+      posts: posts,
+      user_link: assigns.user_link,
+      rss: false,
+      preview: false,
+      conn: assigns.conn
+    })
   end
 
   @doc """
@@ -27,6 +33,7 @@ defmodule NindoPhxWeb.FeedComponent do
       <p class="inactive">Wow, such empty...</p>
     """
   end
+
   def feed(assigns) do
     ~H"""
       <%= for post <- @posts do %>

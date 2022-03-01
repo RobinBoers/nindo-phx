@@ -47,6 +47,7 @@ defmodule NindoPhxWeb.AccountController do
         conn
         |> put_session(:app, true)
         |> redirect(to: live_path(Endpoint, Live.Social))
+
       false ->
         conn
         |> put_session(:app, true)
@@ -60,14 +61,13 @@ defmodule NindoPhxWeb.AccountController do
   # Session management
 
   def login(conn, %{"password" => password, "username" => username}) do
-    account  = Accounts.get_by(:username, username)
+    account = Accounts.get_by(:username, username)
 
     if account != nil do
       id = account.id
 
       redirect_to =
-        case NavigationHistory.last_path(conn, 1,
-        default: live_path(Endpoint, Live.Social)) do
+        case NavigationHistory.last_path(conn, 1, default: live_path(Endpoint, Live.Social)) do
           "/" -> live_path(Endpoint, Live.Social)
           path -> path
         end
@@ -75,12 +75,13 @@ defmodule NindoPhxWeb.AccountController do
       case Accounts.login(username, password) do
         :ok ->
           Feeds.cache(account)
+
           conn
           |> put_session(:logged_in?, true)
           |> put_session(:user_id, id)
           |> redirect(to: redirect_to)
 
-        :wrong_password   ->
+        :wrong_password ->
           conn
           |> put_flash(:error, "Password doesn't match")
           |> assign(:page_title, "Sign in")
@@ -101,9 +102,7 @@ defmodule NindoPhxWeb.AccountController do
   end
 
   def logout(conn, _params) do
-    redirect_to =
-      NavigationHistory.last_path(conn, 1,
-      default: account_path(Endpoint, :sign_in))
+    redirect_to = NavigationHistory.last_path(conn, 1, default: account_path(Endpoint, :sign_in))
 
     conn
     |> put_session(:app, false)
@@ -116,7 +115,7 @@ defmodule NindoPhxWeb.AccountController do
 
   def create_account(conn, %{"email" => email, "password" => password, "username" => username}) do
     case Accounts.new(username, password, email) do
-      {:ok, account}    ->
+      {:ok, account} ->
         Feeds.follow(account.username, account)
         Feeds.cache(account)
 
@@ -125,7 +124,7 @@ defmodule NindoPhxWeb.AccountController do
         |> put_session(:user_id, account.id)
         |> redirect(to: live_path(Endpoint, Live.Welcome))
 
-      {:error, error}   ->
+      {:error, error} ->
         conn
         |> put_flash(:error, format_error(error))
         |> assign(:page_title, "Sign up")

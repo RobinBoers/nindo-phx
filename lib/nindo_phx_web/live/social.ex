@@ -20,20 +20,22 @@ defmodule NindoPhxWeb.Live.Social do
           |> FeedAgent.get_pid()
           |> FeedAgent.get_posts()
 
-          {:ok, socket
-          |> assign(:posts, posts)
-          |> assign(:page_title, "Social")
-          |> assign(:logged_in?, logged_in?(session))
-          |> assign(:user, user(session))}
+        {:ok,
+         socket
+         |> assign(:posts, posts)
+         |> assign(:page_title, "Social")
+         |> assign(:logged_in?, logged_in?(session))
+         |> assign(:user, user(session))}
 
       _ ->
-      {:ok, socket
-      |> redirect(to: live_path(Endpoint, Live.Discover))}
+        {:ok,
+         socket
+         |> redirect(to: live_path(Endpoint, Live.Discover))}
     end
   end
 
   @impl true
-  def render(assigns), do: render SocialView, "index.html", assigns
+  def render(assigns), do: render(SocialView, "index.html", assigns)
 
   @impl true
   def handle_info(:refresh, socket) do

@@ -5,7 +5,7 @@ config :nindo_phx, NindoPhxWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: [
     "https://nindo.fly.dev",
-    "https://nindo.geheimesite.nl",
+    "https://nindo.geheimesite.nl"
   ]
 
 config :logger, level: :warn

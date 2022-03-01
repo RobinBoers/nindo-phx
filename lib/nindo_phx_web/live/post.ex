@@ -11,27 +11,35 @@ defmodule NindoPhxWeb.Live.Post do
 
   @impl true
   def mount(_params, session, socket) do
-    {:ok, socket
-    |> assign(:font, "font-sans")
-    |> assign(:logged_in?, logged_in?(session))
-    |> assign(:user, user(session))}
+    {:ok,
+     socket
+     |> assign(:font, "font-sans")
+     |> assign(:logged_in?, logged_in?(session))
+     |> assign(:user, user(session))}
   end
 
   @impl true
   def handle_params(%{"id" => id}, _uri, socket) do
     post = Nindo.Posts.get(id)
+
     if post != nil do
       account = Accounts.get(post.author_id)
+
       comments =
         :post
         |> Comments.get(id)
-        |> Enum.reverse # newest at top
+        # newest at top
+        |> Enum.reverse()
 
-      {:noreply, socket
-      |> assign(:page_title, post.title <> " · " <> Format.display_name(account) <> " (@" <> account.username <> ")")
-      |> assign(:comments, comments)
-      |> assign(:post, post)
-      |> assign(:rss, false)}
+      {:noreply,
+       socket
+       |> assign(
+         :page_title,
+         post.title <> " · " <> Format.display_name(account) <> " (@" <> account.username <> ")"
+       )
+       |> assign(:comments, comments)
+       |> assign(:post, post)
+       |> assign(:rss, false)}
     else
       raise Error.NotFound
     end
@@ -39,22 +47,28 @@ defmodule NindoPhxWeb.Live.Post do
 
   def handle_params(%{"post" => post_id, "source" => source_id}, _uri, socket) do
     case Cachex.get(:rss, "#{source_id}:#{post_id}") do
-      {:ok, nil} -> raise Error.NotFound
+      {:ok, nil} ->
+        raise Error.NotFound
+
       {:ok, post} ->
-        {:noreply, socket
-        |> assign(:page_title, post.title <> " · " <> post.author)
-        |> assign(:post, post)
-        |> assign(:rss, true)}
+        {:noreply,
+         socket
+         |> assign(:page_title, post.title <> " · " <> post.author)
+         |> assign(:post, post)
+         |> assign(:rss, true)}
     end
   end
 
   @impl true
   def handle_info(:refresh, socket) do
     post = Posts.get(socket.assigns.post.id)
+
     comments =
       :post
       |> Comments.get(socket.assigns.post.id)
-      |> Enum.reverse # newest at top
+      # newest at top
+      |> Enum.reverse()
+
     {:noreply, assign(socket, post: post, comments: comments)}
   end
 
@@ -68,7 +82,7 @@ defmodule NindoPhxWeb.Live.Post do
   end
 
   @impl true
-  def render(assigns), do: render SocialView, "post.html", assigns
+  def render(assigns), do: render(SocialView, "post.html", assigns)
 
   defp get_font(nil), do: "font-sans"
   defp get_font(font), do: font

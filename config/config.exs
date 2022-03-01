@@ -6,8 +6,8 @@ config :nindo_phx, NindoPhxWeb.Endpoint,
   pubsub_server: NindoPhx.PubSub,
   live_view: [signing_salt: "vjxpT+JX"]
 
-#config :nindo_phx, NindoPhx.Mailer, adapter: Swoosh.Adapters.Local
-#config :swoosh, :api_client, false
+# config :nindo_phx, NindoPhx.Mailer, adapter: Swoosh.Adapters.Local
+# config :swoosh, :api_client, false
 
 config :esbuild,
   version: "0.12.18",
@@ -27,7 +27,7 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :nindb,
-   ecto_repos: [NinDB.Repo]
+  ecto_repos: [NinDB.Repo]
 
 if config_env() in [:test, :dev] do
   config :nindb, NinDB.Repo,
@@ -38,7 +38,7 @@ end
 
 config :nindb, NinDB.Vault,
   ciphers: [
-   default: {
+    default: {
       Cloak.Ciphers.AES.GCM,
       tag: "AES.GCM.V1",
       key: Base.decode64!("goQI42SEuU17EvCwQ9jdlKxDeSecXF7s02wnNwkwuEI="),

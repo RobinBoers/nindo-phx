@@ -55,7 +55,7 @@
                 </p>
 
                 <div class="py-8">
-                    <%= live_patch "Finish", to: live_path(Endpoint, Live.Social), phx_hook: "ScrollToTop", class: "btn-primary" %>
+                    <%= live_redirect "Finish", to: live_path(Endpoint, Live.Social), class: "btn-primary" %>
                 </div>   
             </details>
         </div>

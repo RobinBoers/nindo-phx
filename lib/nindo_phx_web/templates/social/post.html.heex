@@ -4,7 +4,7 @@
     <div class="flex flex-row items-center gap-2 pt-7">
     <img class="w-6 object-cover h-6 rounded-full border-indigo-700 border-2" src={Format.profile_picture(username)}/>
     <p class="font-bold text-lg">
-        <%= live_patch(Format.display_name(username), to: live_path(Endpoint, Live.User, username), phx_hook: "ScrollToTop") %>
+        <%= live_redirect(Format.display_name(username), to: live_path(Endpoint, Live.User, username)) %>
     </p>
     </div>
 
@@ -13,7 +13,7 @@
     <div class="flex flex-row items-center gap-2 pt-7">
     <img class="w-6 object-cover h-6" src={@post.source.icon} onerror="this.src='/images/rss.png'"/>
     <p class="font-bold text-lg">
-        <%= live_patch @post.author, to: live_path(Endpoint, Live.Source, @post.source, phx_hook: "ScrollToTop") %>
+        <%= live_redirect @post.author, to: live_path(Endpoint, Live.Source, @post.source) %>
     </p>
     </div>
 

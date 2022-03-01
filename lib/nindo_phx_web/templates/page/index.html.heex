@@ -74,7 +74,7 @@
                 <span class="w-8 mr-3"></span>
               <% end %>
               <span class="mt-1">
-                <%= live_patch(source.title, to: live_path(Endpoint, Live.Source, source)) %>
+                <%= live_redirect(source.title, to: live_path(Endpoint, Live.Source, source)) %>
               </span>
             </li>
           <% end %>

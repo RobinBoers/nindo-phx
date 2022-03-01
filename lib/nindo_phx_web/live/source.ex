@@ -15,23 +15,28 @@ defmodule NindoPhxWeb.Live.Source do
     case logged_in?(session) do
       true ->
         user = user(session)
-        source = Enum.filter(user.sources, fn source = %Source{id: id} ->
-          id == source_id
-          source
-        end)
+
+        source =
+          Enum.filter(user.sources, fn source = %Source{id: id} ->
+            id == source_id
+            source
+          end)
 
         case source do
           [source] ->
             feed = Feeds.get_feed(source.feed)
             posts = RSS.generate_posts(feed, source)
 
-            {:ok, socket
-            |> assign(:logged_in?, true)
-            |> assign(:user, user)
-            |> assign(:page_title, feed["title"])
-            |> assign(:posts, posts)
-            |> assign(:title, feed["title"])}
-          _ -> raise Error.NotFound
+            {:ok,
+             socket
+             |> assign(:logged_in?, true)
+             |> assign(:user, user)
+             |> assign(:page_title, feed["title"])
+             |> assign(:posts, posts)
+             |> assign(:title, feed["title"])}
+
+          _ ->
+            raise Error.NotFound
         end
 
       _ ->
@@ -40,5 +45,5 @@ defmodule NindoPhxWeb.Live.Source do
   end
 
   @impl true
-  def render(assigns), do: render SocialView, "feed.html", assigns
+  def render(assigns), do: render(SocialView, "feed.html", assigns)
 end

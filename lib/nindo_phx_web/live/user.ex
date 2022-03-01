@@ -11,29 +11,31 @@ defmodule NindoPhxWeb.Live.User do
 
   @impl true
   def mount(%{"username" => username}, session, socket) do
-    {:ok, socket
-    |> assign(:logged_in?, logged_in?(session))
-    |> assign(:user, user(session))
-    |> assign(:username, username)}
+    {:ok,
+     socket
+     |> assign(:logged_in?, logged_in?(session))
+     |> assign(:user, user(session))
+     |> assign(:username, username)}
   end
 
   @impl true
   def handle_params(%{"username" => username}, _uri, socket) do
     if Accounts.exists?(username) do
-      {:noreply, assign(socket, page_title: Format.display_name(username) <> " (@" <> username <> ")")}
+      {:noreply,
+       assign(socket, page_title: Format.display_name(username) <> " (@" <> username <> ")")}
     else
       {:noreply, assign(socket, page_title: "Unknown user" <> " (@deleted)")}
     end
   end
 
   @impl true
-  def render(assigns), do: render SocialView, "user.html", assigns
+  def render(assigns), do: render(SocialView, "user.html", assigns)
 
   @impl true
   def handle_event("follow", %{"username" => username}, socket) do
     case username in socket.assigns.user.following do
-      true  -> Feeds.unfollow(username, socket.assigns.user)
-      _     -> Feeds.follow(username, socket.assigns.user)
+      true -> Feeds.unfollow(username, socket.assigns.user)
+      _ -> Feeds.follow(username, socket.assigns.user)
     end
 
     user = Accounts.get(socket.assigns.user.id)

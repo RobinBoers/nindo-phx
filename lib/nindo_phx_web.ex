@@ -67,7 +67,6 @@ defmodule NindoPhxWeb do
       import Phoenix.LiveView.Helpers
       import Phoenix.View
 
-
       import NindoPhxWeb.ErrorHelpers
       import NindoPhxWeb.Gettext
       alias NindoPhxWeb.Router.Helpers, as: Routes

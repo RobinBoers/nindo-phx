@@ -17,12 +17,14 @@ defmodule NindoPhxWeb.PageController do
     |> put_layout("page.html")
     |> render("index.html")
   end
+
   def about(conn, _params) do
     conn
     |> assign(:page_title, "About")
     |> put_layout("page.html")
     |> render("about.html")
   end
+
   def blog(conn, _params) do
     conn
     |> assign(:page_title, "Blog")
@@ -58,11 +60,13 @@ defmodule NindoPhxWeb.PageController do
     post = Posts.get(id)
 
     if post != nil do
-      channel = RSS.channel(
-        "Comments for \"#{post.title}\" · Nindo",
-        "https://#{RSS.base_url()}/post/#{id}",
-        "The official micro blog for Nindo."
-      )
+      channel =
+        RSS.channel(
+          "Comments for \"#{post.title}\" · Nindo",
+          "https://#{RSS.base_url()}/post/#{id}",
+          "The official micro blog for Nindo."
+        )
+
       items =
         :post
         |> Comments.get(id)
@@ -87,14 +91,15 @@ defmodule NindoPhxWeb.PageController do
     items =
       @admins
       |> Enum.flat_map(&SocialView.get_posts(&1))
-      |> Enum.sort_by(&(&1.datetime), {:desc, NaiveDateTime})
+      |> Enum.sort_by(& &1.datetime, {:desc, NaiveDateTime})
       |> Enum.map(&RSS.generate_entry(&1.title, &1.body, &1.datetime, &1.id))
 
-    channel = RSS.channel(
-      "Nindo Blog",
-      "https://#{RSS.base_url()}/blog",
-      "The official micro blog for Nindo."
-    )
+    channel =
+      RSS.channel(
+        "Nindo Blog",
+        "https://#{RSS.base_url()}/blog",
+        "The official micro blog for Nindo."
+      )
 
     feed = RSS.generate_feed(channel, items)
 

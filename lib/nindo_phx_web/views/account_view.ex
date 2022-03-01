@@ -7,5 +7,4 @@ defmodule NindoPhxWeb.AccountView do
   alias Nindo.{Format}
 
   import Routes
-
 end
