@@ -24,3 +24,15 @@ Nindo is a RSS reader and blogging platform designed to be easy and minimal.
 - [Usage](https://docs.geheimesite.nl/nindo-phx/content.html)
 - [Self-hosting](https://docs.geheimesite.nl/nindo-phx/getting-started.html)
 - [API Documentation](https://docs.geheimesite.nl/nindo-phx/rest-api.html)
+
+## To Do
+
+Steps necessary to make Nindo a stable platform:
+
+- Render posts in LiveComponent instead of seperate LiveView to remove the need to cache them seperately.
+- Update to the newest LiveView version and replace the current node stuff with esbuild?
+- Write full test-suite (ugghh)
+- Update ex_doc (because newer version has nicer docs & dark mode)
+- Add PubSub for live updating the timeline
+
+Read more about why we need to do this here: [The current state of Nindo](https://nindo.geheimesite.nl/post/24).
