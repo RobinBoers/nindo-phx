@@ -20,10 +20,10 @@ Nindo is a RSS reader and blogging platform designed to be easy and minimal.
 
 ## Resources
 
-- [About](https://docs.geheimesite.nl/nindo-phx/about.html)
-- [Usage](https://docs.geheimesite.nl/nindo-phx/content.html)
-- [Self-hosting](https://docs.geheimesite.nl/nindo-phx/getting-started.html)
-- [API Documentation](https://docs.geheimesite.nl/nindo-phx/rest-api.html)
+- [About](https://nindo-social.github.io/nindo/about.html)
+- [Usage](https://nindo-social.github.io/nindo/content.html)
+- [Self-hosting](https://nindo-social.github.io/nindo/getting-started.html)
+- [API Documentation](https://nindo-social.github.io/nindo/rest-api.html)
 
 ## To Do
 
